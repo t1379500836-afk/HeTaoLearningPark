@@ -167,58 +167,126 @@ await Sk.misceval.asyncToPromise(function() {
 
 ### 2. 打字练习模块 (TypingPractice.vue)
 
-#### 核心功能
-- **两种练习模式**：
-  - 单词打字练习：练习关键词汇
-  - 代码模板打字练习：练习Python代码片段（支持多行、Tab缩进）
-- **完整QWERTY键盘布局**：5行标准键盘（数字行、三行字母、空格行）
-- **按键状态反馈**：
-  - 按下显示橙色（核桃橙）
-  - 输入正确亮绿色
-  - 输入错误亮红色
-- **错误处理**：不干预输入，只显示提示，配清除按钮
-- **实时统计**：WPM（每分钟字数）、准确率
+#### 功能特性
 
-#### 组件Props
+**双模式练习系统**
+- 单词模式：练习Python关键词汇和英文单词
+- 代码模式：练习Python代码片段语法
+
+**虚拟键盘交互**
+- QWERTY 5行标准键盘布局
+- 实时按键状态反馈：
+  - 按下：橙色高亮 (#ff9f00)
+  - 正确：绿色渐变
+  - 错误：红色渐变
+- 300ms 自动恢复机制
+
+**内置关卡体系**
+| 关卡名称 | 练习内容 | 类型 |
+|---------|---------|------|
+| Home Row | A S D F J K L ; | word |
+| Top Row | Q W E R T Y U I O P | word |
+| Bottom Row | Z X C V B N M | word |
+| Python Keywords | print, input, if, else... | word |
+| Print语句 | print("Hello") | code |
+| 变量赋值 | name = "Tom" | code |
+| 条件语句 | if age >= 18: | code |
+
+**进度追踪**
+- 实时统计：字母/分钟、准确率、用时
+- 历史成绩榜：保存前5名
+- 成绩对比：与上次练习对比（儿童友好版提示词）
+
+**完成祝贺界面**
+- 随机鼓励话术
+- 基于表现的祝贺标题
+- 与上次成绩对比显示
+
+#### Props 完整列表
+
 | Prop | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
+| `id` | String | - | 组件唯一标识 |
 | `mode` | `'word' \| 'code'` | `'word'` | 练习模式 |
 | `customWords` | `Array` | `[]` | 自定义单词列表 |
-| `customTemplates` | `Array` | `[]` | 自定义代码模板列表 |
-| `showLevelSelector` | `Boolean` | `false` | 是否显示关卡选择按钮 |
+| `customTemplates` | `Array` | `[]` | 自定义代码模板 |
+| `showLevelSelector` | `Boolean` | `false` | 显示关卡选择 |
+| `autoFocus` | `Boolean` | `false` | 自动聚焦输入框 |
+| `embedded` | `Boolean` | `false` | 嵌入式模式 |
 
 #### 使用示例
-```vue
-<!-- 公共区域：不显示关卡选择 -->
-<TypingPractice />
 
-<!-- 课时内嵌：单词模式 -->
+```vue
+<!-- 单词模式 - 自定义关键词 -->
 <TypingPractice
-  :custom-words="['print', 'input', 'if', 'else']"
+  :custom-words="['print', 'input', 'if', 'else', 'while']"
   mode="word"
 />
 
-<!-- 课时内嵌：代码模式 -->
+<!-- 代码模式 - 自定义模板 -->
 <TypingPractice
-  :custom-templates="['print(\"Hello\")', 'age = 10']"
+  :custom-templates="['print(\"Hello\")', 'age = 10', 'if x > 0:']"
   mode="code"
 />
 
-<!-- 显示关卡选择 -->
-<TypingPractice :show-level-selector="true" />
+<!-- 显示关卡选择器 -->
+<TypingPractice
+  :show-level-selector="true"
+/>
+
+<!-- 课时内嵌模式 -->
+<TypingPractice
+  :custom-words="['for', 'in', 'range']"
+  mode="word"
+  :embedded="true"
+/>
 ```
 
-#### 技术实现
-- 使用键盘事件监听 (`keydown`)
-- 按键状态管理：`keyStates` 对象存储每个按键的状态
-- WPM 计算: `(字符数 / 5) / (用时分钟数)`
-- 准确率: `(正确字符数 / 总字符数) * 100%`
-- Tab键处理：代码模式下插入2个空格作为缩进
+#### 技术实现细节
+
+**按键检测与反馈**
+- 监听 `@keydown` 事件捕获键盘输入
+- `mapKeyToDisplay()` 函数映射按键到键盘布局
+- `showKeyFeedback()` 函数控制高亮状态
+- 使用 `setTimeout` 实现 300ms 延迟恢复
+
+**统计计算公式**
+```javascript
+// 字母/分钟
+lettersPerMinute = correctChars / (elapsedSeconds / 60)
+
+// 准确率
+accuracy = (correctChars / (correctChars + errorChars)) * 100
+
+// 计时显示
+timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`
+```
+
+**成绩对比逻辑**
+- `previousScore`：保存上一次练习成绩
+- `lastScore`：用于下次对比的当前成绩
+- 对比维度：速度（字母/分钟差值）
+- 儿童友好提示词：根据进步/退步程度生成鼓励话语
 
 **关键代码位置**
-- 键盘布局定义: [TypingPractice.vue:208-285](src/components/course/TypingPractice.vue#L208-L285)
-- 按键状态管理: [TypingPractice.vue:445-498](src/components/course/TypingPractice.vue#L445-L498)
-- Tab键处理: [TypingPractice.vue:449-469](src/components/course/TypingPractice.vue#L449-L469)
+- 键盘布局定义: [TypingPractice.vue:339-345](src/components/course/TypingPractice.vue#L339-L345)
+- 按键反馈函数: [TypingPractice.vue:558-571](src/components/course/TypingPractice.vue#L558-L571)
+- 统计计算: [TypingPractice.vue:408-427](src/components/course/TypingPractice.vue#L408-L427)
+- 成绩对比: [TypingPractice.vue:468-533](src/components/course/TypingPractice.vue#L468-L533)
+
+#### 响应式设计
+
+虚拟键盘在不同设备上的表现：
+| 屏幕宽度 | 键盘状态 | 按键尺寸 |
+|---------|---------|---------|
+| ≥768px | 完整5行 | 40×40px |
+| ≤768px | 简化布局 | 24-32px |
+| ≤480px | 最小化 | 20-28px |
+
+移动端优化：
+- 容器支持水平滚动
+- Space键弹性伸缩
+- 按键添加 `max-width` 限制
 
 ---
 

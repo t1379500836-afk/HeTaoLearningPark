@@ -98,8 +98,8 @@
               <div class="score-details">
                 <div class="score-speed">{{ score.lettersPerMinute }} 字母/分钟</div>
                 <div class="score-meta">
-                  <span>{{ score.accuracy }}% 准确率</span>
-                  <span>{{ score.elapsedTime }}</span>
+                  <span class="meta-item">准确率 {{ score.accuracy }}%</span>
+                  <span class="meta-item">用时 {{ score.elapsedTime }}</span>
                 </div>
               </div>
               <div v-if="score.isLatest" class="score-latest-badge">本次</div>
@@ -121,6 +121,27 @@
               {{ level.name }}
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 虚拟键盘显示 -->
+    <div class="virtual-keyboard">
+      <div v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex" class="keyboard-row">
+        <div
+          v-for="key in row"
+          :key="key"
+          class="keyboard-key"
+          :class="{
+            'active': activeKey === key,
+            'correct': activeKey === key && keyStatus === 'correct',
+            'error': activeKey === key && keyStatus === 'error',
+            'wide': isWideKey(key),
+            'extra-wide': isExtraWideKey(key),
+            'space-key': key === 'Space'
+          }"
+        >
+          {{ formatKeyLabel(key) }}
         </div>
       </div>
     </div>
@@ -311,7 +332,21 @@ const timerInterval = ref(null)          // 计时器定时器
 
 // 成绩榜相关
 const scoreHistory = ref([])             // 历史成绩记录
-const lastScore = ref(null)              // 上次成绩（用于对比）
+const lastScore = ref(null)              // 上次成绩（用于下次）
+const previousScore = ref(null)          // 上一次练习成绩（用于对比显示）
+
+// 虚拟键盘状态
+const keyboardLayout = [
+  ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+  ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
+  ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'Shift'],
+  ['Space']
+]
+
+const activeKey = ref('')           // 当前激活的按键
+const keyStatus = ref('default')    // 按键状态: 'default' | 'correct' | 'error'
+const keyTimer = ref(null)          // 按键高亮计时器
 
 // 计算属性
 const mode = computed(() => props.mode)
@@ -429,70 +464,136 @@ const completionMessage = computed(() => {
   return messages[Math.floor(Math.random() * messages.length)]
 })
 
-// 与上次成绩对比的话术（改进版 - 对比速度、准确率、用时）
+// 与上次成绩对比的话术（儿童友好版）
 const comparisonMessage = computed(() => {
-  if (!lastScore.value) return '这是你的第一次练习，继续加油！'
+  // 第一次练习
+  if (!previousScore.value) {
+    const firstTimeMessages = [
+      '这是你的第一次练习，做得真棒！继续练习会越来越厉害！✨',
+      '太棒了！第一次就这么认真，继续加油哦！💪',
+      '你已经迈出第一步了，每天进步一点点，未来更精彩！🌟',
+      '好样的！坚持练习，你的打字速度会越来越快！🚀'
+    ]
+    return firstTimeMessages[Math.floor(Math.random() * firstTimeMessages.length)]
+  }
 
   const currentLPM = lettersPerMinute.value
-  const lastLPM = lastScore.value.lettersPerMinute
-  const currentAcc = accuracy.value
-  const lastAcc = lastScore.value.accuracy
-  const currentTime = elapsedSeconds.value
-  const lastTime = parseTimeToSeconds(lastScore.value.elapsedTime)
+  const prevLPM = previousScore.value.lettersPerMinute
 
-  const speedDiff = currentLPM - lastLPM
-  const accDiff = currentAcc - lastAcc
-  const timeDiff = lastTime - currentTime  // 正数表示用时更少（更快）
+  // 简化对比：主要对比速度
+  const speedDiff = currentLPM - prevLPM
 
-  // 构建对比信息数组
-  const improvements = []
-  const declines = []
-
-  // 速度对比
-  if (speedDiff > 0) {
-    improvements.push(`速度快了 ${speedDiff} 字母/分钟`)
-  } else if (speedDiff < 0) {
-    declines.push(`速度慢了 ${Math.abs(speedDiff)} 字母/分钟`)
+  // 速度明显提升（快5个以上）
+  if (speedDiff >= 5) {
+    const fastMessages = [
+      `哇！你的速度快了 ${speedDiff} 字母/分钟，像闪电一样！⚡`,
+      `太厉害了！比上次快了 ${speedDiff} 字母/分钟，进步超大！🎉`,
+      `你越来越厉害了！速度快了 ${speedDiff} 字母/分钟，继续保持！🌟`
+    ]
+    return fastMessages[Math.floor(Math.random() * fastMessages.length)]
   }
 
-  // 准确率对比
-  if (accDiff > 0) {
-    improvements.push(`准确率提高了 ${accDiff}%`)
-  } else if (accDiff < 0) {
-    declines.push(`准确率下降了 ${Math.abs(accDiff)}%`)
+  // 速度轻微提升（快1-4个）
+  if (speedDiff >= 1) {
+    const slightFastMessages = [
+      `很棒！比上次快了一点点，继续加油会更厉害！💪`,
+      `稳稳的进步！速度提升 ${speedDiff} 字母/分钟，做得好！👍`,
+      `每一次练习都有进步，你正在变得更棒！✨`
+    ]
+    return slightFastMessages[Math.floor(Math.random() * slightFastMessages.length)]
   }
 
-  // 用时对比
-  if (timeDiff > 0) {
-    improvements.push(`用时快了 ${timeDiff} 秒`)
-  } else if (timeDiff < 0) {
-    declines.push(`用时慢了 ${Math.abs(timeDiff)} 秒`)
+  // 速度持平或差不多（±0）
+  if (speedDiff === 0) {
+    const stableMessages = [
+      '发挥很稳定！继续保持这个节奏，会越来越厉害！🎯',
+      '稳扎稳打！你的表现很棒，继续练习会更出色！💫',
+      '坚持练习就是胜利，你已经很棒了！🌟'
+    ]
+    return stableMessages[Math.floor(Math.random() * stableMessages.length)]
   }
 
-  // 根据对比结果生成话术
-  if (improvements.length > 0 && declines.length === 0) {
-    // 全部进步
-    const improvementsStr = improvements.join('，')
-    return `太棒了！${improvementsStr}，你的进步真明显！🎉`
-  } else if (improvements.length > 0 && declines.length > 0) {
-    // 有进有退
-    const improvementsStr = improvements.join('，')
-    const declinesStr = declines.join('，')
-    return `${improvementsStr}，不过${declinesStr}，继续加油！💪`
-  } else if (improvements.length === 0 && declines.length > 0) {
-    // 全部退步
-    const declinesStr = declines.join('，')
-    return `这次${declinesStr}，别灰心，多练习就会更好！🌱`
-  } else {
-    // 都持平
-    return '和上次成绩一样稳定，继续挑战更高难度吧！🏆'
+  // 速度轻微下降（慢1-4个）
+  if (speedDiff >= -4) {
+    const gentleMessages = [
+      '别担心，打字速度有波动很正常，多练习就会更稳定！🌱',
+      '今天可能有点累，没关系，休息后继续练习会更棒！💪',
+      '每次练习都在积累，你的手指正在记住位置呢！✨'
+    ]
+    return gentleMessages[Math.floor(Math.random() * gentleMessages.length)]
   }
+
+  // 速度下降较多（慢5个以上）
+  const slowMessages = [
+    '没关系，今天可能状态不好，下次一定会更好！💪',
+    '别灰心！打字就像骑自行车，多练几次就会熟练！🚴',
+    '相信自己！每个打字高手都经历过这个过程，加油！⭐'
+  ]
+  return slowMessages[Math.floor(Math.random() * slowMessages.length)]
 })
 
-// 辅助函数：解析时间字符串为秒数
-const parseTimeToSeconds = (timeStr) => {
-  const parts = timeStr.split(':')
-  return parseInt(parts[0]) * 60 + parseInt(parts[1])
+// 虚拟键盘辅助函数
+// 将按键码映射到键盘布局中的显示名称
+const mapKeyToDisplay = (key) => {
+  if (key.length === 1) {
+    return key.toLowerCase()
+  }
+
+  const keyMap = {
+    ' ': 'Space',
+    'Control': 'Control',
+    'Meta': 'Meta',
+    'Alt': 'Alt',
+    'Shift': 'Shift',
+    'CapsLock': 'CapsLock',
+    'Enter': 'Enter',
+    'Backspace': 'Backspace',
+    'Tab': 'Tab'
+  }
+
+  return keyMap[key] || key
+}
+
+// 显示按键反馈（正确/错误）
+const showKeyFeedback = (key, status) => {
+  if (keyTimer.value) {
+    clearTimeout(keyTimer.value)
+  }
+
+  const displayKey = mapKeyToDisplay(key)
+  activeKey.value = displayKey
+  keyStatus.value = status
+
+  keyTimer.value = setTimeout(() => {
+    activeKey.value = ''
+    keyStatus.value = 'default'
+  }, 300)
+}
+
+// 判断是否为宽按键
+const isWideKey = (key) => {
+  return ['Tab', 'Backspace', 'CapsLock', 'Enter', '\\'].includes(key)
+}
+
+// 判断是否为超宽按键
+const isExtraWideKey = (key) => {
+  return ['Shift'].includes(key)
+}
+
+// 格式化按键标签显示
+const formatKeyLabel = (key) => {
+  const labelMap = {
+    'Backspace': '⌫',
+    'Tab': '⇥',
+    'Enter': '↵',
+    'Shift': '⇧',
+    'Control': 'Ctrl',
+    'Meta': '⌘',
+    'Alt': 'Alt',
+    'CapsLock': '⇪',
+    'Space': ''
+  }
+  return labelMap[key] || key.toUpperCase()
 }
 
 // 方法
@@ -589,11 +690,18 @@ const handleKeyDown = (e) => {
       if (char === targetChar) {
         // 正确输入
         correctChars.value++
+        showKeyFeedback(char, 'correct')
       } else if (targetChar) {
         // 错误输入
         errorChars.value++
+        showKeyFeedback(char, 'error')
       }
     }
+  }
+
+  // 处理特殊按键显示
+  if (['Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'Meta', 'CapsLock'].includes(char)) {
+    showKeyFeedback(char, 'default')
   }
 }
 
@@ -640,6 +748,9 @@ const completePractice = () => {
   // 添加新成绩
   scoreHistory.value.push(currentScore)
 
+  // 保存上一次成绩用于对比显示（在更新前先保存）
+  previousScore.value = lastScore.value ? { ...lastScore.value } : null
+
   // 更新上次成绩（用于下次对比）
   lastScore.value = { ...currentScore }
 
@@ -675,6 +786,9 @@ onMounted(() => {
 
 onUnmounted(() => {
   stopTimer()  // 清理计时器
+  if (keyTimer.value) {
+    clearTimeout(keyTimer.value)
+  }
 })
 </script>
 
@@ -984,6 +1098,9 @@ onUnmounted(() => {
   padding: 20px;
   border: 2px solid #81c784;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 380px;
 }
 
 .score-board-title {
@@ -1050,8 +1167,17 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 0.85rem;
+  color: #2e7d32;
+  font-weight: 500;
+  text-align: center;
+}
+
+.score-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .score-latest-badge {
@@ -1273,7 +1399,82 @@ onUnmounted(() => {
 }
 
 /* ============================================
-   7. 移动端响应式
+   8. 虚拟键盘显示
+   ============================================ */
+.virtual-keyboard {
+  margin-top: 30px;
+  padding: 20px;
+  background: #1a1d21;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  min-width: max-content;
+}
+
+.keyboard-key {
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #ccc;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  user-select: none;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.keyboard-key.wide {
+  min-width: 60px;
+}
+
+.keyboard-key.extra-wide {
+  min-width: 90px;
+}
+
+.keyboard-key.space-key {
+  min-width: 300px;
+}
+
+/* 激活状态 */
+.keyboard-key.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 正确状态 - 绿色 */
+.keyboard-key.active.correct {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  border-color: #27ae60;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+}
+
+/* 错误状态 - 红色 */
+.keyboard-key.active.error {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+  border-color: #c0392b;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+/* ============================================
+   9. 移动端响应式
    ============================================ */
 @media (max-width: 768px) {
   /* 完成弹窗移动端优化 */
@@ -1355,6 +1556,40 @@ onUnmounted(() => {
     min-width: 100%;
     width: 100%;
   }
+
+  /* 虚拟键盘移动端 */
+  .virtual-keyboard {
+    padding: 12px;
+    gap: 3px;
+  }
+
+  .keyboard-row {
+    gap: 3px;
+  }
+
+  .keyboard-key {
+    min-width: 24px;
+    max-width: 32px;
+    height: 28px;
+    font-size: 0.55rem;
+    padding: 0 3px;
+  }
+
+  .keyboard-key.wide {
+    min-width: 36px;
+    max-width: 50px;
+  }
+
+  .keyboard-key.extra-wide {
+    min-width: 50px;
+    max-width: 70px;
+  }
+
+  .keyboard-key.space-key {
+    min-width: 80px;
+    max-width: 120px;
+    flex: 1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1370,6 +1605,34 @@ onUnmounted(() => {
   .completion-stat {
     flex: 1 1 calc(33% - 8px);
     max-width: calc(33% - 6px);
+  }
+
+  /* 虚拟键盘超小屏幕 */
+  .virtual-keyboard {
+    padding: 10px;
+  }
+
+  .keyboard-key {
+    min-width: 20px;
+    max-width: 28px;
+    height: 26px;
+    font-size: 0.5rem;
+    padding: 0 2px;
+  }
+
+  .keyboard-key.wide {
+    min-width: 32px;
+    max-width: 45px;
+  }
+
+  .keyboard-key.extra-wide {
+    min-width: 45px;
+    max-width: 60px;
+  }
+
+  .keyboard-key.space-key {
+    min-width: 60px;
+    max-width: 100px;
   }
 }
 </style>
