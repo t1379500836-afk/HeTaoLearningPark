@@ -18,47 +18,93 @@
 ## 项目架构概览
 
 ### 目录结构
+
 ```
 hetao-learning-park/
-├── index.html                 # 入口HTML，引入CodeMirror CDN
-├── package.json               # 项目依赖配置
-├── vite.config.js             # Vite配置（含路径别名@）
-├── HeTaoLearningPark.md       # 主文档（本文件）
+├── index.html                      # 入口HTML，引入CodeMirror CDN
+├── package.json                    # 项目依赖配置
+├── vite.config.js                  # Vite配置（含路径别名@）
+├── HeTaoLearningPark.md            # 主文档（本文件）
+├── claude.md                       # 快速上手文档
 └── src/
-    ├── main.js                # Vue应用入口 + Router
-    ├── App.vue                # 根组件（使用RouterView）
-    ├── config/                # 配置文件
-    │   └── stages.config.js   # 阶段解锁配置
+    ├── main.js                     # Vue应用入口 + Router
+    ├── App.vue                     # 根组件（使用RouterView）
+    ├── config/                     # 配置文件
+    │   ├── courses.config.js       # 课程统一配置
+    │   ├── courses.config.claude.md
+    │   ├── stages.config.js        # 阶段解锁配置
+    │   └── stages.config.claude.md
     ├── router/
-    │   └── index.js           # Vue Router路由配置
-    ├── views/                 # 页面级组件
-    │   ├── HomeView.vue       # 首页
-    │   ├── CourseLevelsView.vue  # 阶段选择（PY1/PY2/PY3）
-    │   ├── StageView.vue      # Level选择（L1-L18）
-    │   ├── UnitView.vue       # 课时选择（L1-1 ~ L1-4）
-    │   ├── LessonView.vue     # 课时主页面（知识点+打字+习题）
-    │   ├── PracticeView.vue   # 课后练习
-    │   ├── TypingView.vue     # 独立打字练习
-    │   ├── PythonIDEView.vue  # 独立Python编辑器
-    │   └── YCLZoneView.vue    # YCL专区
+    │   ├── index.js                # Vue Router路由配置
+    │   └── claude.md               # 路由文档
+    ├── views/                      # 页面级组件
+    │   ├── HomeView.vue            # 首页（快速入口卡片）
+    │   ├── HomeView.claude.md
+    │   ├── CourseLevelsView.vue    # 阶段选择（PY1/PY2/PY3）
+    │   ├── CourseLevelsView.claude.md
+    │   ├── StageView.vue           # Level选择（L1-L18）
+    │   ├── StageView.claude.md
+    │   ├── UnitView.vue            # 课时选择（L1-1 ~ L1-4）
+    │   ├── UnitView.claude.md
+    │   ├── LessonView.vue          # 课时主页面（知识点+打字+习题）
+    │   ├── LessonView.claude.md
+    │   ├── PracticeView.vue        # 课后练习（开发中）
+    │   ├── PracticeView.claude.md
+    │   ├── TypingView.vue          # 独立打字练习
+    │   ├── TypingView.claude.md
+    │   ├── PythonIDEView.vue       # 独立Python编辑器
+    │   ├── PythonIDEView.claude.md
+    │   ├── YCLZoneView.vue         # YCL专区（开发中）
+    │   ├── YCLZoneView.claude.md
+    │   └── README.md               # 视图目录说明
     ├── components/
-    │   ├── shared/            # 共享组件
-    │   │   ├── Navigation.vue  # 导航栏（使用router-link）
-    │   │   ├── HeroSection.vue # Hero横幅
-    │   │   ├── Footer.vue      # 页脚
-    │   │   └── StageLocked.vue # 阶段锁定提示组件
-    │   ├── course/            # 课程相关组件
-    │   │   ├── TypingPractice.vue  # 打字练习
-    │   │   └── CodeEditor.vue      # Python编辑器
-    │   └── ycl/               # YCL专区组件
-    ├── composables/           # 可复用逻辑
-    │   ├── useCourseData.js   # 课程数据加载（待实现）
-    │   └── useProgress.js     # 用户进度跟踪（待实现）
+    │   ├── shared/                 # 共享组件
+    │   │   ├── Navigation.vue      # 导航栏（使用router-link）
+    │   │   ├── Navigation.claude.md
+    │   │   ├── HeroSection.vue     # Hero横幅
+    │   │   ├── HeroSection.claude.md
+    │   │   ├── Footer.vue          # 页脚
+    │   │   ├── Footer.claude.md
+    │   │   ├── StageLocked.vue     # 阶段锁定提示组件
+    │   │   ├── StageLocked.claude.md
+    │   │   └── README.md           # 共享组件说明
+    │   └── course/                 # 课程相关组件
+    │       ├── TypingPractice.vue  # 打字练习组件
+    │       ├── TypingPractice.claude.md
+    │       ├── CodeEditor.vue      # Python在线编辑器
+    │       ├── CodeEditor.claude.md
+    │       ├── FlashcardDisplay.vue # 单词卡展示组件
+    │       ├── FlashcardDisplay.claude.md
+    │       ├── KnowledgeCard.vue   # 知识点卡片组件
+    │       ├── KnowledgeCard.claude.md
+    │       ├── ExerciseCard.vue    # 习题卡片组件
+    │       ├── ExerciseCard.claude.md
+    │       ├── DifficultyBadge.vue # 难度徽章组件
+    │       ├── DifficultyBadge.claude.md
+    │       └── README.md           # 课程组件说明
+    ├── composables/                # 可复用逻辑
+    │   ├── useLessonData.js        # 课程数据加载
+    │   └── README.md               # Composables文档
     ├── assets/
+    │   ├── images/
+    │   │   └── hetao-logo.png      # 核桃logo
     │   └── styles/
-    │       └── variables.css  # CSS变量系统
-    └── data/                  # 课程数据
-        └── courses/           # 18个Level数据目录
+    │       ├── variables.css       # CSS变量系统
+    │       └── claude.md           # 样式文档
+    └── data/                       # 课程数据
+        └── courses/                # 18个Level数据目录
+            ├── README.md           # 课程数据目录说明
+            ├── LESSON_DEVELOPMENT_GUIDE.md
+            ├── PY1/                # Python入门基础（L1-L6）
+            ├── PY2/                # Python进阶编程（L7-L12）
+            │   ├── lessons/        # 课次数据目录
+            │   │   ├── L7-1/
+            │   │   │   └── lesson-data.js
+            │   │   └── ...
+            │   ├── typing-templates-pool.js
+            │   ├── content.json
+            │   └── README.md
+            └── PY3/                # Python高级应用（L13-L18）
 ```
 
 ### 路由结构
@@ -170,8 +216,8 @@ await Sk.misceval.asyncToPromise(function() {
 #### 功能特性
 
 **双模式练习系统**
-- 单词模式：练习Python关键词汇和英文单词
-- 代码模式：练习Python代码片段语法
+- **单词模式**：练习PY2课程单词（L7-1 至 L8-8单元）
+- **代码模式**：练习Python代码模板语法，支持Tab缩进（4空格）
 
 **虚拟键盘交互**
 - QWERTY 5行标准键盘布局
@@ -181,26 +227,36 @@ await Sk.misceval.asyncToPromise(function() {
   - 错误：红色渐变
 - 300ms 自动恢复机制
 
-**内置关卡体系**
+**内置关卡体系**（课程内嵌使用）
 | 关卡名称 | 练习内容 | 类型 |
 |---------|---------|------|
-| Home Row | A S D F J K L ; | word |
-| Top Row | Q W E R T Y U I O P | word |
-| Bottom Row | Z X C V B N M | word |
-| Python Keywords | print, input, if, else... | word |
-| Print语句 | print("Hello") | code |
-| 变量赋值 | name = "Tom" | code |
-| 条件语句 | if age >= 18: | code |
+| L7-1 单词 | split, encode, decode, print... | word |
+| L7-2 单词 | weather, float, max, index... | word |
+| L7-3 单词 | sum, sort, player, record... | word |
+| L7-4 单词 | initial, power, claw, detect... | word |
+| L8-1 单词 | power, note, dict, get... | word |
+| L8-2 单词 | set, add, insert, score... | word |
+| L8-3 单词 | line, sensor, wait, time... | word |
+| L8-4 单词 | reverse, count, sorted, slice... | word |
+| L7-1: 遍历与split | for i in s:, s.split(" ")... | code |
+| L7-2: 查找与列表 | max(scores), min(numbers)... | code |
+| L7-3: 排序与求和 | sum(numbers), list.sort()... | code |
+| L8-1: 字典基础 | {"name": "Tom"}, dict.get()... | code |
+| L8-2: 列表操作 | list.append(), list.insert()... | code |
+| L8-3: 循环结构 | while x > 0:, for i in range()... | code |
+| L8-4: 列表高级 | list.reverse(), sorted(list)... | code |
 
-**进度追踪**
+**进度追踪与排行榜**
 - 实时统计：字母/分钟、准确率、用时
-- 历史成绩榜：保存前5名
+- 历史成绩榜：保存前5名，支持跨练习持久化
 - 成绩对比：与上次练习对比（儿童友好版提示词）
+- 完成祝贺界面：随机鼓励话术、基于表现的祝贺标题
 
-**完成祝贺界面**
-- 随机鼓励话术
-- 基于表现的祝贺标题
-- 与上次成绩对比显示
+**公共区域打字练习** (`/typing`)
+- 单词模式：从8个课程关卡中随机选题
+- 代码模式：从模板池随机抽取（支持难度选择：全部/基础/进阶/挑战）
+- 点击"返回"或"重新开始"后自动刷新题目
+- 排行榜数据持久化（使用props传递和emit同步）
 
 #### Props 完整列表
 
@@ -213,6 +269,16 @@ await Sk.misceval.asyncToPromise(function() {
 | `showLevelSelector` | `Boolean` | `false` | 显示关卡选择 |
 | `autoFocus` | `Boolean` | `false` | 自动聚焦输入框 |
 | `embedded` | `Boolean` | `false` | 嵌入式模式 |
+| `wordCount` | `Number` | `8` | 每轮练习的单词/模板数量 |
+| `scoreHistory` | `Array` | `[]` | 外部管理的排行榜数据（持久化） |
+
+#### Events
+
+| Event | 参数 | 说明 |
+|-------|------|------|
+| `complete` | 成绩对象 | 练习完成时触发 |
+| `restart` | - | 用户点击"返回"或"重新开始"时触发 |
+| `update:scoreHistory` | 新排行榜数据 | 排行榜数据更新时触发 |
 
 #### 使用示例
 
@@ -239,6 +305,17 @@ await Sk.misceval.asyncToPromise(function() {
   :custom-words="['for', 'in', 'range']"
   mode="word"
   :embedded="true"
+  :word-count="5"
+/>
+
+<!-- 公共区域模式（带持久化排行榜） -->
+<TypingPractice
+  :mode="mode"
+  :custom-words="currentWords"
+  :custom-templates="currentTemplates"
+  :score-history="scoreHistory"
+  @update:score-history="handleScoreHistoryUpdate"
+  @restart="handleRestart"
 />
 ```
 
@@ -249,6 +326,7 @@ await Sk.misceval.asyncToPromise(function() {
 - `mapKeyToDisplay()` 函数映射按键到键盘布局
 - `showKeyFeedback()` 函数控制高亮状态
 - 使用 `setTimeout` 实现 300ms 延迟恢复
+- **代码模式Tab键处理**：插入4个空格，检查正确性并更新统计
 
 **统计计算公式**
 ```javascript
@@ -262,6 +340,12 @@ accuracy = (correctChars / (correctChars + errorChars)) * 100
 timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`
 ```
 
+**排行榜持久化**
+- 父组件（TypingView）管理 `scoreHistory` 状态
+- 组件初始化时从 props 接收历史数据
+- 完成练习时通过 `update:scoreHistory` emit 同步更新
+- 内容变化时使用 `watch` 监听并重置练习（保留排行榜）
+
 **成绩对比逻辑**
 - `previousScore`：保存上一次练习成绩
 - `lastScore`：用于下次对比的当前成绩
@@ -269,10 +353,12 @@ timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`
 - 儿童友好提示词：根据进步/退步程度生成鼓励话语
 
 **关键代码位置**
-- 键盘布局定义: [TypingPractice.vue:339-345](src/components/course/TypingPractice.vue#L339-L345)
-- 按键反馈函数: [TypingPractice.vue:558-571](src/components/course/TypingPractice.vue#L558-L571)
-- 统计计算: [TypingPractice.vue:408-427](src/components/course/TypingPractice.vue#L408-L427)
-- 成绩对比: [TypingPractice.vue:468-533](src/components/course/TypingPractice.vue#L468-L533)
+- 键盘布局定义: [TypingPractice.vue:443-449](src/components/course/TypingPractice.vue#L443-L449)
+- 按键反馈函数: [TypingPractice.vue:666-679](src/components/course/TypingPractice.vue#L666-L679)
+- Tab键处理: [TypingPractice.vue:776-812](src/components/course/TypingPractice.vue#L776-L812)
+- 统计计算: [TypingPractice.vue:516-528](src/components/course/TypingPractice.vue#L516-L528)
+- 成绩对比: [TypingPractice.vue:576-641](src/components/course/TypingPractice.vue#L576-L641)
+- 排行榜持久化: [TypingPractice.vue:438,860](src/components/course/TypingPractice.vue#L438),[TypingPractice.vue:860](src/components/course/TypingPractice.vue#L860)
 
 #### 响应式设计
 
@@ -287,6 +373,22 @@ timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`
 - 容器支持水平滚动
 - Space键弹性伸缩
 - 按键添加 `max-width` 限制
+
+#### 未来扩展需求
+
+**中文打字练习**
+- 难度：★★★★☆（中等）
+- 方案：创建独立的中文打字模块
+- 功能要点：
+  - IME（输入法）事件处理
+  - 拼音输入反馈
+  - 整体匹配而非逐字符匹配
+  - 切换按钮：英文 ↔ 中文
+  - 统计单位：字/分钟
+- 技术挑战：
+  - 中文输入法的compositionstart/compositionend事件
+  - 拼音预览状态的正确判断
+  - 避免输入法候选词窗口干扰
 
 ---
 

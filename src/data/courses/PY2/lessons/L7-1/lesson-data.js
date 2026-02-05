@@ -424,13 +424,44 @@ export const typingWords = {
   hard: ['iteration', 'separator', 'delimiter', 'concatenate']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - 基础语法
+    'for i in s:',
+    's.split(" ")',
+    'print(*list)',
+    'text.split(",")',
+    'words = s.split()',
+    'print(*items)'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'for char in s:\n    print(char)',
+    'parts = text.split(",")',
+    'print(*words, sep="-")',
+    'for i in range(5):\n    print(i)',
+    'items = text.split(" ")',
+    'for word in words:\n    print(word)'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'for i, char in enumerate(s):',
+    'for line in lines:\n    print(line.strip())',
+    'parts = s.split(",")\nfor p in parts:\n    print(p)',
+    'for i, ch in enumerate(text):\n    print(f"{i}: {ch}")'
+  ]
+}
+
 // 导出所有数据
 export const L7_1_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L7_1_data

@@ -62,8 +62,44 @@
       <!-- 打字练习 - 等待数据加载完成后再挂载，避免焦点抢占 -->
       <section id="typing-practice" v-if="typingWords && typingWords.easy && !isLoading" class="section">
         <h2>⌨️ 打字练习</h2>
-        <p class="section-desc">通过打字巩固今天学习的词汇</p>
-        <TypingPractice :custom-words="allTypingWords" :auto-focus="false" embedded />
+        <p class="section-desc">通过打字巩固今天学习的词汇和代码</p>
+
+        <!-- 模式切换按钮 -->
+        <div class="typing-mode-switch">
+          <button
+            :class="{ active: typingMode === 'word' }"
+            @click="typingMode = 'word'"
+            class="mode-btn"
+          >
+            📝 单词模式
+          </button>
+          <button
+            v-if="typingTemplates && typingTemplates.easy && typingTemplates.easy.length > 0"
+            :class="{ active: typingMode === 'code' }"
+            @click="typingMode = 'code'"
+            class="mode-btn"
+          >
+            💻 代码模式
+          </button>
+        </div>
+
+        <!-- 单词模式 -->
+        <TypingPractice
+          v-if="typingMode === 'word'"
+          :custom-words="allTypingWords"
+          :auto-focus="false"
+          embedded
+        />
+
+        <!-- 代码模式 -->
+        <TypingPractice
+          v-if="typingMode === 'code' && allTypingTemplates.length > 0"
+          :key="templateVersion"
+          mode="code"
+          :custom-templates="allTypingTemplates"
+          :auto-focus="false"
+          embedded
+        />
       </section>
 
       <!-- 课后习题 -->
@@ -142,6 +178,7 @@ const {
   knowledgePoints,
   exercises,
   typingWords,
+  typingTemplates,
   getExercisesByLevel,
   reload
 } = useLessonData(stage, unit, lesson)
@@ -182,6 +219,43 @@ const allTypingWords = computed(() => {
   ]
   // 去重
   return [...new Set(all)]
+})
+
+// 打字练习模式（单词/代码）
+const typingMode = ref('word')
+
+// 随机抽取函数（Fisher-Yates 洗牌算法）
+const shuffleAndPick = (array, count) => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled.slice(0, Math.min(count, shuffled.length))
+}
+
+// 每次练习随机抽取5个代码模板
+const practiceTemplatesCount = 5
+const allTypingTemplates = ref([])
+const templateVersion = ref(0)  // 用于强制刷新组件
+
+// 刷新代码模板（重新随机抽取）
+const refreshCodeTemplates = () => {
+  const all = [
+    ...(typingTemplates.value.easy || []),
+    ...(typingTemplates.value.medium || []),
+    ...(typingTemplates.value.hard || [])
+  ]
+  const unique = [...new Set(all)]
+  allTypingTemplates.value = shuffleAndPick(unique, practiceTemplatesCount)
+  templateVersion.value++  // 递增版本号，强制组件重新创建
+}
+
+// 监听模式切换，切换到代码模式时刷新模板
+watch(typingMode, (newMode) => {
+  if (newMode === 'code') {
+    refreshCodeTemplates()
+  }
 })
 
 // 单元内课次列表（用于导航）
@@ -236,10 +310,11 @@ onMounted(() => {
   })
 })
 
-// 监听路由变化，重置难度选择
+// 监听路由变化，重置难度选择和打字模式
 watch(() => route.params.lesson, () => {
   selectedDifficulty.value = 'all'
   defaultLevel.value = 'easy'
+  typingMode.value = 'word'
 }, { immediate: true })
 
 // 路由变化后滚动到顶部
@@ -441,6 +516,35 @@ watch(isLoading, (newVal) => {
   cursor: pointer;
   transition: all 0.3s;
   font-size: 0.95rem;
+}
+
+/* 打字模式切换 */
+.typing-mode-switch {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  padding: 10px 18px;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+}
+
+.mode-btn:hover {
+  border-color: var(--primary-color);
+  background: #fff8f0;
+}
+
+.mode-btn.active {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
 }
 
 .filter-btn:hover {

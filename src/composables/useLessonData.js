@@ -66,7 +66,8 @@ export function useLessonData(stage, unit, lesson) {
     vocab: [],
     knowledgePoints: [],
     exercises: [],
-    typingWords: { easy: [], medium: [], hard: [] }
+    typingWords: { easy: [], medium: [], hard: [] },
+    typingTemplates: { easy: [], medium: [], hard: [] }
   })
 
   // 监听参数变化，自动重新加载数据
@@ -82,6 +83,7 @@ export function useLessonData(stage, unit, lesson) {
   const knowledgePoints = computed(() => lessonData.value?.knowledgePoints || [])
   const exercises = computed(() => lessonData.value?.exercises || [])
   const typingWords = computed(() => lessonData.value?.typingWords || {})
+  const typingTemplates = computed(() => lessonData.value?.typingTemplates || {})
 
   // 按难度筛选习题
   const getExercisesByLevel = (level) => {
@@ -107,6 +109,7 @@ export function useLessonData(stage, unit, lesson) {
     knowledgePoints,
     exercises,
     typingWords,
+    typingTemplates,
 
     // 方法
     getExercisesByLevel,

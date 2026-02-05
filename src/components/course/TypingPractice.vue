@@ -161,14 +161,6 @@
 
         <div class="completion-stats">
           <div class="completion-stat">
-            <span class="stat-label">完成单词</span>
-            <span class="stat-value">{{ correctCount }} 个</span>
-          </div>
-          <div class="completion-stat">
-            <span class="stat-label">正确字母</span>
-            <span class="stat-value">{{ correctChars }} 个</span>
-          </div>
-          <div class="completion-stat">
             <span class="stat-label">速度</span>
             <span class="stat-value">{{ lettersPerMinute }} 字母/分钟</span>
           </div>
@@ -202,9 +194,17 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+
+// Fisher-Yates 洗牌算法 - 随机抽取指定数量的项目
+const shuffleAndPick = (array, count) => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled.slice(0, Math.min(count, shuffled.length))
+}
 
 // 组件props
 const props = defineProps({
@@ -235,11 +235,21 @@ const props = defineProps({
   embedded: {
     type: Boolean,
     default: false
+  },
+  // 每轮练习的单词/模板数量（默认8个）
+  wordCount: {
+    type: Number,
+    default: 8
+  },
+  // 外部管理的排行榜数据（用于持久化）
+  scoreHistory: {
+    type: Array,
+    default: () => []
   }
 })
 
 // 组件emit
-const emit = defineEmits(['complete'])
+const emit = defineEmits(['complete', 'restart', 'update:scoreHistory'])
 
 // 容器类名：根据嵌入式模式返回不同类名
 const containerClass = computed(() => ({
@@ -247,69 +257,166 @@ const containerClass = computed(() => ({
   'embedded': props.embedded
 }))
 
-// 打字练习数据
+// 打字练习数据（每个关卡最多8个单词/模板）
+// 基于 PY2 课程 L7-L8 单元的单词卡内容
 const levels = [
+  // 课程单词关卡 - L7 单元
+  {
+    name: 'L7-1 单词',
+    title: 'L7-1: split, encode, decode, print',
+    type: 'word',
+    words: ['split', 'encode', 'decode', 'print', 'string', 'traversal', 'hello', 'world']
+  },
+  {
+    name: 'L7-2 单词',
+    title: 'L7-2: weather, float, max, index',
+    type: 'word',
+    words: ['weather', 'float', 'maximum', 'minimum', 'index', 'find', 'number', 'list']
+  },
+  {
+    name: 'L7-3 单词',
+    title: 'L7-3: sum, sort, player, record',
+    type: 'word',
+    words: ['sum', 'sort', 'player', 'record', 'score', 'game', 'add', 'total']
+  },
+  {
+    name: 'L7-4 单词',
+    title: 'L7-4: initial, power, claw, detect',
+    type: 'word',
+    words: ['initial', 'power', 'claw', 'detect', 'robot', 'action', 'move', 'sensor']
+  },
+  // 课程单词关卡 - L8 单元
+  {
+    name: 'L8-1 单词',
+    title: 'L8-1: power, note, dict, get',
+    type: 'word',
+    words: ['power', 'note', 'dict', 'dictionary', 'value', 'key', 'pair', 'data']
+  },
+  {
+    name: 'L8-2 单词',
+    title: 'L8-2: set, add, in, score',
+    type: 'word',
+    words: ['set', 'add', 'insert', 'score', 'append', 'remove', 'pop', 'count']
+  },
+  {
+    name: 'L8-3 单词',
+    title: 'L8-3: line, sensor, wait, time',
+    type: 'word',
+    words: ['line', 'sensor', 'wait', 'time', 'while', 'loop', 'break', 'continue']
+  },
+  {
+    name: 'L8-4 单词',
+    title: 'L8-4: reverse, count, sorted, slice',
+    type: 'word',
+    words: ['reverse', 'count', 'sorted', 'slice', 'order', 'range', 'step', 'index']
+  },
+  // 基础指法关卡（键盘练习）
   {
     name: 'Home Row',
-    title: 'Home Row Keys (A S D F J K L ;)',
+    title: '基准行练习 (A S D F J K L ;)',
     type: 'word',
-    words: ['asdf', 'jkl;', 'asdfj', 'kl;asdf', 'fjdk', 'sl;ak', 'dad', 'sad', 'lad', 'fall']
+    words: ['asdf', 'jkl;', 'fad', 'sak', 'lad', 'ask', 'fall', 'dads']
   },
   {
     name: 'Top Row',
-    title: 'Top Row Keys (Q W E R T Y U I O P)',
+    title: '上排键练习 (Q W E R T Y U I O P)',
     type: 'word',
-    words: ['qwer', 'tyui', 'op', 'power', 'write', 'type', 'quit', 'peek', 'worker']
+    words: ['qwer', 'tyui', 'op', 'power', 'write', 'type', 'quit', 'trip']
   },
   {
     name: 'Bottom Row',
-    title: 'Bottom Row Keys (Z X C V B N M)',
+    title: '下排键练习 (Z X C V B N M)',
     type: 'word',
-    words: ['zxcv', 'bnm', 'zero', 'max', 'box', 'cube', 'mix', 'vex', 'comb']
+    words: ['zxcv', 'bnm', 'zero', 'max', 'box', 'cube', 'mix', 'vex']
   },
+  // 代码模板关卡 - L7 单元
   {
-    name: 'Python Keywords',
-    title: 'Python 关键词练习',
-    type: 'word',
-    words: ['print', 'input', 'if', 'else', 'while', 'for', 'def', 'class', 'import', 'return']
-  },
-  {
-    name: 'All Keys',
-    title: '全键盘混合练习',
-    type: 'word',
-    words: ['hello', 'world', 'python', 'function', 'variable', 'keyboard', 'practice', 'speed']
-  },
-  // 代码模板关卡
-  {
-    name: 'Print语句',
-    title: '练习 print 语句',
+    name: 'L7-1: 遍历与split',
+    title: '字符串遍历与split命令',
     type: 'code',
     templates: [
+      'for i in s:',
+      's.split(" ")',
       'print("Hello")',
-      'print(name)',
-      'print(age + 1)',
-      'print("Result:", x + y)'
+      'print(*words)'
     ]
   },
   {
-    name: '变量赋值',
-    title: '练习变量赋值',
+    name: 'L7-2: 查找与列表',
+    title: 'max/min/float/index',
+    type: 'code',
+    templates: [
+      'max(scores)',
+      'min(numbers)',
+      'float(12)',
+      'list.index("item")'
+    ]
+  },
+  {
+    name: 'L7-3: 排序与求和',
+    title: 'sum/sort 命令',
+    type: 'code',
+    templates: [
+      'sum(numbers)',
+      'list.sort()',
+      'numbers.sort()',
+      'sum([1, 2, 3])'
+    ]
+  },
+  {
+    name: 'L7-4: 变量与赋值',
+    title: '变量赋值基础',
     type: 'code',
     templates: [
       'name = "Tom"',
       'age = 10',
-      'score = 95.5',
-      'is_student = True'
+      'power = 5',
+      'score = 95.5'
+    ]
+  },
+  // 代码模板关卡 - L8 单元
+  {
+    name: 'L8-1: 字典基础',
+    title: 'dict/get 命令',
+    type: 'code',
+    templates: [
+      '{"name": "Tom"}',
+      'dict["key"]',
+      'dict.get("key")',
+      'dict.get("key", 0)'
     ]
   },
   {
-    name: '条件语句',
-    title: '练习 if 条件语句',
+    name: 'L8-2: 列表操作',
+    title: 'append/insert 操作',
     type: 'code',
     templates: [
-      'if age >= 18:\n  print("成年")',
-      'if score >= 60:\n  print("及格")',
-      'if x > 0:\n  print("正数")'
+      'list.append(item)',
+      'list.insert(0, item)',
+      'list.pop()',
+      'list.count(x)'
+    ]
+  },
+  {
+    name: 'L8-3: 循环结构',
+    title: 'while/for 循环',
+    type: 'code',
+    templates: [
+      'while x > 0:',
+      'while True:\n    break',
+      'for i in range(5):',
+      'for item in list:'
+    ]
+  },
+  {
+    name: 'L8-4: 列表高级',
+    title: 'reverse/sorted 操作',
+    type: 'code',
+    templates: [
+      'list.reverse()',
+      'sorted(list)',
+      'list.sort(reverse=True)',
+      '[x * 2 for x in nums]'
     ]
   }
 ]
@@ -331,7 +438,7 @@ const elapsedSeconds = ref(0)            // 经过的时间（秒）
 const timerInterval = ref(null)          // 计时器定时器
 
 // 成绩榜相关
-const scoreHistory = ref([])             // 历史成绩记录
+const scoreHistory = ref(props.scoreHistory.map(s => ({ ...s })))  // 历史成绩记录（从props初始化）
 const lastScore = ref(null)              // 上次成绩（用于下次）
 const previousScore = ref(null)          // 上一次练习成绩（用于对比显示）
 
@@ -354,10 +461,14 @@ const mode = computed(() => props.mode)
 // 使用自定义内容或关卡内容
 const currentLevel = computed(() => {
   if (props.customWords.length > 0) {
-    return { type: 'word', words: props.customWords, title: '自定义单词练习' }
+    // 从自定义单词中随机抽取指定数量
+    const selectedWords = shuffleAndPick(props.customWords, props.wordCount)
+    return { type: 'word', words: selectedWords, title: '自定义单词练习' }
   }
   if (props.customTemplates.length > 0) {
-    return { type: 'code', templates: props.customTemplates, title: '自定义代码练习' }
+    // 从自定义模板中随机抽取指定数量
+    const selectedTemplates = shuffleAndPick(props.customTemplates, props.wordCount)
+    return { type: 'code', templates: selectedTemplates, title: '自定义代码练习' }
   }
   return levels[currentLevelIndex.value]
 })
@@ -670,11 +781,35 @@ const handleKeyDown = (e) => {
     const textarea = e.target
     const start = textarea.selectionStart
     const end = textarea.selectionEnd
-    // 插入2个空格作为缩进
-    inputValue.value = inputValue.value.substring(0, start) + '  ' + inputValue.value.substring(end)
+
+    // 检查Tab键输入是否正确（目标应该是4个空格）
+    const target = currentTemplate.value
+    const insertSpaces = '    '
+    let tabCorrect = true
+
+    // 检查接下来应该输入的4个字符是否都是空格
+    for (let i = 0; i < 4; i++) {
+      const targetChar = target[inputValue.value.length + i]
+      if (targetChar !== ' ') {
+        tabCorrect = false
+        break
+      }
+    }
+
+    // 更新统计
+    if (tabCorrect) {
+      correctChars.value += 4
+      showKeyFeedback('Tab', 'correct')
+    } else {
+      errorChars.value += 4
+      showKeyFeedback('Tab', 'error')
+    }
+
+    // 插入4个空格作为缩进（Python PEP 8标准）
+    inputValue.value = inputValue.value.substring(0, start) + insertSpaces + inputValue.value.substring(end)
     // 恢复光标位置
     setTimeout(() => {
-      textarea.selectionStart = textarea.selectionEnd = start + 2
+      textarea.selectionStart = textarea.selectionEnd = start + 4
     }, 0)
     return
   }
@@ -723,7 +858,7 @@ const stopTimer = () => {
 
 // 生成唯一ID
 const generateScoreId = () => {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2)
+  return Date.now().toString(36) + Math.random().toString(36).slice(2)
 }
 
 // 完成练习
@@ -748,6 +883,9 @@ const completePractice = () => {
   // 添加新成绩
   scoreHistory.value.push(currentScore)
 
+  // 同步排行榜数据到父组件
+  emit('update:scoreHistory', scoreHistory.value.map(s => ({ ...s })))
+
   // 保存上一次成绩用于对比显示（在更新前先保存）
   previousScore.value = lastScore.value ? { ...lastScore.value } : null
 
@@ -768,6 +906,8 @@ const completePractice = () => {
 // 重新开始（提供给按钮使用）
 const restartPractice = () => {
   resetPractice()
+  // 触发 restart 事件，让父组件知道可以刷新内容了
+  emit('restart')
 }
 
 // 返回上一页或首页
@@ -775,7 +915,15 @@ const goBack = () => {
   // 关闭完成弹窗，重置练习状态
   isCompleted.value = false
   resetPractice()
+  // 触发 restart 事件，让父组件知道可以刷新内容了
+  emit('restart')
 }
+
+// 监听自定义内容变化，重置练习状态（保留排行榜数据）
+watch(() => [props.customWords, props.customTemplates], () => {
+  // 当父组件更新内容时，重置练习状态
+  resetPractice()
+}, { deep: true })
 
 onMounted(() => {
   // 根据 prop 决定是否自动聚焦
