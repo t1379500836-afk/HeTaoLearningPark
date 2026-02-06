@@ -40,8 +40,8 @@ export const unitConfig = {
   L8: { id: 'L8', name: 'Level 8', description: '字典、集合与文本处理' },
   L9: { id: 'L9', name: 'Level 9', description: '循环控制与枚举法' },
   L10: { id: 'L10', name: 'Level 10', description: '二维列表' },
-  L11: { id: 'L11', name: 'Level 11', description: '异常处理' },
-  L12: { id: 'L12', name: 'Level 12', description: '模块与包' },
+  L11: { id: 'L11', name: 'Level 11', description: '函数基础' },
+  L12: { id: 'L12', name: 'Level 12', description: 'Pygame 游戏开发' },
 
   // PY3 单元
   L13: { id: 'L13', name: 'Level 13', description: '面向对象编程' },

@@ -72,8 +72,8 @@ const stageData = {
       { id: 'L8', name: 'Level 8', icon: '8️⃣', description: '字典、集合与文本处理', lessons: ['L8-1', 'L8-2', 'L8-3', 'L8-4'] },
       { id: 'L9', name: 'Level 9', icon: '9️⃣', description: '循环控制与枚举法', lessons: ['L9-1', 'L9-2', 'L9-3', 'L9-4'] },
       { id: 'L10', name: 'Level 10', icon: '🔟', description: '二维列表', lessons: ['L10-1', 'L10-2', 'L10-3'] },
-      { id: 'L11', name: 'Level 11', icon: '1️⃣1️⃣', description: '异常处理', lessons: ['L11-1', 'L11-2', 'L11-3', 'L11-4'] },
-      { id: 'L12', name: 'Level 12', icon: '1️⃣2️⃣', description: '模块与包', lessons: ['L12-1', 'L12-2', 'L12-3', 'L12-4'] }
+      { id: 'L11', name: 'Level 11', icon: '1️⃣1️⃣', description: '函数基础', lessons: ['L11-1', 'L11-2', 'L11-4'] },
+      { id: 'L12', name: 'Level 12', icon: '1️⃣2️⃣', description: 'Pygame 游戏开发', lessons: ['L12-1', 'L12-2', 'L12-3', 'L12-4'] }
     ]
   },
   PY3: {
