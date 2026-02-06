@@ -518,7 +518,7 @@ export const typingTemplates = {
   hard: [
     'matrix[i][j] = matrix[j][i]',
     'list[i].append(new_item)',
-    'for i in range(len(list)): for j in range(len(list[i])):'
+    'for i in range(len(list)):\n    for j in range(len(list[i])):'
   ]
 }
 

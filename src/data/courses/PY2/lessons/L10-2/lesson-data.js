@@ -434,12 +434,12 @@ export const typingTemplates = {
     'print(matrix[i][j])'
   ],
   medium: [
-    'for i in range(len(list)): for j in range(len(list[i])):',
+    'for i in range(len(list)):\n    for j in range(len(list[i])):',
     'print(list[i][j])',
-    'for row in matrix: print(row)'
+    'for row in matrix:\n    print(row)'
   ],
   hard: [
-    'for i in range(len(matrix)): for j in range(len(matrix[i])): print(matrix[i][j])',
+    'for i in range(len(matrix)):\n    for j in range(len(matrix[i])):\n        print(matrix[i][j])',
     'col = [row[i] for row in matrix]',
     'matrix[i][j] = matrix[j][i]'
   ]

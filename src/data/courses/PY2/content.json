@@ -643,6 +643,36 @@
     }
   },
   {
+    "id": "L10-1",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L10-2",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L10-3",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L11-1",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L11-2",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L11-4",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
     "id": "L7-1",
     "unit": "lessons",
     "resources": {}
@@ -659,6 +689,46 @@
   },
   {
     "id": "L7-4",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L8-1",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L8-2",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L8-3",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L8-4",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L9-1",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L9-2",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L9-3",
+    "unit": "lessons",
+    "resources": {}
+  },
+  {
+    "id": "L9-4",
     "unit": "lessons",
     "resources": {}
   }

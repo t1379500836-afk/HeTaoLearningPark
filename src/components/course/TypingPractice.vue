@@ -3,8 +3,6 @@
     <div :class="containerClass">
       <h2 class="section-title">金手指打字练习</h2>
       <div class="typing-demo">
-        <h3 class="task-title">当前任务：{{ currentTask.title }}</h3>
-
         <!-- 单词模式显示 -->
         <div v-if="mode === 'word'" class="word-display">
           <transition name="word-slide" mode="out-in">
@@ -460,22 +458,18 @@ const mode = computed(() => props.mode)
 
 // 使用自定义内容或关卡内容
 const currentLevel = computed(() => {
+  // 优先检查代码模式：如果 mode 是 code 且有自定义模板，直接使用
+  if (props.mode === 'code' && props.customTemplates.length > 0) {
+    return { type: 'code', templates: props.customTemplates, title: '代码练习' }
+  }
+  // 然后检查自定义单词
   if (props.customWords.length > 0) {
-    // 从自定义单词中随机抽取指定数量
     const selectedWords = shuffleAndPick(props.customWords, props.wordCount)
-    return { type: 'word', words: selectedWords, title: '自定义单词练习' }
+    return { type: 'word', words: selectedWords, title: '单词练习' }
   }
-  if (props.customTemplates.length > 0) {
-    // 从自定义模板中随机抽取指定数量
-    const selectedTemplates = shuffleAndPick(props.customTemplates, props.wordCount)
-    return { type: 'code', templates: selectedTemplates, title: '自定义代码练习' }
-  }
+  // 最后使用内置关卡
   return levels[currentLevelIndex.value]
 })
-
-const currentTask = computed(() => ({
-  title: currentLevel.value.title
-}))
 
 const currentWord = computed(() => {
   if (currentLevel.value.words) {

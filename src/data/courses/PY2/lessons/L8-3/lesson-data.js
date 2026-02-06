@@ -596,13 +596,44 @@ export const typingWords = {
   hard: ['getLineSensor', 'setPower', 'waitButton', 'isAllBlack']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - while循环和传感器
+    'while True:',
+    'if n[2] == 1:',
+    'n = getLineSensor()',
+    'setPower(80, 80)',
+    'waitButton()',
+    'break'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'while True:\n    n = getLineSensor()',
+    'if n[0] == 1:\n    setPower(0, 80)',
+    'elif n[2] == 1:\n    setPower(80, 80)',
+    'setPower(left, right)',
+    'counter += 1',
+    'for i in range(4):'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'while crossings < 3:\n    if isAllBlack():\n        crossings += 1',
+    'if n[2] == 1:\n    setPower(80, 80)\n    elif n[0] == 1:\n        setPower(0, 80)',
+    'while True:\n    n = getLineSensor()\n    if n[2] == 1:\n        break',
+    'if crossings >= 3:\n    setPower(0, 0)\n    break'
+  ]
+}
+
 // 导出所有数据
 export const L8_3_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L8_3_data

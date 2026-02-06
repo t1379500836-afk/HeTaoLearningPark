@@ -435,13 +435,45 @@ export const typingWords = {
   hard: ['dictionary', 'keys', 'values', 'bracket']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - 字典操作
+    '{"name": "Tom"}',
+    'dict["key"]',
+    'dict.get("key")',
+    'dict.get("key", 0)',
+    'len(dict)',
+    '"key" in dict'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'student = {"name": "Tom", "age": 10}',
+    'score = student["score"]',
+    'name = dict.get("name", "未知")',
+    'prices["苹果"] = 8',
+    'for key in dict:',
+    'if "key" in dict:\n    value = dict["key"]'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'for key, value in dict.items():',
+    'if "key" in dict:\n    value = dict["key"]',
+    'counts[char] = counts.get(char, 0) + 1',
+    'dict.update({"key1": "value1", "key2": "value2"})',
+    'for key in sorted(dict.keys()):'
+  ]
+}
+
 // 导出所有数据
 export const L8_1_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L8_1_data

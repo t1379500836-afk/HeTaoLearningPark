@@ -342,13 +342,43 @@ export const typingWords = {
   hard: ['terminate', 'iteration', 'condition', 'statement']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - continue和break
+    'continue',
+    'break',
+    'if i % 2 == 1:',
+    'if value == 0:',
+    'if found:\n    break',
+    'for i in range(10):'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'if i % 2 == 1:\n    continue',
+    'if value == target:\n    break',
+    'for i in range(len(list)):',
+    'while True:\n    if condition:\n        break',
+    'for item in items:\n    if item == key:\n        break'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'for i in range(len(list)):\n    if list[i] == target:\n        print(i)\n        break',
+    'while True:\n    value = get_value()\n    if value is None:\n        break',
+    'for i in range(10):\n    if i % 2 == 0:\n        continue\n    print(i)',
+    'while count < 3:\n    if found:\n        break\n    count += 1'
+  ]
+}
+
 // 导出所有数据
 export const L9_1_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L9_1_data

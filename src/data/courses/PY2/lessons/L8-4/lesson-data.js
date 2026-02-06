@@ -592,13 +592,45 @@ export const typingWords = {
   hard: ['list_comprehension', 'string_slice', 'character_count', 'descending_order']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - 列表生成式
+    '[n * 2 for n in list]',
+    'sorted(numbers)',
+    'text.split(",")',
+    '"-".join(words)',
+    'list.count("a")',
+    'list[0:3]'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'result = [int(x) for x in list]',
+    'sorted(numbers, reverse=True)',
+    'parts = text.split(":")',
+    'scores = [int(x) for x in strings]',
+    'for item in list:\n    print(item)',
+    '[n for n in range(10) if n % 2 == 0]'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'sorted([int(x) for x in text.split()])',
+    'result = [x for x in list if x > 0]',
+    'for i, item in enumerate(list):\n    print(i, item)',
+    '[n * 2 for n in range(1, 6) if n % 2 == 0]',
+    'for word in sorted(words, reverse=True):'
+  ]
+}
+
 // 导出所有数据
 export const L8_4_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L8_4_data

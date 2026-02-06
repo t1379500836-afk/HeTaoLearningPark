@@ -74,12 +74,18 @@
             📝 单词模式
           </button>
           <button
-            v-if="typingTemplates && typingTemplates.easy && typingTemplates.easy.length > 0"
             :class="{ active: typingMode === 'code' }"
             @click="typingMode = 'code'"
             class="mode-btn"
           >
             💻 代码模式
+          </button>
+          <button
+            :class="{ active: typingMode === 'chinese' }"
+            @click="typingMode = 'chinese'"
+            class="mode-btn"
+          >
+            📖 中文练习
           </button>
         </div>
 
@@ -93,10 +99,19 @@
 
         <!-- 代码模式 -->
         <TypingPractice
-          v-if="typingMode === 'code' && allTypingTemplates.length > 0"
+          v-if="typingMode === 'code'"
           :key="templateVersion"
           mode="code"
           :custom-templates="allTypingTemplates"
+          :auto-focus="false"
+          embedded
+        />
+
+        <!-- 中文练习模式 -->
+        <ChineseTypingPractice
+          v-if="typingMode === 'chinese'"
+          :key="chineseContentVersion"
+          :items="chineseTypingItems"
           :auto-focus="false"
           embedded
         />
@@ -160,7 +175,8 @@ import FlashcardDisplay from '@/components/course/FlashcardDisplay.vue'
 import KnowledgeCard from '@/components/course/KnowledgeCard.vue'
 import ExerciseCard from '@/components/course/ExerciseCard.vue'
 import TypingPractice from '@/components/course/TypingPractice.vue'
-import CodeEditor from '@/components/course/CodeEditor.vue'
+import ChineseTypingPractice from '@/components/course/ChineseTypingPractice.vue'
+import { getMixedContent } from '@/data/chinese-typing-pool.js'
 
 const route = useRoute()
 const stage = computed(() => route.params.stage)
@@ -169,7 +185,6 @@ const lesson = computed(() => route.params.lesson)
 
 // 使用数据加载 composable
 const {
-  lessonData,
   isLoading,
   error,
   lessonId,
@@ -221,8 +236,18 @@ const allTypingWords = computed(() => {
   return [...new Set(all)]
 })
 
-// 打字练习模式（单词/代码）
+// 打字练习模式（单词/代码/中文）
 const typingMode = ref('word')
+
+// 中文打字练习内容
+const chineseTypingItems = ref([])
+const chineseContentVersion = ref(0)  // 用于强制刷新组件
+
+// 刷新中文练习内容
+const refreshChineseContent = () => {
+  chineseTypingItems.value = getMixedContent(5, 'mixed')
+  chineseContentVersion.value++
+}
 
 // 随机抽取函数（Fisher-Yates 洗牌算法）
 const shuffleAndPick = (array, count) => {
@@ -251,10 +276,12 @@ const refreshCodeTemplates = () => {
   templateVersion.value++  // 递增版本号，强制组件重新创建
 }
 
-// 监听模式切换，切换到代码模式时刷新模板
+// 监听模式切换，切换到代码模式或中文模式时刷新模板
 watch(typingMode, (newMode) => {
   if (newMode === 'code') {
     refreshCodeTemplates()
+  } else if (newMode === 'chinese') {
+    refreshChineseContent()
   }
 })
 

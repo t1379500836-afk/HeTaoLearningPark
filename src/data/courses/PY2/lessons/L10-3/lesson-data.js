@@ -431,15 +431,15 @@ export const typingTemplates = {
   easy: [
     'list[i][1] = 11',
     'zeros = [0] * 5',
-    'for row in matrix: print(row)'
+    'for row in matrix:\n    print(row)'
   ],
   medium: [
-    'for i in range(len(matrix)): matrix[i][1] = new_value',
+    'for i in range(len(matrix)):\n    matrix[i][1] = new_value',
     'matrix = [[0] * n for _ in range(n)]',
     'import random'
   ],
   hard: [
-    'for i in range(len(matrix)): for j in range(len(matrix[i])): matrix[i][j] = value',
+    'for i in range(len(matrix)):\n    for j in range(len(matrix[i])):\n        matrix[i][j] = value',
     'matrix = [[0] * cols for _ in range(rows)]',
     'if matrix[i][j] == target: found = True'
   ]

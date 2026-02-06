@@ -7,7 +7,9 @@
 ## 目录
 
 - [功能特性](#功能特性)
-- [组件API](#组件api)
+- [英文打字练习组件](#英文打字练习组件-typingpracticevue)
+- [中文打字练习组件](#中文打字练习组件-chinesetypingpracticevue)
+- [代码模板池](#代码模板池-typing-templates-pooljs)
 - [使用示例](#使用示例)
 - [技术实现](#技术实现)
 - [内置关卡](#内置关卡)
@@ -15,6 +17,54 @@
 ---
 
 ## 功能特性
+
+### 三种练习系统
+
+| 组件 | 练习内容 | 数据来源 | 适用场景 |
+|------|---------|----------|----------|
+| **TypingPractice** | 单词模式 + 代码模式（英文） | lesson-data.js + typing-templates-pool.js | Python代码语法练习 |
+| **ChineseTypingPractice** | 古诗 + 成语（中文） | chinese-typing-pool.js | 中文输入练习 |
+| **代码模板池** | 难度分级代码模板 | typing-templates-pool.js | 随机代码练习 |
+
+### 虚拟键盘交互
+
+- **布局**: QWERTY 5行标准键盘
+- **按键状态**:
+  - 按下：橙色高亮 (#ff9f00)
+  - 正确：绿色渐变
+  - 错误：红色渐变
+- **自动恢复**: 300ms
+- **响应式**: 支持桌面/平板/手机多端适配
+
+### 进度追踪
+
+| 统计项 | 说明 | 单位 |
+|--------|------|------|
+| 字母/分钟 | `(正确字符数 / 用时秒数) × 60` | 英文打字 |
+| 字/分钟 | `(正确字符数 / 用时秒数) × 60` | 中文打字 |
+| 准确率 | `(正确字符数 / 总字符数) × 100%` | % |
+| 用时 | `分:秒` 格式 | - |
+
+### 排行榜系统
+
+- 保存前5名成绩
+- 支持跨练习持久化
+- 成绩对比（与上次练习）
+- 儿童友好版提示词
+
+### 完成祝贺
+
+- 随机鼓励话术
+- 基于表现的祝贺标题
+- 进步对比显示
+
+---
+
+## 英文打字练习组件 (TypingPractice.vue)
+
+### 组件位置
+
+**文件**: [components/course/TypingPractice.vue](../src/components/course/TypingPractice.vue)
 
 ### 双模式练习系统
 
@@ -52,14 +102,6 @@
 - 随机鼓励话术
 - 基于表现的祝贺标题
 
----
-
-## 组件API
-
-### 组件位置
-
-**文件**: [components/course/TypingPractice.vue](../src/components/course/TypingPractice.vue)
-
 ### Props 完整列表
 
 | Prop | 类型 | 默认值 | 说明 |
@@ -83,6 +125,122 @@
 | `update:scoreHistory` | 新排行榜数据 | 排行榜数据更新时触发 |
 
 ---
+
+## 中文打字练习组件 (ChineseTypingPractice.vue)
+
+### 组件位置
+
+**文件**: [components/course/ChineseTypingPractice.vue](../src/components/course/ChineseTypingPractice.vue)
+
+### 功能说明
+
+中文打字练习组件支持古诗和成语练习，采用整体匹配方式（而非逐字符匹配），适合学生练习中文输入。
+
+### 练习内容类型
+
+| 类型 | 数据格式 | 示例 |
+|------|---------|------|
+| **古诗** | `{ text: "静夜思床前明月光...", type: "poem", title: "静夜思", author: "李白" }` | 显示标题和作者 |
+| **成语** | `{ text: "一心一意", type: "idiom" }` | 显示"成语"标签 |
+
+### Props 完整列表
+
+| Prop | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `items` | `Array` | `[]` | 练习内容列表（古诗/成语对象） |
+| `embedded` | `Boolean` | `false` | 嵌入式模式（隐藏排行榜） |
+| `scoreHistory` | `Array` | `[]` | 外部管理的排行榜数据（持久化） |
+
+### Events
+
+| Event | 参数 | 说明 |
+|-------|------|------|
+| `complete` | 成绩对象 | 练习完成时触发 |
+| `restart` | - | 用户点击"返回"或"再练一次"时触发 |
+| `update:scoreHistory` | 新排行榜数据 | 排行榜数据更新时触发 |
+
+### 界面特点
+
+- **字符状态显示**: 已输入（灰色背景）、当前（黄色闪烁）、正确（绿色）、错误（红色删除线）
+- **光标动画**: 闪烁光标指示当前输入位置
+- **进度条**: 实时显示练习进度
+- **儿童友好**: 鼓励语和祝贺界面
+
+### 统计单位
+
+- **速度**: 字/分钟
+- **准确率**: 百分比
+- **用时**: 分:秒格式
+
+---
+
+## 代码模板池 (typing-templates-pool.js)
+
+### 文件位置
+
+**文件**: [data/courses/PY2/typing-templates-pool.js](../src/data/courses/PY2/typing-templates-pool.js)
+
+### 功能说明
+
+代码模板池聚合了PY2阶段L7-L12所有课程的代码模板，按难度分级，提供随机抽取功能。
+
+### 难度分级
+
+| 难度 | 模板数量 | 说明 |
+|------|---------|------|
+| `easy` | 131条 | 单行代码、基础语法 |
+| `medium` | 120条 | 多行代码、常见操作 |
+| `hard` | 97条 | 复杂逻辑、嵌套结构 |
+
+### 使用方式
+
+```javascript
+import { getRandomTemplates } from '@/data/courses/PY2/typing-templates-pool.js'
+
+// 随机抽取8个基础难度模板
+const templates = getRandomTemplates(8, 'easy')
+
+// 随机抽取5个全部难度模板
+const templates = getRandomTemplates(5, 'all')
+```
+
+### 模板内容示例
+
+**基础难度 (easy)**:
+- `for i in s:`
+- `s.split(" ")`
+- `max(scores)`
+- `sum(numbers)`
+- `{"name": "Tom"}`
+
+**中等难度 (medium)**:
+- `for char in s:\n    print(char)`
+- `items = text.split(",")`
+- `result = max(numbers)`
+- `for key in dict:`
+
+**高难度 (hard)**:
+- `for i, char in enumerate(s):`
+- `sorted([int(x) for x in text.split()])`
+- `[n * 2 for n in range(1, 6) if n % 2 == 0]`
+- `def func(x):\n    if x > 0:\n        return x`
+
+### 覆盖课程范围
+
+| 单元 | 课程数量 | 模板来源 |
+|------|---------|---------|
+| L7 | 4次课 | 遍历、split、max/min、排序、求和、机器人控制 |
+| L8 | 4次课 | 字典、集合、while循环、列表操作、循环嵌套 |
+| L9 | 4次课 | 二维列表、函数定义与调用 |
+| L10 | 4次课 | 函数进阶（参数、返回值）、random模块 |
+| L11 | 4次课 | Pygame游戏开发基础 |
+| L12 | 4次课 | Pygame游戏开发进阶 |
+
+---
+
+## 使用示例
+
+### 英文打字 - 单词模式
 
 ## 使用示例
 
@@ -259,26 +417,8 @@ timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`
 
 ---
 
-## 未来扩展需求
-
-### 中文打字练习
-
-- **难度**: ★★★★☆（中等）
-- **方案**: 创建独立的中文打字模块
-- **功能要点**:
-  - IME（输入法）事件处理
-  - 拼音输入反馈
-  - 整体匹配而非逐字符匹配
-  - 切换按钮：英文 ↔ 中文
-  - 统计单位：字/分钟
-- **技术挑战**:
-  - 中文输入法的compositionstart/compositionend事件
-  - 拼音预览状态的正确判断
-  - 避免输入法候选词窗口干扰
-
----
-
 ## 相关文档
 
 - [02-功能需求](./02-FUNCTIONALITY.md) - 功能清单、已知限制
 - [03-前端布局](./03-FRONTEND-LAYOUT.md) - 虚拟键盘布局、响应式设计
+- [05-课程资料](./05-COURSE-MATERIALS.md) - 课程资料提取、命名规范

@@ -592,13 +592,45 @@ export const typingWords = {
   hard: ['initialize', 'direction', 'rotation', 'automated', 'obstacle']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - 智能车控制
+    'initCar()',
+    'move(10)',
+    'turnLeft(90)',
+    'turnRight(90)',
+    'move(-10)',
+    'setPower(80, 80)'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'initCar()\nmove(20)',
+    'for i in range(4):\n    move(10)',
+    'turnLeft(90)\nmove(15)',
+    'setPower(60, 80)',
+    'setClaw(True)',
+    'for i in range(3):\n    turnLeft(90)'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'for i in range(4):\n    move(10)\n    turnLeft(90)',
+    'initCar()\nsetPower(70, 70)\nmove(25)',
+    'for i in range(360):\n    setPower(50, -50)',
+    'if sensor.detect():\n    setClaw(True)\n    move(10)',
+    'for _ in range(8):\n    move(5)\n    turnLeft(45)'
+  ]
+}
+
 // 导出所有数据
 export const L7_4_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L7_4_data

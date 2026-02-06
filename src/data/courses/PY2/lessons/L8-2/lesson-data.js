@@ -513,13 +513,45 @@ export const typingWords = {
   hard: ['intersection', 'union', 'duplicate', 'bracket']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - 类型转换和集合
+    'int("123")',
+    'float("3.14")',
+    'str(123)',
+    'set([1, 2, 3])',
+    '"key" in set',
+    'len(set)'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'nums = set([1, 2, 2, 3])',
+    'set.add("new_item")',
+    'value = int(float("3.9"))',
+    'if item in set:',
+    'unique = set(list_with_duplicates)',
+    'for item in my_set:\n    print(item)'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'unique_set = set([1, 2, 2, 3, 3, 3])',
+    'result = set_a | set_b',
+    'if value in set_a:\n    set_a.add(value)',
+    'intersection = set_a & set_b',
+    'for i in range(len(list)):\n    unique.add(list[i])'
+  ]
+}
+
 // 导出所有数据
 export const L8_2_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L8_2_data

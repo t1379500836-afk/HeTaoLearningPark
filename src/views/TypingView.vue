@@ -3,9 +3,6 @@
     <section class="page-header">
       <h1>打字练习</h1>
       <p>提高打字速度和准确率，为编程学习打下基础</p>
-      <p v-if="mode === 'word'" class="current-level">
-        当前练习：{{ currentWordLevel.id }}
-      </p>
     </section>
 
     <!-- 模式切换 -->
@@ -24,28 +21,85 @@
       >
         💻 代码练习
       </button>
+      <button
+        :class="{ active: mode === 'chinese' }"
+        @click="switchMode('chinese')"
+        class="selector-btn"
+      >
+        📖 中文练习
+      </button>
     </div>
 
-    <!-- 难度选择（代码模式） -->
-    <div v-if="mode === 'code'" class="difficulty-selector">
-      <button
-        v-for="level in difficultyLevels"
-        :key="level.value"
-        :class="{ active: difficulty === level.value }"
-        @click="setDifficulty(level.value)"
-        class="difficulty-btn"
-      >
-        {{ level.emoji }} {{ level.label }}
-      </button>
+    <!-- 单词练习选项 -->
+    <div v-if="mode === 'word'" class="word-options">
+      <div class="option-group">
+        <span class="option-label">难度：</span>
+        <div class="option-buttons">
+          <button
+            v-for="level in wordDifficultyOptions"
+            :key="level.value"
+            :class="{ active: wordDifficulty === level.value }"
+            @click="setWordDifficulty(level.value)"
+            class="option-btn"
+          >
+            {{ level.emoji }} {{ level.label }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中文练习选项 -->
+    <div v-if="mode === 'chinese'" class="chinese-options">
+      <!-- 内容类型选择 -->
+      <div class="option-group">
+        <span class="option-label">内容类型：</span>
+        <div class="option-buttons">
+          <button
+            v-for="type in contentTypeOptions"
+            :key="type.value"
+            :class="{ active: chineseContentType === type.value }"
+            @click="setChineseContentType(type.value)"
+            class="option-btn"
+          >
+            {{ type.emoji }} {{ type.label }}
+          </button>
+        </div>
+      </div>
+      <!-- 难度选择 -->
+      <div class="option-group">
+        <span class="option-label">难度：</span>
+        <div class="option-buttons">
+          <button
+            v-for="level in chineseDifficultyLevels"
+            :key="level.value"
+            :class="{ active: chineseDifficulty === level.value }"
+            @click="setChineseDifficulty(level.value)"
+            class="option-btn"
+          >
+            {{ level.emoji }} {{ level.label }}
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- 打字练习组件 -->
     <TypingPractice
+      v-if="mode !== 'chinese'"
       :mode="mode"
       :custom-words="currentWords"
       :custom-templates="currentTemplates"
       :score-history="scoreHistory"
       @update:score-history="handleScoreHistoryUpdate"
+      @complete="handleComplete"
+      @restart="handleRestart"
+    />
+
+    <!-- 中文打字练习组件 -->
+    <ChineseTypingPractice
+      v-if="mode === 'chinese'"
+      :items="chineseItems"
+      :score-history="chineseScoreHistory"
+      @update:score-history="handleChineseScoreHistoryUpdate"
       @complete="handleComplete"
       @restart="handleRestart"
     />
@@ -55,93 +109,105 @@
 <script setup>
 import { ref, watch } from 'vue'
 import TypingPractice from '@/components/course/TypingPractice.vue'
+import ChineseTypingPractice from '@/components/course/ChineseTypingPractice.vue'
 import { getRandomTemplates } from '@/data/courses/PY2/typing-templates-pool.js'
+import { getRandomWords } from '@/data/courses/PY2/typing-words-pool.js'
+import { getRandomPoems, getRandomIdioms, getMixedContent } from '@/data/chinese-typing-pool.js'
 
-// 课程单词关卡数据（PY2 L7-L8单元）
-const wordLevels = [
-  { id: 'L7-1', title: 'L7-1: split, encode, decode, print', words: ['split', 'encode', 'decode', 'print', 'string', 'traversal', 'hello', 'world'] },
-  { id: 'L7-2', title: 'L7-2: weather, float, max, index', words: ['weather', 'float', 'maximum', 'minimum', 'index', 'find', 'number', 'list'] },
-  { id: 'L7-3', title: 'L7-3: sum, sort, player, record', words: ['sum', 'sort', 'player', 'record', 'score', 'game', 'add', 'total'] },
-  { id: 'L7-4', title: 'L7-4: initial, power, claw, detect', words: ['initial', 'power', 'claw', 'detect', 'robot', 'action', 'move', 'sensor'] },
-  { id: 'L8-1', title: 'L8-1: power, note, dict, get', words: ['power', 'note', 'dict', 'dictionary', 'value', 'key', 'pair', 'data'] },
-  { id: 'L8-2', title: 'L8-2: set, add, in, score', words: ['set', 'add', 'insert', 'score', 'append', 'remove', 'pop', 'count'] },
-  { id: 'L8-3', title: 'L8-3: line, sensor, wait, time', words: ['line', 'sensor', 'wait', 'time', 'while', 'loop', 'break', 'continue'] },
-  { id: 'L8-4', title: 'L8-4: reverse, count, sorted, slice', words: ['reverse', 'count', 'sorted', 'slice', 'order', 'range', 'step', 'index'] }
-]
-
-// 使用课程单词关卡（移除基础指法关卡）
-const allWordLevels = wordLevels
+// PY2 课程所有课次的单词池 (L7-L12 共24课)
+// 从 typing-words-pool.js 聚合而来，包含68个easy、73个medium、66个hard单词
 
 // 练习模式
-const mode = ref('word')  // 'word' | 'code'
-const difficulty = ref('all')  // 'all' | 'easy' | 'medium' | 'hard'
-const currentWordLevel = ref({ id: '', title: '' })  // 当前单词关卡
+const mode = ref('word')  // 'word' | 'code' | 'chinese'
 const currentWords = ref([])  // 当前使用的单词列表
 const scoreHistory = ref([])  // 排行榜数据（持久化）
 
-// 难度选项
-const difficultyLevels = [
+// 单词练习选项
+const wordDifficulty = ref('all')  // 'all' | 'easy' | 'medium' | 'hard'
+
+// 单词难度选项
+const wordDifficultyOptions = [
   { value: 'all', label: '全部', emoji: '📚' },
   { value: 'easy', label: '基础', emoji: '🟢' },
   { value: 'medium', label: '进阶', emoji: '🟡' },
   { value: 'hard', label: '挑战', emoji: '🔴' }
 ]
 
-// 每次练习抽取5个模板
+// 中文打字练习状态
+const chineseContentType = ref('mixed')  // 'poem' | 'idiom' | 'mixed'
+const chineseDifficulty = ref('mixed')  // 'mixed' | 'easy' | 'medium' | 'hard'
+const chineseItems = ref([])  // 当前中文练习内容
+const chineseScoreHistory = ref([])  // 中文练习排行榜
+
+// 中文练习选项
+const contentTypeOptions = [
+  { value: 'poem', label: '古诗词', emoji: '📜' },
+  { value: 'idiom', label: '成语俗语', emoji: '📖' },
+  { value: 'mixed', label: '混合', emoji: '🎲' }
+]
+
+const chineseDifficultyLevels = [
+  { value: 'mixed', label: '全部', emoji: '📚' },
+  { value: 'easy', label: '基础', emoji: '🟢' },
+  { value: 'medium', label: '进阶', emoji: '🟡' },
+  { value: 'hard', label: '挑战', emoji: '🔴' }
+]
+
+// 每次练习抽取数量
 const practiceCount = 5
+const wordPracticeCount = 8  // 单词每次练习8个
 
 // 当前使用的代码模板
 const currentTemplates = ref([])
-const lastLevelIndex = ref(-1)  // 上次选择的关卡索引，避免连续重复
-
-// Fisher-Yates 洗牌算法 - 随机打乱数组
-const shuffleArray = (array) => {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
-}
-
-// 随机选择一个单词关卡（确保不与上次相同，并打乱单词顺序）
-const pickRandomWordLevel = () => {
-  let randomIndex
-  // 如果只有一个关卡，直接使用
-  if (allWordLevels.length === 1) {
-    randomIndex = 0
-  } else {
-    // 确保不选择与上次相同的关卡
-    do {
-      randomIndex = Math.floor(Math.random() * allWordLevels.length)
-    } while (randomIndex === lastLevelIndex.value)
-  }
-
-  lastLevelIndex.value = randomIndex
-  const selectedLevel = allWordLevels[randomIndex]
-  currentWordLevel.value = selectedLevel
-  // 打乱单词顺序，让每次练习都不同
-  currentWords.value = shuffleArray(selectedLevel.words)
-}
 
 // 刷新内容
 const refreshContent = () => {
   if (mode.value === 'code') {
-    // 代码模式：从模板池随机抽取
-    currentTemplates.value = getRandomTemplates(practiceCount, difficulty.value)
+    // 代码模式：从所有课程的模板池随机抽取
+    currentTemplates.value = getRandomTemplates(practiceCount, 'all')
     currentWords.value = []
-    currentWordLevel.value = { title: '' }
-  } else {
-    // 单词模式：随机选择一个关卡
-    pickRandomWordLevel()
+    chineseItems.value = []
+  } else if (mode.value === 'chinese') {
+    // 中文模式：根据选择获取内容
+    refreshChineseContent()
+    currentWords.value = []
     currentTemplates.value = []
+  } else {
+    // 单词模式：从所有课程的单词池随机抽取
+    currentWords.value = getRandomWords(wordPracticeCount, wordDifficulty.value)
+    currentTemplates.value = []
+    chineseItems.value = []
   }
 }
 
-// 设置难度
-const setDifficulty = (level) => {
-  difficulty.value = level
+// 设置单词难度
+const setWordDifficulty = (level) => {
+  wordDifficulty.value = level
   refreshContent()
+}
+
+// 刷新中文练习内容
+const refreshChineseContent = () => {
+  const count = 5
+  if (chineseContentType.value === 'poem') {
+    chineseItems.value = getRandomPoems(count, chineseDifficulty.value)
+  } else if (chineseContentType.value === 'idiom') {
+    chineseItems.value = getRandomIdioms(count, chineseDifficulty.value)
+  } else {
+    chineseItems.value = getMixedContent(count, chineseDifficulty.value)
+  }
+}
+
+// 设置中文内容类型
+const setChineseContentType = (type) => {
+  chineseContentType.value = type
+  refreshChineseContent()
+}
+
+// 设置中文难度
+const setChineseDifficulty = (level) => {
+  chineseDifficulty.value = level
+  refreshChineseContent()
 }
 
 // 切换模式
@@ -161,6 +227,11 @@ const handleComplete = () => {
 // 处理排行榜数据更新
 const handleScoreHistoryUpdate = (newHistory) => {
   scoreHistory.value = newHistory
+}
+
+// 处理中文练习排行榜数据更新
+const handleChineseScoreHistoryUpdate = (newHistory) => {
+  chineseScoreHistory.value = newHistory
 }
 
 // 处理重新开始/返回事件（用户点击按钮后刷新内容）
@@ -200,18 +271,6 @@ refreshContent()
 .page-header p {
   font-size: 1.1rem;
   color: #666;
-}
-
-.current-level {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-  border: 2px solid #f39c12;
-  border-radius: 24px;
-  color: #d68910;
-  font-size: 1rem;
-  font-weight: 500;
-  display: inline-block;
 }
 
 /* 模式选择器 */
@@ -274,6 +333,68 @@ refreshContent()
   color: #fff;
 }
 
+/* 单词练习选项 */
+.word-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+/* 中文练习选项 */
+.chinese-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.option-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.option-label {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.option-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.option-btn:hover {
+  border-color: #E91E63;
+  background: #FCE4EC;
+}
+
+.option-btn.active {
+  border-color: #E91E63;
+  background: #E91E63;
+  color: #fff;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .page-header h1 {
@@ -301,6 +422,29 @@ refreshContent()
   .current-level {
     font-size: 0.9rem;
     padding: 8px 16px;
+  }
+
+  .chinese-options {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .option-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .option-label {
+    font-size: 0.9rem;
+  }
+
+  .option-buttons {
+    gap: 6px;
+  }
+
+  .option-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
 }
 </style>

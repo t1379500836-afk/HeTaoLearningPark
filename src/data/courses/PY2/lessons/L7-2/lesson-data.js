@@ -512,13 +512,45 @@ export const typingWords = {
   hard: ['enumerate', 'iteration', 'conversion', 'algorithm', 'position']
 }
 
+// 代码模板练习（按难度分组）
+// 缩进使用4个空格（Python PEP 8标准）
+export const typingTemplates = {
+  easy: [
+    // 简单单行代码 - max/min/float
+    'max(scores)',
+    'min(numbers)',
+    'float("3.14")',
+    'list.index("item")',
+    'max([1, 2, 3])',
+    'len(numbers)'
+  ],
+  medium: [
+    // 包含缩进的多行代码
+    'result = max(numbers)',
+    'minimum = min(scores)',
+    'value = float(text)',
+    'position = list.index(key)',
+    'for i in numbers:\n    print(i)',
+    'nums = [float(x) for x in list]'
+  ],
+  hard: [
+    // 复杂的多行代码
+    'result = max([1, 2, 3, 4, 5])',
+    'numbers = [float(x) for x in ["1", "2", "3"]]',
+    'for i, num in enumerate(numbers):',
+    'if value in list:\n    index = list.index(value)',
+    'maximum = max([max(x) for x in matrix])'
+  ]
+}
+
 // 导出所有数据
 export const L7_2_data = {
   meta: lessonMeta,
   vocab: vocabData,
   knowledgePoints,
   exercises,
-  typingWords
+  typingWords,
+  typingTemplates
 }
 
 export default L7_2_data
