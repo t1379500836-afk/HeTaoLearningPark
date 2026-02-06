@@ -14,6 +14,7 @@ export const vocabData = [
   {
     word: 'reverse',
     pronunciation: "[ri'vɜːs]",
+    partOfSpeech: 'v.',
     meaning: '反转；颠倒；相反',
     level: 'medium',
     example: 'Reverse the list.',
@@ -22,6 +23,7 @@ export const vocabData = [
   {
     word: 'count',
     pronunciation: '[kaunt]',
+    partOfSpeech: 'v.',
     meaning: '计数；统计',
     level: 'easy',
     example: 'Count the apples.',
@@ -30,6 +32,7 @@ export const vocabData = [
   {
     word: 'slice',
     pronunciation: '[slais]',
+    partOfSpeech: 'v.',
     meaning: '切片；切片',
     level: 'easy',
     example: 'Slice the string.',
@@ -38,6 +41,7 @@ export const vocabData = [
   {
     word: 'join',
     pronunciation: '[dʒɔin]',
+    partOfSpeech: 'v.',
     meaning: '连接；加入',
     level: 'medium',
     example: 'Join the words together.',
@@ -46,6 +50,7 @@ export const vocabData = [
   {
     word: 'comprehension',
     pronunciation: "[,kɔmpri'henʃn]",
+    partOfSpeech: 'n.',
     meaning: '理解；推导式',
     level: 'hard',
     example: 'List comprehension is powerful.',

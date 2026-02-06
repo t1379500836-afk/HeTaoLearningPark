@@ -69,9 +69,9 @@ const stageData = {
     description: '深入学习Python进阶概念，提升编程能力',
     levels: [
       { id: 'L7', name: 'Level 7', icon: '7️⃣', description: '字符串与列表操作', lessons: ['L7-1', 'L7-2', 'L7-3', 'L7-4'] },
-      { id: 'L8', name: 'Level 8', icon: '8️⃣', description: '函数进阶', lessons: ['L8-1', 'L8-2', 'L8-3', 'L8-4'] },
-      { id: 'L9', name: 'Level 9', icon: '9️⃣', description: '字典与集合', lessons: ['L9-1', 'L9-2', 'L9-3', 'L9-4'] },
-      { id: 'L10', name: 'Level 10', icon: '🔟', description: '文件操作', lessons: ['L10-1', 'L10-2', 'L10-3', 'L10-4'] },
+      { id: 'L8', name: 'Level 8', icon: '8️⃣', description: '字典、集合与文本处理', lessons: ['L8-1', 'L8-2', 'L8-3', 'L8-4'] },
+      { id: 'L9', name: 'Level 9', icon: '9️⃣', description: '循环控制与枚举法', lessons: ['L9-1', 'L9-2', 'L9-3', 'L9-4'] },
+      { id: 'L10', name: 'Level 10', icon: '🔟', description: '二维列表', lessons: ['L10-1', 'L10-2', 'L10-3'] },
       { id: 'L11', name: 'Level 11', icon: '1️⃣1️⃣', description: '异常处理', lessons: ['L11-1', 'L11-2', 'L11-3', 'L11-4'] },
       { id: 'L12', name: 'Level 12', icon: '1️⃣2️⃣', description: '模块与包', lessons: ['L12-1', 'L12-2', 'L12-3', 'L12-4'] }
     ]

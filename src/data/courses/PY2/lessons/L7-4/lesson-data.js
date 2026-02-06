@@ -14,6 +14,7 @@ export const vocabData = [
   {
     word: 'initial',
     pronunciation: "[ɪ'nɪʃl]",
+    partOfSpeech: 'adj.',
     meaning: '最初的；开始的；首字母',
     level: 'medium',
     example: 'The initial step is to turn on the device.',
@@ -22,6 +23,7 @@ export const vocabData = [
   {
     word: 'power',
     pronunciation: "['paʊər]",
+    partOfSpeech: 'n.',
     meaning: '力量；能量；电力；动力',
     level: 'easy',
     example: 'The car has a powerful engine.',
@@ -30,6 +32,7 @@ export const vocabData = [
   {
     word: 'claw',
     pronunciation: '[klɔː]',
+    partOfSpeech: 'n.',
     meaning: '爪；螯；钳',
     level: 'easy',
     example: 'The crab has big claws.',
@@ -38,6 +41,7 @@ export const vocabData = [
   {
     word: 'detect',
     pronunciation: "[dɪ'tekt]",
+    partOfSpeech: 'v.',
     meaning: '检测；识别；发现；察觉',
     level: 'medium',
     example: 'Sensors can detect obstacles.',
@@ -46,6 +50,7 @@ export const vocabData = [
   {
     word: 'initialize',
     pronunciation: "[ɪ'nɪʃəlaɪz]",
+    partOfSpeech: 'v.',
     meaning: '初始化；设定初始值',
     level: 'hard',
     example: 'Please initialize the system before use.',

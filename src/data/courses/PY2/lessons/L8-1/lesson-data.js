@@ -12,6 +12,7 @@ export const vocabData = [
   {
     word: 'power',
     pronunciation: "['pauə(r)]",
+    partOfSpeech: 'n.',
     meaning: '力量；能量；权力',
     level: 'easy',
     example: 'He has great power.',
@@ -20,6 +21,7 @@ export const vocabData = [
   {
     word: 'note',
     pronunciation: '[nəut]',
+    partOfSpeech: 'n.',
     meaning: '笔记；便条；记录',
     level: 'easy',
     example: 'I took notes carefully in the class.',
@@ -28,6 +30,7 @@ export const vocabData = [
   {
     word: 'dictionary',
     pronunciation: "['dikʃəneri]",
+    partOfSpeech: 'n.',
     meaning: '字典；词典',
     level: 'medium',
     example: 'Look up the word in the dictionary.',
@@ -36,6 +39,7 @@ export const vocabData = [
   {
     word: 'key',
     pronunciation: '[kiː]',
+    partOfSpeech: 'n.',
     meaning: '键；关键；钥匙',
     level: 'easy',
     example: 'The key opens the door.',
@@ -44,6 +48,7 @@ export const vocabData = [
   {
     word: 'value',
     pronunciation: "['væljuː]",
+    partOfSpeech: 'n.',
     meaning: '值；数值；价值',
     level: 'medium',
     example: 'The value of x is 5.',

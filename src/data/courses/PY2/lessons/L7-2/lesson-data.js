@@ -13,6 +13,7 @@ export const vocabData = [
   {
     word: 'weather',
     pronunciation: "['weðər]",
+    partOfSpeech: 'n.',
     meaning: '天气；气象；气象预报',
     level: 'easy',
     example: 'The weather forecast says it is going to be sunny.',
@@ -21,6 +22,7 @@ export const vocabData = [
   {
     word: 'float',
     pronunciation: '[flout]',
+    partOfSpeech: 'v.',
     meaning: '漂浮；浮动；浮板',
     level: 'medium',
     example: 'They will neither sink nor float.',
@@ -29,6 +31,7 @@ export const vocabData = [
   {
     word: 'maximum',
     pronunciation: "['mæksɪməm]",
+    partOfSpeech: 'adj.',
     meaning: '最大量；最大的',
     level: 'medium',
     example: 'The maximum speed of this car is 200 km/h.',
@@ -37,6 +40,7 @@ export const vocabData = [
   {
     word: 'minimum',
     pronunciation: "['mɪnɪməm]",
+    partOfSpeech: 'adj.',
     meaning: '最小量；最小的',
     level: 'medium',
     example: 'The minimum age for this job is 18.',
@@ -45,6 +49,7 @@ export const vocabData = [
   {
     word: 'index',
     pronunciation: "['ɪndeks]",
+    partOfSpeech: 'n.',
     meaning: '索引；指数；指标',
     level: 'hard',
     example: 'The index of this list starts from 0.',

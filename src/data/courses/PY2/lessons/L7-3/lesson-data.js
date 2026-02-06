@@ -12,6 +12,7 @@ export const vocabData = [
   {
     word: 'sum',
     pronunciation: '[sʌm]',
+    partOfSpeech: 'n.',
     meaning: '总和；全部；求和',
     level: 'easy',
     example: 'The sum of 5 and 3 is 8.',
@@ -20,6 +21,7 @@ export const vocabData = [
   {
     word: 'sort',
     pronunciation: '[sɔːrt]',
+    partOfSpeech: 'v.',
     meaning: '分类；排序；整理',
     level: 'easy',
     example: 'Please sort these cards by number.',
@@ -28,6 +30,7 @@ export const vocabData = [
   {
     word: 'player',
     pronunciation: "['pleɪər]",
+    partOfSpeech: 'n.',
     meaning: '运动员；玩家；播放器',
     level: 'medium',
     example: 'He is the best player on the team.',
@@ -36,6 +39,7 @@ export const vocabData = [
   {
     word: 'record',
     pronunciation: "['rekərd]",
+    partOfSpeech: 'n.',
     meaning: '记录；唱片；记载',
     level: 'medium',
     example: 'She holds the world record.',
@@ -44,6 +48,7 @@ export const vocabData = [
   {
     word: 'algorithm',
     pronunciation: "['ælɡərɪðəm]",
+    partOfSpeech: 'n.',
     meaning: '算法；运算法则',
     level: 'hard',
     example: 'Sorting is a common algorithm in programming.',

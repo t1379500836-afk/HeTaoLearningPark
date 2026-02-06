@@ -16,6 +16,7 @@ export const vocabData = [
   {
     word: 'line',
     pronunciation: '[lain]',
+    partOfSpeech: 'n.',
     meaning: '线；分界线；路线',
     level: 'easy',
     example: 'Follow the white line.',
@@ -24,6 +25,7 @@ export const vocabData = [
   {
     word: 'sensor',
     pronunciation: "['sensə(r)]",
+    partOfSpeech: 'n.',
     meaning: '传感器；探测设备',
     level: 'medium',
     example: 'The sensor detects light.',
@@ -32,6 +34,7 @@ export const vocabData = [
   {
     word: 'wait',
     pronunciation: '[weit]',
+    partOfSpeech: 'v.',
     meaning: '等待；等候',
     level: 'easy',
     example: 'Please wait a moment.',
@@ -40,6 +43,7 @@ export const vocabData = [
   {
     word: 'power',
     pronunciation: "['pauə(r)]",
+    partOfSpeech: 'n.',
     meaning: '功率；动力；能量',
     level: 'easy',
     example: 'Set the power to 80.',
@@ -48,6 +52,7 @@ export const vocabData = [
   {
     word: 'infrared',
     pronunciation: "['infrə'red]",
+    partOfSpeech: 'n.',
     meaning: '红外线；红外线的',
     level: 'hard',
     example: 'The sensor uses infrared light.',

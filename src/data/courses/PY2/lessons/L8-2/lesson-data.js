@@ -13,6 +13,7 @@ export const vocabData = [
   {
     word: 'set',
     pronunciation: '[set]',
+    partOfSpeech: 'n.',
     meaning: '集合；设置',
     level: 'easy',
     example: 'I have a set of cards.',
@@ -21,6 +22,7 @@ export const vocabData = [
   {
     word: 'add',
     pronunciation: '[æd]',
+    partOfSpeech: 'v.',
     meaning: '添加；增加',
     level: 'easy',
     example: 'Please add some sugar.',
@@ -29,6 +31,7 @@ export const vocabData = [
   {
     word: 'type',
     pronunciation: '[taip]',
+    partOfSpeech: 'n.',
     meaning: '类型；打字',
     level: 'easy',
     example: 'What type of data is it?',
@@ -37,6 +40,7 @@ export const vocabData = [
   {
     word: 'convert',
     pronunciation: "[kən'vɜːt]",
+    partOfSpeech: 'v.',
     meaning: '转换；变换',
     level: 'medium',
     example: 'Can you convert this to text?',
@@ -45,6 +49,7 @@ export const vocabData = [
   {
     word: 'unique',
     pronunciation: "[juː'niːk]",
+    partOfSpeech: 'adj.',
     meaning: '唯一的；独特的',
     level: 'hard',
     example: 'Each person has a unique fingerprint.',

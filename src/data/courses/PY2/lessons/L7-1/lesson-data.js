@@ -12,6 +12,7 @@ export const vocabData = [
   {
     word: 'split',
     pronunciation: '[split]',
+    partOfSpeech: 'v.',
     meaning: '分割；分裂',
     level: 'easy',
     example: 'The big apple was split in half.',
@@ -20,6 +21,7 @@ export const vocabData = [
   {
     word: 'encode',
     pronunciation: "[in'koud]",
+    partOfSpeech: 'v.',
     meaning: '编码；译成密码',
     level: 'medium',
     example: 'I encoded my secret message.',
@@ -28,6 +30,7 @@ export const vocabData = [
   {
     word: 'decode',
     pronunciation: "[di:'koud]",
+    partOfSpeech: 'v.',
     meaning: '解码；破译',
     level: 'medium',
     example: 'Can you decode this message?',
@@ -36,6 +39,7 @@ export const vocabData = [
   {
     word: 'string',
     pronunciation: '[striŋ]',
+    partOfSpeech: 'n.',
     meaning: '字符串；线',
     level: 'easy',
     example: 'This is a string.',
@@ -44,6 +48,7 @@ export const vocabData = [
   {
     word: 'traverse',
     pronunciation: '[trə-vɜːs]',
+    partOfSpeech: 'v.',
     meaning: '遍历；横过',
     level: 'hard',
     example: 'We need to traverse the list.',

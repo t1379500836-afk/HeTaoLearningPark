@@ -46,7 +46,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { isStageUnlocked } from '@/config/stages.config.js'
 // StageLocked component used via /locked route
@@ -65,7 +64,7 @@ const baseStages = [
   {
     id: 'PY2',
     name: 'Python 进阶编程',
-    description: '',
+    description: '掌握字典、集合等数据结构，学习文件操作与异常处理',
     color: '#4facfe',
     levels: ['L7', 'L8', 'L9', 'L10', 'L11', 'L12']
   },
