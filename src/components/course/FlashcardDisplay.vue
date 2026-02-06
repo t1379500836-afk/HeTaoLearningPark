@@ -22,10 +22,8 @@
         v-for="word in filteredVocab"
         :key="word.word"
         class="vocab-card"
-        :class="{ flipped: flippedCards[word.word] }"
-        @click="flipCard(word.word)"
       >
-        <!-- 正面 -->
+        <!-- 卡片内容 -->
         <div class="card-front">
           <button
             @click="playPronunciation(word.word, $event)"
@@ -37,16 +35,15 @@
           </button>
           <div class="word-main">{{ word.word }}</div>
           <div class="pronunciation">{{ word.pronunciation }}</div>
-          <DifficultyBadge :level="word.level" />
-        </div>
-
-        <!-- 背面 -->
-        <div class="card-back">
-          <div class="meaning">{{ word.meaning }}</div>
+          <div class="word-meaning">
+            <span class="part-of-speech">{{ word.partOfSpeech }}</span>
+            <span class="meaning-text">{{ word.meaning }}</span>
+          </div>
           <div class="example-box">
             <p class="example">{{ word.example }}</p>
             <p class="translation">{{ word.exampleTranslation }}</p>
           </div>
+          <DifficultyBadge :level="word.level" />
         </div>
       </div>
     </div>
@@ -85,7 +82,6 @@ const props = defineProps({
 const emit = defineEmits(['scroll-to-typing'])
 
 const selectedLevel = ref('all')
-const flippedCards = ref({})
 const playingWord = ref(null)
 
 const levels = [
@@ -109,10 +105,6 @@ const typingWordsForLevel = computed(() => {
   const levelKey = selectedLevel.value === 'hard' ? 'hard' : selectedLevel.value === 'medium' ? 'medium' : 'easy'
   return props.typingWords[levelKey] || []
 })
-
-const flipCard = (word) => {
-  flippedCards.value[word] = !flippedCards.value[word]
-}
 
 // TTS 发音功能
 const playPronunciation = (word, event) => {
@@ -215,11 +207,10 @@ const scrollToTyping = () => {
   background: #fff;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
-  min-height: 180px;
-  cursor: pointer;
+  min-height: 280px;
+  cursor: default;
   transition: all 0.4s;
   position: relative;
-  transform-style: preserve-3d;
 }
 
 .vocab-card:hover {
@@ -228,26 +219,12 @@ const scrollToTyping = () => {
   border-color: var(--primary-color);
 }
 
-.vocab-card.flipped {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
-}
-
-.card-front,
-.card-back {
+.card-front {
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-}
-
-.vocab-card:not(.flipped) .card-back {
-  display: none;
-}
-
-.vocab-card.flipped .card-front {
-  display: none;
 }
 
 .word-main {
@@ -263,29 +240,52 @@ const scrollToTyping = () => {
   margin-bottom: 12px;
 }
 
-.meaning {
-  font-size: 1.3rem;
+.word-meaning {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.part-of-speech {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--primary-color);
   color: #fff;
+  border-radius: 4px;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  white-space: nowrap;
+}
+
+.meaning-text {
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .example-box {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #dee2e6;
 }
 
 .example {
-  color: #fff;
-  margin: 0 0 8px 0;
+  color: #6c757d;
   font-style: italic;
+  font-size: 0.85rem;
+  margin: 0 0 4px 0;
 }
 
 .translation {
-  color: rgba(255, 255, 255, 0.8);
+  color: #868e96;
+  font-size: 0.8rem;
   margin: 0;
-  font-size: 0.9rem;
 }
 
 .empty-state {

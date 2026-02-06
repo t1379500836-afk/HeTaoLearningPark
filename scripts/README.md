@@ -16,7 +16,7 @@
 
 **输出**：
 - JSON 格式：`src/data/courses/PY2/content.json`
-- Markdown 格式：`src/data/courses/PY2/README.md`
+- Markdown 格式：`src/data/courses/PY2/OCR-CONTENT.md`
 
 **技术方案**：
 | 任务 | Python 库 | 版本 |
@@ -49,7 +49,7 @@ python scripts/extract_content.py
 #### 3. 检查输出
 
 - JSON 数据：[src/data/courses/PY2/content.json](../src/data/courses/PY2/content.json)
-- 可读版本：[src/data/courses/PY2/README.md](../src/data/courses/PY2/README.md)
+- 可读版本：[src/data/courses/PY2/OCR-CONTENT.md](../src/data/courses/PY2/OCR-CONTENT.md)
 
 ---
 
@@ -97,7 +97,7 @@ numpy>=1.24.0
 │                                                             │
 │  3. 汇总数据                                                 │
 │     ├── content.json   → 结构化 JSON 数据                    │
-│     └── README.md      → 可读的 Markdown 格式                │
+│     └── OCR-CONTENT.md → 可读的 Markdown 格式                │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -121,7 +121,7 @@ numpy>=1.24.0
 ## 常见问题
 
 ### Q1: OCR 识别不准确怎么办？
-A: 中文 OCR 可能出现错误，需要人工校对。查看 [PY2/README_GUIDE.md](../src/data/courses/PY2/README_GUIDE.md) 了解校对指南。
+A: 中文 OCR 可能出现错误，需要人工校对。查看 [PY2/GUIDE.md](../src/data/courses/PY2/GUIDE.md) 了解校对指南。
 
 ### Q2: PDF 提取不到文字？
 A: 脚本会自动检测，如果是扫描版 PDF，会尝试使用 OCR 提取。

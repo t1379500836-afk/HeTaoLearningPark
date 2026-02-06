@@ -9,6 +9,7 @@
 | Navigation.vue | 顶部导航栏，使用 `<router-link>` 实现路由跳转 |
 | HeroSection.vue | Hero横幅组件，用于首页展示 |
 | Footer.vue | 页脚组件，显示版权和链接 |
+| StageLocked.vue | 阶段锁定提示组件 |
 
 ## Navigation.vue
 
