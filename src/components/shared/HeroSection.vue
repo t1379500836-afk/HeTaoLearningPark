@@ -2,7 +2,7 @@
   <section class="hero" id="home">
     <h1>开启孩子的编程探索之旅</h1>
     <p>课前预习 · 课后复习 · 趣味打字 · 在线编程 · YCL考级冲刺</p>
-    <a href="#typing" class="cta-btn">开始学习</a>
+    <router-link to="/levels" class="cta-btn">开始学习</router-link>
   </section>
 </template>
 

@@ -41,7 +41,13 @@
       "Bash(start http://localhost:5173/typing)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(node --check:*)",
+      "Bash(ping:*)",
+      "Bash(netstat:*)",
+      "Bash(node scripts/aggregate-typing-data.js:*)",
+      "mcp__chrome-devtools__emulate",
+      "mcp__chrome-devtools__resize_page"
     ]
   }
 }

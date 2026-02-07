@@ -2,10 +2,8 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="logo">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-        </svg>
-        <span style="color: #fff;">核桃学习站</span>
+        <img src="@/assets/images/hetao-logo.png" alt="核桃编程Logo" class="logo-img">
+        <span style="color: #fff;">核桃Python学习站</span>
       </div>
       <p class="slogan">让每个孩子爱上编程，在快乐中成长。</p>
       <div class="footer-links">
@@ -14,15 +12,12 @@
         <a href="#practice">练习题库</a>
         <a href="#">联系客服</a>
       </div>
-      <p class="copyright">&copy; {{ currentYear }} 核桃编程学习资料站. All rights reserved.</p>
+      <p class="copyright">@核桃编程成都基地Python10组版权所有，禁止转发使用</p>
     </div>
   </footer>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-
-const currentYear = computed(() => new Date().getFullYear())
 </script>
 
 <style scoped>
@@ -43,10 +38,20 @@ const currentYear = computed(() => new Date().getFullYear())
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 20px;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.logo-img {
+  height: 40px;
+  width: 40px;
+  display: block;
+  object-fit: cover;
+  object-position: center left;
+  margin-right: 2px;
+  margin-top: 3px;
 }
 
 .slogan {
@@ -91,6 +96,23 @@ const currentYear = computed(() => new Date().getFullYear())
   }
 
   .footer-links a {
+    font-size: 0.9rem;
+  }
+}
+
+/* 480px断点：小屏幕优化 */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .logo-img {
+    height: 32px;
+    width: 32px;
+    margin-right: 0;
+  }
+
+  .slogan {
     font-size: 0.9rem;
   }
 }
