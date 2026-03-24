@@ -1,17 +1,20 @@
 // 阶段解锁配置
-// 老师部署时修改此文件即可控制哪些阶段对学生可见
+// 结合路由前缀控制阶段访问权限
 
+import { routePrefixConfig, getAllowedStages } from '@/composables/useRoutePrefix.js'
+
+// 基础阶段配置
 export const stagesConfig = {
   PY1: {
-    unlocked: true,           // PY1 解锁（开发模式）
+    unlocked: true,
     unlockCode: null
   },
   PY2: {
-    unlocked: true,           // PY2 解锁（开发模式）
+    unlocked: true,
     unlockCode: null
   },
   PY3: {
-    unlocked: true,           // PY3 解锁（开发模式）
+    unlocked: true,
     unlockCode: null
   }
 }
@@ -24,7 +27,7 @@ export function getAllStages() {
   }))
 }
 
-// 检查阶段是否解锁
+// 检查阶段是否解锁（基础检查）
 export function isStageUnlocked(stageId) {
   return stagesConfig[stageId]?.unlocked || false
 }
@@ -35,3 +38,15 @@ export function getUnlockedStages() {
     .filter(([_, config]) => config.unlocked)
     .map(([key, _]) => key)
 }
+
+// 根据路由前缀检查阶段是否可访问
+export function isStageAccessibleWithPrefix(stageId, prefix) {
+  // 先检查基础解锁状态
+  if (!isStageUnlocked(stageId)) return false
+  // 再检查前缀权限
+  const allowedStages = getAllowedStages(prefix)
+  return allowedStages.includes(stageId)
+}
+
+// 获取路由前缀配置（供其他模块使用）
+export { routePrefixConfig }

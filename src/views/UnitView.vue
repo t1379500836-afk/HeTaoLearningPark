@@ -9,9 +9,9 @@
 
     <section class="page-header">
       <div class="breadcrumb">
-        <router-link to="/levels">课程体系</router-link>
+        <router-link :to="prefixedPath('/levels')">课程体系</router-link>
         <span class="separator">/</span>
-        <router-link :to="`/levels/${stage}`">{{ stageInfo.name }}</router-link>
+        <router-link :to="prefixedPath(`/levels/${stage}`)">{{ stageInfo.name }}</router-link>
         <span class="separator">/</span>
         <span class="current">{{ levelInfo.name }}</span>
       </div>
@@ -23,7 +23,7 @@
       <router-link
         v-for="lesson in lessons"
         :key="lesson.id"
-        :to="`/lesson/${stage}/${level}/${lesson.id}`"
+        :to="prefixedPath(`/lesson/${stage}/${level}/${lesson.id}`)"
         class="lesson-card"
       >
         <div class="lesson-number">{{ lesson.id }}</div>
@@ -43,11 +43,15 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getStageName, getUnitInfo } from '@/config/courses.config.js'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
 const route = useRoute()
 const router = useRouter()
 const stage = computed(() => route.params.stage)
 const level = computed(() => route.params.unit)
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
 
 // 加载单元内的课程数据
 const lessons = ref([])
@@ -91,6 +95,11 @@ onMounted(() => {
 
 const stageInfo = computed(() => ({ name: getStageName(stage.value) }))
 const levelInfo = computed(() => getUnitInfo(level.value))
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 
 // 返回上一页
 const goBack = () => {

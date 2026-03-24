@@ -24,11 +24,11 @@
       <!-- 页面头部 -->
       <section class="page-header">
         <div class="breadcrumb">
-          <router-link to="/levels">课程体系</router-link>
+          <router-link :to="prefixedPath('/levels')">课程体系</router-link>
           <span class="separator">/</span>
-          <router-link :to="`/levels/${stage}`">{{ getStageName(stage) }}</router-link>
+          <router-link :to="prefixedPath(`/levels/${stage}`)">{{ getStageName(stage) }}</router-link>
           <span class="separator">/</span>
-          <router-link :to="`/levels/${stage}/${unit}`">{{ getUnitInfo(unit).name }}</router-link>
+          <router-link :to="prefixedPath(`/levels/${stage}/${unit}`)">{{ getUnitInfo(unit).name }}</router-link>
           <span class="separator">/</span>
           <span class="current">{{ lessonId }} {{ meta.title || '' }}</span>
         </div>
@@ -156,14 +156,14 @@
       <section class="lesson-navigation">
         <router-link
           v-if="prevLesson"
-          :to="`/lesson/${stage}/${unit}/${prevLesson}`"
+          :to="prefixedPath(`/lesson/${stage}/${unit}/${prevLesson}`)"
           class="nav-btn prev"
         >
           ← 上一课
         </router-link>
         <router-link
           v-if="nextLesson"
-          :to="`/lesson/${stage}/${unit}/${nextLesson}`"
+          :to="prefixedPath(`/lesson/${stage}/${unit}/${nextLesson}`)"
           class="nav-btn next"
         >
           下一课 →
@@ -178,6 +178,7 @@ import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useLessonData } from '@/composables/useLessonData.js'
 import { getStageName, getUnitInfo } from '@/config/courses.config.js'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 import FlashcardDisplay from '@/components/course/FlashcardDisplay.vue'
 import KnowledgeCard from '@/components/course/KnowledgeCard.vue'
 import ExerciseCard from '@/components/course/ExerciseCard.vue'
@@ -190,6 +191,14 @@ const router = useRouter()
 const stage = computed(() => route.params.stage)
 const unit = computed(() => route.params.unit)
 const lesson = computed(() => route.params.lesson)
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 
 // 使用数据加载 composable
 const {

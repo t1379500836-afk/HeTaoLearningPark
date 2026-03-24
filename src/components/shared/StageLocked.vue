@@ -11,7 +11,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
 const props = defineProps({
   stageName: {
@@ -21,13 +22,18 @@ const props = defineProps({
 })
 
 const router = useRouter()
+const route = useRoute()
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
 
 const message = computed(() => {
-  return `您当前的学习阶段尚未解锁${props.stageName}。请完成当前阶段学习后再继续。`
+  return `您当前的学习阶段尚未解锁${props.stageName}，下阶段报名之后自动解锁哟~`
 })
 
 function goToHome() {
-  router.push('/')
+  const homePath = buildPrefixedPath(prefix.value, '/')
+  router.push(homePath)
 }
 </script>
 

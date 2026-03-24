@@ -7,15 +7,15 @@
 
     <section class="stages">
       <div
-        v-for="stage in stagesWithUnlock"
+        v-for="stage in visibleStages"
         :key="stage.id"
         class="stage-card"
-        :class="{ locked: !stage.unlocked }"
+        :class="{ locked: !stage.accessible }"
         :style="{ '--stage-color': stage.color }"
       >
         <router-link
-          v-if="stage.unlocked"
-          :to="`/levels/${stage.id}`"
+          v-if="stage.accessible"
+          :to="prefixedPath(`/levels/${stage.id}`)"
           class="stage-link"
         >
           <div class="stage-header">
@@ -46,12 +46,19 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { isStageUnlocked } from '@/config/stages.config.js'
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { stageConfig } from '@/config/courses.config.js'
-// StageLocked component used via /locked route
+import { getCurrentPrefix, getAllowedStages, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
 const router = useRouter()
+const route = useRoute()
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
+
+// 获取允许访问的阶段
+const allowedStages = computed(() => getAllowedStages(prefix.value))
 
 // 课程阶段颜色配置
 const stageColors = {
@@ -69,15 +76,22 @@ const baseStages = Object.values(stageConfig).map(stage => ({
   levels: stage.units
 }))
 
-// 添加解锁状态
-const stagesWithUnlock = baseStages.map(stage => ({
-  ...stage,
-  unlocked: isStageUnlocked(stage.id)
-}))
+// 根据前缀过滤可见阶段，并添加可访问状态
+const visibleStages = computed(() => {
+  return baseStages.map(stage => ({
+    ...stage,
+    accessible: allowedStages.value.includes(stage.id)
+  }))
+})
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 
 // 显示锁定提示对话框
 const showLockedMessage = (stageName) => {
-  router.push({ path: '/locked', query: { stage: stageName } })
+  router.push({ path: prefixedPath('/locked'), query: { stage: stageName } })
 }
 </script>
 

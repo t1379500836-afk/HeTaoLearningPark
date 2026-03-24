@@ -62,7 +62,8 @@ hetao-learning-park/
     │       ├── ExerciseCard.vue    # 习题卡片
     │       └── DifficultyBadge.vue # 难度徽章
     ├── composables/                # 可复用逻辑
-    │   └── useLessonData.js        # 课程数据加载
+    │   ├── useLessonData.js        # 课程数据加载
+    │   └── useRoutePrefix.js       # 路由前缀权限控制
     ├── assets/
     │   ├── images/
     │   │   └── hetao-logo.png      # 核桃logo
@@ -85,6 +86,24 @@ hetao-learning-park/
 
 ## 路由配置
 
+### 路由前缀权限控制
+
+为不同阶段的学生提供独立的访问入口，通过路由前缀控制可访问的课程阶段：
+
+| 前缀 | 可访问阶段 | 适用学生 |
+|------|-----------|----------|
+| 无前缀 | PY1, PY2, PY3 | 管理员/完整访问 |
+| `p1/` | PY1 | Python入门学生 |
+| `py2/` | PY1, PY2 | Python进阶学生 |
+| `python3/` | PY1, PY2, PY3 | Python高级学生 |
+
+**示例**：
+- PY1学生访问：`/p1/levels` → 只能看到 PY1 阶段
+- PY2学生访问：`/py2/levels` → 能看到 PY1 和 PY2 阶段
+- PY3学生访问：`/python3/levels` → 能看到全部阶段
+
+**核心文件**: [composables/useRoutePrefix.js](../src/composables/useRoutePrefix.js)
+
 ### 路由表
 
 | 路由 | 组件 | 说明 | 配置文件 |
@@ -99,6 +118,8 @@ hetao-learning-park/
 | `/python` | PythonIDEView | 独立Python编辑器 | [router/index.js](../src/router/index.js) |
 | `/ycl` | YCLZoneView | YCL专区 | [router/index.js](../src/router/index.js) |
 | `/locked` | StageLocked | 阶段锁定提示页 | [router/index.js](../src/router/index.js) |
+
+> **注意**：以上路由都支持 `p1/`、`py2/`、`python3/` 三个前缀版本
 
 ### 路由参数说明
 
@@ -171,25 +192,61 @@ export const coursesConfig = {
 
 ### stages.config.js
 
-阶段解锁配置，控制哪些阶段对学生可见。
+阶段解锁配置，结合路由前缀控制阶段访问权限。
 
 **文件**: [config/stages.config.js](../src/config/stages.config.js)
 
 ```javascript
+import { routePrefixConfig, getAllowedStages } from '@/composables/useRoutePrefix.js'
+
+// 基础阶段配置
 export const stagesConfig = {
-  PY1: {
-    unlocked: true,    // 是否解锁
-    unlockCode: null   // 解锁码（预留）
+  PY1: { unlocked: true, unlockCode: null },
+  PY2: { unlocked: true, unlockCode: null },
+  PY3: { unlocked: true, unlockCode: null }
+}
+
+// 根据路由前缀检查阶段是否可访问
+export function isStageAccessibleWithPrefix(stageId, prefix) {
+  if (!isStageUnlocked(stageId)) return false
+  const allowedStages = getAllowedStages(prefix)
+  return allowedStages.includes(stageId)
+}
+```
+
+### useRoutePrefix.js
+
+路由前缀权限控制，定义不同入口的可访问阶段。
+
+**文件**: [composables/useRoutePrefix.js](../src/composables/useRoutePrefix.js)
+
+```javascript
+export const routePrefixConfig = {
+  'p1': {
+    name: 'PY1入口',
+    maxStage: 'PY1',
+    allowedStages: ['PY1']
   },
-  PY2: {
-    unlocked: true,
-    unlockCode: null
+  'py2': {
+    name: 'PY2入口',
+    maxStage: 'PY2',
+    allowedStages: ['PY1', 'PY2']
   },
-  PY3: {
-    unlocked: false,
-    unlockCode: null
+  'python3': {
+    name: 'PY3入口',
+    maxStage: 'PY3',
+    allowedStages: ['PY1', 'PY2', 'PY3']
   }
 }
+
+// 获取当前路由前缀
+export function getCurrentPrefix(route) { ... }
+
+// 检查阶段是否可访问
+export function isStageAccessible(stageId, prefix) { ... }
+
+// 构建带前缀的路由路径
+export function prefixedPath(prefix, path) { ... }
 ```
 
 ---

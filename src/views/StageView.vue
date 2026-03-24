@@ -8,10 +8,10 @@
     </button>
 
     <!-- StageLocked content shown when stage is not unlocked -->
-    <div v-if="!isUnlocked" class="stage-locked">
+    <div v-if="!isAccessible" class="stage-locked">
       <div class="locked-icon">🔒</div>
       <h2>课程未解锁</h2>
-      <p>您当前的学习阶段尚未解锁 {{ stageInfo.name }}。请完成当前阶段学习后再继续。</p>
+      <p>您当前的学习阶段尚未解锁此课程，下阶段报名之后自动解锁哟~</p>
       <button @click="goToLevels" class="back-btn">
         返回课程体系
       </button>
@@ -21,7 +21,7 @@
     <template v-else>
     <section class="page-header">
       <div class="breadcrumb">
-        <router-link to="/levels">课程体系</router-link>
+        <router-link :to="prefixedPath('/levels')">课程体系</router-link>
         <span class="separator">/</span>
         <span class="current">{{ stageInfo.name }}</span>
       </div>
@@ -33,7 +33,7 @@
       <router-link
         v-for="level in stageInfo.levels"
         :key="level.id"
-        :to="`/levels/${stage}/${level.id}`"
+        :to="prefixedPath(`/levels/${stage}/${level.id}`)"
         class="level-card"
       >
         <div class="level-icon">{{ level.icon }}</div>
@@ -51,12 +51,18 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { isStageUnlocked } from '@/config/stages.config.js'
 import { stageConfig, getUnitInfo, getUnitLessons } from '@/config/courses.config.js'
+import { getCurrentPrefix, getAllowedStages, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
 const route = useRoute()
 const router = useRouter()
 const stage = computed(() => route.params.stage)
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
+
+// 获取允许访问的阶段
+const allowedStages = computed(() => getAllowedStages(prefix.value))
 
 // Level 图标映射
 const levelIcons = {
@@ -102,12 +108,17 @@ const stageInfo = computed(() => {
   }
 })
 
-// Check if current stage is unlocked
-const isUnlocked = computed(() => isStageUnlocked(stage.value))
+// 检查当前阶段是否可访问（结合前缀权限）
+const isAccessible = computed(() => allowedStages.value.includes(stage.value))
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 
 // Navigate back to course levels page
 function goToLevels() {
-  router.push('/levels')
+  router.push(prefixedPath('/levels'))
 }
 
 // 返回上一页

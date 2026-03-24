@@ -2,7 +2,7 @@
   <header class="header">
     <nav class="nav">
       <div class="logo">
-        <router-link to="/">
+        <router-link :to="prefixedPath('/')">
           <img src="@/assets/images/hetao-logo.png" alt="核桃编程" class="logo-img" />
         </router-link>
       </div>
@@ -18,7 +18,7 @@
       <ul class="nav-links" :class="{ active: isMenuOpen }">
         <li v-for="link in navLinks" :key="link.to">
           <router-link
-            :to="link.to"
+            :to="prefixedPath(link.to)"
             :class="{ active: isActive(link.to) }"
             @click="handleNavClick"
           >
@@ -31,11 +31,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
 const router = useRouter()
 const route = useRoute()
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
 
 // 导航链接配置
 const navLinks = [
@@ -50,6 +54,11 @@ const navLinks = [
 // 状态管理
 const isMenuOpen = ref(false)
 
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
+
 // 切换汉堡菜单
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -62,8 +71,14 @@ const handleNavClick = () => {
 
 // 判断当前路由是否激活
 const isActive = (to) => {
-  if (to === '/') return route.path === '/'
-  return route.path.startsWith(to)
+  // 移除前缀后比较
+  let pathWithoutPrefix = route.path
+  if (prefix.value) {
+    pathWithoutPrefix = pathWithoutPrefix.replace(`/${prefix.value}`, '') || '/'
+  }
+
+  if (to === '/') return pathWithoutPrefix === '/'
+  return pathWithoutPrefix.startsWith(to)
 }
 </script>
 

@@ -2,12 +2,24 @@
   <section class="hero" id="home">
     <h1>开启孩子的编程探索之旅</h1>
     <p>课前预习 · 课后复习 · 趣味打字 · 在线编程 · YCL考级冲刺</p>
-    <router-link to="/levels" class="cta-btn">开始学习</router-link>
+    <router-link :to="prefixedPath('/levels')" class="cta-btn">开始学习</router-link>
   </section>
 </template>
 
 <script setup>
-// Hero横幅组件 - 无需额外逻辑
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
+
+const route = useRoute()
+
+// 获取当前路由前缀
+const prefix = computed(() => getCurrentPrefix(route))
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 </script>
 
 <style scoped>

@@ -6,22 +6,22 @@
     <section class="quick-access">
       <h2>开始学习</h2>
       <div class="cards">
-        <router-link to="/levels" class="card">
+        <router-link :to="prefixedPath('/levels')" class="card">
           <div class="card-icon">📚</div>
           <h3>课程体系</h3>
           <p>选择你的学习阶段</p>
         </router-link>
-        <router-link to="/typing" class="card">
+        <router-link :to="prefixedPath('/typing')" class="card">
           <div class="card-icon">⌨️</div>
           <h3>打字练习</h3>
           <p>提高打字速度和准确率</p>
         </router-link>
-        <router-link to="/python" class="card">
+        <router-link :to="prefixedPath('/python')" class="card">
           <div class="card-icon">🐍</div>
           <h3>Python IDE</h3>
           <p>在线 Python 代码编辑器</p>
         </router-link>
-        <router-link to="/ycl" class="card">
+        <router-link :to="prefixedPath('/ycl')" class="card">
           <div class="card-icon">🏆</div>
           <h3>YCL 专区</h3>
           <p>考级冲刺练习</p>
@@ -32,7 +32,18 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import HeroSection from '@/components/shared/HeroSection.vue'
+import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
+
+const route = useRoute()
+const prefix = computed(() => getCurrentPrefix(route))
+
+// 生成带前缀的路径
+function prefixedPath(path) {
+  return buildPrefixedPath(prefix.value, path)
+}
 </script>
 
 <style scoped>

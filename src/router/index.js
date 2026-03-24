@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const routes = [
+// 基础路由配置（无前缀，完整访问）
+const baseRoutes = [
   {
     path: '/',
     name: 'home',
@@ -54,6 +55,80 @@ const routes = [
     name: 'locked',
     component: () => import('@/components/shared/StageLocked.vue')
   }
+]
+
+// 为带前缀的路由生成路由配置
+function createPrefixedRoutes(prefix) {
+  return [
+    {
+      path: `/${prefix}`,
+      name: `${prefix}-home`,
+      component: () => import('@/views/HomeView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/levels`,
+      name: `${prefix}-course-levels`,
+      component: () => import('@/views/CourseLevelsView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/levels/:stage`,
+      name: `${prefix}-stage`,
+      component: () => import('@/views/StageView.vue'),
+      props: true
+    },
+    {
+      path: `/${prefix}/levels/:stage/:unit`,
+      name: `${prefix}-unit`,
+      component: () => import('@/views/UnitView.vue'),
+      props: true
+    },
+    {
+      path: `/${prefix}/lesson/:stage/:unit/:lesson`,
+      name: `${prefix}-lesson`,
+      component: () => import('@/views/LessonView.vue'),
+      props: true
+    },
+    {
+      path: `/${prefix}/practice`,
+      name: `${prefix}-practice`,
+      component: () => import('@/views/PracticeView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/typing`,
+      name: `${prefix}-typing`,
+      component: () => import('@/views/TypingView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/python`,
+      name: `${prefix}-python`,
+      component: () => import('@/views/PythonIDEView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/ycl`,
+      name: `${prefix}-ycl`,
+      component: () => import('@/views/YCLZoneView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/locked`,
+      name: `${prefix}-locked`,
+      component: () => import('@/components/shared/StageLocked.vue'),
+      props: { prefix }
+    }
+  ]
+}
+
+// 合并所有路由：基础路由 + 三个前缀路由
+const routes = [
+  ...baseRoutes,
+  ...createPrefixedRoutes('p1'),
+  ...createPrefixedRoutes('py2'),
+  ...createPrefixedRoutes('python3')
 ]
 
 const router = createRouter({
