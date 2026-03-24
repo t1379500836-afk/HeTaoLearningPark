@@ -9,8 +9,9 @@
  * 5. count() 统计字符次数
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'reverse',
     pronunciation: "[ri'vɜːs]",
@@ -20,6 +21,7 @@ export const vocabData = [
     example: 'Reverse the list.',
     exampleTranslation: '把列表反转。'
   },
+  // 拓展单词
   {
     word: 'count',
     pronunciation: '[kaunt]',

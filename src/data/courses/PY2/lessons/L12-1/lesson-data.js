@@ -9,8 +9,9 @@
  * 5. 角色坐标 x 和 y
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'width',
     pronunciation: '[widθ]',
@@ -46,6 +47,16 @@ export const vocabData = [
     level: 'medium',
     example: 'The actor performed very well in the movie.',
     exampleTranslation: '这位演员在电影中表现得非常好。'
+  },
+  // 拓展单词
+  {
+    word: 'height',
+    pronunciation: '[hait]',
+    partOfSpeech: 'n.',
+    meaning: '高度；身高',
+    level: 'easy',
+    example: 'The height of the window is 600 pixels.',
+    exampleTranslation: '窗口的高度是600像素。'
   }
 ]
 

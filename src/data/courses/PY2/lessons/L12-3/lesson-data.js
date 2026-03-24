@@ -7,8 +7,9 @@
  * 3. 键盘控制角色移动
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'key',
     pronunciation: '[ki:]',
@@ -27,6 +28,7 @@ export const vocabData = [
     example: 'Press the space bar to jump.',
     exampleTranslation: '按空格键跳跃。'
   },
+  // 拓展单词
   {
     word: 'keyboard',
     pronunciation: "['ki:bɔ:d]",
@@ -391,7 +393,8 @@ export const typingTemplates = {
   hard: [
     'def on_key_down(key):\n    if key == keys.LEFT:\n        player.x -= speed\n    elif key == keys.RIGHT:\n        player.x += speed',
     'if player.x < 0:\n    player.x = 0\nif player.x > WIDTH:\n    player.x = WIDTH',
-    'if keyboard[keys.LEFT]:\n    player.x -= 5'
+    'if keyboard[keys.LEFT]:\n    player.x -= 5',
+    'def on_key_down(key):\n    if key == keys.UP:\n        player.y -= 5\n    elif key == keys.DOWN:\n        player.y += 5'
   ]
 }
 

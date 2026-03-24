@@ -133,7 +133,7 @@ export const knowledgePoints = [
       syntax: '# 常见标准库模块\nimport random   # 随机数\nimport math     # 数学函数\nimport time     # 时间相关\nimport json     # JSON处理\nimport os       # 操作系统接口',
       example: {
         title: '使用多个模块',
-        code: '# 综合使用多个模块\nimport random\nimport math\nimport time\n\n# 生成随机角度\nangle = random.randint(0, 360)\nprint(f"角度: {angle}度")\n\n# 计算正弦值\nsin_value = math.sin(math.radians(angle))\nprint(f"正弦: {sin_value}")',
+        code: '# 综合使用多个模块\nimport random\nimport math\nimport time\n\n# 生成随机角度\nangle = random.randint(0, 360)\nprint("角度: " + str(angle) + "度")\n\n# 计算正弦值\nsin_value = math.sin(math.radians(angle))\nprint("正弦: " + str(sin_value))',
         output: '角度: 247度\n正弦: -0.9205...',
         explanation: '导入三个模块，用 random 生成随机角度，用 math 计算正弦值。不同模块配合可以实现复杂功能。'
       },
@@ -187,7 +187,7 @@ export const knowledgePoints = [
       syntax: 'import random\n\n# 从列表选择\nitem = random.choice(list)\n\n# 从字符串选择\nchar = random.choice("hello")',
       example: {
         title: '多种随机选择',
-        code: 'import random\n\n# 抽奖活动\nprizes = ["一等奖", "二等奖", "三等奖", "谢谢参与"]\nmy_prize = random.choice(prizes)\nprint(f"恭喜获得: {my_prize}")\n\n# 随机动作\nactions = ["跳", "跑", "爬", "走"]\naction = random.choice(actions)\nprint(f"请你{action}！")',
+        code: 'import random\n\n# 抽奖活动\nprizes = ["一等奖", "二等奖", "三等奖", "谢谢参与"]\nmy_prize = random.choice(prizes)\nprint("恭喜获得: " + my_prize)\n\n# 随机动作\nactions = ["跳", "跑", "爬", "走"]\naction = random.choice(actions)\nprint("请你" + action + "！")',
         output: '恭喜获得: 二等奖\n请你跑！',
         explanation: '第一个例子从奖品列表随机选择一个。第二个从动作列表随机选择一个。每次运行结果可能不同。'
       },
@@ -207,10 +207,10 @@ export const knowledgePoints = [
     hard: {
       story: '随机算法大师！random.choice() 实现了等概率随机选择。理解随机数生成原理、概率分布，是编写游戏、模拟、抽样程序的基础！',
       concept: 'random.choice() 使用 Mersenne Twister 算法生成伪随机数，每个元素被选中的概率相等（均匀分布）。对于真随机场景（如抽奖），需用 secrets 模块。random.choice(seq) 等价于 seq[random.randint(0, len(seq)-1)]',
-      syntax: '# 等价实现\nimport random\ndef choice(seq):\n    index = random.randint(0, len(seq) - 1)\n    return seq[index]\n\n# 多个不重复选择\nimport random\nclass_choices = random.sample(population, k)',
+      syntax: '# random.choice() 内部原理类似这样：\nimport random\nindex = random.randint(0, len(seq) - 1)\nresult = seq[index]\n\n# 如果要选多个不重复的元素，可以用循环实现\nselected = []\nfor i in range(k):\n    item = random.choice(列表)\n    while item in selected:\n        item = random.choice(列表)\n    selected.append(item)',
       example: {
         title: '随机选择应用',
-        code: 'import random\n\n# 模拟掷骰子1000次，统计频率\ncounts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}\nfor _ in range(1000):\n    result = random.choice([1, 2, 3, 4, 5, 6])\n    counts[result] += 1\n\nprint("掷骰子结果分布:")\nfor face, count in counts.items():\n    print(f"{face}点: {count}次 ({count/10}%)")',
+        code: 'import random\n\n# 模拟掷骰子1000次，统计频率\ncounts = [0, 0, 0, 0, 0, 0]  # 用列表存储每个面出现的次数\nfor _ in range(1000):\n    result = random.choice([1, 2, 3, 4, 5, 6])\n    counts[result-1] += 1  # result-1是因为列表索引从0开始\n\nprint("掷骰子结果分布:")\nfor i in range(6):\n    face = i + 1\n    count = counts[i]\n    print(str(face) + "点: " + str(count) + "次 (" + str(count/10) + "%)")',
         output: '掷骰子结果分布:\n1点: 167次 (16.7%)\n2点: 158次 (15.8%)\n3点: 175次 (17.5%)\n4点: 161次 (16.1%)\n5点: 170次 (17.0%)\n6点: 169次 (16.9%)',
         explanation: '掷骰子1000次，每个数字出现的频率都在16.7%左右，验证了随机选择的均匀性。次数越多，分布越均匀。'
       },
@@ -220,8 +220,8 @@ export const knowledgePoints = [
           answer: '一样，是均匀分布'
         },
         {
-          question: '如何从列表中随机选择多个不重复的元素？',
-          answer: '用 random.sample(列表, k) 可以选择k个不重复的元素'
+          question: 'random.choice() 和 random.randint() 有什么区别？',
+          answer: 'random.choice() 从列表中选，random.randint() 从数字范围中选'
         }
       ]
     }
@@ -264,7 +264,7 @@ export const knowledgePoints = [
       syntax: 'import random\n\n# 掷骰子\ndice = random.randint(1, 6)\n\n# 随机月份\nmonth = random.randint(1, 12)\n\n# 随机年份\nyear = random.randint(2000, 2024)',
       example: {
         title: '各种随机数生成',
-        code: 'import random\n\n# 模拟掷骰子\nprint("掷骰子:", random.randint(1, 6))\n\n# 模拟抛硬币（1=正面, 2=反面）\ncoin = random.randint(1, 2)\nprint(f"抛硬币: {\'正面\' if coin == 1 else \'反面\'}")\n\n# 随机幸运数（1-100）\nlucky = random.randint(1, 100)\nprint(f"幸运数: {lucky}")',
+        code: 'import random\n\n# 模拟掷骰子\nprint("掷骰子:", random.randint(1, 6))\n\n# 模拟抛硬币（1=正面, 2=反面）\ncoin = random.randint(1, 2)\nif coin == 1:\n    print("抛硬币: 正面")\nelse:\n    print("抛硬币: 反面")\n\n# 随机幸运数（1-100）\nlucky = random.randint(1, 100)\nprint("幸运数: " + str(lucky))',
         output: '掷骰子: 4\n抛硬币: 反面\n幸运数: 73',
         explanation: '第一个模拟骰子（1-6）。第二个模拟硬币（1-2，1是正面，2是反面）。第三个生成1-100的幸运数。'
       },
@@ -461,17 +461,17 @@ export const typingTemplates = {
   ],
   medium: [
     'import random\nfruits = ["苹果", "香蕉", "橙子"]\nresult = random.choice(fruits)',
-    'import random\ndice = random.randint(1, 6)\nprint(f"骰子: {dice}")',
-    'import random\nlucky = random.randint(1, 100)\nprint(f"幸运数: {lucky}")',
+    'import random\ndice = random.randint(1, 6)\nprint("骰子: " + str(dice))',
+    'import random\nlucky = random.randint(1, 100)\nprint("幸运数: " + str(lucky))',
     'import random\nprizes = ["一等奖", "谢谢参与"]\nprint(random.choice(prizes))',
-    'import random\ncoin = random.randint(1, 2)\nprint("正面" if coin == 1 else "反面")'
+    'import random\ncoin = random.randint(1, 2)\nif coin == 1:\n    print("正面")\nelse:\n    print("反面")'
   ],
   hard: [
     'import random\nrandom.seed(42)\nfor i in range(5):\n    print(random.randint(1, 100))',
     'import random\nnumbers = [1, 2, 3, 4, 5]\nfor _ in range(10):\n    print(random.choice(numbers))',
-    'import random\nfor _ in range(3):\n    dice = random.randint(1, 6)\n    print(f"掷骰子: {dice}")',
-    'import random\nactions = ["跳", "跑", "爬"]\nprint(f"请你{random.choice(actions)}！")',
-    'import random\nnumber = random.randint(0, 100)\nprint(f"随机数: {number}")\nprint(f"大于50: {number > 50}")'
+    'import random\nfor _ in range(3):\n    dice = random.randint(1, 6)\n    print("掷骰子: " + str(dice))',
+    'import random\nactions = ["跳", "跑", "爬"]\nprint("请你" + random.choice(actions) + "！")',
+    'import random\nnumber = random.randint(0, 100)\nprint("随机数: " + str(number))\nif number > 50:\n    print("大于50: True")\nelse:\n    print("大于50: False")'
   ]
 }
 

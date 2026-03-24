@@ -6,8 +6,9 @@
  * 2. print()命令进阶（end参数）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'side',
     pronunciation: '[said]',
@@ -34,6 +35,16 @@ export const vocabData = [
     level: 'medium',
     example: 'Good luck and happy end.',
     exampleTranslation: '祝好运，结局美满。'
+  },
+  // 拓展单词
+  {
+    word: 'loop',
+    pronunciation: '[lu:p]',
+    partOfSpeech: 'n.',
+    meaning: '循环；环；圈',
+    level: 'hard',
+    example: 'Use a loop to repeat.',
+    exampleTranslation: '用循环来重复执行。'
   }
 ]
 

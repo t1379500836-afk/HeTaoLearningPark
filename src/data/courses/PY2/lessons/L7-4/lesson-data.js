@@ -9,8 +9,9 @@
  * 5. setClaw()语句（控制夹爪）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'initial',
     pronunciation: "[ɪ'nɪʃl]",
@@ -20,6 +21,7 @@ export const vocabData = [
     example: 'The initial step is to turn on the device.',
     exampleTranslation: '第一步是打开设备。'
   },
+  // 拓展单词
   {
     word: 'power',
     pronunciation: "['paʊər]",

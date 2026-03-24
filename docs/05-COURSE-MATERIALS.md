@@ -224,8 +224,10 @@ python scripts/extract_content.py PY2
  * 3. 知识点三
  */
 
-// 1. 单词卡数据（3-5个单词）
+// 1. 单词卡数据（4-6个单词，至少拓展1个）
+// 包含 OCR 提取的必选单词 + 至少1个拓展单词
 export const vocabData = [
+  // OCR 提取的必选单词
   {
     word: 'example',
     pronunciation: '[example]',
@@ -233,8 +235,18 @@ export const vocabData = [
     level: 'easy',
     example: 'This is an example.',
     exampleTranslation: '这是一个例子。'
+  },
+  // 拓展单词（至少1个）
+  {
+    word: 'expand',
+    pronunciation: '[ɪkˈspænd]',
+    meaning: '扩展；扩大',
+    level: 'medium',
+    example: 'We need to expand our vocabulary.',
+    exampleTranslation: '我们需要扩展词汇量。',
+    note: '拓展单词'
   }
-  // ... 更多单词
+  // ... 更多单词（总数4-6个）
 ]
 
 // 2. 知识点数据（2-4个知识点）

@@ -7,57 +7,49 @@
  * 3. float() 命令 - 转换为小数
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'input',
-    pronunciation: '[input]',
-    partOfSpeech: 'v./n.',
-    meaning: '输入；投入',
+    pronunciation: "['input]",
+    partOfSpeech: 'n./v.',
+    meaning: '输入量；输入端；把(数据)输入计算机',
     level: 'easy',
     example: 'Please input your name.',
     exampleTranslation: '请输入你的名字。',
-    note: ''
+    note: 'input() 输入命令'
   },
   {
-    word: 'string',
-    pronunciation: '[striŋ]',
+    word: 'theme',
+    pronunciation: '[θi:m]',
     partOfSpeech: 'n.',
-    meaning: '字符串；线',
+    meaning: '主题；主旋律',
+    level: 'medium',
+    example: 'The theme of the party is music.',
+    exampleTranslation: '派对的主题是音乐。',
+    note: 'for the people 为人民服务'
+  },
+  {
+    word: 'name',
+    pronunciation: '[neim]',
+    partOfSpeech: 'n./v.',
+    meaning: '名称；名字；命名',
     level: 'easy',
-    example: 'This is a string.',
-    exampleTranslation: '这是一个字符串。',
-    note: 'computer string 电脑字符串'
+    example: 'My name is Taozi.',
+    exampleTranslation: '我的名字是桃子。',
+    note: 'Hi, my name is... 你好，我叫...'
   },
-  {
-    word: 'int',
-    pronunciation: '[int]',
-    partOfSpeech: 'n.',
-    meaning: '整数（integer的缩写）',
-    level: 'medium',
-    example: 'The int 5 is a whole number.',
-    exampleTranslation: '整数5是一个完整的数字。',
-    note: 'integer的缩写'
-  },
-  {
-    word: 'float',
-    pronunciation: '[flout]',
-    partOfSpeech: 'n.',
-    meaning: '浮点数；小数',
-    level: 'medium',
-    example: '3.14 is a float number.',
-    exampleTranslation: '3.14是一个浮点数。',
-    note: '带小数点的数字'
-  },
+  // 拓展单词
   {
     word: 'convert',
-    pronunciation: '[kan-vɜːt]',
+    pronunciation: '[kənˈvɜːt]',
     partOfSpeech: 'v.',
-    meaning: '转换；转变',
-    level: 'hard',
+    meaning: '转换；转变；兑换',
+    level: 'medium',
     example: 'Convert the string to a number.',
     exampleTranslation: '把字符串转换成数字。',
-    note: ''
+    note: 'int() 和 float() 用于类型转换'
   }
 ]
 

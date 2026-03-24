@@ -6,8 +6,9 @@
  * 2. 鸡兔同笼问题（枚举法解决经典数学问题）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'head',
     pronunciation: '[hed]',
@@ -43,6 +44,16 @@ export const vocabData = [
     level: 'hard',
     example: 'Honey is sweet.',
     exampleTranslation: '蜂蜜是甜的。'
+  },
+  // 拓展单词
+  {
+    word: 'cage',
+    pronunciation: '[keij]',
+    partOfSpeech: 'n.',
+    meaning: '笼子；牢笼',
+    level: 'medium',
+    example: 'The bird is in the cage.',
+    exampleTranslation: '鸟在笼子里。'
   }
 ]
 

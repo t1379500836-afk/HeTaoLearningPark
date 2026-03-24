@@ -8,8 +8,9 @@
  * 4. in 判断
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'set',
     pronunciation: '[set]',
@@ -28,6 +29,7 @@ export const vocabData = [
     example: 'Please add some sugar.',
     exampleTranslation: '请加一些糖。'
   },
+  // 拓展单词
   {
     word: 'type',
     pronunciation: '[taip]',

@@ -6,12 +6,12 @@
  * 2. or - 至少一个条件满足
  */
 
-// 单词卡数据（源文件 + 拓展词汇）
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // 源文件单词
+  // OCR 提取的单词
   {
     word: 'and',
-    pronunciation: '[aend]',
+    pronunciation: '[ænd]',
     partOfSpeech: 'conj.',
     meaning: '和；与；而且',
     level: 'easy',
@@ -21,7 +21,7 @@ export const vocabData = [
   },
   {
     word: 'or',
-    pronunciation: '[ɔ:(r)]',
+    pronunciation: '[ɔː(r)]',
     partOfSpeech: 'conj.',
     meaning: '或者；或',
     level: 'easy',
@@ -30,35 +30,24 @@ export const vocabData = [
     note: 'or表示"或者"'
   },
   {
+    word: 'weather',
+    pronunciation: "['weðə(r)]",
+    partOfSpeech: 'n.',
+    meaning: '天气；气象',
+    level: 'medium',
+    example: 'The weather is nice today.',
+    exampleTranslation: '今天天气很好。',
+    note: ''
+  },
+  {
     word: 'age',
-    pronunciation: '[eidʒ]',
+    pronunciation: '[eɪdʒ]',
     partOfSpeech: 'n./v.',
-    meaning: '年龄；时代；变老',
+    meaning: '年龄；时代；变老；老化',
     level: 'medium',
     example: 'What is your age?',
     exampleTranslation: '你几岁？',
     note: ''
-  },
-  // 拓展编程词汇（逻辑运算相关）
-  {
-    word: 'both',
-    pronunciation: '[bəuθ]',
-    partOfSpeech: 'adj./pron.',
-    meaning: '两者；双方',
-    level: 'easy',
-    example: 'Both conditions are true.',
-    exampleTranslation: '两个条件都成立。',
-    note: 'both...and... 两个都...'
-  },
-  {
-    word: 'logic',
-    pronunciation: "['lɔdʒik]",
-    partOfSpeech: 'n.',
-    meaning: '逻辑；逻辑学',
-    level: 'hard',
-    example: 'Understand the logic of the program.',
-    exampleTranslation: '理解程序的逻辑。',
-    note: 'logical 逻辑的'
   }
 ]
 

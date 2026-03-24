@@ -6,8 +6,9 @@
  * 2. 变量 - 存储数据的盒子
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'print',
     pronunciation: '[print]',
@@ -37,6 +38,17 @@ export const vocabData = [
     example: 'What is your height?',
     exampleTranslation: '你的身高是多少？',
     note: ''
+  },
+  // 拓展单词
+  {
+    word: 'variable',
+    pronunciation: "['veəriəbl]",
+    partOfSpeech: 'n./adj.',
+    meaning: '变量；可变的；易变的',
+    level: 'medium',
+    example: 'Create a variable to store the value.',
+    exampleTranslation: '创建一个变量来存储这个值。',
+    note: 'variable 变量'
   }
 ]
 

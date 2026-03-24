@@ -7,57 +7,47 @@
  * 3. 列表 - 存储分割后的数据
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取
 export const vocabData = [
   {
-    word: 'split',
-    pronunciation: '[split]',
-    partOfSpeech: 'v.',
-    meaning: '分割；分裂；分开',
+    word: 'for',
+    pronunciation: '[fɔːr]',
+    partOfSpeech: 'prep./conj.',
+    meaning: '对；因为；由于',
     level: 'easy',
-    example: 'Split the apple into two pieces.',
-    exampleTranslation: '把苹果分成两半。',
-    note: 'split() 分割字符串'
+    example: 'for the people 为人民服务',
+    exampleTranslation: '为人民服务',
+    note: 'for 循环关键字'
   },
   {
-    word: 'separator',
-    pronunciation: '[sep-rei-ter]',
-    partOfSpeech: 'n.',
-    meaning: '分隔符；分离器',
-    level: 'medium',
-    example: 'Use a comma as separator.',
-    exampleTranslation: '用逗号作为分隔符。',
-    note: '分隔符可以是空格、逗号等'
-  },
-  {
-    word: 'divide',
-    pronunciation: '[di\'vaid]',
-    partOfSpeech: 'v.',
-    meaning: '划分；分隔；除',
-    level: 'medium',
-    example: 'Divide the cake into 8 pieces.',
-    exampleTranslation: '把蛋糕分成8块。',
-    note: 'divide 划分'
-  },
-  {
-    word: 'piece',
-    pronunciation: '[pi:s]',
-    partOfSpeech: 'n.',
-    meaning: '碎片；块；片',
+    word: 'in',
+    pronunciation: '[in]',
+    partOfSpeech: 'prep./adv.',
+    meaning: '参与；参加；进入；在内',
     level: 'easy',
-    example: 'A piece of cake.',
-    exampleTranslation: '一块蛋糕。',
-    note: 'piece 一块、一片'
+    example: 'for i in range(5):',
+    exampleTranslation: '循环5次',
+    note: 'in 在...里面'
   },
   {
-    word: 'segment',
-    pronunciation: '[seg-ment]',
-    partOfSpeech: 'n.',
-    meaning: '部分；片段；段',
-    level: 'hard',
-    example: 'Divide into segments.',
-    exampleTranslation: '分成几段。',
-    note: 'segment 部分、片段'
+    word: 'range',
+    pronunciation: '[reindʒ]',
+    partOfSpeech: 'n./v.',
+    meaning: '区间；射程；靶场；徘徊；变动',
+    level: 'medium',
+    example: 'The range is from 1 to 10.',
+    exampleTranslation: '范围是1到10。',
+    note: 'range() 生成数字范围'
+  },
+  {
+    word: 'shoot',
+    pronunciation: '[ʃuːt]',
+    partOfSpeech: 'v./n.',
+    meaning: '射击；幼苗；嫩芽；新枝',
+    level: 'medium',
+    example: 'Shoot the target!',
+    exampleTranslation: '射击目标！',
+    note: 'shoot 射击'
   }
 ]
 
@@ -123,7 +113,7 @@ export const knowledgePoints = [
       syntax: 'parts = text.split(分隔符)\ndata = parts[索引]  # 获取特定位置',
       example: {
         title: '提取特定数据',
-        code: 'info = "张三,10,北京"\nparts = info.split(",")\nname = parts[0]\nage = parts[1]\nprint(f"姓名:{name}, 年龄:{age}")',
+        code: 'info = "张三,10,北京"\nparts = info.split(",")\nname = parts[0]\nage = parts[1]\nprint("姓名:" + name + ", 年龄:" + age)',
         output: '姓名:张三, 年龄:10',
         explanation: '先按逗号分割成["张三","10","北京"]，然后用索引获取：parts[0]是姓名，parts[1]是年龄。'
       },

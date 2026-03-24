@@ -7,8 +7,9 @@
  * 3. 二维列表的综合应用
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'animal',
     pronunciation: '[a-ni-mal]',
@@ -44,6 +45,16 @@ export const vocabData = [
     level: 'hard',
     example: 'What was your score in the test?',
     exampleTranslation: '你考试得了多少分？'
+  },
+  // 拓展单词
+  {
+    word: 'maze',
+    pronunciation: '[meiz]',
+    partOfSpeech: 'n.',
+    meaning: '迷宫；迷惑',
+    level: 'medium',
+    example: 'Find your way out of the maze.',
+    exampleTranslation: '找到走出迷宫的路。'
   }
 ]
 
@@ -240,7 +251,7 @@ export const knowledgePoints = [
       syntax: '# 随机种菜\nimport random\nrow = random.randint(0, 行数-1)\ncol = random.randint(0, 列数-1)\nmap[row][col] = 1',
       example: {
         title: '随机种菜游戏',
-        code: 'import random\n\n# 4x4的土地\nland = [[0] * 4 for _ in range(4)]\n\n# 随机种5棵菜\nfor _ in range(5):\n    row = random.randint(0, 3)\n    col = random.randint(0, 3)\n    land[row][col] = 1\n\nprint("土地状态:")\nprint("  0 1 2 3")\nfor i, row in enumerate(land):\n    # 用emoji美化显示\n    display = ["🌱" if x == 1 else "⬜" for x in row]\n    print(f"{i} " + " ".join(display))',
+        code: 'import random\n\n# 4x4的土地\nland = [[0] * 4 for _ in range(4)]\n\n# 随机种5棵菜\nfor _ in range(5):\n    row = random.randint(0, 3)\n    col = random.randint(0, 3)\n    land[row][col] = 1\n\nprint("土地状态:")\nprint("  0 1 2 3")\nfor i in range(len(land)):\n    # 用emoji美化显示\n    display = ["🌱" if x == 1 else "⬜" for x in land[i]]\n    print(f"{i} " + " ".join(display))',
         output: '土地状态:\n  0 1 2 3\n0 ⬜ ⬜ 🌱 ⬜\n1 ⬜ 🌱 ⬜ ⬜\n2 ⬜ ⬜ ⬜ 🌱\n3 🌱 ⬜ ⬜ ⬜（每次运行结果不同）',
         explanation: '用random模块生成随机位置，用emoji美化显示，让游戏更加生动有趣。'
       },
@@ -250,8 +261,8 @@ export const knowledgePoints = [
           answer: '会产生0到3之间的随机整数（包括0和3）'
         },
         {
-          question: 'enumerate()函数有什么用？',
-          answer: '同时获取索引和值，方便显示行号'
+          question: 'range(len(land))有什么用？',
+          answer: '生成0到列表长度-1的索引范围，方便访问每个元素'
         }
       ]
     },

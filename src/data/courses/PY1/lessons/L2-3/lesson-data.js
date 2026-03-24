@@ -7,57 +7,49 @@
  * 3. 负索引 - 从末尾访问元素
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
+  {
+    word: 'color',
+    pronunciation: "['kʌlər]",
+    partOfSpeech: 'n./v.',
+    meaning: '颜色；着色；色素；染；歪曲',
+    level: 'easy',
+    example: 'What color do you like?',
+    exampleTranslation: '你喜欢什么颜色？',
+    note: 'color 颜色'
+  },
+  {
+    word: 'red',
+    pronunciation: '[red]',
+    partOfSpeech: 'n./adj.',
+    meaning: '红色；红葡萄酒；红的；红色的',
+    level: 'easy',
+    example: 'red wine 红酒',
+    exampleTranslation: '红酒',
+    note: 'red 红色'
+  },
+  {
+    word: 'blue',
+    pronunciation: '[bluː]',
+    partOfSpeech: 'adj./n.',
+    meaning: '蓝色的；忧郁的；蓝色；天蓝色',
+    level: 'easy',
+    example: 'blue sky 蓝天',
+    exampleTranslation: '蓝天',
+    note: 'blue 蓝色'
+  },
+  // 拓展单词
   {
     word: 'index',
-    pronunciation: '[in-deks]',
+    pronunciation: "['ɪndeks]",
     partOfSpeech: 'n./v.',
-    meaning: '索引；指数；指标',
-    level: 'easy',
-    example: 'The index of a list starts at 0.',
-    exampleTranslation: '列表的索引从0开始。',
-    note: 'index 索引、下标'
-  },
-  {
-    word: 'list',
-    pronunciation: '[list]',
-    partOfSpeech: 'n.',
-    meaning: '列表；清单；目录',
-    level: 'easy',
-    example: 'Make a list of fruits.',
-    exampleTranslation: '列一个水果清单。',
-    note: 'list 列表'
-  },
-  {
-    word: 'element',
-    pronunciation: '[el-ə-ment]',
-    partOfSpeech: 'n.',
-    meaning: '元素；要素；成分',
+    meaning: '索引；指数；指标；做索引',
     level: 'medium',
-    example: 'The list has five elements.',
-    exampleTranslation: '这个列表有五个元素。',
-    note: 'element 元素'
-  },
-  {
-    word: 'position',
-    pronunciation: '[pə-zi-shən]',
-    partOfSpeech: 'n.',
-    meaning: '位置；方位；职位',
-    level: 'medium',
-    example: 'What is the position of the item?',
-    exampleTranslation: '这个项目的位置是什么？',
-    note: 'position 位置'
-  },
-  {
-    word: 'negative',
-    pronunciation: '[neg-a-tiv]',
-    partOfSpeech: 'adj./n.',
-    meaning: '负的；消极的；否定',
-    level: 'hard',
-    example: 'Use negative index to access from the end.',
-    exampleTranslation: '使用负索引从末尾访问。',
-    note: 'negative index 负索引'
+    example: 'Use index to get the element.',
+    exampleTranslation: '用索引获取元素。',
+    note: '列表索引从0开始'
   }
 ]
 
@@ -277,7 +269,7 @@ export const knowledgePoints = [
       syntax: '# 常用模式\nlast = list[-1]\nsecond_last = list[-2]\nfirst = list[0]',
       example: {
         title: '灵活运用索引',
-        code: 'data = [5, 10, 15, 20, 25]\nfirst = data[0]\nlast = data[-1]\nsecond_last = data[-2]\nprint(f"首:{first}, 尾:{last}, 次尾:{second_last}")',
+        code: 'data = [5, 10, 15, 20, 25]\nfirst = data[0]\nlast = data[-1]\nsecond_last = data[-2]\nprint("首:" + str(first) + ", 尾:" + str(last) + ", 次尾:" + str(second_last))',
         output: '首:5, 尾:25, 次尾:20',
         explanation: '用data[0]获取第一个元素，用data[-1]获取最后一个，用data[-2]获取倒数第二个，非常方便。'
       },

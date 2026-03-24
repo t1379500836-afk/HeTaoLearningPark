@@ -133,10 +133,10 @@ export const knowledgePoints = [
       syntax: '# 嵌套循环\nfor i in range(3):\n    for j in range(3):\n        if 条件:\n            break  # 只退出内层\n    # 继续外层循环\n\n# while-else\nwhile 条件:\n    if 找到:\n        break\nelse:\n    # 没break才执行',
       example: {
         title: '查找数据',
-        code: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i, fruit in enumerate(data):\n    if fruit == target:\n        print(f"找到了!索引:{i}")\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
+        code: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i in range(len(data)):\n    if data[i] == target:\n        print("找到了!索引:" + str(i))\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
         output: '找到了!索引:2\n搜索结束',
-        structure: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i, fruit in enumerate(data):\n    if fruit == target:\n        print(f"找到了!索引:{i}")\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
-        explanation: '在列表中查找"橙子"，找到后打印索引并break退出。因为break了，所以else块不执行。'
+        structure: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i in range(len(data)):\n    if data[i] == target:\n        print("找到了!索引:" + str(i))\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
+        explanation: '在列表中查找"橙子"，用range(len())遍历获取索引。找到后打印索引并break退出。因为break了，所以else块不执行。'
       },
       practice: [
         {
@@ -188,7 +188,7 @@ export const knowledgePoints = [
       syntax: '# 复合条件\nwhile count < 10 and 没有错误:\n    执行代码\n\n# 布尔变量\nrunning = True\nwhile running:\n    if 想退出:\n        running = False\n\n# 或条件\nwhile 有数据 or 还有任务:\n    处理',
       example: {
         title: '多条件控制',
-        code: 'count = 0\nerrors = 0\n\nwhile count < 5 and errors < 2:\n    print(f"count={count}, errors={errors}")\n    count = count + 1\n    if count == 3:\n        errors = errors + 1\n\nprint("循环结束!")',
+        code: 'count = 0\nerrors = 0\n\nwhile count < 5 and errors < 2:\n    print("count=" + str(count) + ", errors=" + str(errors))\n    count = count + 1\n    if count == 3:\n        errors = errors + 1\n\nprint("循环结束!")',
         output: 'count=0, errors=0\ncount=1, errors=0\ncount=2, errors=0\ncount=3, errors=1\ncount=4, errors=1\n循环结束!',
         explanation: '循环条件是count<5且errors<2。count到4或errors到2时，任一条件不满足就结束。'
       },
@@ -208,10 +208,10 @@ export const knowledgePoints = [
     hard: {
       story: '条件大师模式！你可以用条件实现各种算法：二分查找（找到目标）、欧几里得算法（求最大公约数）、牛顿迭代法（求平方根）等等！',
       concept: 'while循环条件的本质是"不变式"（Invariant）：每次循环前后都保持为真的性质。算法设计的关键是找到正确的不变式和终止条件。典型模式：①收敛型（逐渐接近目标）②消耗型（逐渐用完数据）③状态型（状态变化触发结束）。',
-      syntax: '# 二分查找\nwhile left <= right:\n    mid = (left + right) // 2\n    if list[mid] == target:\n        return mid\n    elif list[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\n\n# 欧几里得算法\nwhile b != 0:\n    a, b = b, a % b',
+      syntax: '# 二分查找\nwhile left <= right:\n    mid = (left + right) // 2\n    if list[mid] == target:\n        print("找到了，索引:", mid)\n        break\n    elif list[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\n\n# 欧几里得算法\nwhile b != 0:\n    a, b = b, a % b',
       example: {
         title: '求最大公约数',
-        code: '# 欧几里得算法求GCD\na = 48\nb = 18\n\nwhile b != 0:\n    a, b = b, a % b\n    print(f"a={a}, b={b}")\n\nprint(f"最大公约数: {a}")',
+        code: '# 欧几里得算法求GCD\na = 48\nb = 18\n\nwhile b != 0:\n    a, b = b, a % b\n    print("a=" + str(a) + ", b=" + str(b))\n\nprint("最大公约数: " + str(a))',
         output: 'a=18, b=12\na=12, b=6\na=6, b=0\n最大公约数: 6',
         explanation: '每次循环用b和a%b替换a和b。当b变为0时，a就是最大公约数。这是经典的算法。'
       },
@@ -288,7 +288,7 @@ export const knowledgePoints = [
       syntax: '# 游戏主循环\nrunning = True\nwhile running:\n    处理事件()\n    更新游戏()\n    绘制画面()\n    if 游戏结束:\n        running = False\n\n# 状态机\ncurrent_state = "菜单"\nwhile current_state != "退出":\n    if current_state == "菜单":\n        current_state = 处理菜单()\n    elif current_state == "游戏":\n        current_state = 处理游戏()\n    elif current_state == "结束":\n        current_state = 处理结束()',
       example: {
         title: '猜数字游戏',
-        code: 'import random\n\ntarget = random.randint(1, 100)\nattempts = 0\nmax_attempts = 10\n\nprint("猜1-100的数字!")\n\nwhile attempts < max_attempts:\n    guess = int(input("猜:"))\n    attempts = attempts + 1\n    \n    if guess == target:\n        print(f"猜对了!用了{attempts}次")\n        break\n    elif guess < target:\n        print("太小了!")\n    else:\n        print("太大了!")\nelse:\n    print(f"次数用完!答案是{target}")',
+        code: 'import random\n\ntarget = random.randint(1, 100)\nattempts = 0\nmax_attempts = 10\n\nprint("猜1-100的数字!")\n\nwhile attempts < max_attempts:\n    guess = int(input("猜:"))\n    attempts = attempts + 1\n    \n    if guess == target:\n        print("猜对了!用了" + str(attempts) + "次")\n        break\n    elif guess < target:\n        print("太小了!")\n    else:\n        print("太大了!")\nelse:\n    print("次数用完!答案是" + str(target))',
         output: '猜1-100的数字!\n猜:50\n太大了!\n猜:25\n太小了!\n猜:37\n猜对了!用了3次',
         explanation: '循环条件是次数<10，猜对时break退出。次数用完还没猜对，循环正常结束，显示答案。'
       },
@@ -474,7 +474,7 @@ export const typingTemplates = {
     'while attempts < max_attempts:\n    guess = int(input("猜:"))\n    if guess == target:\n        break\n    attempts = attempts + 1',
     'while left <= right:\n    mid = (left + right) // 2\n    if list[mid] == target:\n        break\n    elif list[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1',
     'while running:\n    处理事件()\n    更新游戏()\n    if 游戏结束:\n        running = False',
-    'for i in range(len(data)):\n    if data[i] == target:\n        print(f"找到!索引:{i}")\n        break\nelse:\n    print("没找到!")',
+    'for i in range(len(data)):\n    if data[i] == target:\n        print("找到!索引:" + str(i))\n        break\nelse:\n    print("没找到!")',
     'current_state = "菜单"\nwhile current_state != "退出":\n    if current_state == "菜单":\n        current_state = 处理菜单()'
   ]
 }

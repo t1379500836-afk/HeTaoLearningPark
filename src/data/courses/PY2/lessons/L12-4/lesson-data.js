@@ -9,8 +9,9 @@
  * 5. 综合游戏开发流程
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'play',
     pronunciation: '[plei]',
@@ -46,6 +47,16 @@ export const vocabData = [
     level: 'medium',
     example: 'Click the button to start.',
     exampleTranslation: '点击按钮开始。'
+  },
+  // 拓展单词
+  {
+    word: 'game',
+    pronunciation: '[geim]',
+    partOfSpeech: 'n.',
+    meaning: '游戏；比赛',
+    level: 'easy',
+    example: 'This is a fun game.',
+    exampleTranslation: '这是一个有趣的游戏。'
   }
 ]
 
@@ -385,12 +396,14 @@ export const typingTemplates = {
   medium: [
     'def on_key_down(key):\n    if key == keys.SPACE:\n        pass',
     'if light.image == "灯亮":\n    light.image = "灯熄灭"\nelse:\n    light.image = "灯亮"',
-    'global score\nscore += 1'
+    'global score\nscore += 1',
+    'def update():\n    if player.x > WIDTH:\n        player.x = 0'
   ],
   hard: [
     'def on_key_down(key):\n    if key == keys.LEFT:\n        player.x -= 5\n    elif key == keys.RIGHT:\n        player.x += 5',
     'if current_state == STATE_MENU:\n    if key == keys.SPACE:\n        current_state = STATE_PLAYING',
-    'dragging = False\ndef on_mouse_down(pos):\n    global dragging\n    if player.collidepoint(pos):\n        dragging = True'
+    'dragging = False\ndef on_mouse_down(pos):\n    global dragging\n    if player.collidepoint(pos):\n        dragging = True',
+    'def on_mouse_up():\n    global dragging\n    dragging = False\ndef update():\n    if dragging:\n        player.pos = mouse.pos'
   ]
 }
 

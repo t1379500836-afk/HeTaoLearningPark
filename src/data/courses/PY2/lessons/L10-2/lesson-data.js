@@ -7,8 +7,9 @@
  * 3. 获取二维列表的行和列
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'good',
     pronunciation: '[gud]',
@@ -44,6 +45,16 @@ export const vocabData = [
     level: 'hard',
     example: 'The company has a new logo.',
     exampleTranslation: '公司有了一个新标志。'
+  },
+  // 拓展单词
+  {
+    word: 'matrix',
+    pronunciation: '[mei-triks]',
+    partOfSpeech: 'n.',
+    meaning: '矩阵；母体',
+    level: 'hard',
+    example: 'The matrix has many rows and columns.',
+    exampleTranslation: '矩阵有很多行和列。'
   }
 ]
 

@@ -8,8 +8,9 @@
  * 4. isdigit() - 判断是否为数字
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'rotate',
     pronunciation: "[rəʊˈteɪt]",
@@ -50,15 +51,16 @@ export const vocabData = [
     exampleTranslation: '检查结果。',
     note: 'as a result 结果'
   },
+  // 拓展单词
   {
-    word: 'motor',
-    pronunciation: "['məʊtə(r)]",
+    word: 'password',
+    pronunciation: "['pɑːswɜːd]",
     partOfSpeech: 'n.',
-    meaning: '马达；发动机；电机',
-    level: 'medium',
-    example: 'The motor is running.',
-    exampleTranslation: '电机正在运行。',
-    note: 'servo motor 伺服电机/舵机'
+    meaning: '密码；口令',
+    level: 'hard',
+    example: 'Enter your password.',
+    exampleTranslation: '输入你的密码。',
+    note: 'pass word 通过的文字'
   },
   {
     word: 'remote',
@@ -69,26 +71,6 @@ export const vocabData = [
     example: 'Use the remote control.',
     exampleTranslation: '使用遥控器。',
     note: 'remote control 遥控器'
-  },
-  {
-    word: 'combine',
-    pronunciation: "[kəm'baɪn]",
-    partOfSpeech: 'v.',
-    meaning: '结合；联合；合并',
-    level: 'hard',
-    example: 'Combine the strings.',
-    exampleTranslation: '合并字符串。',
-    note: 'combination 组合'
-  },
-  {
-    word: 'password',
-    pronunciation: "['pɑːswɜːd]",
-    partOfSpeech: 'n.',
-    meaning: '密码；口令',
-    level: 'hard',
-    example: 'Enter your password.',
-    exampleTranslation: '输入你的密码。',
-    note: 'pass word 通过的文字'
   }
 ]
 
@@ -154,7 +136,7 @@ export const knowledgePoints = [
       syntax: '# 速度控制\ncurrent = 0\ntarget = 180\nstep = 5\nwhile current < target:\n    current += step\n    rotateTo(current)\n    sleep(0.1)\n\n# 角度映射\nangle = map(数值, 最小值, 最大值, 0, 180)\nrotateTo(angle)\n\n# 多舵机\nrotateTo(0, channel=1)  # 舵机1\nrotateTo(90, channel=2) # 舵机2',
       example: {
         title: '平滑门锁',
-        code: '# 平滑开关锁\ndef smooth_unlock():\n    for angle in range(90, -1, -5):\n        rotateTo(angle)\n        sleep(0.05)\n\ndef smooth_lock():\n    for angle in range(0, 91, 5):\n        rotateTo(angle)\n        sleep(0.05)\n\n# 使用\nsmooth_unlock()  # 平滑开锁\nsleep(3)\nsmooth_lock()    # 平滑上锁',
+        code: '# 平滑开锁：从90度慢慢转到0度\nfor angle in range(90, -1, -5):\n    rotateTo(angle)\n    sleep(0.05)\n\nsleep(3)  # 等待3秒\n\n# 平滑上锁：从0度慢慢转到90度\nfor angle in range(0, 91, 5):\n    rotateTo(angle)\n    sleep(0.05)',
         output: '（舵机从90度慢慢转到0度开锁，然后从0度慢慢转到90度上锁）',
         explanation: '用for循环分步转动，每次转5度，配合sleep实现平滑效果。range(90, -1, -5)从90递减到0。'
       },
@@ -231,9 +213,9 @@ export const knowledgePoints = [
       syntax: '# 长按检测\npress_time = 0\nwhile key == "up":\n    press_time += 1\n    if press_time > 长按阈值:\n        长按触发()\n\n# 组合按键\nif key == "A" and last_key == "B":\n    组合触发()\n\n# 按键状态机\ncurrent_state = "待机"\nif current_state == "待机" and key == "start":\n    current_state = "运行"',
       example: {
         title: '长按加速',
-        code: 'speed = 1\npress_count = 0\nlast_key = ""\n\nwhile True:\n    key = getKey()\n    \n    if key == last_key:\n        press_count += 1\n    else:\n        press_count = 0\n    \n    if press_count > 10:\n        speed = 3  # 长按加速\n    elif press_count > 5:\n        speed = 2  # 中按中速\n    else:\n        speed = 1  # 短按常速\n    \n    print(f"速度: {speed}")\n    last_key = key',
+        code: 'speed = 1\npress_count = 0\nlast_key = ""\n\nwhile True:\n    key = getKey()\n    \n    if key == last_key:\n        press_count += 1\n    else:\n        press_count = 0\n    \n    if press_count > 10:\n        speed = 3  # 长按加速\n    elif press_count > 5:\n        speed = 2  # 中按中速\n    else:\n        speed = 1  # 短按常速\n    \n    print("速度: " + str(speed))\n    last_key = key',
         output: '（短按）\n速度: 1\n（中按）\n速度: 2\n（长按）\n速度: 3',
-        explanation: '统计同一按键连续按下的次数，超过5次中速，超过10次加速。'
+        explanation: '统计同一按键连续按下的次数，超过5次中速，超过10次加速。用字符串拼接显示速度。'
       },
       practice: [
         {
@@ -305,17 +287,17 @@ export const knowledgePoints = [
     hard: {
       story: '拼接大师模式！你可以用循环拼接大量字符串、用格式化字符串(f-string)更优雅地拼接、或者用join()方法高效拼接列表中的所有字符串！',
       concept: '高级拼接技巧：①f-string格式化（最推荐）②join()方法（高效）③循环拼接（灵活）④模板字符串（复用）。f-string是Python 3.6+的特性，最简洁易读。',
-      syntax: '# f-string格式化\nname = "Tom"\nage = 10\nmessage = f"我叫{name}，今年{age}岁"\n\n# join方法\nresult = "-".join(["a", "b", "c"])  # "a-b-c"\n\n# 循环拼接\nresult = ""\nfor s in list:\n    result += s',
+      syntax: '# 字符串拼接\nname = "Tom"\nage = 10\nmessage = "我叫" + name + "，今年" + str(age) + "岁"\n\n# join方法\nresult = "-".join(["a", "b", "c"])  # "a-b-c"\n\n# 循环拼接\nresult = ""\nfor s in list:\n    result += s',
       example: {
         title: '动态密码生成',
-        code: 'import random\n\n# 生成随机密码\ndef generate_password(length=6):\n    password = ""\n    for i in range(length):\n        digit = random.randint(0, 9)\n        password += str(digit)\n    return password\n\n# 使用\nprint("新密码:", generate_password())\nprint("新密码:", generate_password(8))',
+        code: 'import random\n\n# 生成6位随机密码\npassword = ""\nfor i in range(6):\n    digit = random.randint(0, 9)\n    password = password + str(digit)\n\nprint("新密码: " + password)\n\n# 生成8位随机密码\npassword2 = ""\nfor i in range(8):\n    digit = random.randint(0, 9)\n    password2 = password2 + str(digit)\n\nprint("新密码: " + password2)',
         output: '新密码: 723849\n新密码: 12345678',
-        explanation: '用循环拼接6个或8个随机数字，生成随机密码。每次生成的密码都不同。'
+        explanation: '用循环拼接6个或8个随机数字，生成随机密码。每次生成的密码都不同。用字符串拼接显示结果。'
       },
       practice: [
         {
-          question: 'f-string中如何使用变量？',
-          answer: '用花括号：f"文字{变量}更多文字"'
+          question: '如何用字符串拼接显示"速度: 3"？',
+          answer: 'print("速度: " + str(speed))'
         },
         {
           question: 'join()方法有什么用？',
@@ -385,18 +367,18 @@ export const knowledgePoints = [
       syntax: '# 多重条件\nif len(s) >= 6 and s.isdigit():\n    通过验证\n\n# 逐字检查\nall_digits = True\nfor ch in s:\n    if not ch.isdigit():\n        all_digits = False\n        break\n\n# 组合验证\nif s.isalnum():  # 字母或数字\nif s.isalpha():  # 全是字母\nif s.isspace():  # 全是空格',
       example: {
         title: '强密码验证',
-        code: 'def validate_password(password):\n    # 至少8位\n    if len(password) < 8:\n        return "密码至少8位!"\n    \n    # 至少一个数字\n    has_digit = any(ch.isdigit() for ch in password)\n    \n    # 至少一个字母\n    has_alpha = any(ch.isalpha() for ch in password)\n    \n    if has_digit and has_alpha:\n        return "密码强度: 高"\n    else:\n        return "密码需要包含数字和字母!"\n\nprint(validate_password("12345678"))\nprint(validate_password("abcd1234"))',
-        output: '密码需要包含数字和字母!\n密码强度: 高',
-        explanation: '检查密码长度、是否包含数字、是否包含字母。同时满足数字和字母才是高强度的。'
+        code: '# 检查密码是否包含数字\npassword = "abcd1234"\n\n# 检查长度\nif len(password) < 8:\n    print("密码至少8位!")\nelse:\n    # 检查是否有数字\n    has_digit = False\n    for ch in password:\n        if ch.isdigit():\n            has_digit = True\n            break\n    \n    # 检查是否有字母\n    has_alpha = False\n    for ch in password:\n        if ch.isalpha():\n            has_alpha = True\n            break\n    \n    if has_digit and has_alpha:\n        print("密码强度: 高")\n    else:\n        print("密码需要包含数字和字母!")',
+        output: '密码强度: 高',
+        explanation: '检查密码长度、是否包含数字、是否包含字母。用循环检查每个字符，同时满足数字和字母才是高强度的。'
       },
       practice: [
         {
-          question: 'any()函数有什么用？',
-          answer: '检查是否有任何一个元素满足条件'
+          question: '如何检查字符串中是否有数字？',
+          answer: '用循环遍历每个字符，用isdigit()判断'
         },
         {
           question: 'isalpha()判断什么？',
-          answer: '判断字符串是否全是字母'
+          answer: '判断字符是否是字母'
         }
       ]
     }
@@ -564,7 +546,7 @@ export const typingTemplates = {
     'if password.isdigit():\n    print("有效!")',
     'part1 = "12"\npart2 = "34"\nresult = part1 + part2',
     'if key == "stop":\n    break',
-    'print(f"密码: {password}")'
+    'print("密码: " + password)'
   ],
   hard: [
     'while True:\n    if 检测到人脸:\n        rotateTo(0)\n        sleep(3)\n        rotateTo(90)',
@@ -572,7 +554,7 @@ export const typingTemplates = {
     'if len(password) == 4 and password.isdigit():\n    print("密码正确!")',
     'for i in range(10):\n    key = getKey()\n    if key == last_key:\n        count += 1\n    else:\n        count = 0',
     'password = ""\nfor i in range(6):\n    digit = random.randint(0, 9)\n    password += str(digit)',
-    'if any(ch.isdigit() for ch in password):\n    print("包含数字!")'
+    'has_digit = False\nfor ch in password:\n    if ch.isdigit():\n        has_digit = True\n        break\nif has_digit:\n    print("包含数字!")'
   ]
 }
 

@@ -6,8 +6,9 @@
  * 2. break与continue的区别
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'continue',
     pronunciation: '[kan-tinju:]',
@@ -43,6 +44,16 @@ export const vocabData = [
     level: 'hard',
     example: 'The bomb exploded with a loud noise.',
     exampleTranslation: '炸弹发出巨响爆炸了。'
+  },
+  // 拓展单词
+  {
+    word: 'skip',
+    pronunciation: '[skip]',
+    partOfSpeech: 'v.',
+    meaning: '跳过；略过；蹦跳',
+    level: 'easy',
+    example: 'Skip the ones you do not need.',
+    exampleTranslation: '跳过你不需要的那些。'
   }
 ]
 

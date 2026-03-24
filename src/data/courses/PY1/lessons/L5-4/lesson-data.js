@@ -290,7 +290,7 @@ export const knowledgePoints = [
       syntax: "messages = []  # 存储留言信息\ndef record_message():\n    messages.append({'time': now(), 'duration': record()})\ndef play_message(index):\n    playRecord(messages[index])",
       example: {
         title: '多条留言管理',
-        code: "messages = []\nif isPressed('A'):\n    record()\n    messages.append(len(messages))\nif isPressed('B'):\n    for i in messages:\n        print(f'留言 {i+1}')",
+        code: "messages = []\nif isPressed('A'):\n    record()\n    messages.append(len(messages))\nif isPressed('B'):\n    for i in messages:\n        print('留言 ' + str(i+1))",
         output: '记录和显示多条留言',
         explanation: '使用列表存储留言记录，支持多条留言的记录和管理。'
       },

@@ -11,8 +11,9 @@
  * ⚠️ 硬件专项：本课内容需要核桃编程智能车硬件才能运行
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'line',
     pronunciation: '[lain]',
@@ -40,6 +41,7 @@ export const vocabData = [
     example: 'Please wait a moment.',
     exampleTranslation: '请稍等一下。'
   },
+  // 拓展单词
   {
     word: 'power',
     pronunciation: "['pauə(r)]",

@@ -8,8 +8,9 @@
  * 4. record() 和 playRecord() - 录音与播放
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'show',
     pronunciation: '[ʃəʊ]',
@@ -50,6 +51,7 @@ export const vocabData = [
     exampleTranslation: '按下按钮来录制。',
     note: '作动词时读[rɪˈkɔːd]，作名词时读[ˈrekɔːd]'
   },
+  // 拓展单词
   {
     word: 'press',
     pronunciation: '[pres]',
@@ -61,16 +63,6 @@ export const vocabData = [
     note: 'press conference 新闻发布会'
   },
   {
-    word: 'touch',
-    pronunciation: '[tʌtʃ]',
-    partOfSpeech: 'v./n.',
-    meaning: '触摸；触碰；接触',
-    level: 'medium',
-    example: 'Don\'t touch the screen.',
-    exampleTranslation: '不要触摸屏幕。',
-    note: 'touch screen 触摸屏'
-  },
-  {
     word: 'button',
     pronunciation: "['bʌtn]",
     partOfSpeech: 'n.',
@@ -79,16 +71,6 @@ export const vocabData = [
     example: 'Click the button.',
     exampleTranslation: '点击按钮。',
     note: 'push button 按钮开关'
-  },
-  {
-    word: 'display',
-    pronunciation: "[dɪ'spleɪ]",
-    partOfSpeech: 'v./n.',
-    meaning: '显示；展示；显示器',
-    level: 'hard',
-    example: 'The display shows the time.',
-    exampleTranslation: '显示器显示时间。',
-    note: 'LCD display 液晶显示器'
   }
 ]
 
@@ -305,7 +287,7 @@ export const knowledgePoints = [
     hard: {
       story: '打印大师模式！你可以用print()和printPos()制作仪表盘、记分牌、进度条、动态菜单...通过精心设计布局和动态更新，让界面清晰美观！',
       concept: '高级打印应用：①动态更新（用while循环刷新显示）②格式化输出（对齐、美化）③表格显示（行列对齐）④动画效果（位置变化）。配合清屏命令可以实现完全自定义的界面。',
-      syntax: '# 动态更新\nwhile True:\n    printPos(0, 0, f"时间: {当前时间}")\n    清屏并重新打印\n\n# 格式化输出\nprint(f"{name:10} {score:5}")\n\n# 进度条\nprogress = "=" * 完成百分比\nprint(f"[{progress}]")\n\n# 表格\nprint(f"{"姓名":10}{"分数":5}")\nfor student in students:\n    print(f"{student.name:10}{student.score:5}")',
+      syntax: '# 动态更新\nwhile True:\n    printPos(0, 0, "时间: " + str(当前时间))\n    清屏并重新打印\n\n# 格式化输出\nprint(name + " " + score)\n\n# 进度条\nprogress = "=" * 完成百分比\nprint("[" + progress + "]")\n\n# 表格\nprint("姓名" + " " + "分数")\nfor student in students:\n    print(student.name + " " + student.score)',
       example: {
         title: '实时仪表盘',
         code: 'import time\n\nwhile True:\n    # 清屏\n    print("\\n" * 50)\n    \n    # 显示标题\n    printPos(0, 0, "===智能门铃===")\n    \n    # 显示状态\n    if isTouched("sensor"):\n        printPos(0, 20, "状态: 有人！")\n    else:\n        printPos(0, 20, "状态: 等待...")\n    \n    time.sleep(0.5)',
@@ -318,8 +300,8 @@ export const knowledgePoints = [
           answer: '用while循环定期清屏并重新打印'
         },
         {
-          question: 'f-string中的{变量:10}是什么意思？',
-          answer: '变量占10个字符宽度，用于对齐输出'
+          question: '如何让变量和文字拼接在一起输出？',
+          answer: '用 + 号拼接，如 "分数: " + str(score)'
         }
       ]
     }
@@ -382,7 +364,7 @@ export const knowledgePoints = [
     hard: {
       story: '录音大师模式！你可以制作语音日记、声音备忘录、语音识别系统...甚至可以保存多段录音，按时间顺序播放，就像一个真正的录音机！',
       concept: '高级录音应用：①多段录音（用列表存储）②语音识别（转文字）③声音分析（音量、频率）④压缩存储（减小文件大小）。录音通常保存为WAV或MP3格式。',
-      syntax: '# 多段录音\nrecordings = []\n\nwhile True:\n    if isPressed("rec"):\n        record()\n        recordings.append(最新录音)\n    if isPressed("play"):\n        for rec in recordings:\n            playRecord(rec)\n\n# 语音日记\nimport datetime\ndate = datetime.now()\nrecord(f"diary_{date}.wav")',
+      syntax: '# 多段录音\nrecordings = []\n\nwhile True:\n    if isPressed("rec"):\n        record()\n        recordings.append(最新录音)\n    if isPressed("play"):\n        for rec in recordings:\n            playRecord(rec)\n\n# 语音日记\nimport datetime\ndate = datetime.now()\nrecord("diary_" + str(date) + ".wav")',
       example: {
         title: '语音备忘录',
         code: 'memos = []  # 存储录音\n\nwhile True:\n    print("1.录音 2.播放 3.退出")\n    choice = input("选择:")\n    \n    if choice == "1":\n        print("录音中...")\n        record()\n        memos.append("录音")\n        print("已保存！")\n    elif choice == "2":\n        for memo in memos:\n            playRecord(memo)\n    elif choice == "3":\n        break',
@@ -564,15 +546,15 @@ export const typingTemplates = {
     'printPos(10, 20, "状态: 正常")',
     'record()\nsleep(3)\nplayRecord()',
     'if isTouched("sensor"):\n    print("触发!")',
-    'print(f"温度: {temp}度")'
+    'print("温度: " + str(temp) + "度")'
   ],
   hard: [
     'while True:\n    if isPressed("A") and isPressed("B"):\n        print("组合触发!")',
-    'for i in range(5):\n    playSound(f"note{i}")\n    sleep(0.5)',
-    'printPos(0, 0, "===仪表盘===")\nprintPos(0, 20, f"分数: {score}")',
+    'for i in range(5):\n    playSound("note" + str(i))\n    sleep(0.5)',
+    'printPos(0, 0, "===仪表盘===")\nprintPos(0, 20, "分数: " + str(score))',
     'memos = []\nwhile True:\n    if isPressed("rec"):\n        record()\n        memos.append("新录音")',
     'while True:\n    x, y = get_touch_position()\n    printPos(x, y, "触摸")',
-    'import time\nwhile True:\n    print("\\n" * 50)\n    printPos(0, 0, f"时间: {time.now()}")'
+    'import time\nwhile True:\n    print("\\n" * 50)\n    printPos(0, 0, "时间: " + str(time.now()))'
   ]
 }
 

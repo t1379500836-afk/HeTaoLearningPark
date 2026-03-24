@@ -87,6 +87,25 @@
     }
   },
   {
+    "id": "L10-4",
+    "unit": "L10",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY2\\L10\\L10-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL10-4\nfollow ['fα:lou]\nn.跟随，追随\nv.跟随；在...后发生；理\n解，明白；沿着；遵循\n听从；追随\nlight[la1t]\nn.光；电灯；打火机\ngep\nadj.明亮的；浅色的；轻的\nV.点燃；照亮；开始燃烧\non [α:n]\nprep..在...上；由...支\n撑；在 （某一天）\nadv.向前；穿着\noff [o:f]\nadv.离开；被取消；未\n连接；休息\nprep.离，距；从...去掉\nadj.变质的；不礼貌的\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY2\\L10\\L10-4\\knowledge.png",
+        "content": "颜色传感器的使用\n变量控制智能车转圈动作\ninitCar()\n记录颜色传感器识别到红色的次数\ninitColorSensor()\n初始化颜色传感器\nif color==红'：\nwhile True:\ncircleNum +=1\ncolor = getColor()\n获取颜色传感器识别结果\n识别到蓝色并且变量等于1，巡逻小圈\nprintPos(color,'中间)\nif color == \"蓝' and circleNum == 1:\nsetPower(0, 0)\n车灯控制\nmove(7)\nturnLeft(90)\n打开车灯\nsetPower(80, 80)\ncarLightOn(车灯序号,车灯颜色)\n变量等于2，停止运行\n关闭车灯\nif circleNum == 2:\ncarLightOff(车灯序号)\nbreak"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY2\\L10\\L10-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块31：巡逻回收车\n模块32：智能巡逻车\nL10-4事与愿违\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡follow :跟随 light :光\non:在…之上 off:离开getColor() 语句\ncarLightOn() 语句\ncarLightOff() 语句\n变量控制原理initColorSensor() 语句\n\n\n--- 第3页 ---\n概念详解\ninitColorSensor() 语句\n•initColorSensor() 语句可以 初始化颜色传感器\n•通过颜色传感器，智能车就可以 识别颜色\n在初始化颜色传感器之前，\n我们还要使用 initCar() 语\n句初始化智能车哦 ~\n初始化智能车\n初始化颜色传感器\n代码示例\ninitCar()\ninitColorSensor()\n\n\n--- 第4页 ---\ngetColor() 语句\n概念详解\ngetColor() 语句可以获取颜色传感器的识别结果。\n'红'可以识别这些颜色\n返回结果 '无'\n颜色传感器识别的结果是 字符串类型 哦~\n'蓝'\n'白''黑'\n代码示例\n获取颜色传感器\n识别结果并赋值\n给变量color\n代码运行结果whileTrue:\ncolor = getColor()\nprintPos(color, '中间')\n\n\n--- 第5页 ---\ncarLightO ff()语句\n代码示例carLightOff(  )概念详解\n灯的序号\n（0表示全部灯） 关闭智能车的 一颗\n车灯或者 全部车灯\n这里的颜色都是字符串，\n需要加上单引号\n打开全部车灯，并显示红色\n让智能车等待 2秒\n关闭全部车灯ifcolor =='红':\nsetPower( 0,0)\ncarLightOn( 0,'红')\ntime.sleep(2)\nmove(9)\ncarLightOff( 0)\nsetPower( 80,80)\n\n\n--- 第6页 ---\ncarLightOn() 语句\ncarLightOn(  ,  )概念详解\n灯的序号\n（0表示全部灯）\n灯的颜色点亮智能车的 一颗\n车灯或者 全部车灯\n1号车灯 2号车灯\n4号车灯 3号车灯车灯可显示的颜色\n红绿蓝粉\n黄紫白灰橙\n在智能车上总共有 4颗灯，分\n布在智能车的车头和车尾\n\n\n--- 第7页 ---\n小\n圈\n巡\n逻大\n圈\n巡\n逻\n变量控制转圈\n使用变量circleNum 记录通过红色区域的次数 ，\n让智能车 在不同圈数的时候进行不同的运动 。\n智能车每经过 1次红色区域，\ncircleNum 的值增加 1\n智能车在识别到蓝色\n并且circleNum 的\n值等于 1时巡逻小圈智能车跑完两圈后停止运动\nifcolor =='蓝'andcircleNum ==1:\nsetPower( 0, 0)\nmove(7)\nturnLeft( 90)\nsetPower( 80, 80)ifcolor =='红':\ncircleNum +=1\nprintPos(circleNum, '右')\nsetPower( 0,0)\ncarLightOn( 0, '红')\nifcircleNum ==2:\nbreak\ntime.sleep(2)\nmove(9)\ncarLightOff( 0)\nsetPower( 80, 80)\n\n\n--- 第8页 ---\n科学探索\n颜色传感器是怎么识\n别物体的颜色的呢？\n红\n颜色传感器\n颜色传感器向物体发射一束\n光，光照射到物体表面后，\n和物体表面不一样的颜色会\n被物体吸收 。\n分析颜色\n 红色\n和物体颜色相同的光会被反\n射回去，当反射光线被颜色\n传感器接收后，颜色传感器\n会自动分析反射回来的光线\n颜色。\n颜色传感器识别颜色的原理\n\n\n--- 第9页 ---\n项目日志\n\n\n--- 第10页 ---\n1、下面哪个命令可以获取颜色传感器的识别结果？（ ）\n动手试一试\nA. initColorSensor()\nB. getColor()\nC. carLightOn()\nD. carLightOff()\n\n\n--- 第11页 ---\n动手试一试\n2、下面哪个命令可以把智能车 的所有车灯都 关闭？（）\nA. carLightOff(1234)\nB. carLightOff(4)\nC. carLightOff(1)\nD. carLightOff(0)\n\n\n--- 第12页 ---\n动手试一试\n3、下面哪个选项正确使用了循线函数 ？（）\nA. followLine()   \nB. followLine[]\nC. followLine\nD. followLine:\n\n\n--- 第13页 ---\n答案解密\n答案： B。\n解析：本题考查的是 获取颜色传感器的识别结果 的方法。\n只有选项 B是正确的，使用 initColorSensor ()语句，可\n以初始化颜色传感器；使用 carLightOn() 语句，可以 点\n亮智能车的一颗车灯或者全部车灯； 使用 carLightOff()\n语句，可以关闭智能车的一颗车灯或者全部车灯。1、下面哪个命令可以获取颜色传感器的识别结果？（ ）\nA. initColorSensor()\nB. getColor()\nC. carLightOn()\nD. carLightOff()\n\n\n--- 第14页 ---\n答案解密\n答案： D。\n解析：本题考查的是 carLightOff ()语句， carLightOff ()\n语句可以关闭智能车上的车灯。 关闭 1颗灯，需要填写车\n灯的序号 ；关闭所有车灯，参数填写 0就可以了。\nA选项参数 错误，B选项只能 关闭 4号车灯， C选项只能 关\n闭1号车灯， 正确答案为 D选项。2、下面哪个命令可以把智能车 的所有车灯都 关闭？（）\nA. carLightOff(1234)\nB. carLightOff(4)\nC. carLightOff(1)\nD. carLightOff(0)\n\n\n--- 第15页 ---\n答案解密\n答案： A。\n解析：本题考查的是循线函数的使用方法。正确格式是循\n线函数的名称加上一对儿小括号 ()，即 followLine() ，正\n确答案为 A选项。3、下面哪个选项正确使用了循线函数 ？（）\nA. followLine()   \nB. followLine[]\nC. followLine\nD. followLine:\n\n"
+      }
+    }
+  },
+  {
     "id": "L11-1",
     "unit": "L11",
     "resources": {
@@ -136,6 +155,35 @@
         "file": "src\\data\\courses\\PY2\\L11\\L11-2\\exercise.pdf",
         "method": "direct",
         "content": "\n--- 第1页 ---\n动手试一试1、下列选项中正确定义函数的是（）A. B.C. D.\n\n\n--- 第2页 ---\n2、执行下列代码，输出结果是（）\n动手试一试\nA. 未成年B. 成年C. x D. 10\n\n\n--- 第3页 ---\n动手试一试参数某果冻某辣条某汉堡某香蕉热量204 KJ408 KJ659 KJ105 KJ口味甜辣咸甜价格6元2元30元2元产地安徽湖南云南云南A. 某果冻B. 某辣条C. 某汉堡D. 某香蕉3、在生活中，一个商品的数据也被称为参数，下列有4种食物的部分参数信息，请帮猴赛雷挑选最适合的食物。（）\n我需要热量在500KJ以下，口味是甜的，价格小于5元，产地是云南的食物。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L11-3",
+    "unit": "L11",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY2\\L11\\L11-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL11-3\nsonar ['sounα:r]\nn.声呐；声波定位仪\n【例句】\nSonar is like eyes in total darkness.\n声呐就像是黑暗中的眼睛\ngoods [gudz]\nn.商品；货物；动产；\n私人财产\n【短语】\nhouseholdgoods家居用品\n【例句】\nThe railroads made transporting goods easier\n铁路使货物运输更加容易。\nw\nOR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY2\\L11\\L11-3\\knowledge.png",
+        "content": "initCar()\n初始化智能车\n控制智能车循线\nwhile True:\n不停地运行\nfollowLine()\n循线函数\ninitCar()\n初始化智能车\n检测地图颜色\ninitColorSensor()\n初始化传感器\nwhile True:\n检测颜色\ncolor = getColor()\nprint(color)\n初始化智能车\ninitCar()\nwhile True:\n超声波避障\ndist = getSonar()\n获得前方距离\nif dist < 10:\nprint（'智能车绕开障碍物'）"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY2\\L11\\L11-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块37：自动物流车\n模块38：智能避障车\nL11-3神秘惊喜\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡 sonar :声纳 goods :货物智能车识别地图颜色\n智能车获取货物\ngetSonar() 语句\n智能车识别全黑路口智能车循线\n\n\n--- 第3页 ---\n智能车循线\n代码示例\n控制智能车循线\n概念详解\nfollowLine ()函数是根据循线的代码创建的一个函\n数，只要调用它，小车就能实现 循线功能 。\n初始化小车 initCar()\nprintPos( '可以出发了 ','中间')\nwaitButton()\nsetPower( 80, 80)\nwhileTrue:\nfollowLine()\n\n\n--- 第4页 ---\n智能车识别地图颜色\n知识复习\n•initColorSensor() 语句可以 初始化颜色传感器 。\n•getColor() 语句可以获取颜色传感器的 识别结果 。\n代\n码\n示\n例\n初始化颜色传感器\n检测地图颜色 ，并保\n存到变量 color中\n打印变量 color 的值初始化智能车 initCar()\ninitColorSensor ()\nprintPos ('可以出发了 ', '中间')\nwaitButton ()\nsetPower (80, 80)\nwhileTrue:\nfollowLine ()\ncolor = getColor ()\nprintPos (color, '中间')\n\n\n--- 第5页 ---\n智能车获取货物\n地图上的第一个 红色区域 ，表\n示的是货物点入口。\n在第一次检测到红色区域的时\n候，需要 先前进一段距离 ，再\n让智能车向右转 90 度。右转\n后前进一段距离，进入取货点。\n规则讲解\n使用变量 num记录经过红色区域的次数 ，让\n智能车在不同的 红色区域 进行不同的运动 。\n使用变量 num记录次数检测智能车是否经过红色区域\n前进 7厘米如果是第一次检测到红色区域\n智能车右转 90度代\n码\n示\n例\nwhileTrue:\nfollowLine()\ncolor =getColor()\nifcolor =='红':\nnum =num +1\nif num ==1:\nmove(7)\nturnRight( 90)\nmove(15)\n\n\n--- 第6页 ---\n智能车获取货物\n•setClaw() 语句可以控制智能车抓夹。 括号中填入 1，\n夹爪关闭，填入 0，夹爪打开。\n•move()语句可以让智能车前进或者后退 固定距离 ，\n括号中为正数表示前进，括号中为负数，表示后退。\n•setPower() 语句可以控制两个电机转动的快慢。知识复习\n夹取货物创建的函数，用于简化代码\n左转 90度后退 15厘米\n保持前进代\n码\n示\n例\ndefgetGoods ():\nmove(7)\nturnRight( 90)\nmove(15)\nsetClaw( 1)\nmove(-15)\nturnLeft( 90)\nsetPower( 80,80)\n\n\n--- 第7页 ---\ngetSonar() 语句\ngetSonar() 语句可以获得 超声波传感器的结果 。这个结\n果就是前方物体与智能车的距离 。\n代\n码\n示\n例\n概念详解\n获得超声波传感器 的结果\n并保存到变量 dist中\n如果障碍物距离小于 10创建的函数，用于实现绕开障碍物的功能 defavoid():\ndist=getSonar()\nprintPos(dist, '下')\nifdist <10:\nturnRight( 90)\nmove(15)\nturnLeft( 90)\nsetPower( 80, 80)\n\n\n--- 第8页 ---\n智能车识别全黑路口\n如果智能车所有循线\n传感器都检测到黑线\n松开智能车夹爪让智能车停下来\n让程序暂停 10秒代\n码\n示\n例\n概念详解\nisAllBlack() 语句可以查看 循线传感器是否都检测到\n黑线。\nwhileTrue:\nifisAllBlack():\nsetPower( 0,0)\nsetClaw( 0)\ntime.sleep( 10)\n\n\n--- 第9页 ---\n科学探索\n超声波传感器是怎样识别到前方的障碍物，并测\n量出到障碍物的距离的？\n蝙蝠可以发出一种人类\n听不到的声音，叫做 超\n声波，当超声波 遇到障\n碍物之后，会反弹回来 。\n蝙蝠听到反弹回来的超\n声波，就知道障碍物的\n位置和距离。超声波传感器，它前面的两个\n像小眼睛一样的东西，是 超声\n波发射器和接收器 。通过发射\n器发射超声波、接收器接收反\n弹回来的超声波，记录超声波\n发出和反弹回来的时间，计算\n出传感器到前方障碍物的距离。\n超声波传感器识别障碍物的原理\n\n\n--- 第10页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY2\\L11\\L11-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、超声波传感器的作用是什么？ （）\nA. 根据超声波 发射和反弹 的时间计算出 与前方\n物体的距离。\nB. 通过人耳能听到的声音探测前方物体的距离。\n\n\n--- 第2页 ---\n动手试一试\n2、下面哪个 语句可以获取超声波传感器的结果？（ ）\nA. getColor()   \nB. setClaw()   \nC. move()                           \nD. getSonar()   \n\n\n--- 第3页 ---\n动手试一试\n3、在智能车避障程序中，如何让智能车在检测到障碍\n物后停下来？（ ）\nA. 使用setPower(0, 0) 语句\nB. 使用setClaw(0) 语句\nC. 使用getSonar() 语句\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY2\\L11\\L11-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案： A。\n解析：本题考查的是超声波传感器 的作用。 超声波传感器\n通过发射超声波并接收其反射回来的声波，计算出与前方\n物体的距离。超声波频率超出人耳可听范围，因此，正确\n答案为 A选项。1、超声波传感器的作用是什么？ （）\nB. 通过人耳能听到的声音探测前方物体的距离。A. 根据超声波 发射和反弹 的时间计算出 与前方\n物体的距离。\n\n\n--- 第2页 ---\n答案解密\n答案： D。\n解析：本题考查的是 获取超声波传感器 结果的方法。\ngetColor() 语句用于获取颜色传感器的检测结果 ，setClaw()\n语句用于控制智能车的夹爪， move()可以让智能车前进固定\n距离，getSonar() 用于获取超声波传感器的测量结果 。所以\n正确答案为 D选项。2、下面哪个 语句可以获取超声波传感器的结果？（ ）\nA. getColor()\nB. setClaw()\nC. move()                     \nD. getSonar()                        \n\n\n--- 第3页 ---\n答案解密\n答案： A。\n解析：本题考查的是 setPower ()语句。 setPower(0, 0) \n可以停止智能车的所有电机，从而使智能车停下来。\nsetClaw(0) 可以打开夹爪，而 getSonar() 用于获取超声\n波传感器的检测结果。 所以正确答案是 A选项。3、在智能车避障程序中，如何让智能车在检测到障碍\n物后停下来？（ ）\nA. 使用setPower(0, 0) 语句\nB. 使用setClaw(0) 语句\nC. 使用getSonar() 语句\n\n"
       }
     }
   },

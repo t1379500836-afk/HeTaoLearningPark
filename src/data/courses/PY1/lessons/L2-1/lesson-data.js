@@ -7,57 +7,47 @@
  * 3. 循环控制 - 条件判断
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取
 export const vocabData = [
   {
-    word: 'while',
-    pronunciation: '[wail]',
-    partOfSpeech: 'conj.',
-    meaning: '当...时候；循环',
+    word: 'hit',
+    pronunciation: '[hit]',
+    partOfSpeech: 'v./n.',
+    meaning: '打；打击；击中；命中',
     level: 'easy',
-    example: 'While the music plays, we dance.',
-    exampleTranslation: '音乐播放时，我们跳舞。',
-    note: 'while loop 循环'
+    example: 'hit song 畅销歌曲',
+    exampleTranslation: '畅销歌曲',
+    note: 'hit 击打'
   },
   {
-    word: 'loop',
-    pronunciation: '[lu:p]',
+    word: 'else',
+    pronunciation: '[els]',
+    partOfSpeech: 'adv./adj.',
+    meaning: '别的；其他的',
+    level: 'easy',
+    example: 'If you are ready, go. Else wait.',
+    exampleTranslation: '如果你准备好了就走，否则等待。',
+    note: 'else 否则（if-else语句）'
+  },
+  {
+    word: 'link',
+    pronunciation: '[liŋk]',
     partOfSpeech: 'n./v.',
-    meaning: '循环；圈；环',
-    level: 'easy',
-    example: 'The program runs in a loop.',
-    exampleTranslation: '程序在循环运行。',
-    note: 'for loop, while loop'
+    meaning: '链接；连接；联系',
+    level: 'medium',
+    example: 'Click the link to open the page.',
+    exampleTranslation: '点击链接打开页面。',
+    note: 'link 链接'
   },
   {
-    word: 'repeat',
-    pronunciation: '[ri\'pi:t]',
+    word: 'replace',
+    pronunciation: "[ri'pleis]",
     partOfSpeech: 'v.',
-    meaning: '重复；重做',
+    meaning: '取代；代替',
     level: 'medium',
-    example: 'Please repeat after me.',
-    exampleTranslation: '请跟我重复一遍。',
-    note: 'repeat 重复执行'
-  },
-  {
-    word: 'condition',
-    pronunciation: '[kən\'diʃən]',
-    partOfSpeech: 'n.',
-    meaning: '条件；状况',
-    level: 'medium',
-    example: 'Check the condition first.',
-    exampleTranslation: '先检查条件。',
-    note: 'if condition 条件判断'
-  },
-  {
-    word: 'forever',
-    pronunciation: '[fə\'revə]',
-    partOfSpeech: 'ad.',
-    meaning: '永远；一直',
-    level: 'hard',
-    example: 'The loop runs forever.',
-    exampleTranslation: '循环一直运行。',
-    note: 'while True 无限循环'
+    example: 'Replace the old with the new.',
+    exampleTranslation: '用新的取代旧的。',
+    note: 'replace 替换'
   }
 ]
 
@@ -200,7 +190,7 @@ export const knowledgePoints = [
       syntax: 'while True:\n    try:\n        主要逻辑\n    except:\n        break',
       example: {
         title: '游戏循环结构',
-        code: 'score = 0\nwhile True:\n    # 游戏主逻辑\n    print(f"分数: {score}")\n    # 检查游戏是否结束\n    if score >= 100:\n        print("胜利！")\n        break\n    score = score + 10',
+        code: 'score = 0\nwhile True:\n    # 游戏主逻辑\n    print("分数: " + str(score))\n    # 检查游戏是否结束\n    if score >= 100:\n        print("胜利！")\n        break\n    score = score + 10',
         output: '分数: 0\n分数: 10\n分数: 20\n...（直到分数达到100）',
         explanation: '这是典型的游戏循环结构。while True保持游戏运行，当达到胜利条件时用break退出。'
       },

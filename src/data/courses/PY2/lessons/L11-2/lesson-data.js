@@ -7,8 +7,9 @@
  * 3. 返回值的两种情况 - 有返回值和无返回值
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'action',
     pronunciation: '[aek-n]',
@@ -36,6 +37,7 @@ export const vocabData = [
     example: 'Push the button to start.',
     exampleTranslation: '按下按钮开始。'
   },
+  // 拓展单词
   {
     word: 'format',
     pronunciation: '[fo-rmaet]',

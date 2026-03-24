@@ -8,8 +8,9 @@
  * 4. 音乐播放 (music.play_once)
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'mouse',
     pronunciation: '[maus]',
@@ -37,6 +38,7 @@ export const vocabData = [
     example: 'The mouse went up.',
     exampleTranslation: '鼠标松开了。'
   },
+  // 拓展单词
   {
     word: 'collision',
     pronunciation: "[kə'liʒn]",

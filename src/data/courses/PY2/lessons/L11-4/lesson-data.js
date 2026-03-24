@@ -8,8 +8,9 @@
  * 4. 综合应用：百兽词典
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'return',
     pronunciation: '[ri-t3:rn]',
@@ -45,6 +46,16 @@ export const vocabData = [
     level: 'medium',
     example: 'Make a wise choice.',
     exampleTranslation: '做出明智的选择。'
+  },
+  // 拓展单词
+  {
+    word: 'random',
+    pronunciation: '[ran-dom]',
+    partOfSpeech: 'adj.',
+    meaning: '随机的；随意的',
+    level: 'medium',
+    example: 'Pick a random card.',
+    exampleTranslation: '随机抽一张卡片。'
   }
 ]
 

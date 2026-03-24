@@ -7,8 +7,9 @@
  * 3. 修改、新增键值对
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'power',
     pronunciation: "['pauə(r)]",
@@ -27,6 +28,7 @@ export const vocabData = [
     example: 'I took notes carefully in the class.',
     exampleTranslation: '我上课认真地做了笔记。'
   },
+  // 拓展单词
   {
     word: 'dictionary',
     pronunciation: "['dikʃəneri]",
@@ -115,12 +117,12 @@ export const knowledgePoints = [
     hard: {
       story: '大师级宝箱管理员！字典不仅存储数据，还能实现快速查找、统计分组、配置管理等高级功能。',
       concept: '字典是哈希表结构，查找速度快，时间复杂度是O(1)。常用于计数器、分组统计、配置管理等场景。',
-      syntax: '# 计数器应用\nfor item in items:\n    counts[item] = counts.get(item, 0) + 1',
+      syntax: '# 计数器应用\nfor item in items:\n    if item in counts:\n        counts[item] += 1\n    else:\n        counts[item] = 1',
       example: {
         title: '统计字符出现次数',
-        code: '# 统计字符串中每个字符出现的次数\ntext = "hello banana"\ncounts = {}\nfor char in text:\n    counts[char] = counts.get(char, 0) + 1\nprint(counts)',
+        code: '# 统计字符串中每个字符出现的次数\ntext = "hello banana"\ncounts = {}\nfor char in text:\n    if char in counts:\n        counts[char] += 1\n    else:\n        counts[char] = 1\nprint(counts)',
         output: "{'h': 1, 'e': 1, 'l': 2, 'o': 2, ' ': 1, 'b': 1, 'a': 3, 'n': 2}",
-        explanation: '用字典统计每个字符出现的次数，get()方法可以在键不存在时返回默认值0，避免报错。'
+        explanation: '用字典统计每个字符出现的次数。先用 in 判断键是否存在，存在就加1，不存在就设为1。'
       },
       practice: [
         {
@@ -128,8 +130,8 @@ export const knowledgePoints = [
           answer: 'O(1)，非常快'
         },
         {
-          question: 'get()方法的作用是什么？',
-          answer: '安全地获取值，键不存在时返回默认值'
+          question: '如何判断一个键是否在字典中？',
+          answer: '用 "键 in 字典名" 判断'
         }
       ]
     }
@@ -397,12 +399,12 @@ export const exercises = [
     question: '编程与数学结合！\n\n统计一句话中每个字母出现的次数，下面哪个代码是正确的？\n\n```python\ntext = "hello banana"\ncounts = {}\nfor letter in text:\n    _________\n\nprint(counts)\n# 期望输出: {"h": 1, "e": 1, "l": 2, "o": 2, ...}\n```\n\n应该填入什么代码？',
     options: [
       'counts[letter] += 1',
-      'counts[letter] = counts.get(letter, 0) + 1',
+      'if letter in counts: counts[letter] += 1 else: counts[letter] = 1',
       'counts.add(letter)',
       'counts.append(letter)'
     ],
     answer: 1, // B
-    explanation: '正确答案：B\n\n**解释：**\n- A选项：如果字母不存在会报错\n- B选项：get()方法在字母不存在时返回0，正确实现计数\n- C选项：add是集合的方法，字典没有\n- D选项：append是列表的方法，字典没有\n\n**数学知识：** 这就是"计数"问题，用字典可以统计任意元素的出现次数。',
+    explanation: '正确答案：B\n\n**解释：**\n- A选项：如果字母不存在会报错（KeyError）\n- B选项：先用 in 判断键是否存在，存在就加1，不存在就设为1\n- C选项：add是集合的方法，字典没有\n- D选项：append是列表的方法，字典没有\n\n**数学知识：** 这就是"计数"问题，用字典可以统计任意元素的出现次数。',
     hint: '第一次遇到某个字母时，字典里还没有这个键'
   }
 ]
@@ -460,7 +462,7 @@ export const typingTemplates = {
     // 复杂的多行代码
     'for key, value in dict.items():',
     'if "key" in dict:\n    value = dict["key"]',
-    'counts[char] = counts.get(char, 0) + 1',
+    'if char in counts:\n    counts[char] += 1\nelse:\n    counts[char] = 1',
     'dict.update({"key1": "value1", "key2": "value2"})',
     'for key in sorted(dict.keys()):'
   ]

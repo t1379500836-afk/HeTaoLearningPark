@@ -264,9 +264,9 @@ export const knowledgePoints = [
       syntax: '# 方式1：直接遍历元素\nfor item in list:\n    print(item)\n\n# 方式2：遍历索引\nfor i in range(len(list)):\n    print(list[i])',
       example: {
         title: '两种遍历方式',
-        code: 'scores = [95, 87, 92]\n\n# 方式1：直接打印\nprint("方式1:")\nfor s in scores:\n    print(s)\n\n# 方式2：带索引\nprint("方式2:")\nfor i in range(len(scores)):\n    print(f"位置{i}: {scores[i]}")',
+        code: 'scores = [95, 87, 92]\n\n# 方式1：直接打印\nprint("方式1:")\nfor s in scores:\n    print(s)\n\n# 方式2：带索引\nprint("方式2:")\nfor i in range(len(scores)):\n    print("位置" + str(i) + ": " + str(scores[i]))',
         output: '方式1:\n95\n87\n92\n方式2:\n位置0: 95\n位置1: 87\n位置2: 92',
-        explanation: '方式1直接获取每个元素值。方式2通过索引访问，可以显示位置信息，还可以修改元素。'
+        explanation: '方式1直接获取每个元素值。方式2通过索引访问，可以显示位置信息，还可以修改元素。str()将数字转为字符串进行拼接。'
       },
       practice: [
         {
@@ -284,10 +284,10 @@ export const knowledgePoints = [
     hard: {
       story: '遍历大师模式！你可以在遍历中进行条件判断、数据统计、查找筛选，实现搜索、过滤、聚合等高级算法！',
       concept: '遍历是处理列表的核心操作。在遍历中可以实现：计数求和（sum/count）、查找最大最小（max/min）、条件过滤（filter）、数据转换（map）等。理解遍历模式是掌握算法的基础。',
-      syntax: '# 统计遍历\ncount = 0\nfor item in list:\n    if condition:\n        count += 1\n\n# 查找遍历\nfor i, item in enumerate(list):\n    if condition:\n        return i, item',
+      syntax: '# 统计遍历\ncount = 0\nfor item in list:\n    if condition:\n        count += 1\n\n# 查找遍历\nfor i in range(len(list)):\n    if condition:\n        print(i, list[i])',
       example: {
         title: '遍历统计和查找',
-        code: 'scores = [85, 92, 78, 95, 88]\n\n# 统计90分以上的数量\ncount = 0\nfor s in scores:\n    if s >= 90:\n        count += 1\nprint(f"90分以上: {count}人")\n\n# 找最高分\nmax_score = scores[0]\nfor s in scores:\n    if s > max_score:\n        max_score = s\nprint(f"最高分: {max_score}")',
+        code: 'scores = [85, 92, 78, 95, 88]\n\n# 统计90分以上的数量\ncount = 0\nfor s in scores:\n    if s >= 90:\n        count += 1\nprint("90分以上: " + str(count) + "人")\n\n# 找最高分\nmax_score = scores[0]\nfor s in scores:\n    if s > max_score:\n        max_score = s\nprint("最高分: " + str(max_score))',
         output: '90分以上: 2人\n最高分: 95',
         explanation: '第一个循环统计90分以上的人数。第二个循环用"打擂台"方式找最高分：遇到更大的就更新max_score。'
       },
@@ -297,8 +297,8 @@ export const knowledgePoints = [
           answer: '设一个计数器，每次满足条件就加1'
         },
         {
-          question: 'enumerate() 函数有什么作用？',
-          answer: '同时获取索引和元素值，如 for i, item in enumerate(list)'
+          question: '如何在遍历时同时获取索引和元素值？',
+          answer: '用range(len())遍历，如 for i in range(len(list)): 然后用list[i]获取元素'
         }
       ]
     }

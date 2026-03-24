@@ -7,57 +7,49 @@
  * 3. else 分支 - 条件不满足时执行
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'if',
     pronunciation: '[if]',
     partOfSpeech: 'conj.',
-    meaning: '如果；假如',
+    meaning: '如果；倘若',
     level: 'easy',
-    example: 'If it rains, I will stay home.',
-    exampleTranslation: '如果下雨，我就待在家里。',
+    example: 'If you do not study hard, you will not get good grades.',
+    exampleTranslation: '如果你不努力学习，你将不会获得好成绩。',
     note: '条件判断关键字'
   },
   {
+    word: 'turn',
+    pronunciation: '[tɜːrn]',
+    partOfSpeech: 'v./n.',
+    meaning: '转向；转弯；转变',
+    level: 'easy',
+    example: 'You need to turn left to avoid the stones.',
+    exampleTranslation: '你需要左转避开石头。',
+    note: 'turn left 向左转；turn right 向右转'
+  },
+  // 拓展单词
+  {
     word: 'else',
     pronunciation: '[els]',
-    partOfSpeech: 'adv.',
-    meaning: '否则；其他',
+    partOfSpeech: 'adv./adj.',
+    meaning: '别的；其他的',
     level: 'easy',
     example: 'If you are ready, go. Else wait.',
     exampleTranslation: '如果你准备好了就走，否则等待。',
-    note: 'else分支关键字'
-  },
-  {
-    word: 'compare',
-    pronunciation: '[kam-pɛr]',
-    partOfSpeech: 'v.',
-    meaning: '比较；对照',
-    level: 'medium',
-    example: 'Compare the two numbers.',
-    exampleTranslation: '比较这两个数字。',
-    note: '比较大小或是否相等'
+    note: 'else 否则（if-else语句）'
   },
   {
     word: 'condition',
-    pronunciation: '[kan-dish-an]',
+    pronunciation: '[kənˈdɪʃn]',
     partOfSpeech: 'n.',
-    meaning: '条件；状况',
+    meaning: '条件；情况；状态',
     level: 'medium',
     example: 'Check the condition first.',
     exampleTranslation: '先检查条件。',
-    note: 'if后面的判断条件'
-  },
-  {
-    word: 'equal',
-    pronunciation: '[i-kwal]',
-    partOfSpeech: 'adj.',
-    meaning: '相等的；相同的',
-    level: 'hard',
-    example: 'These two numbers are equal.',
-    exampleTranslation: '这两个数字相等。',
-    note: '用==表示相等'
+    note: 'if 后面跟的就是条件'
   }
 ]
 

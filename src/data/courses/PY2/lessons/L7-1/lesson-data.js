@@ -7,8 +7,9 @@
  * 3. print进阶 (展开列表)
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'split',
     pronunciation: '[split]',
@@ -27,6 +28,7 @@ export const vocabData = [
     example: 'I encoded my secret message.',
     exampleTranslation: '我对我的秘密信息进行了编码。'
   },
+  // 拓展单词
   {
     word: 'decode',
     pronunciation: "[di:'koud]",
@@ -452,10 +454,10 @@ export const typingTemplates = {
   ],
   hard: [
     // 复杂的多行代码
-    'for i, char in enumerate(s):',
+    'for i in range(len(s)):',
     'for line in lines:\n    print(line.strip())',
     'parts = s.split(",")\nfor p in parts:\n    print(p)',
-    'for i, ch in enumerate(text):\n    print(f"{i}: {ch}")'
+    'for i in range(len(text)):\n    print(i, text[i])'
   ]
 }
 

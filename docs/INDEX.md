@@ -51,7 +51,7 @@ npm run build
 | 编写与课程主题无关的习题 | 参考 OCR 题目风格，根据知识点出**相关**习题 |
 
 **开发规则**：
-1. **单词卡**：OCR 提取的单词必须全部包含，可拓展 4-6 个课程相关单词
+1. **单词卡**：OCR 提取的单词必须全部包含，至少拓展 1 个，共 4-6 个课程相关单词
 2. **知识点**：以 OCR 提取的知识点为核心，按三梯度标准编写
 3. **习题**：参考 OCR 题目风格，根据知识点自主编写 6 道题（2基础 + 2进阶 + 2挑战）
 
@@ -165,7 +165,7 @@ python scripts/extract_content.py PY2
 **数据来源**：从 `src/data/courses/PX/content.json` 中提取对应课次的内容
 
 **规则说明**：
-- ✅ **单词卡**：4-6 个，其中 OCR 提取的单词**必须包含**，其余根据课程主题拓展相关单词
+- ✅ **单词卡**：4-6 个，其中 OCR 提取的单词**必须包含**，至少拓展 1 个相关单词
 - ✅ **知识点**：从 OCR 提取的核心知识点出发，按三梯度标准编写
 - ✅ **习题**：**6 道**（2基础 + 2进阶 + 2挑战），参考 OCR 题目风格，根据知识点自主出题
 
@@ -188,7 +188,7 @@ export const typingWords = {...}         // 打字练习（根据课程主题生
 **开发流程**：
 1. 打开 `src/data/courses/PX/content.json`
 2. 找到对应课次（如 `L5-1`）的内容
-3. 从 `resources.flashcard.content` 中提取单词卡（必须包含）→ 拓展至 4-6 个相关单词
+3. 从 `resources.flashcard.content` 中提取单词卡（必须包含）→ 至少拓展 1 个，共 4-6 个相关单词
 4. 从 `resources.knowledge.content` 中提取核心知识点 → 按三梯度标准编写
 5. 从 `resources.exercise.content` 中查看题目风格 → 根据知识点自主编写 6 道习题
 6. 从 `resources.solution.content` 中参考解析风格
@@ -206,7 +206,7 @@ export const typingWords = {...}         // 打字练习（根据课程主题生
 
 | 数据类型 | 数量要求 | 说明 |
 |---------|---------|------|
-| **单词卡** (vocabData) | **4-6 个** | OCR 提取的单词必须包含，其余根据课程主题拓展 |
+| **单词卡** (vocabData) | **4-6 个** | OCR 提取的单词必须包含，至少拓展 1 个 |
 | **知识点** (knowledgePoints) | 2-4 个 | 每个知识点需要3个难度版本 |
 | **习题** (exercises) | **6 道** | 2基础 + 2进阶 + 2挑战（根据知识点自主出题） |
 | **打字单词** (typingWords) | 每难度 4 个 | easy/medium/hard 各4个 |
@@ -301,7 +301,7 @@ done
 
 | 检查项 | 标准要求 | 检查方法 |
 |--------|----------|----------|
-| 单词卡数量 | 3-5 个 | `vocabData.length` |
+| 单词卡数量 | 4-6 个（必须包含OCR提取的所有单词，每节课至少拓展一个单词） | `vocabData.length` |
 | 知识点数量 | 2-4 个 | `knowledgePoints.length` |
 | 习题总数 | **至少 6 道** | `exercises.length` |
 | easy 习题 | **至少 2 道** | `exercises.filter(e => e.level === 'easy').length` |
@@ -379,7 +379,7 @@ try {
   const hardCount = data.exercises?.filter(e => e.level === 'hard').length || 0;
 
   console.log('【内容数量】');
-  console.log(`  单词卡: ${vocabCount} ${vocabCount >= 3 ? '✓' : '✗ (要求: 3-5个)'}`);
+  console.log(`  单词卡: ${vocabCount} ${vocabCount >= 4 && vocabCount <= 6 ? '✓' : '✗ (要求: 4-6个)'}`);
   console.log(`  知识点: ${kpCount} ${kpCount >= 2 ? '✓' : '✗ (要求: 2-4个)'}`);
   console.log(`  习题总数: ${exCount} ${exCount >= 6 ? '✓' : '✗ (要求: ≥6道)'}`);
   console.log(`  🟢 easy: ${easyCount} ${easyCount >= 2 ? '✓' : '✗ (要求: ≥2道)'}`);
@@ -444,7 +444,7 @@ done
 
 | 内容类型 | 核对标准 | 说明 |
 |---------|---------|------|
-| **单词卡** (vocabData) | 图片中的单词必须包含，可拓展至 3-5 个 | "课程相关的英文单词"，不限于图片内容 |
+| **单词卡** (vocabData) | 图片中的单词必须包含，至少拓展 1 个，共 4-6 个 | "课程相关的英文单词"，不限于图片内容 |
 | **知识点** (knowledgePoints) | 图片中的知识点必须包含，可拓展至 2-4 个 | 知识点是课程核心，应覆盖并合理拓展 |
 
 #### 核对方法

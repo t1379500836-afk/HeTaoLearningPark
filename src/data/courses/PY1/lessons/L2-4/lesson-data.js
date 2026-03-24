@@ -7,57 +7,49 @@
  * 3. 重复画图 - 用循环简化代码
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
+  {
+    word: 'online',
+    pronunciation: "[ˌɒn'laɪn]",
+    partOfSpeech: 'adj./adv.',
+    meaning: '联机的；在线的；在网上地',
+    level: 'easy',
+    example: 'This game has many online users.',
+    exampleTranslation: '这个游戏有很多在线用户。',
+    note: 'online user 在线用户'
+  },
+  {
+    word: 'judge',
+    pronunciation: '[dʒʌdʒ]',
+    partOfSpeech: 'n./v.',
+    meaning: '法官；裁判；内行；判断；评判',
+    level: 'medium',
+    example: 'My judge for you is 100 points.',
+    exampleTranslation: '我给你的评价是100分。',
+    note: 'online judge 线上测评（OJ）'
+  },
+  // 拓展单词 - OJ 相关
+  {
+    word: 'submit',
+    pronunciation: '[səb-mit]',
+    partOfSpeech: 'v.',
+    meaning: '提交；呈交',
+    level: 'medium',
+    example: 'Submit your code to the OJ system.',
+    exampleTranslation: '把你的代码提交到OJ系统。',
+    note: 'submit code 提交代码'
+  },
   {
     word: 'turtle',
-    pronunciation: '[ter-tl]',
+    pronunciation: "['tɜːtl]",
     partOfSpeech: 'n.',
     meaning: '海龟；乌龟',
     level: 'easy',
-    example: 'The turtle moves slowly.',
-    exampleTranslation: '海龟移动得很慢。',
-    note: 'turtle graphics 海龟绘图'
-  },
-  {
-    word: 'forward',
-    pronunciation: '[for-werd]',
-    partOfSpeech: 'adv./adj.',
-    meaning: '向前；前进',
-    level: 'easy',
-    example: 'Move forward 100 steps.',
-    exampleTranslation: '向前移动100步。',
-    note: 'forward() 前进命令'
-  },
-  {
-    word: 'backward',
-    pronunciation: '[bak-ward]',
-    partOfSpeech: 'adv./adj.',
-    meaning: '向后；后退',
-    level: 'easy',
-    example: 'Go backward to the start.',
-    exampleTranslation: '向后退回到起点。',
-    note: 'backward() 后退命令'
-  },
-  {
-    word: 'direction',
-    pronunciation: '[di-rek-shn]',
-    partOfSpeech: 'n.',
-    meaning: '方向；指导',
-    level: 'medium',
-    example: 'Change the direction.',
-    exampleTranslation: '改变方向。',
-    note: 'direction 方向'
-  },
-  {
-    word: 'degrees',
-    pronunciation: '[di-gri:z]',
-    partOfSpeech: 'n.',
-    meaning: '度；度数',
-    level: 'medium',
-    example: 'Turn 90 degrees.',
-    exampleTranslation: '转90度。',
-    note: 'degrees 度数'
+    example: 'The turtle can draw shapes.',
+    exampleTranslation: '海龟能画出各种形状。',
+    note: 'turtle 海龟绘图模块'
   }
 ]
 

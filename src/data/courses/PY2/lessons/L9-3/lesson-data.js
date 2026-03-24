@@ -6,8 +6,9 @@
  * 2. 枚举法（循环遍历逐个查，条件满足选出它）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'mask',
     pronunciation: '[maesk]',
@@ -43,6 +44,16 @@ export const vocabData = [
     level: 'medium',
     example: 'We play in the park.',
     exampleTranslation: '我们在公园里玩。'
+  },
+  // 拓展单词
+  {
+    word: 'search',
+    pronunciation: '[serch]',
+    partOfSpeech: 'v.',
+    meaning: '搜索；搜寻；查找',
+    level: 'medium',
+    example: 'Search for the answer.',
+    exampleTranslation: '搜寻答案。'
   }
 ]
 

@@ -6,14 +6,14 @@
  * 2. 变量计数 - 在循环中对变量进行连续修改
  */
 
-// 单词卡数据（源文件 + 拓展词汇）
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // 源文件单词
+  // OCR 提取的单词
   {
     word: 'move',
     pronunciation: '[mu:v]',
     partOfSpeech: 'v./n.',
-    meaning: '移动；搬家；调动',
+    meaning: '移动；搬家；调动；使感动',
     level: 'easy',
     example: 'The cat moves slowly.',
     exampleTranslation: '猫慢慢移动。',
@@ -21,7 +21,7 @@ export const vocabData = [
   },
   {
     word: 'cat',
-    pronunciation: '[kaet]',
+    pronunciation: '[kæt]',
     partOfSpeech: 'n.',
     meaning: '猫；猫科动物',
     level: 'easy',
@@ -30,35 +30,24 @@ export const vocabData = [
     note: ''
   },
   {
+    word: 'dog',
+    pronunciation: '[dɒɡ]',
+    partOfSpeech: 'n./v.',
+    meaning: '狗；公狗；困扰；纠缠；跟踪',
+    level: 'easy',
+    example: 'The dog is running.',
+    exampleTranslation: '狗在跑。',
+    note: ''
+  },
+  {
     word: 'total',
-    pronunciation: "['teut(e)l]",
-    partOfSpeech: 'adj./n.',
-    meaning: '总的；总计；总数',
+    pronunciation: "['təʊt(ə)l]",
+    partOfSpeech: 'adj./n./v.',
+    meaning: '总的；彻底的；总数；计算...的总和',
     level: 'medium',
     example: 'The total is 100.',
     exampleTranslation: '总数是100。',
     note: 'in total 总共'
-  },
-  // 拓展编程词汇（变量修改相关）
-  {
-    word: 'value',
-    pronunciation: '[vælju:]',
-    partOfSpeech: 'n.',
-    meaning: '值；数值',
-    level: 'medium',
-    example: 'The value of x is 5.',
-    exampleTranslation: 'x的值是5。',
-    note: '编程中常用词汇'
-  },
-  {
-    word: 'count',
-    pronunciation: '[kaunt]',
-    partOfSpeech: 'v./n.',
-    meaning: '计数；数数；总数',
-    level: 'easy',
-    example: 'Count the numbers from 1 to 10.',
-    exampleTranslation: '数1到10的数字。',
-    note: 'count 计数器'
   }
 ]
 

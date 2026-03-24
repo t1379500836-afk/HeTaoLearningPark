@@ -7,8 +7,9 @@
  * 3. 排序算法思想（选择排序）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'sum',
     pronunciation: '[sʌm]',
@@ -18,6 +19,7 @@ export const vocabData = [
     example: 'The sum of 5 and 3 is 8.',
     exampleTranslation: '5 和 3 的和是 8。'
   },
+  // 拓展单词
   {
     word: 'sort',
     pronunciation: '[sɔːrt]',

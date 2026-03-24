@@ -209,7 +209,7 @@ export const knowledgePoints = [
       syntax: '# 队列（先进先出）\nqueue = []\nqueue.append(item)    # 入队（末尾）\nitem = queue.pop(0)   # 出队（开头）\n\n# 栈（后进先出）\nstack = []\nstack.append(item)    # 压栈\nitem = stack.pop()     # 出栈',
       example: {
         title: '实现队列和栈',
-        code: '# 队列：排队买票（先进先出）\nqueue = []\nqueue.append("小明")  # 小明先来\nqueue.append("小红")  # 小红第二\nprint("队列:", queue)\n\n# 服务第一个\nserved = queue.pop(0)\nprint(f"服务: {served}")\nprint("剩余:", queue)\n\n# 对比栈：叠盘子（后进先出）\nstack = []\nstack.append("盘子1")\nstack.append("盘子2")\nprint(f"取出: {stack.pop()}")',
+        code: '# 队列：排队买票（先进先出）\nqueue = []\nqueue.append("小明")  # 小明先来\nqueue.append("小红")  # 小红第二\nprint("队列:", queue)\n\n# 服务第一个\nserved = queue.pop(0)\nprint("服务: " + served)\nprint("剩余:", queue)\n\n# 对比栈：叠盘子（后进先出）\nstack = []\nstack.append("盘子1")\nstack.append("盘子2")\nprint("取出: " + stack.pop())',
         output: "队列: ['小明', '小红']\n服务: 小明\n剩余: ['小红']\n取出: 盘子2",
         explanation: '队列用 pop(0) 从开头取出，先来的先服务。栈用 pop() 从末尾取出，后来的先取。这是两种基本的数据结构模式。'
       },

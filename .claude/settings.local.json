@@ -74,7 +74,10 @@
       "Bash(for file in src/data/courses/PY1/lessons/L5-*/lesson-data.js)",
       "Bash(do echo \"=== 检查: $file ===\")",
       "Bash(do echo \"=== $file ===\")",
-      "Bash(head -n 2 \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/PY1/lessons/L5-\"*/lesson-data.js \")"
+      "Bash(head -n 2 \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/PY1/lessons/L5-\"*/lesson-data.js \")",
+      "Bash(mv \"L10-4-单词卡.png\" \"flashcard.png\")",
+      "Bash(mv \"L10-4知识点图.png\" \"knowledge.png\")",
+      "Bash(mv \"L10-4-硬件前置版讲义.pdf\" \"lecture.pdf\")"
     ]
   }
 }

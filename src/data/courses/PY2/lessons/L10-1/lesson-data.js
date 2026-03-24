@@ -7,8 +7,9 @@
  * 3. 向二维列表添加元素
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'tool',
     pronunciation: '[tu:l]',
@@ -44,6 +45,16 @@ export const vocabData = [
     level: 'hard',
     example: 'Please write on the board.',
     exampleTranslation: '请在板上写字。'
+  },
+  // 拓展单词
+  {
+    word: 'grid',
+    pronunciation: '[grid]',
+    partOfSpeech: 'n.',
+    meaning: '网格；格栅',
+    level: 'medium',
+    example: 'Draw a grid on the paper.',
+    exampleTranslation: '在纸上画一个网格。'
   }
 ]
 

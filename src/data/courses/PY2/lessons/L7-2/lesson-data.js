@@ -8,8 +8,9 @@
  * 4. float命令（数据类型转换）
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'weather',
     pronunciation: "['weðər]",
@@ -28,6 +29,7 @@ export const vocabData = [
     example: 'They will neither sink nor float.',
     exampleTranslation: '他们既不会下沉也不会浮上来。'
   },
+  // 拓展单词
   {
     word: 'maximum',
     pronunciation: "['mæksɪməm]",
@@ -269,18 +271,18 @@ export const knowledgePoints = [
     // 🔴 挑战版（5-6年级）
     hard: {
       story: '高级探测器！你可以用 index + 循环找到所有出现的位置，或者处理复杂的查找逻辑。',
-      concept: '手动实现查找所有位置的算法：遍历列表，用 enumerate 同时获取索引和值，收集所有匹配的位置。',
-      syntax: '# 找所有位置\npositions = [i for i, x in enumerate(list) if x == target]',
+      concept: '手动实现查找所有位置的算法：遍历列表，用 range(len()) 获取索引，收集所有匹配的位置。',
+      syntax: '# 找所有位置\npositions = [i for i in range(len(list)) if list[i] == target]',
       example: {
         title: '找出所有 5 的位置',
-        code: '# 有重复元素的列表\nnumbers = [1, 0, 5, 2, 5, 12]\ntarget = 5\n\n# 找到所有 5 的位置\npositions = []\nfor i, num in enumerate(numbers):\n    if num == target:\n        positions.append(i)\n\nprint("5 出现在索引:", positions)',
+        code: '# 有重复元素的列表\nnumbers = [1, 0, 5, 2, 5, 12]\ntarget = 5\n\n# 找到所有 5 的位置\npositions = []\nfor i in range(len(numbers)):\n    if numbers[i] == target:\n        positions.append(i)\n\nprint("5 出现在索引:", positions)',
         output: '5 出现在索引: [2, 4]',
-        explanation: 'enumerate 同时返回索引和值，我们遍历整个列表，把所有匹配的位置收集起来。'
+        explanation: 'range(len(numbers)) 获取索引范围，我们遍历每个索引，把所有匹配的位置收集起来。'
       },
       practice: [
         {
           question: '如何用列表生成式实现同样的功能？',
-          answer: '[i for i, x in enumerate(list) if x == target]'
+          answer: '[i for i in range(len(list)) if list[i] == target]'
         },
         {
           question: '如果要从后往前找，用什么命令？',
@@ -509,7 +511,7 @@ export const lessonMeta = {
 export const typingWords = {
   easy: ['max', 'min', 'list', 'index', 'float'],
   medium: ['weather', 'maximum', 'minimum', 'result', 'number'],
-  hard: ['enumerate', 'iteration', 'conversion', 'algorithm', 'position']
+  hard: ['iteration', 'conversion', 'algorithm', 'position', 'search']
 }
 
 // 代码模板练习（按难度分组）
@@ -537,7 +539,7 @@ export const typingTemplates = {
     // 复杂的多行代码
     'result = max([1, 2, 3, 4, 5])',
     'numbers = [float(x) for x in ["1", "2", "3"]]',
-    'for i, num in enumerate(numbers):',
+    'for i in range(len(numbers)):',
     'if value in list:\n    index = list.index(value)',
     'maximum = max([max(x) for x in matrix])'
   ]

@@ -7,8 +7,9 @@
  * 3. 多参函数 - 多个参数的使用
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'define',
     pronunciation: '[di-fain]',
@@ -44,6 +45,16 @@ export const vocabData = [
     level: 'medium',
     example: 'How much should I pay for this?',
     exampleTranslation: '这个我该付多少钱？'
+  },
+  // 拓展单词
+  {
+    word: 'function',
+    pronunciation: '[fank-shan]',
+    partOfSpeech: 'n.',
+    meaning: '函数；功能；作用',
+    level: 'medium',
+    example: 'This function calculates the sum.',
+    exampleTranslation: '这个函数计算总和。'
   }
 ]
 

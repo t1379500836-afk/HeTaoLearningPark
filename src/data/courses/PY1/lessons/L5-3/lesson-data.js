@@ -202,9 +202,9 @@ export const knowledgePoints = [
       syntax: "# 校验码计算（简化版）\nweights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]\nchecksum = sum(int(id[i]) * weights[i] for i in range(17)) % 11",
       example: {
         title: '完整身份证信息提取',
-        code: "def parse_id(id):\n    region = id[:6]\n    birth = id[6:14]\n    gender = '男' if int(id[16]) % 2 == 1 else '女'\n    return f'地区：{region}，生日：{birth}，性别：{gender}'\n\nprint(parse_id('510603200012301234'))",
-        output: '地区：510603，生日：20001230，性别：男',
-        explanation: '使用切片提取各个部分，并判断性别，返回完整的身份证信息。'
+        code: "id = '510603200012301234'\n\n# 提取各部分信息\nregion = id[:6]\nbirth = id[6:14]\ngender_code = int(id[16])\n\n# 判断性别\nif gender_code % 2 == 1:\n    gender = '男'\nelse:\n    gender = '女'\n\n# 输出结果\nprint('地区：' + region)\nprint('生日：' + birth)\nprint('性别：' + gender)",
+        output: '地区：510603\n生日：20001230\n性别：男',
+        explanation: '使用切片提取各个部分信息。用if-else判断性别：性别码为奇数是男，偶数是女。最后用字符串拼接输出结果。'
       },
       practice: [
         {
