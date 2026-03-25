@@ -47,7 +47,8 @@ hetao-learning-park/
     │   ├── PracticeView.vue        # 课后练习（开发中）
     │   ├── TypingView.vue          # 独立打字练习
     │   ├── PythonIDEView.vue       # 独立Python编辑器
-    │   └── YCLZoneView.vue         # YCL专区（开发中）
+    │   ├── YCLZoneView.vue         # YCL专区（开发中）
+    │   └── ContactView.vue         # 联系作者页面
     ├── components/
     │   ├── shared/                 # 共享组件
     │   │   ├── Navigation.vue      # 导航栏
@@ -118,6 +119,7 @@ hetao-learning-park/
 | `/python` | PythonIDEView | 独立Python编辑器 | [router/index.js](../src/router/index.js) |
 | `/ycl` | YCLZoneView | YCL专区 | [router/index.js](../src/router/index.js) |
 | `/locked` | StageLocked | 阶段锁定提示页 | [router/index.js](../src/router/index.js) |
+| `/contact` | ContactView | 联系作者页面 | [router/index.js](../src/router/index.js) |
 
 > **注意**：以上路由都支持 `p1/`、`py2/`、`python3/` 三个前缀版本
 

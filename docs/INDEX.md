@@ -539,6 +539,9 @@ done
 | `/lesson/:stage/:unit/:lesson` | LessonView | 课时主页面 |
 | `/typing` | TypingView | 独立打字练习 |
 | `/python` | PythonIDEView | 独立Python编辑器 |
+| `/ycl` | YCLZoneView | YCL专区 |
+| `/contact` | ContactView | 联系作者 |
+| `/locked` | StageLocked | 阶段锁定提示 |
 
 ---
 

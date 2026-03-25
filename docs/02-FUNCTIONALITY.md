@@ -255,7 +255,7 @@ npm run build
 | 核心组件 | CodeEditor、TypingPractice、Navigation、HeroSection、Footer |
 | 打字练习 | 英文打字（单词+代码模式）、中文打字（古诗+成语）、代码模板池 |
 | 虚拟键盘 | QWERTY 5行布局，实时按键反馈，多端适配 |
-| 路由系统 | 10个路由，9个页面视图 |
+| 路由系统 | 11个路由，10个页面视图 |
 | 课程体系框架 | 阶段 → 单元 → 课时选择流程 |
 | 阶段锁定功能 | stages.config.js 配置系统 |
 | 数据驱动架构 | lesson-data.js 数据结构 |

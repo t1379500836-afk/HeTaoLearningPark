@@ -54,6 +54,11 @@ const baseRoutes = [
     path: '/locked',
     name: 'locked',
     component: () => import('@/components/shared/StageLocked.vue')
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('@/views/ContactView.vue')
   }
 ]
 
@@ -118,6 +123,12 @@ function createPrefixedRoutes(prefix) {
       path: `/${prefix}/locked`,
       name: `${prefix}-locked`,
       component: () => import('@/components/shared/StageLocked.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/contact`,
+      name: `${prefix}-contact`,
+      component: () => import('@/views/ContactView.vue'),
       props: { prefix }
     }
   ]
