@@ -62,29 +62,30 @@ async function loadLessons() {
   const unitId = level.value
   const lessonIds = ['1', '2', '3', '4'].map(num => `${unitId}-${num}`)
 
-  const loadedLessons = []
-
-  for (const lessonId of lessonIds) {
+  // 并行加载四个课时的元数据
+  const loadPromises = lessonIds.map(async (lessonId) => {
     try {
-      // 使用相对路径而不是 @ 别名
       const module = await import(
         `../data/courses/${stage.value}/lessons/${lessonId}/lesson-data.js`
       )
       const meta = module.lessonMeta
-      loadedLessons.push({
+      return {
         id: lessonId,
         title: meta.title,
         description: meta.subtitle
-      })
+      }
     } catch (error) {
       // 如果 lesson-data.js 不存在，使用默认值
-      loadedLessons.push({
+      return {
         id: lessonId,
         title: `课时 ${lessonId.split('-')[1]}`,
         description: '知识点讲解、打字练习与课后习题'
-      })
+      }
     }
-  }
+  })
+
+  // 并行执行所有加载请求
+  const loadedLessons = await Promise.all(loadPromises)
 
   lessons.value = loadedLessons
   isLoading.value = false

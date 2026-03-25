@@ -40,7 +40,7 @@ hetao-learning-park/
     │   └── index.js                # Vue Router路由配置
     ├── views/                      # 页面级组件
     │   ├── HomeView.vue            # 首页（快速入口卡片）
-    │   ├── CourseLevelsView.vue    # 阶段选择（PY1/PY2/PY3）
+    │   ├── CourseLevelsView.vue    # 课程体系（横向轮播：图形化→Python→C++）
     │   ├── StageView.vue           # Level选择（L1-L18）
     │   ├── UnitView.vue            # 课时选择（L1-1 ~ L1-4）
     │   ├── LessonView.vue          # 课时主页面
@@ -110,7 +110,7 @@ hetao-learning-park/
 | 路由 | 组件 | 说明 | 配置文件 |
 |------|------|------|----------|
 | `/` | HomeView | 首页（快速入口卡片） | [router/index.js](../src/router/index.js) |
-| `/levels` | CourseLevelsView | 阶段选择（PY1/PY2/PY3） | [router/index.js](../src/router/index.js) |
+| `/levels` | CourseLevelsView | 课程体系（横向轮播：图形化→Python→C++） | [router/index.js](../src/router/index.js) |
 | `/levels/:stage` | StageView | Level选择（L1-L18），含解锁检查 | [router/index.js](../src/router/index.js) |
 | `/levels/:stage/:unit` | UnitView | 课时选择（L1-1 ~ L1-4） | [router/index.js](../src/router/index.js) |
 | `/lesson/:stage/:unit/:lesson` | LessonView | 课时主页面 | [router/index.js](../src/router/index.js) |
@@ -249,6 +249,42 @@ export function isStageAccessible(stageId, prefix) { ... }
 
 // 构建带前缀的路由路径
 export function prefixedPath(prefix, path) { ... }
+```
+
+### useLoading.js
+
+全局页面加载动画状态管理，控制路由切换时的 loading 显示。
+
+**文件**: [composables/useLoading.js](../src/composables/useLoading.js)
+
+```javascript
+// 显示 loading 动画
+export function showLoading(text = '加载中...')
+
+// 隐藏 loading 动画
+export function hideLoading()
+
+// 通知页面已准备好（由页面组件调用）
+export function notifyPageReady()
+
+// 等待页面就绪（由路由守卫调用）
+export function waitForPageReady()
+
+// 获取 loading 状态的 composable
+export function useLoading()
+```
+
+**使用示例**：
+
+```javascript
+// 在页面组件中通知加载完成
+import { notifyPageReady } from '@/composables/useLoading.js'
+
+watch(isLoading, (loading) => {
+  if (!loading) {
+    nextTick(() => notifyPageReady())
+  }
+})
 ```
 
 ---
