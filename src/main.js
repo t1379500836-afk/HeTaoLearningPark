@@ -20,9 +20,12 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-// 路由切换完成后隐藏 loading
+// 路由切换完成后隐藏 loading（延迟等待页面内容渲染）
 router.afterEach(() => {
-  hideLoading()
+  // 延迟 800ms 隐藏，确保异步数据加载和页面渲染完成
+  setTimeout(() => {
+    hideLoading()
+  }, 800)
 })
 
 const app = createApp(App)

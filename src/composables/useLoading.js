@@ -12,7 +12,7 @@ const loadingText = ref('加载中...')
 
 // 最小显示时间控制
 let loadingStartTime = 0
-const MIN_DISPLAY_TIME = 300 // 最小显示 300ms，避免闪烁
+const MIN_DISPLAY_TIME = 500 // 最小显示 500ms，确保动画流畅
 
 /**
  * 显示全局 loading
