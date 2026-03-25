@@ -60,6 +60,22 @@ const skulptLoadError = ref('')
 let cmEditor = null
 const codeTextarea = ref(null)
 
+// CDN 源列表（按优先级排序，国内优先）
+const SKULPT_CDNS = [
+  {
+    core: 'https://unpkg.com/skulpt@1.2.0/dist/skulpt.min.js',
+    stdlib: 'https://unpkg.com/skulpt@1.2.0/dist/skulpt-stdlib.js'
+  },
+  {
+    core: 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js',
+    stdlib: 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js'
+  },
+  {
+    core: 'https://cdnjs.cloudflare.com/ajax/libs/skulpt/1.2.0/skulpt.min.js',
+    stdlib: 'https://cdnjs.cloudflare.com/ajax/libs/skulpt/1.2.0/skulpt-stdlib.js'
+  }
+]
+
 // 代码模板
 const templates = [
   {
@@ -90,43 +106,83 @@ const isRunning = ref(false)
 const output = ref('')
 const hasError = ref(false)
 
-// 加载 Skulpt
+// 加载单个脚本（带超时）
+const loadScript = (src, timeout = 5000) => {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = src
+
+    const timer = setTimeout(() => {
+      script.remove()
+      reject(new Error(`加载超时 (${timeout}ms)`))
+    }, timeout)
+
+    script.onload = () => {
+      clearTimeout(timer)
+      resolve()
+    }
+
+    script.onerror = () => {
+      clearTimeout(timer)
+      script.remove()
+      reject(new Error('加载失败'))
+    }
+
+    document.head.appendChild(script)
+  })
+}
+
+// 加载 Skulpt（支持 CDN 降级）
 const loadSkulpt = async () => {
-  try {
-    // 动态加载 Skulpt 核心库
-    if (typeof window.Sk === 'undefined') {
-      await new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js'
-        script.onload = resolve
-        script.onerror = reject
-        document.head.appendChild(script)
-      })
-    }
-
-    // 加载 Skulpt 标准库 - 等待 builtinFiles 初始化
-    if (typeof window.Sk.builtinFiles === 'undefined') {
-      await new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js'
-        script.onload = resolve
-        script.onerror = reject
-        document.head.appendChild(script)
-      })
-
-      // 等待 builtinFiles 实际初始化
-      let retries = 0
-      while (typeof window.Sk.builtinFiles === 'undefined' && retries < 50) {
-        await new Promise(r => setTimeout(r, 100))
-        retries++
-      }
-    }
-
+  // 如果已加载，直接返回
+  if (typeof window.Sk !== 'undefined' && typeof window.Sk.builtinFiles !== 'undefined') {
     skulptLoading.value = false
-  } catch (error) {
-    skulptLoadError.value = `Python 环境加载失败: ${error.message}`
-    skulptLoading.value = false
+    return
   }
+
+  let lastError = null
+
+  // 依次尝试各个 CDN 源
+  for (let i = 0; i < SKULPT_CDNS.length; i++) {
+    const cdn = SKULPT_CDNS[i]
+    try {
+      console.log(`正在尝试加载 Skulpt (CDN ${i + 1}/${SKULPT_CDNS.length})...`)
+
+      // 加载核心库
+      if (typeof window.Sk === 'undefined') {
+        await loadScript(cdn.core)
+      }
+
+      // 加载标准库
+      if (typeof window.Sk.builtinFiles === 'undefined') {
+        await loadScript(cdn.stdlib)
+
+        // 等待 builtinFiles 初始化
+        let retries = 0
+        while (typeof window.Sk.builtinFiles === 'undefined' && retries < 30) {
+          await new Promise(r => setTimeout(r, 100))
+          retries++
+        }
+
+        if (typeof window.Sk.builtinFiles === 'undefined') {
+          throw new Error('标准库初始化失败')
+        }
+      }
+
+      console.log('Skulpt 加载成功')
+      skulptLoading.value = false
+      return
+    } catch (error) {
+      console.warn(`CDN ${i + 1} 加载失败:`, error.message)
+      lastError = error
+      // 继续尝试下一个 CDN
+    }
+  }
+
+  // 所有 CDN 都失败
+  skulptLoadError.value = `Python 环境加载失败，请检查网络连接后刷新页面重试`
+  skulptLoading.value = false
+  console.error('所有 CDN 源均加载失败:', lastError)
 }
 
 // 初始化 CodeMirror

@@ -5,12 +5,18 @@
       <RouterView />
     </main>
     <Footer />
+    <!-- 全局 Loading 动画覆盖层 -->
+    <LoadingOverlay :is-loading="isLoading" :text="loadingText" />
   </div>
 </template>
 
 <script setup>
 import Navigation from './components/shared/Navigation.vue'
 import Footer from './components/shared/Footer.vue'
+import LoadingOverlay from './components/shared/LoadingOverlay.vue'
+import { useLoading } from './composables/useLoading.js'
+
+const { isLoading, loadingText } = useLoading()
 </script>
 
 <style scoped>
