@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/styles/variables.css'
-import { showLoading, hideLoading } from './composables/useLoading.js'
+import { showLoading, waitForPageReady } from './composables/useLoading.js'
 
 // CodeMirror JS (全局引入，用于Python编辑器)
 import 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js'
@@ -20,12 +20,9 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-// 路由切换完成后隐藏 loading（延迟等待页面内容渲染）
+// 路由切换完成后等待页面就绪
 router.afterEach(() => {
-  // 延迟 800ms 隐藏，确保异步数据加载和页面渲染完成
-  setTimeout(() => {
-    hideLoading()
-  }, 800)
+  waitForPageReady()
 })
 
 const app = createApp(App)

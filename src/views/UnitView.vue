@@ -40,10 +40,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getStageName, getUnitInfo } from '@/config/courses.config.js'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
+import { notifyPageReady } from '@/composables/useLoading.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -87,6 +88,11 @@ async function loadLessons() {
 
   lessons.value = loadedLessons
   isLoading.value = false
+
+  // 通知全局 loading 可以隐藏了
+  nextTick(() => {
+    notifyPageReady()
+  })
 }
 
 onMounted(() => {

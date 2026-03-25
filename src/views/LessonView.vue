@@ -179,6 +179,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useLessonData } from '@/composables/useLessonData.js'
 import { getStageName, getUnitInfo } from '@/config/courses.config.js'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
+import { notifyPageReady } from '@/composables/useLoading.js'
 import FlashcardDisplay from '@/components/course/FlashcardDisplay.vue'
 import KnowledgeCard from '@/components/course/KnowledgeCard.vue'
 import ExerciseCard from '@/components/course/ExerciseCard.vue'
@@ -386,6 +387,8 @@ watch(isLoading, (newVal) => {
   if (!newVal) {
     nextTick(() => {
       scrollToTop()
+      // 通知全局 loading 可以隐藏了
+      notifyPageReady()
     })
   }
 })

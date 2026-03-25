@@ -10,9 +10,14 @@ import { ref } from 'vue'
 const isLoading = ref(false)
 const loadingText = ref('加载中...')
 
-// 最小显示时间控制
-let loadingStartTime = 0
-const MIN_DISPLAY_TIME = 500 // 最小显示 500ms，确保动画流畅
+// 页面就绪状态
+const pageReady = ref(false)
+let readyTimer = null
+let timeoutTimer = null
+
+// 时间配置
+const DEFAULT_DELAY = 500    // 默认延迟隐藏时间
+const TIMEOUT = 5000         // 超时保护时间
 
 /**
  * 显示全局 loading
@@ -21,31 +26,51 @@ const MIN_DISPLAY_TIME = 500 // 最小显示 500ms，确保动画流畅
 export function showLoading(text = '加载中...') {
   loadingText.value = text
   isLoading.value = true
-  loadingStartTime = Date.now()
+  pageReady.value = false
+
+  // 清除之前的定时器
+  if (readyTimer) clearTimeout(readyTimer)
+  if (timeoutTimer) clearTimeout(timeoutTimer)
+
+  // 设置超时保护
+  timeoutTimer = setTimeout(() => {
+    hideLoading()
+  }, TIMEOUT)
 }
 
 /**
- * 隐藏全局 loading（保证最小显示时间）
+ * 隐藏全局 loading
  */
 export function hideLoading() {
-  const elapsed = Date.now() - loadingStartTime
-  const remainingTime = MIN_DISPLAY_TIME - elapsed
-
-  if (remainingTime > 0) {
-    // 还没达到最小显示时间，延迟隐藏
-    setTimeout(() => {
-      isLoading.value = false
-    }, remainingTime)
-  } else {
-    isLoading.value = false
-  }
+  if (readyTimer) clearTimeout(readyTimer)
+  if (timeoutTimer) clearTimeout(timeoutTimer)
+  isLoading.value = false
 }
 
 /**
- * 强制立即隐藏（不等待最小显示时间）
+ * 通知页面已准备好（由页面组件调用）
  */
-export function forceHideLoading() {
-  isLoading.value = false
+export function notifyPageReady() {
+  pageReady.value = true
+  hideLoading()
+}
+
+/**
+ * 开始等待页面就绪
+ * - 如果页面调用 notifyPageReady()，立即隐藏
+ * - 否则在 DEFAULT_DELAY 后自动隐藏
+ */
+export function waitForPageReady() {
+  // 如果页面已经准备好，直接隐藏
+  if (pageReady.value) {
+    hideLoading()
+    return
+  }
+
+  // 否则设置默认延迟
+  readyTimer = setTimeout(() => {
+    hideLoading()
+  }, DEFAULT_DELAY)
 }
 
 /**
@@ -56,8 +81,7 @@ export function useLoading() {
     isLoading,
     loadingText,
     showLoading,
-    hideLoading,
-    forceHideLoading
+    hideLoading
   }
 }
 
