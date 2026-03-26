@@ -527,12 +527,16 @@ done
     - 阶段卡片差异化配色（PY1橙色/PY2蓝色/PY3玫粉色）
     - 课程详情页悬浮返回按钮（响应式设计）
     - 移动端导航菜单优化（55%/60%宽度）
+- **教师口令验证**：
+  - 访问时输入口令，验证成功显示专属首页
+  - 半透明弹窗 + 祝贺动画特效
+  - 适合教培机构分班使用
 
 ### 路由结构
 
 | 路由 | 组件 | 说明 |
 |------|------|------|
-| `/` | HomeView | 首页 |
+| `/` | HomeView | 首页（个性化显示） |
 | `/levels` | CourseLevelsView | 阶段选择（PY1/PY2/PY3） |
 | `/levels/:stage` | StageView | 单元选择（L1-L18） |
 | `/levels/:stage/:unit` | UnitView | 课时选择 |
@@ -542,6 +546,8 @@ done
 | `/ycl` | YCLZoneView | YCL专区 |
 | `/contact` | ContactView | 联系作者 |
 | `/locked` | StageLocked | 阶段锁定提示 |
+
+> **口令验证**：访问任意路由时，若未验证则弹出验证弹窗覆盖页面，验证成功后方可访问内容。
 
 ---
 

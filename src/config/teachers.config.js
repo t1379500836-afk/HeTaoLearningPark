@@ -37,7 +37,7 @@ const encryptedTeachers = [
   { key: '5a6d6LSd5pyA5qOS', name: '小梁老师' },
   { key: '5riF5am36ICB5biINjY2', name: '清婷老师' },
   { key: '5YiY6ICB5biI5oiR5p2l5ZWm', name: '刘言老师' },
-  { key: '5bCP6Zm255qE54ix5b6S5YS/NjY2', name: '小陶老师' },
+  { key: '5bCP6Zm26ICB5biI55qE54ix5b6SNjY2', name: '小陶老师' },
   { key: '5bCP546L6ICB5biINjY2', name: '王劲乔老师' },
   { key: '6a2P6ICB5biI44CQ56CB44CR5LiK6LWi', name: '魏杰老师' },
   { key: '5bCP6a2P6ICB5biI5oiR5p2l5ZWm', name: '魏玉芳老师' },

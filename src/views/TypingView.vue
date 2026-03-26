@@ -28,6 +28,13 @@
       >
         📖 中文练习
       </button>
+      <button
+        :class="{ active: mode === 'shortcut' }"
+        @click="switchMode('shortcut')"
+        class="selector-btn"
+      >
+        ⌨️ 快捷键练习
+      </button>
     </div>
 
     <!-- 单词练习选项 -->
@@ -84,7 +91,7 @@
 
     <!-- 打字练习组件 -->
     <TypingPractice
-      v-if="mode !== 'chinese'"
+      v-if="mode !== 'chinese' && mode !== 'shortcut'"
       :mode="mode"
       :custom-words="currentWords"
       :custom-templates="currentTemplates"
@@ -103,6 +110,15 @@
       @complete="handleComplete"
       @restart="handleRestart"
     />
+
+    <!-- 快捷键练习组件 -->
+    <ShortcutPractice
+      v-if="mode === 'shortcut'"
+      :score-history="shortcutScoreHistory"
+      @update:score-history="handleShortcutScoreHistoryUpdate"
+      @complete="handleComplete"
+      @restart="handleRestart"
+    />
   </div>
 </template>
 
@@ -110,6 +126,7 @@
 import { ref, watch } from 'vue'
 import TypingPractice from '@/components/course/TypingPractice.vue'
 import ChineseTypingPractice from '@/components/course/ChineseTypingPractice.vue'
+import ShortcutPractice from '@/components/course/ShortcutPractice.vue'
 import { getRandomTemplates } from '@/data/courses/PY2/typing-templates-pool.js'
 import { getRandomWords } from '@/data/courses/PY2/typing-words-pool.js'
 import { getRandomPoems, getRandomIdioms, getMixedContent } from '@/data/chinese-typing-pool.js'
@@ -138,6 +155,9 @@ const chineseContentType = ref('mixed')  // 'poem' | 'idiom' | 'mixed'
 const chineseDifficulty = ref('mixed')  // 'mixed' | 'easy' | 'medium' | 'hard'
 const chineseItems = ref([])  // 当前中文练习内容
 const chineseScoreHistory = ref([])  // 中文练习排行榜
+
+// 快捷键练习状态
+const shortcutScoreHistory = ref([])  // 快捷键练习排行榜
 
 // 中文练习选项
 const contentTypeOptions = [
@@ -232,6 +252,11 @@ const handleScoreHistoryUpdate = (newHistory) => {
 // 处理中文练习排行榜数据更新
 const handleChineseScoreHistoryUpdate = (newHistory) => {
   chineseScoreHistory.value = newHistory
+}
+
+// 处理快捷键练习排行榜数据更新
+const handleShortcutScoreHistoryUpdate = (newHistory) => {
+  shortcutScoreHistory.value = newHistory
 }
 
 // 处理重新开始/返回事件（用户点击按钮后刷新内容）
