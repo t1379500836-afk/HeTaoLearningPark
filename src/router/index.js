@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// 有效的路由前缀列表
+const validPrefixes = ['p1', 'py2', 'python3']
+
 // 基础路由配置（无前缀，完整访问）
 const baseRoutes = [
   {
@@ -134,12 +137,19 @@ function createPrefixedRoutes(prefix) {
   ]
 }
 
-// 合并所有路由：基础路由 + 三个前缀路由
+// 合并所有路由：基础路由 + 三个前缀路由 + 404
 const routes = [
   ...baseRoutes,
   ...createPrefixedRoutes('p1'),
   ...createPrefixedRoutes('py2'),
-  ...createPrefixedRoutes('python3')
+  ...createPrefixedRoutes('python3'),
+  // 404 路由必须放在最后
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/NotFoundView.vue'),
+    meta: { is404: true }
+  }
 ]
 
 const router = createRouter({
@@ -151,4 +161,39 @@ const router = createRouter({
   }
 })
 
+// 路由守卫：检测无效前缀
+router.beforeEach((to, from, next) => {
+  // 如果匹配到了 404 路由，直接放行
+  if (to.meta?.is404) {
+    return next()
+  }
+
+  const path = to.path
+  const pathSegments = path.split('/').filter(Boolean)
+
+  // 如果没有路径段，放行（根路径）
+  if (pathSegments.length === 0) {
+    return next()
+  }
+
+  const firstSegment = pathSegments[0]
+
+  // 如果第一个段是有效前缀，放行
+  if (validPrefixes.includes(firstSegment)) {
+    return next()
+  }
+
+  // 有效的基础路由路径（不带前缀）
+  const baseRoutePaths = ['levels', 'lesson', 'practice', 'typing', 'python', 'ycl', 'locked', 'contact']
+
+  // 如果第一个段是基础路由路径，放行
+  if (baseRoutePaths.includes(firstSegment)) {
+    return next()
+  }
+
+  // 其他情况（如 /py3, /abc, /random 等）跳转 404
+  return next({ name: 'not-found' })
+})
+
+export { validPrefixes }
 export default router

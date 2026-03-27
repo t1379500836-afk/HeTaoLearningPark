@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <Navigation />
-    <main class="main-content">
+    <!-- 404 页面不显示页头页脚 -->
+    <template v-if="!is404Page">
+      <Navigation />
+    </template>
+    <main class="main-content" :class="{ 'full-page': is404Page }">
       <RouterView />
     </main>
-    <Footer />
+    <template v-if="!is404Page">
+      <Footer />
+    </template>
     <!-- 全局 Loading 动画覆盖层 -->
     <LoadingOverlay :is-loading="isLoading" :text="loadingText" />
     <!-- 口令验证弹窗 -->
@@ -22,7 +27,13 @@ import AuthModal from './components/shared/AuthModal.vue'
 import CelebrationEffect from './components/shared/CelebrationEffect.vue'
 import { useLoading } from './composables/useLoading.js'
 import { useAuth } from './composables/useAuth.js'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// 检测是否是 404 页面
+const is404Page = computed(() => route.meta?.is404 === true)
 
 const { isLoading, loadingText } = useLoading()
 const { needAuth, teacherName } = useAuth()
@@ -51,5 +62,10 @@ const onAuthSuccess = () => {
 
 main {
   flex: 1;
+}
+
+main.full-page {
+  /* 404 页面占满整个视口 */
+  min-height: 100vh;
 }
 </style>
