@@ -32,8 +32,8 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-// 检测是否是 404 页面
-const is404Page = computed(() => route.meta?.is404 === true)
+// 检测是否是 404 页面（通过路由名称或 meta 判断）
+const is404Page = computed(() => route.name === 'not-found' || route.meta?.is404 === true)
 
 const { isLoading, loadingText } = useLoading()
 const { needAuth, teacherName } = useAuth()

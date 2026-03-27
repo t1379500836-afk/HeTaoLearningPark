@@ -161,10 +161,10 @@ const router = createRouter({
   }
 })
 
-// 路由守卫：检测无效前缀
+// 路由守卫：检测无效前缀，阻止猜测访问
 router.beforeEach((to, from, next) => {
-  // 如果匹配到了 404 路由，直接放行
-  if (to.meta?.is404) {
+  // 如果已经是要跳转 404 页面，直接放行
+  if (to.name === 'not-found') {
     return next()
   }
 
@@ -191,8 +191,8 @@ router.beforeEach((to, from, next) => {
     return next()
   }
 
-  // 其他情况（如 /py3, /abc, /random 等）跳转 404
-  return next({ name: 'not-found' })
+  // 其他情况（如 /py1, /py3, /abc, /random 等）跳转 404
+  return next({ name: 'not-found', replace: true })
 })
 
 export { validPrefixes }
