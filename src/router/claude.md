@@ -68,9 +68,13 @@ const validPrefixes = ['p1', 'py2', 'python3']
 const baseRoutePaths = ['levels', 'lesson', 'practice', 'typing', 'python', 'ycl', 'locked', 'contact']
 
 // 路由守卫逻辑
-if (validPrefixes.includes(firstSegment)) return next()  // 有效前缀，放行
-if (baseRoutePaths.includes(firstSegment)) return next() // 基础路由，放行
-return next({ name: 'not-found' })                       // 其他情况，404
+if (to.name === 'not-found') return next()                // 已是 404 路由，放行
+if (validPrefixes.includes(firstSegment)) return next()   // 有效前缀，放行
+if (baseRoutePaths.includes(firstSegment)) return next()  // 基础路由，放行
+return next({ name: 'not-found', replace: true })         // 其他情况，404
+
+// App.vue 中的 404 检测逻辑
+const is404Page = computed(() => route.name === 'not-found' || route.meta?.is404 === true)
 ```
 
 ### 访问示例

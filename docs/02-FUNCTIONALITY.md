@@ -339,11 +339,12 @@ npm run build
 #### 实现机制
 
 1. **路由守卫** (`router.beforeEach`)：
+   - 通过 `to.name === 'not-found'` 检测是否已是 404 路由
    - 检查路径第一段是否为有效前缀或基础路由
-   - 无效前缀重定向到 404 页面
+   - 无效前缀使用 `replace: true` 重定向到 404 页面（不留历史记录）
 
 2. **App.vue 条件渲染**：
-   - 检测 `route.meta.is404` 判断是否为 404 页面
+   - 双重检测：`route.name === 'not-found' || route.meta?.is404 === true`
    - 404 页面不渲染 Navigation 和 Footer
    - 404 页面不显示口令验证弹窗 (`needAuth && !is404Page`)
 
