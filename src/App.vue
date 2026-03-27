@@ -12,8 +12,8 @@
     </template>
     <!-- 全局 Loading 动画覆盖层 -->
     <LoadingOverlay :is-loading="isLoading" :text="loadingText" />
-    <!-- 口令验证弹窗 -->
-    <AuthModal :show="needAuth" @success="onAuthSuccess" />
+    <!-- 口令验证弹窗（404 页面不需要验证） -->
+    <AuthModal :show="needAuth && !is404Page" @success="onAuthSuccess" />
     <!-- 彩带庆祝动画（独立于弹窗） -->
     <CelebrationEffect :show="showCelebration" />
   </div>
