@@ -557,10 +557,16 @@ function formatTime(seconds) {
   return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
 }
 
-// 格式化选项文本（将 \n 转为 <br>）
+// 格式化选项文本（将 \n 转为 <br>，保留缩进空格）
 function formatOption(text) {
   if (!text) return ''
-  return text.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')
+  // 先处理换行符
+  let result = text.replace(/\\n/g, '\n').replace(/\n/g, '<br>')
+  // 将每行开头的空格转换为 &nbsp;（在 <br> 之后或字符串开头）
+  result = result.replace(/(^|<br>)( +)/g, (match, prefix, spaces) => {
+    return prefix + '&nbsp;'.repeat(spaces.length)
+  })
+  return result
 }
 
 // 题目是否已作答
@@ -1186,7 +1192,8 @@ onUnmounted(() => {
 
 .option-text {
   flex: 1;
-  white-space: pre-line;
+  white-space: pre-wrap;
+  font-family: 'Consolas', 'Monaco', monospace;
 }
 
 .coding-area {
