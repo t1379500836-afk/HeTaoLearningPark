@@ -92,8 +92,8 @@
             <div class="test-cases">
               <h4>测试用例</h4>
               <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="test-case">
-                <p><strong>输入：</strong>{{ tc.input || '无' }}</p>
-                <p><strong>输出：</strong>{{ tc.expectedOutput }}</p>
+                <p><strong>输入：</strong><span v-html="formatOption(tc.input || '无')"></span></p>
+                <p><strong>输出：</strong><span v-html="formatOption(tc.expectedOutput)"></span></p>
               </div>
             </div>
             <!-- 代码对比区域 -->
@@ -359,8 +359,8 @@
             <div class="test-cases">
               <h4>测试用例</h4>
               <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="test-case">
-                <p><strong>输入：</strong>{{ tc.input || '无' }}</p>
-                <p><strong>输出：</strong>{{ tc.expectedOutput }}</p>
+                <p><strong>输入：</strong><span v-html="formatOption(tc.input || '无')"></span></p>
+                <p><strong>输出：</strong><span v-html="formatOption(tc.expectedOutput)"></span></p>
               </div>
             </div>
             <textarea
