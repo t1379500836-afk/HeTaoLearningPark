@@ -54,6 +54,18 @@ const baseRoutes = [
     component: () => import('@/views/YCLZoneView.vue')
   },
   {
+    path: '/ycl/practice/:level',
+    name: 'ycl-practice',
+    component: () => import('@/views/YCLPracticeView.vue'),
+    props: true
+  },
+  {
+    path: '/ycl/exam/:level/:setId',
+    name: 'ycl-exam',
+    component: () => import('@/views/YCLExamView.vue'),
+    props: true
+  },
+  {
     path: '/locked',
     name: 'locked',
     component: () => import('@/components/shared/StageLocked.vue')
@@ -121,6 +133,18 @@ function createPrefixedRoutes(prefix) {
       name: `${prefix}-ycl`,
       component: () => import('@/views/YCLZoneView.vue'),
       props: { prefix }
+    },
+    {
+      path: `/${prefix}/ycl/practice/:level`,
+      name: `${prefix}-ycl-practice`,
+      component: () => import('@/views/YCLPracticeView.vue'),
+      props: true
+    },
+    {
+      path: `/${prefix}/ycl/exam/:level/:setId`,
+      name: `${prefix}-ycl-exam`,
+      component: () => import('@/views/YCLExamView.vue'),
+      props: true
     },
     {
       path: `/${prefix}/locked`,

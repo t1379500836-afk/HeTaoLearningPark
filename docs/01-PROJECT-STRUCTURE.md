@@ -80,7 +80,22 @@ hetao-learning-park/
             │   │   └── ...
             │   ├── typing-templates-pool.js
             │   └── content.json
-            └── PY3/                # Python高级应用（L13-L18）
+            ├── PY3/                # Python高级应用（L13-L18）
+            └── YCL/                # YCL考级专区
+                ├── config/         # 配置文件
+                │   ├── exam-info.js        # 考试信息配置
+                │   ├── knowledge-points.js  # 知识点配置
+                │   └── theory.js           # 理论讲解内容
+                ├── level4/         # 四级数据
+                │   ├── exam-analysis.js    # 考情分析
+                │   └── sets/               # 练习套卷
+                ├── level5/         # 五级数据
+                │   ├── exam-analysis.js
+                │   └── sets/
+                ├── level6/         # 六级数据
+                │   ├── exam-analysis.js
+                │   └── sets/
+                └── index.js        # 统一导出入口
 ```
 
 ---
