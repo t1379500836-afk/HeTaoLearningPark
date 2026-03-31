@@ -36,7 +36,6 @@ function prefixedPath(path) {
   color: #fff;
   padding: 40px 20px;
   text-align: center;
-  margin-top: 60px;
 }
 
 .footer-content {
@@ -98,7 +97,6 @@ function prefixedPath(path) {
 @media (max-width: 768px) {
   .footer {
     padding: 30px 20px;
-    margin-top: 40px;
   }
 
   .footer-links {
