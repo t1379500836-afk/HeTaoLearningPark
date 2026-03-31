@@ -214,21 +214,24 @@
               </span>
             </div>
 
-            <!-- 历史记录 -->
-            <div v-if="setRecords[set.id]" class="set-record">
+            <!-- 统一信息区域 -->
+            <div class="set-record">
               <div class="record-item">
                 <span class="record-label">选择题得分</span>
-                <span class="record-score" :class="{ pass: (setRecords[set.id].objectiveScore || 0) >= 30 }">
+                <span v-if="setRecords[set.id]" class="record-score" :class="{ pass: (setRecords[set.id].objectiveScore || 0) >= 30 }">
                   {{ setRecords[set.id].objectiveScore || 0 }}/{{ setRecords[set.id].objectiveTotal || 45 }}
                 </span>
+                <span v-else class="record-empty">暂无数据</span>
               </div>
               <div class="record-item">
                 <span class="record-label">编程题</span>
-                <span class="record-time">请找老师核对</span>
+                <span v-if="setRecords[set.id]" class="record-time">请找老师核对</span>
+                <span v-else class="record-empty">暂无数据</span>
               </div>
               <div class="record-item">
                 <span class="record-label">完成时间</span>
-                <span class="record-time">{{ formatTime(setRecords[set.id].submitTime) }}</span>
+                <span v-if="setRecords[set.id]" class="record-time">{{ formatTime(setRecords[set.id].submitTime) }}</span>
+                <span v-else class="record-empty">暂无数据</span>
               </div>
             </div>
 
@@ -1373,6 +1376,12 @@ watch(() => route.params.level, (newLevel, oldLevel) => {
 .record-time {
   font-size: 0.9rem;
   color: #666;
+}
+
+.record-empty {
+  font-size: 0.9rem;
+  color: #bbb;
+  font-style: italic;
 }
 
 /* 操作按钮容器 */
