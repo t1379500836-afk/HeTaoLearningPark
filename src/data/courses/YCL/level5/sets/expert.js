@@ -210,10 +210,10 @@ print(d['英语'])`,
     print('*', end='')
     print('#', end='')`,
       options: [
-        '*#\\n*#\\n*#',
+        '*#\n*#\n*#',
         '***###',
         '*#*#*#',
-        '*\\n#\\n*\\n#\\n*\\n#'
+        '*\n#\n*\n#\n*\n#'
       ],
       answer: 2,
       explanation: "end=''取消换行，循环3次每次输出'*#'，连续输出'*#*#*#'。"
@@ -323,10 +323,10 @@ print(result)`,
       question: '【多选】下列哪些循环能正确统计1到100中偶数的个数？',
       code: null,
       options: [
-        'count = 0\\nfor i in range(1, 101):\\n    if i % 2 == 0:\\n        count = count + 1',
-        'count = 0\\nfor i in range(2, 101, 2):\\n    count = count + 1',
-        'count = 0\\ni = 1\\nwhile i <= 100:\\n    if i % 2 == 0:\\n        count = count + 1\\n    i = i + 1',
-        'count = 0\\nfor i in range(50):\\n    count = count + 1'
+        'count = 0\nfor i in range(1, 101):\n    if i % 2 == 0:\n        count = count + 1',
+        'count = 0\nfor i in range(2, 101, 2):\n    count = count + 1',
+        'count = 0\ni = 1\nwhile i <= 100:\n    if i % 2 == 0:\n        count = count + 1\n    i = i + 1',
+        'count = 0\nfor i in range(50):\n    count = count + 1'
       ],
       answer: [0, 1, 2, 3],
       partialAnswer: [0],
@@ -341,10 +341,10 @@ print(result)`,
       question: '【多选】下列哪些代码的输出包含数字6？',
       code: null,
       options: [
-        'for i in range(2):\\n    for j in range(2, 4):\\n        print(i * j)',
-        'for i in range(1, 4):\\n    for j in range(1, 4):\\n        if i * j == 6:\\n            print(i * j)',
-        'for i in range(5, 8):\\n    print(i)',
-        'i = 1\\nwhile i <= 10:\\n    print(i)\\n    i = i + 1'
+        'for i in range(2):\n    for j in range(2, 4):\n        print(i * j)',
+        'for i in range(1, 4):\n    for j in range(1, 4):\n        if i * j == 6:\n            print(i * j)',
+        'for i in range(5, 8):\n    print(i)',
+        'i = 1\nwhile i <= 10:\n    print(i)\n    i = i + 1'
       ],
       answer: [0, 1, 2, 3],
       partialAnswer: [0],
@@ -359,7 +359,7 @@ print(result)`,
       question: '【多选】已知 nums = [3, 1, 4, 1, 5]，下列哪些代码执行后 nums 变为 [5, 4, 3, 1, 1]？',
       code: null,
       options: [
-        'nums.sort()\\nnums.reverse()',
+        'nums.sort()\nnums.reverse()',
         'nums.sort(reverse=True)',
         'nums = sorted(nums, reverse=True)',
         'nums.reverse()'
@@ -483,8 +483,8 @@ print(result)`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '4', expectedOutput: '*\\n**\\n***\\n****' },
-        { input: '3', expectedOutput: '*\\n**\\n***' }
+        { input: '4', expectedOutput: '*\n**\n***\n****' },
+        { input: '3', expectedOutput: '*\n**\n***' }
       ],
       scoringRules: {
         fullScore: 15,

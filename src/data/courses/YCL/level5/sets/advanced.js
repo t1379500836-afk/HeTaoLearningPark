@@ -111,10 +111,10 @@ print(a)`,
         print(j, end='')
     print()`,
       options: [
-        '1\\n12\\n123',
-        '1\\n22\\n333',
-        '12\\n123\\n1234',
-        '1\\n21\\n321'
+        '1\n12\n123',
+        '1\n22\n333',
+        '12\n123\n1234',
+        '1\n21\n321'
       ],
       answer: 0,
       explanation: 'i=1时内层range(1,2)输出1；i=2时内层range(1,3)输出12；i=3时内层range(1,4)输出123。'
@@ -338,10 +338,10 @@ print(total)`,
       question: '【多选】下列哪些代码会造成无限循环？',
       code: null,
       options: [
-        'x = 10\\nwhile x > 0:\\n    print(x)\\n    x = x - 1',
-        'x = 10\\nwhile x > 0:\\n    print(x)',
-        'x = 1\\nwhile x < 100:\\n    x = x * 2',
-        'x = 0\\nwhile x < 10:\\n    x = x + 1'
+        'x = 10\nwhile x > 0:\n    print(x)\n    x = x - 1',
+        'x = 10\nwhile x > 0:\n    print(x)',
+        'x = 1\nwhile x < 100:\n    x = x * 2',
+        'x = 0\nwhile x < 10:\n    x = x + 1'
       ],
       answer: [1],
       partialAnswer: [1],
@@ -443,8 +443,8 @@ print(count)`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '4\\n3\\n1\\n4\\n2', expectedOutput: '[1, 2, 3, 4]' },
-        { input: '3\\n10\\n5\\n8', expectedOutput: '[5, 8, 10]' }
+        { input: '4\n3\n1\n4\n2', expectedOutput: '[1, 2, 3, 4]' },
+        { input: '3\n10\n5\n8', expectedOutput: '[5, 8, 10]' }
       ],
       scoringRules: {
         fullScore: 10,
@@ -473,7 +473,7 @@ print(nums)`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '', expectedOutput: '15\\n30\\n45\\n60\\n75\\n90' }
+        { input: '', expectedOutput: '15\n30\n45\n60\n75\n90' }
       ],
       scoringRules: {
         fullScore: 15,
@@ -500,7 +500,7 @@ print(nums)`,
       testCases: [
         {
           input: '',
-          expectedOutput: '1*1=1\\n1*2=2 2*2=4\\n1*3=3 2*3=6 3*3=9'
+          expectedOutput: '1*1=1\n1*2=2 2*2=4\n1*3=3 2*3=6 3*3=9'
         }
       ],
       scoringRules: {

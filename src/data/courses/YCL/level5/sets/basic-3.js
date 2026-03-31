@@ -205,7 +205,7 @@ print(b + 1)`,
       options: [
         '0 1 2',
         '0 1 2 （末尾有空格）',
-        '0\\n1\\n2',
+        '0\n1\n2',
         '012'
       ],
       answer: 1,
@@ -350,10 +350,10 @@ print(result)`,
       question: '【多选】下列哪些代码的输出行数为3？',
       code: null,
       options: [
-        'for i in range(3):\\n    print(i)',
-        'for i in range(1, 4):\\n    print(i)',
-        'for i in range(3):\\n    for j in range(2):\\n        print(i)',
-        'for i in range(2):\\n    for j in range(2):\\n        print(i, j)'
+        'for i in range(3):\n    print(i)',
+        'for i in range(1, 4):\n    print(i)',
+        'for i in range(3):\n    for j in range(2):\n        print(i)',
+        'for i in range(2):\n    for j in range(2):\n        print(i, j)'
       ],
       answer: [0, 1],
       partialAnswer: [0],
@@ -490,7 +490,7 @@ print(len(words))`,
       testCases: [
         {
           input: '',
-          expectedOutput: '****\\n****\\n****'
+          expectedOutput: '****\n****\n****'
         }
       ],
       scoringRules: {

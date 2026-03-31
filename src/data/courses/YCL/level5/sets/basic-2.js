@@ -126,9 +126,9 @@ print(fruits)`,
     for j in range(2):
         print(i, j)`,
       options: [
-        '0 0\\n0 1\\n1 0\\n1 1',
-        '0 0\\n1 1',
-        '0 1\\n0 1',
+        '0 0\n0 1\n1 0\n1 1',
+        '0 0\n1 1',
+        '0 1\n0 1',
         '2 2'
       ],
       answer: 0,
@@ -187,7 +187,7 @@ for c in colors:
         '0 1 2',
         '红 绿 蓝',
         "['红', '绿', '蓝']",
-        '红\\n绿\\n蓝'
+        '红\n绿\n蓝'
       ],
       answer: 3,
       explanation: 'for循环遍历列表，每次print输出一个元素并换行，分3行输出。'
@@ -390,8 +390,8 @@ print(d['age'])`,
       options: [
         "print('A')",
         "print('A', end='')",
-        "print('A', end='\\n')",
-        "print('A', 'B', sep='\\n')"
+        "print('A', end='\n')",
+        "print('A', 'B', sep='\n')"
       ],
       answer: [0, 2, 3],
       partialAnswer: [0],
@@ -435,8 +435,8 @@ print(scores[2])`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '5', expectedOutput: '1\\n2\\n3\\n4\\n5' },
-        { input: '3', expectedOutput: '1\\n2\\n3' }
+        { input: '5', expectedOutput: '1\n2\n3\n4\n5' },
+        { input: '3', expectedOutput: '1\n2\n3' }
       ],
       scoringRules: {
         fullScore: 10,
@@ -463,7 +463,7 @@ while i <= n:
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '3\\n苹果\\n香蕉\\n橙子', expectedOutput: "['苹果', '香蕉', '橙子']" }
+        { input: '3\n苹果\n香蕉\n橙子', expectedOutput: "['苹果', '香蕉', '橙子']" }
       ],
       scoringRules: {
         fullScore: 15,

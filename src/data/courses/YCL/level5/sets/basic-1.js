@@ -69,10 +69,10 @@ print(str1)`,
 for j in range(3):
     print(j, s[j])`,
       options: [
-        '1 d\\n2 o\\n3 g',
-        'd 1\\no 2\\ng 3',
-        '0 d\\n1 o\\n2 g',
-        'd 0\\no 1\\ng 2'
+        '1 d\n2 o\n3 g',
+        'd 1\no 2\ng 3',
+        '0 d\n1 o\n2 g',
+        'd 0\no 1\ng 2'
       ],
       answer: 2,
       explanation: "range(3)生成0、1、2，循环中j依次取这三个值，s[j]分别是'd'、'o'、'g'，所以输出0 d、1 o、2 g。"
@@ -294,9 +294,9 @@ print(*f, sep='-')`,
     print()`,
       options: [
         'rrrrrr',
-        'rr\\nrr',
-        'rrr\\nrrr',
-        'rrr\\nrrr\\nrrr'
+        'rr\nrr',
+        'rrr\nrrr',
+        'rrr\nrrr\nrrr'
       ],
       answer: 2,
       explanation: '外层循环2次，每次内层循环3次输出3个r，然后换行。所以输出两行，每行3个r。'
@@ -348,10 +348,10 @@ print(*f, sep='-')`,
       question: '【多选题】下列哪段代码会一直输出"YCL必胜"？',
       code: null,
       options: [
-        'x = 5\\nwhile x > 0:\\n    print("YCL必胜")',
-        'x = 5\\nwhile x == 0:\\n    print("YCL必胜")',
-        'while True:\\n    break\\n    print("YCL必胜")',
-        'x = 5\\nwhile x > 0:\\n    print("YCL必胜")\\n    x = x + 1'
+        'x = 5\nwhile x > 0:\n    print("YCL必胜")',
+        'x = 5\nwhile x == 0:\n    print("YCL必胜")',
+        'while True:\n    break\n    print("YCL必胜")',
+        'x = 5\nwhile x > 0:\n    print("YCL必胜")\n    x = x + 1'
       ],
       answer: [0, 3],
       partialAnswer: [0],
@@ -384,10 +384,10 @@ print(*f, sep='-')`,
       question: '【多选题】哪些选项对应的代码能打印出两行各4个d？',
       code: null,
       options: [
-        'print("dddd")\\nprint("dddd")',
-        'for m in range(2):\\n    for n in range(4):\\n        print("d")',
-        'for m in range(2):\\n    for n in range(4):\\n        print("d", end="")\\n    print()',
-        'print("ddd")\\nprint("ddd")'
+        'print("dddd")\nprint("dddd")',
+        'for m in range(2):\n    for n in range(4):\n        print("d")',
+        'for m in range(2):\n    for n in range(4):\n        print("d", end="")\n    print()',
+        'print("ddd")\nprint("ddd")'
       ],
       answer: [0, 2],
       partialAnswer: [0],
@@ -431,8 +431,8 @@ print(b[0])`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '22\\n25\\n20', expectedOutput: '25' },
-        { input: '18\\n15\\n20', expectedOutput: '20' }
+        { input: '22\n25\n20', expectedOutput: '25' },
+        { input: '18\n15\n20', expectedOutput: '20' }
       ],
       scoringRules: {
         fullScore: 10,
@@ -459,7 +459,7 @@ print(max(a))`,
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '3\\n语文\\n数学\\n英语', expectedOutput: '语文\\n数学\\n英语' }
+        { input: '3\n语文\n数学\n英语', expectedOutput: '语文\n数学\n英语' }
       ],
       scoringRules: {
         fullScore: 15,
@@ -488,8 +488,8 @@ for book in books:
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '100\\n10\\n2', expectedOutput: '84' },
-        { input: '50\\n5\\n1', expectedOutput: '42' }
+        { input: '100\n10\n2', expectedOutput: '84' },
+        { input: '50\n5\n1', expectedOutput: '42' }
       ],
       scoringRules: {
         fullScore: 20,
