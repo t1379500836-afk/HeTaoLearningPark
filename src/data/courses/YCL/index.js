@@ -96,10 +96,10 @@ export function getSetListByLevel(level) {
     ],
     level6: [
       { id: 'basic-1', name: '六级基础练习（一）', difficulty: 'basic', status: 'available' },
-      { id: 'basic-2', name: '六级基础练习（二）', difficulty: 'basic', status: 'pending' },
-      { id: 'basic-3', name: '六级基础练习（三）', difficulty: 'basic', status: 'pending' },
-      { id: 'advanced', name: '六级进阶练习', difficulty: 'advanced', status: 'pending' },
-      { id: 'expert', name: '六级提升练习', difficulty: 'expert', status: 'pending' }
+      { id: 'basic-2', name: '六级基础练习（二）', difficulty: 'basic', status: 'available' },
+      { id: 'basic-3', name: '六级基础练习（三）', difficulty: 'basic', status: 'available' },
+      { id: 'advanced', name: '六级进阶练习', difficulty: 'advanced', status: 'available' },
+      { id: 'expert', name: '六级提升练习', difficulty: 'expert', status: 'available' }
     ]
   }
 
