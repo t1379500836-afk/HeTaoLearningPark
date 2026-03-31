@@ -80,14 +80,14 @@ async function copyEmail() {
 
 <style scoped>
 .contact-view {
-  min-height: 100%;
-  min-height: calc(100vh - 140px); /* 减去 header + footer 高度 */
+  flex: 1;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .contact-card {
