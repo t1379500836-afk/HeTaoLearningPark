@@ -61,7 +61,7 @@
               }"
             >
               <span class="option-label">{{ ['A', 'B', 'C', 'D'][index] }}.</span>
-              <span class="option-text">{{ option }}</span>
+              <span class="option-text" v-html="formatOption(option)"></span>
               <span v-if="currentQuestion?.answer === index" class="answer-marker correct">✓ 正确答案</span>
               <span v-if="answers[currentQuestion?.id] === index && currentQuestion?.answer !== index" class="answer-marker wrong">✗ 您的答案</span>
             </label>
@@ -81,7 +81,7 @@
               }"
             >
               <span class="option-label">{{ ['A', 'B', 'C', 'D'][index] }}.</span>
-              <span class="option-text">{{ option }}</span>
+              <span class="option-text" v-html="formatOption(option)"></span>
               <span v-if="currentQuestion?.answer?.includes(index)" class="answer-marker correct">✓ 正确答案</span>
               <span v-if="answers[currentQuestion?.id]?.includes(index) && !currentQuestion?.answer?.includes(index)" class="answer-marker wrong">✗ 您的选择</span>
             </label>
@@ -332,7 +332,7 @@
                 v-model="answers[currentQuestion?.id]"
               />
               <span class="option-label">{{ ['A', 'B', 'C', 'D'][index] }}.</span>
-              <span class="option-text">{{ option }}</span>
+              <span class="option-text" v-html="formatOption(option)"></span>
             </label>
           </div>
 
@@ -350,7 +350,7 @@
                 v-model="answers[currentQuestion?.id]"
               />
               <span class="option-label">{{ ['A', 'B', 'C', 'D'][index] }}.</span>
-              <span class="option-text">{{ option }}</span>
+              <span class="option-text" v-html="formatOption(option)"></span>
             </label>
           </div>
 
@@ -555,6 +555,12 @@ function formatTime(seconds) {
   const mins = Math.floor(seconds / 60)
   const secs = seconds % 60
   return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+}
+
+// 格式化选项文本（将 \n 转为 <br>）
+function formatOption(text) {
+  if (!text) return ''
+  return text.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')
 }
 
 // 题目是否已作答

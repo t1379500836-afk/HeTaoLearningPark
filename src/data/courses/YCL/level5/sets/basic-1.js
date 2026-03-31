@@ -69,10 +69,10 @@ print(str1)`,
 for j in range(3):
     print(j, s[j])`,
       options: [
-        '1 d, 2 o, 3 g',
-        'd 1, o 2, g 3',
-        '0 d, 1 o, 2 g',
-        'd 0, o 1, g 2'
+        '1 d\\n2 o\\n3 g',
+        'd 1\\no 2\\ng 3',
+        '0 d\\n1 o\\n2 g',
+        'd 0\\no 1\\ng 2'
       ],
       answer: 2,
       explanation: "range(3)生成0、1、2，循环中j依次取这三个值，s[j]分别是'd'、'o'、'g'，所以输出0 d、1 o、2 g。"
