@@ -647,9 +647,11 @@ watch(() => route.params.level, (newLevel, oldLevel) => {
 .ycl-practice-view {
   min-height: 100vh;
   padding: 20px;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   padding-bottom: 100px;
+  box-sizing: border-box;
 }
 
 /* 悬浮返回按钮 */
