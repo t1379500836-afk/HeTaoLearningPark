@@ -21,6 +21,7 @@
 | 了解CSS变量/响应式 | [技术文档/前端布局.md](技术文档/前端布局.md) |
 | 查看数据结构模板 | [技术文档/课程数据结构.md](技术文档/课程数据结构.md) |
 | 维护打字练习功能 | [技术文档/打字练习.md](技术文档/打字练习.md) |
+| **YCL知识点核对** | [工作流/课程开发全流程.md](工作流/课程开发全流程.md#三ycl专区知识点核对流程) |
 
 ---
 
@@ -41,6 +42,10 @@
 | YCL专区主页 | src/views/YCLZoneView.vue | 全文件 |
 | YCL练习选择页 | src/views/YCLPracticeView.vue | 全文件 |
 | YCL考试界面 | src/views/YCLExamView.vue | 全文件 |
+| YCL数据入口 | src/data/courses/YCL/index.js | 统一导出 |
+| YCL考情分析(5级) | src/data/courses/YCL/level5/exam-analysis.js | 知识点定义 |
+| YCL理论讲解 | src/data/courses/YCL/config/theory.js | 理论内容 |
+| YCL原始题库 | src/data/courses/YCL/temp-extracted/ | 待核对题目 |
 
 ### 打字练习关键代码位置
 
@@ -70,7 +75,7 @@
 │   └── 打字练习.md                    # 简洁描述 + 代码位置指引
 │
 └── 工作流/
-    ├── 课程开发全流程.md              # 正课/YCL专区/练习题库开发流程
+    ├── 课程开发全流程.md              # 正课/YCL专区知识点核对/练习题库开发流程
     └── 内容开发标准.md                # 内容数量标准、难度分布、题目生成原则
 ```
 

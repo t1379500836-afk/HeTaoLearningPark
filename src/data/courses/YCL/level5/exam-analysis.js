@@ -18,7 +18,7 @@ export const level5Analysis = {
       id: 'kp-5-1',
       name: '索引',
       alias: ['列表索引', '下标访问'],
-      reviewLocation: 'L5-2',
+      reviewLocation: 'L6-2',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -33,8 +33,8 @@ export const level5Analysis = {
     {
       id: 'kp-5-2',
       name: '统计命令',
-      alias: ['count', 'len', 'sum'],
-      reviewLocation: 'L2',
+      alias: ['max', 'min', 'len', 'sum'],
+      reviewLocation: 'L7-2',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -43,14 +43,14 @@ export const level5Analysis = {
       trend: 'up',
       trendLabel: '上升',
       importance: 5,
-      description: '使用count、len、sum等统计函数',
+      description: '使用max、min、len、sum等统计函数获取列表的最大值、最小值、长度和总和',
       theoryRef: 'theory-5-2'
     },
     {
       id: 'kp-5-3',
       name: 'while循环',
       alias: ['while', '条件循环'],
-      reviewLocation: 'L4-2',
+      reviewLocation: 'L2-1',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -66,7 +66,7 @@ export const level5Analysis = {
       id: 'kp-5-4',
       name: '字符串分割',
       alias: ['split', '字符串切分'],
-      reviewLocation: 'L1',
+      reviewLocation: 'L2-2',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -81,7 +81,7 @@ export const level5Analysis = {
     {
       id: 'kp-5-5',
       name: '列表修改',
-      alias: ['list修改', '列表增删改'],
+      alias: ['list修改', '索引赋值'],
       reviewLocation: 'L6-2',
       examStatus: {
         objective: '必考',
@@ -91,7 +91,7 @@ export const level5Analysis = {
       trend: 'up',
       trendLabel: '上升',
       importance: 5,
-      description: '列表的append、remove、pop等操作',
+      description: '通过索引修改列表元素（如 list[索引] = 新值）',
       theoryRef: 'theory-5-5'
     },
     {
@@ -114,7 +114,7 @@ export const level5Analysis = {
       id: 'kp-5-7',
       name: 'break、continue',
       alias: ['循环控制', '跳出循环'],
-      reviewLocation: 'L4-2',
+      reviewLocation: 'L4-3',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -130,7 +130,7 @@ export const level5Analysis = {
       id: 'kp-5-8',
       name: '数据类型转换命令',
       alias: ['int', 'str', 'list转换'],
-      reviewLocation: 'L7-2',
+      reviewLocation: 'L8-2',
       examStatus: {
         objective: '常考',
         coding: '必考'
@@ -164,7 +164,7 @@ export const level5Analysis = {
       id: 'kp-5-10',
       name: '遍历',
       alias: ['for遍历', '迭代'],
-      reviewLocation: 'L9-2',
+      reviewLocation: 'L6-2',
       examStatus: {
         objective: '必考',
         coding: '有概率'
@@ -179,7 +179,7 @@ export const level5Analysis = {
     {
       id: 'kp-5-11',
       name: '排序命令',
-      alias: ['sort', 'sorted'],
+      alias: ['sorted'],
       reviewLocation: 'L7-3',
       examStatus: {
         objective: '必考',
@@ -189,14 +189,14 @@ export const level5Analysis = {
       trend: 'up',
       trendLabel: '上升',
       importance: 3,
-      description: '使用sort()和sorted()排序',
+      description: '使用sorted()函数对列表进行升序排序',
       theoryRef: 'theory-5-11'
     },
     {
       id: 'kp-5-12',
       name: 'print()进阶用法',
       alias: ['print进阶', '格式化输出'],
-      reviewLocation: 'L7',
+      reviewLocation: 'L9-2',
       examStatus: {
         objective: '必考',
         coding: '-'
@@ -230,7 +230,7 @@ export const level5Analysis = {
       id: 'kp-5-14',
       name: '集合',
       alias: ['set', '集合操作'],
-      reviewLocation: 'L8-3',
+      reviewLocation: 'L8-2',
       examStatus: {
         objective: '常考',
         coding: '-'

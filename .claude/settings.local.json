@@ -77,7 +77,18 @@
       "Bash(head -n 2 \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/PY1/lessons/L5-\"*/lesson-data.js \")",
       "Bash(mv \"L10-4-单词卡.png\" \"flashcard.png\")",
       "Bash(mv \"L10-4知识点图.png\" \"knowledge.png\")",
-      "Bash(mv \"L10-4-硬件前置版讲义.pdf\" \"lecture.pdf\")"
+      "Bash(mv \"L10-4-硬件前置版讲义.pdf\" \"lecture.pdf\")",
+      "mcp__chrome-devtools__click",
+      "Bash(npm list:*)",
+      "Bash(for f:*)",
+      "Bash(do node:*)",
+      "Bash(echo \"$f\")",
+      "Bash(do echo:*)",
+      "Bash(node -e \"require\\(''''./src/data/courses/YCL/config/theory.js''''\\)\")",
+      "Bash(sed -n '210,220p' \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/YCL/level4/sets/advanced.js\")",
+      "Bash(sed -n '70,78p' \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/YCL/level5/sets/basic-1.js\")",
+      "Bash(echo \"Processing $f.js...\")",
+      "Bash(sed -i \"s/\\\\\\\\\\\\\\\\n/\\\\\\\\n/g\" \"e:/AIIDE/WorkSpace/HeTaoLearningPark/src/data/courses/YCL/level5/sets/$f.js\")"
     ]
   }
 }

@@ -16,9 +16,9 @@ export const level6Analysis = {
     // ===== 核心知识点（客观题+编程题都必考） =====
     {
       id: 'kp-6-1',
-      name: '函数的定义和使用',
+      name: '函数的创建和调用',
       alias: ['函数', 'function', 'def'],
-      reviewLocation: 'L11-3',
+      reviewLocation: 'L11-1',
       examStatus: {
         objective: '必考',
         coding: '-'
@@ -33,7 +33,7 @@ export const level6Analysis = {
     {
       id: 'kp-6-2',
       name: 'Pygame基础',
-      alias: ['pgzrun', '游戏基础'],
+      alias: ['pgzrun', 'PygameZero', '游戏基础'],
       reviewLocation: 'L12-1',
       examStatus: {
         objective: '必考',
@@ -48,8 +48,8 @@ export const level6Analysis = {
     },
     {
       id: 'kp-6-3',
-      name: 'pygame事件监听',
-      alias: ['事件处理', '键盘鼠标'],
+      name: 'Pygame事件监听',
+      alias: ['事件处理', 'on_key_down', 'on_mouse_down'],
       reviewLocation: 'L12-2',
       examStatus: {
         objective: '必考',
@@ -59,7 +59,7 @@ export const level6Analysis = {
       trend: 'stable',
       trendLabel: '稳定',
       importance: 4,
-      description: '键盘、鼠标事件的监听和处理',
+      description: '使用on_key_down、on_mouse_down等函数处理键盘和鼠标事件',
       theoryRef: 'theory-6-3'
     },
     {
@@ -80,9 +80,9 @@ export const level6Analysis = {
     },
     {
       id: 'kp-6-5',
-      name: '模拟表达式',
+      name: '顺序模拟',
       alias: ['表达式模拟', '计算模拟'],
-      reviewLocation: 'L15-3',
+      reviewLocation: '暂无',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -91,14 +91,14 @@ export const level6Analysis = {
       trend: 'stable',
       trendLabel: '稳定',
       importance: 5,
-      description: '模拟表达式的计算过程',
+      description: '按顺序模拟表达式的计算过程',
       theoryRef: 'theory-6-5'
     },
     {
       id: 'kp-6-6',
       name: '循环模拟',
       alias: ['循环模拟', '迭代模拟'],
-      reviewLocation: 'L15-3',
+      reviewLocation: '暂无',
       examStatus: {
         objective: '必考',
         coding: '必考'
@@ -114,7 +114,7 @@ export const level6Analysis = {
       id: 'kp-6-7',
       name: '带列表的模拟',
       alias: ['列表模拟', '数据模拟'],
-      reviewLocation: 'L15-3',
+      reviewLocation: '暂无',
       examStatus: {
         objective: '常考',
         coding: '必考'

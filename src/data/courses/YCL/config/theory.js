@@ -388,7 +388,7 @@ print(total)  # 输出：15
 
 ## 创建字符串
 
-\`\`\'python
+\`\`\`python
 name = "小明"        # 双引号
 msg = '你好'         # 单引号
 \`\`\`
@@ -399,7 +399,7 @@ msg = '你好'         # 单引号
 - 引号必须成对出现（前后的引号要一样）
 - 字符串里面可以包含另一种引号
 
-\`\`\'python
+\`\`\`python
 print('我说："你好"')   # 字符串里有双引号
 print("It's ok")        # 字符串里有单引号
 \`\`\`
@@ -594,7 +594,7 @@ else:
 
   // ==================== 五级理论讲解 ====================
   level5: {
-    // 索引
+    // kp-5-1 索引
     'theory-5-1': {
       id: 'theory-5-1',
       knowledgePointId: 'kp-5-1',
@@ -635,6 +635,18 @@ print(s[-1]) # 输出：o
 fruits = ["苹果", "香蕉"]
 print(fruits[5])  # 报错！列表只有2个元素
 \`\`\`
+
+## 索引赋值
+
+列表可以通过索引修改元素的值：
+
+\`\`\`python
+fruits = ["苹果", "香蕉", "橙子"]
+fruits[1] = "西瓜"
+print(fruits)  # 输出：['苹果', '西瓜', '橙子']
+\`\`\`
+
+注意：字符串不支持索引赋值！
 `,
       practice: [
         { q: '列表 [1,2,3] 中，元素 2 的索引是？', a: '1' },
@@ -642,10 +654,83 @@ print(fruits[5])  # 报错！列表只有2个元素
       ]
     },
 
-    // while循环
+    // kp-5-2 统计命令
     'theory-5-2': {
       id: 'theory-5-2',
       knowledgePointId: 'kp-5-2',
+      title: '统计命令',
+      emoji: '📊',
+      summary: '使用 max、min、len、sum 等函数统计数据',
+      content: `
+## 什么是统计命令？
+
+统计命令用来对数据进行统计分析，如求最大值、最小值、长度、总和等操作。
+
+## max() - 获取最大值
+
+\`\`\`python
+# 列表中的最大值
+scores = [85, 92, 78, 95, 88]
+print(max(scores))  # 输出：95
+
+# 字符串中的最大字符（按ASCII码）
+print(max("Hello"))  # 输出：y
+\`\`\`
+
+## min() - 获取最小值
+
+\`\`\`python
+# 列表中的最小值
+scores = [85, 92, 78, 95, 88]
+print(min(scores))  # 输出：78
+
+# 字符串中的最小字符
+print(min("Hello"))  # 输出：H
+\`\`\`
+
+## len() - 获取长度
+
+\`\`\`python
+# 列表长度
+fruits = ["苹果", "香蕉", "橙子"]
+print(len(fruits))  # 输出：3
+
+# 字符串长度
+name = "Hello"
+print(len(name))  # 输出：5
+\`\`\`
+
+## sum() - 求和
+
+\`\`\`python
+# 对列表中的数字求和
+scores = [85, 90, 78, 92]
+print(sum(scores))  # 输出：345
+
+# 配合 range 使用
+print(sum(range(1, 6)))  # 输出：15（1+2+3+4+5）
+\`\`\`
+
+## 对比
+
+| 函数 | 作用 | 示例 |
+|------|------|------|
+| max() | 获取最大值 | max([3,1,4]) → 4 |
+| min() | 获取最小值 | min([3,1,4]) → 1 |
+| len() | 获取长度/个数 | len([1,2,3]) → 3 |
+| sum() | 求和 | sum([1,2,3]) → 6 |
+`,
+      practice: [
+        { q: 'max([3, 7, 2, 9]) 的结果是？', a: '9' },
+        { q: 'min([85, 92, 78]) 的结果是？', a: '78' },
+        { q: 'len("Python") 的结果是？', a: '6' }
+      ]
+    },
+
+    // kp-5-3 while循环
+    'theory-5-3': {
+      id: 'theory-5-3',
+      knowledgePointId: 'kp-5-3',
       title: 'while 循环',
       emoji: '🔁',
       summary: `while 循环在条件为真时一直重复执行`,
@@ -670,9 +755,13 @@ while i <= 5:
     print(i)
     i = i + 1
 
-# 无限循环（按Ctrl+C停止）
-while True:
-    print("我一直在运行...")
+# 累加到超过100
+total = 0
+n = 1
+while total <= 100:
+    total = total + n
+    n = n + 1
+print(total)  # 输出：105
 \`\`\`
 
 ## 重要提示
@@ -687,7 +776,6 @@ while True:
 |----------|------------|
 | 知道重复次数 | 不知道重复次数 |
 | 遍历序列 | 根据条件判断 |
-\`\`\`
 `,
       practice: [
         { q: 'while 循环什么时候停止？', a: '条件变为假时' },
@@ -695,10 +783,191 @@ while True:
       ]
     },
 
-    // break/continue
+    // kp-5-4 字符串分割
     'theory-5-4': {
       id: 'theory-5-4',
       knowledgePointId: 'kp-5-4',
+      title: '字符串分割 split()',
+      emoji: '✂️',
+      summary: '使用 split() 方法将字符串按指定分隔符切分',
+      content: `
+## 什么是字符串分割？
+
+split() 可以把一个字符串按照指定的分隔符，切分成多个部分，返回一个**列表**。
+
+## 基本用法
+
+\`\`\`python
+# 按空格分割
+sentence = "我 爱 Python"
+parts = sentence.split()
+print(parts)  # 输出：['我', '爱', 'Python']
+
+# 按逗号分割
+info = "苹果,香蕉,橙子"
+fruits = info.split(",")
+print(fruits)  # 输出：['苹果', '香蕉', '橙子']
+\`\`\`
+
+## 指定分割次数
+
+\`\`\`python
+s = "a-b-c-d"
+print(s.split("-"))       # 输出：['a', 'b', 'c', 'd']
+print(s.split("-", 2))    # 输出：['a', 'b', 'c-d']（只分割2次）
+\`\`\`
+
+## 常见用法
+
+\`\`\`python
+# 处理用户输入
+numbers = input("输入数字，用空格隔开：")
+nums = numbers.split()      # 按空格分割
+print(nums)                  # 输出：列表形式的字符串
+
+# 转换为数字列表
+nums = [int(x) for x in numbers.split()]
+\`\`\`
+
+## 注意事项
+
+- 不写参数时，默认按**空白字符**（空格、换行）分割
+- 分割结果是**列表**
+- 原字符串不会被改变
+`,
+      practice: [
+        { q: '"a-b-c".split("-") 的结果是？', a: "['a', 'b', 'c']" },
+        { q: 'split() 不写参数时按什么分割？', a: '空白字符（空格、换行等）' }
+      ]
+    },
+
+    // kp-5-5 列表修改
+    'theory-5-5': {
+      id: 'theory-5-5',
+      knowledgePointId: 'kp-5-5',
+      title: '列表修改',
+      emoji: '📝',
+      summary: '通过索引修改列表中的元素',
+      content: `
+## 什么是列表修改？
+
+列表是**可变**的，可以通过索引来修改列表中的元素。
+
+## 通过索引修改元素
+
+使用 \`列表[索引] = 新值\` 的格式来修改元素：
+
+\`\`\`python
+# 修改单个元素
+fruits = ["苹果", "香蕉", "橙子"]
+fruits[1] = "西瓜"
+print(fruits)  # 输出：['苹果', '西瓜', '橙子']
+
+# 修改数字列表
+nums = [1, 2, 3, 4]
+nums[0] = 10
+print(nums)  # 输出：[10, 2, 3, 4]
+\`\`\`
+
+## 负索引修改
+
+\`\`\`python
+nums = [1, 2, 3, 4, 5]
+nums[-1] = 50  # 修改最后一个元素
+print(nums)  # 输出：[1, 2, 3, 4, 50]
+\`\`\`
+
+## 注意事项
+
+- 索引必须在有效范围内，否则会报错
+- 字符串**不支持**索引赋值，只有列表可以
+
+\`\`\`python
+# 错误示例
+s = "Hello"
+s[0] = "h"  # 报错！字符串不能修改
+\`\`\`
+
+## 常见应用场景
+
+| 场景 | 示例 |
+|------|------|
+| 修正数据 | scores[2] = 90 |
+| 更新状态 | status[0] = "完成" |
+| 替换元素 | fruits[1] = "新水果" |
+`,
+      practice: [
+        { q: '如何把列表 [1,2,3] 的第一个元素改为 10？', a: 'lst[0] = 10' },
+        { q: '如何修改列表最后一个元素？', a: 'lst[-1] = 新值' }
+      ]
+    },
+
+    // kp-5-6 for循环嵌套
+    'theory-5-6': {
+      id: 'theory-5-6',
+      knowledgePointId: 'kp-5-6',
+      title: 'for 循环嵌套',
+      emoji: '🔄',
+      summary: 'for 循环内部再嵌套一个 for 循环',
+      content: `
+## 什么是循环嵌套？
+
+循环嵌套就是在一个循环里面再放一个循环。外层循环每执行一次，内层循环会完整地执行一遍。
+
+## 基本语法
+
+\`\`\`python
+for i in range(外层次数):
+    for j in range(内层次数):
+        # 内层循环体
+\`\`\`
+
+## 示例：九九乘法表
+
+\`\`\`python
+for i in range(1, 4):
+    for j in range(1, i + 1):
+        print(f"{j}x{i}={j*i}", end=" ")
+    print()  # 换行
+# 输出：
+# 1x1=1
+# 1x2=2 2x2=4
+# 1x3=3 2x3=6 3x3=9
+\`\`\`
+
+## 示例：遍历二维列表
+
+\`\`\`python
+grid = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+for row in grid:
+    for num in row:
+        print(num, end=" ")
+    print()
+# 输出：
+# 1 2 3
+# 4 5 6
+# 7 8 9
+\`\`\`
+
+## 注意事项
+
+- 内层循环完整执行一遍后，外层才进入下一次
+- 注意**缩进**，内层循环体要比外层多缩进一级
+`,
+      practice: [
+        { q: '外层循环3次，内层循环2次，内层循环体一共执行多少次？', a: '6次（3×2）' },
+        { q: '嵌套循环的关键是什么？', a: '注意缩进层级' }
+      ]
+    },
+
+    // kp-5-7 break、continue
+    'theory-5-7': {
+      id: 'theory-5-7',
+      knowledgePointId: 'kp-5-7',
       title: 'break 和 continue',
       emoji: '⏹️',
       summary: `break 跳出循环，continue 跳过本次循环`,
@@ -734,6 +1003,22 @@ for i in range(5):
 | 结束整个循环 | 只跳过这一次 |
 | 循环完全停止 | 继续下一次循环 |
 
+## 实际应用
+
+\`\`\`python
+# 找到第一个能被7整除的数
+for i in range(1, 100):
+    if i % 7 == 0:
+        print(i)  # 输出：7
+        break     # 找到就停止
+
+# 跳过所有偶数，只打印奇数
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # 输出：1 3 5 7 9
+\`\`\`
+
 ## 注意事项
 
 - 只能在循环（for/while）中使用
@@ -745,53 +1030,532 @@ for i in range(5):
       ]
     },
 
-    // 随机数模块
-    'theory-5-5': {
-      id: 'theory-5-5',
-      knowledgePointId: 'kp-5-5',
-      title: '随机数模块 random',
-      emoji: '🎲',
-      summary: 'random 模块用于生成随机数和随机选择',
+    // kp-5-8 数据类型转换命令
+    'theory-5-8': {
+      id: 'theory-5-8',
+      knowledgePointId: 'kp-5-8',
+      title: '数据类型转换命令',
+      emoji: '🔀',
+      summary: '使用 int()、str()、list() 等函数进行类型转换',
       content: `
-## 什么是随机数模块？
+## 什么是类型转换？
 
-random 模块可以生成随机数，或者从列表中随机选择元素。
+把一种数据类型变成另一种数据类型，比如把字符串变成数字，或把数字变成字符串。
 
-## 常用函数
+## 常用转换函数
 
 \`\`\`python
-import random
+# int() - 转为整数
+a = int("123")    # 字符串 → 整数 123
+b = int(3.7)      # 小数 → 整数 3（截断，非四舍五入）
 
-# 生成 1-100 之间的随机整数
-num = random.randint(1, 100)
+# str() - 转为字符串
+s = str(123)       # 整数 → 字符串 "123"
+s2 = str(3.14)     # 小数 → 字符串 "3.14"
 
-# 从列表中随机选择一个元素
-fruits = ["苹果", "香蕉", "橙子"]
-fruit = random.choice(fruits)
+# float() - 转为小数
+f = float("3.14")  # 字符串 → 小数 3.14
+f2 = float(5)      # 整数 → 小数 5.0
 
-# 生成 0-1 之间的随机小数
-num = random.random()
-
-# 打乱列表顺序
-cards = [1, 2, 3, 4, 5]
-random.shuffle(cards)
-\`\`\'
+# list() - 转为列表
+lst = list("abc")  # 字符串 → 列表 ['a', 'b', 'c']
+lst2 = list(range(5))  # range → 列表 [0, 1, 2, 3, 4]
+\`\`\`
 
 ## 常见用法
 
-| 函数 | 作用 | 示例 |
-|------|------|------|
-| randint(a, b) | 生成 a-b 之间的随机整数 | randint(1, 10) |
-| choice(列表) | 随机选择一个元素 | choice(['A', 'B', 'C']) |
-| random() | 生成 0-1 之间的随机小数 | random() |
+\`\`\`python
+# 输入数字并计算
+age = int(input("请输入年龄："))
+print("明年你" + str(age + 1) + "岁")
 
-## 记得导入
+# 字符串转列表
+chars = list("Hello")
+print(chars)  # 输出：['H', 'e', 'l', 'l', 'o']
+\`\`\`
 
-使用前要写 \`import random\`！
+## 注意事项
+
+- int("3.14") 会报错！需要先 float 再 int
+- int("abc") 会报错！字符串必须是数字
 `,
       practice: [
-        { q: '如何生成 1-6 的随机整数？', a: 'random.randint(1, 6)' },
-        { q: '如何随机选择列表中的一个元素？', a: 'random.choice(列表名)' }
+        { q: 'int("5") 的结果是什么类型？', a: '整数（int）' },
+        { q: '如何把数字 123 转成字符串？', a: 'str(123)' }
+      ]
+    },
+
+    // kp-5-9 枚举法
+    'theory-5-9': {
+      id: 'theory-5-9',
+      knowledgePointId: 'kp-5-9',
+      title: '枚举法',
+      emoji: '🔎',
+      summary: '通过列举所有可能的情况来解决问题',
+      content: `
+## 什么是枚举法？
+
+枚举法就是把所有可能的情况**一个一个列出来**，找到符合条件的答案。
+
+## 基本思路
+
+1. 确定范围（从哪里到哪里）
+2. 逐个检查每个情况
+3. 找到满足条件的答案
+
+## 示例：找满足条件的数
+
+\`\`\`python
+# 找出 1-100 中既能被3整除又能被5整除的数
+for i in range(1, 101):
+    if i % 3 == 0 and i % 5 == 0:
+        print(i)
+# 输出：15 30 45 60 75 90
+\`\`\`
+
+## 示例：鸡兔同笼
+
+\`\`\`python
+# 鸡和兔共35只，脚共94只，各多少？
+for chicken in range(0, 36):
+    rabbit = 35 - chicken
+    if chicken * 2 + rabbit * 4 == 94:
+        print(f"鸡{chicken}只，兔{rabbit}只")
+# 输出：鸡23只，兔12只
+\`\`\`
+
+## 示例：拆分数字
+
+\`\`\`python
+# 找出所有两位数，各位数字之和等于10
+for n in range(10, 100):
+    tens = n // 10
+    ones = n % 10
+    if tens + ones == 10:
+        print(n)
+# 输出：19 28 37 46 55 64 73 82 91
+\`\`\`
+
+## 注意事项
+
+- 枚举法的关键是确定正确的**范围**
+- 范围太大时效率较低，但思路简单直接
+`,
+      practice: [
+        { q: '枚举法的核心思路是什么？', a: '列出所有可能，逐个检查' },
+        { q: '枚举法最重要的是确定什么？', a: '范围（从哪里到哪里）' }
+      ]
+    },
+
+    // kp-5-10 遍历
+    'theory-5-10': {
+      id: 'theory-5-10',
+      knowledgePointId: 'kp-5-10',
+      title: '遍历',
+      emoji: '🔍',
+      summary: '逐个访问列表、字符串等序列中的每个元素',
+      content: `
+## 什么是遍历？
+
+遍历就是**逐个访问**序列中的每一个元素。
+
+## 遍历列表
+
+\`\`\`python
+fruits = ["苹果", "香蕉", "橙子"]
+
+# 方式1：直接遍历
+for fruit in fruits:
+    print(fruit)
+
+# 方式2：用索引遍历
+for i in range(len(fruits)):
+    print(fruits[i])
+
+# 方式3：同时获取索引和值
+for i, fruit in enumerate(fruits):
+    print(f"第{i}个是{fruit}")
+\`\`\`
+
+## 遍历字符串
+
+\`\`\`python
+s = "Hello"
+for ch in s:
+    print(ch)
+# 输出：H e l l o（每个字符一行）
+
+# 统计字符出现次数
+count = 0
+for ch in "banana":
+    if ch == "a":
+        count += 1
+print(count)  # 输出：3
+\`\`\`
+
+## 遍历字典
+
+\`\`\`python
+info = {"name": "小明", "age": 10}
+
+# 遍历键
+for key in info:
+    print(key, info[key])
+
+# 遍历键值对
+for key, value in info.items():
+    print(f"{key}: {value}")
+\`\`\`
+
+## 注意事项
+
+- for...in 是最常用的遍历方式
+- 需要索引时用 range(len()) 或 enumerate()
+`,
+      practice: [
+        { q: '遍历列表用什么语句？', a: 'for 元素 in 列表:' },
+        { q: '如何同时获取索引和值？', a: 'for i, val in enumerate(列表):' }
+      ]
+    },
+
+    // kp-5-11 排序命令
+    'theory-5-11': {
+      id: 'theory-5-11',
+      knowledgePointId: 'kp-5-11',
+      title: '排序命令',
+      emoji: '📐',
+      summary: '使用 sorted() 对列表进行升序排序',
+      content: `
+## 什么是排序？
+
+排序就是把数据按照从小到大（升序）或从大到小（降序）重新排列。
+
+## sorted() - 返回新列表
+
+sorted() **不修改原列表**，返回一个排好序的新列表。
+
+\`\`\`python
+nums = [3, 1, 4, 1, 5, 9, 2, 6]
+new_nums = sorted(nums)
+
+print(nums)      # 输出：[3, 1, 4, 1, 5, 9, 2, 6]（原列表不变）
+print(new_nums)  # 输出：[1, 1, 2, 3, 4, 5, 6, 9]（新列表已排序）
+\`\`\`
+
+## 常见用法
+
+\`\`\`python
+# 对数字列表排序
+scores = [85, 92, 78, 95, 88]
+sorted_scores = sorted(scores)
+print(sorted_scores)  # 输出：[78, 85, 88, 92, 95]
+
+# 对字符串列表排序（按字母顺序）
+words = ["banana", "apple", "cherry"]
+sorted_words = sorted(words)
+print(sorted_words)  # 输出：['apple', 'banana', 'cherry']
+\`\`\`
+
+## 更新原列表
+
+如果想让原列表变成排序后的结果，可以重新赋值：
+
+\`\`\`python
+nums = [3, 1, 4, 1, 5]
+nums = sorted(nums)  # 将排序结果赋值给原变量
+print(nums)  # 输出：[1, 1, 3, 4, 5]
+\`\`\`
+
+## 注意事项
+
+- sorted() 返回的是**新列表**，原列表不变
+- 默认是**升序**（从小到大）
+- 可以用于列表、字符串等可迭代对象
+`,
+      practice: [
+        { q: 'sorted([3, 1, 4]) 的结果是？', a: '[1, 3, 4]' },
+        { q: 'sorted() 会修改原列表吗？', a: '不会，它返回新列表' }
+      ]
+    },
+
+    // kp-5-12 print()进阶用法
+    'theory-5-12': {
+      id: 'theory-5-12',
+      knowledgePointId: 'kp-5-12',
+      title: 'print() 进阶用法',
+      emoji: '🖨️',
+      summary: 'print 函数的 sep、end 参数控制输出格式',
+      content: `
+## print() 的参数
+
+print() 不只是简单地输出内容，还可以控制输出的格式。
+
+## end 参数 - 控制结尾
+
+默认情况下，print() 输出后会**换行**。用 end 可以改变结尾字符。
+
+\`\`\`python
+# 默认行为（换行）
+print("Hello")
+print("World")
+# 输出：
+# Hello
+# World
+
+# 不换行，用空格结尾
+print("Hello", end=" ")
+print("World")
+# 输出：Hello World
+
+# 不换行，无间隔
+print("Hello", end="")
+print("World")
+# 输出：HelloWorld
+\`\`\`
+
+## sep 参数 - 控制分隔符
+
+当输出多个内容时，默认用**空格**分隔。用 sep 可以改变分隔符。
+
+\`\`\`python
+# 默认用空格分隔
+print("A", "B", "C")
+# 输出：A B C
+
+# 用逗号分隔
+print("A", "B", "C", sep=",")
+# 输出：A,B,C
+
+# 用换行分隔
+print("A", "B", "C", sep="\\n")
+# 输出：
+# A
+# B
+# C
+\`\`\`
+
+## 组合使用
+
+\`\`\`python
+# 一行输出1到5，用逗号分隔
+for i in range(1, 6):
+    print(i, end=", ")
+# 输出：1, 2, 3, 4, 5,
+\`\`\`
+`,
+      practice: [
+        { q: '如何让 print 输出后不换行？', a: 'print(内容, end="")' },
+        { q: 'print("A","B",sep="-") 输出什么？', a: 'A-B' }
+      ]
+    },
+
+    // kp-5-13 列表生成式
+    'theory-5-13': {
+      id: 'theory-5-13',
+      knowledgePointId: 'kp-5-13',
+      title: '列表生成式',
+      emoji: '⚡',
+      summary: '用一行代码快速生成列表',
+      content: `
+## 什么是列表生成式？
+
+列表生成式（也叫列表推导式）是一种**简洁的写法**，用一行代码就能创建列表。
+
+## 基本语法
+
+\`\`\`python
+[表达式 for 变量 in 可迭代对象]
+\`\`\`
+
+## 示例
+
+\`\`\`python
+# 生成 0-9 的平方列表
+squares = [i ** 2 for i in range(10)]
+print(squares)  # 输出：[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# 将字符串列表转为大写
+words = ["hello", "world"]
+upper = [w.upper() for w in words]
+print(upper)  # 输出：['HELLO', 'WORLD']
+\`\`\`
+
+## 带条件判断
+
+\`\`\`python
+# 只保留偶数
+nums = [1, 2, 3, 4, 5, 6, 7, 8]
+evens = [n for n in nums if n % 2 == 0]
+print(evens)  # 输出：[2, 4, 6, 8]
+
+# 1-20中能被3整除的数
+threes = [i for i in range(1, 21) if i % 3 == 0]
+print(threes)  # 输出：[3, 6, 9, 12, 15, 18]
+\`\`\`
+
+## 等价的普通写法
+
+\`\`\`python
+# 列表生成式
+squares = [i ** 2 for i in range(5)]
+
+# 等价的普通写法
+squares = []
+for i in range(5):
+    squares.append(i ** 2)
+# 两种写法结果一样：[0, 1, 4, 9, 16]
+\`\`\`
+`,
+      practice: [
+        { q: '如何用列表生成式生成 [2,4,6,8,10]？', a: '[i*2 for i in range(1,6)]' },
+        { q: '列表生成式比普通循环有什么优点？', a: '更简洁，一行代码完成' }
+      ]
+    },
+
+    // kp-5-14 集合
+    'theory-5-14': {
+      id: 'theory-5-14',
+      knowledgePointId: 'kp-5-14',
+      title: '集合',
+      emoji: '📦',
+      summary: '集合是无序且不重复的数据容器',
+      content: `
+## 什么是集合？
+
+集合（set）是一个**无序**且**不重复**的数据容器，用花括号 {} 创建。
+
+## 创建集合
+
+\`\`\`python
+# 直接创建
+s = {1, 2, 3}
+print(s)  # 输出：{1, 2, 3}
+
+# 从列表创建（自动去重）
+nums = [1, 2, 2, 3, 3, 3]
+s = set(nums)
+print(s)  # 输出：{1, 2, 3}
+\`\`\`
+
+## 常用操作
+
+\`\`\`python
+s = {1, 2, 3}
+
+# 添加元素
+s.add(4)
+print(s)  # 输出：{1, 2, 3, 4}
+
+# 删除元素
+s.remove(1)
+print(s)  # 输出：{2, 3, 4}
+
+# 判断元素是否在集合中
+print(2 in s)   # 输出：True
+print(5 in s)   # 输出：False
+\`\`\`
+
+## 集合运算
+
+\`\`\`python
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a & b)  # 交集：{3}
+print(a | b)  # 并集：{1, 2, 3, 4, 5}
+print(a - b)  # 差集：{1, 2}
+\`\`\`
+
+## 集合 vs 列表
+
+| 特点 | 集合 set | 列表 list |
+|------|---------|----------|
+| 有序 | 无序 | 有序 |
+| 重复 | 不允许 | 允许 |
+| 索引 | 不支持 | 支持 |
+`,
+      practice: [
+        { q: '集合的特点是什么？', a: '无序、不重复' },
+        { q: '如何去除列表中的重复元素？', a: '用 set(列表) 转为集合去重' }
+      ]
+    },
+
+    // kp-5-15 字典
+    'theory-5-15': {
+      id: 'theory-5-15',
+      knowledgePointId: 'kp-5-15',
+      title: '字典',
+      emoji: '📖',
+      summary: '字典用键值对存储数据，通过键快速查找值',
+      content: `
+## 什么是字典？
+
+字典（dict）用**键值对**存储数据，就像查字典一样——通过"键"找到对应的"值"。
+
+## 创建字典
+
+\`\`\`python
+# 用花括号创建
+student = {
+    "name": "小明",
+    "age": 10,
+    "score": 95
+}
+\`\`\`
+
+## 访问值
+
+\`\`\`python
+student = {"name": "小明", "age": 10}
+
+# 用键访问值
+print(student["name"])  # 输出：小明
+print(student["age"])   # 输出：10
+
+# 用 get() 访问（键不存在时不报错）
+print(student.get("score", 0))  # 输出：0（默认值）
+\`\`\`
+
+## 修改和添加
+
+\`\`\`python
+student = {"name": "小明", "age": 10}
+
+# 修改值
+student["age"] = 11
+
+# 添加新键值对
+student["grade"] = "五年级"
+print(student)
+# 输出：{'name': '小明', 'age': 11, 'grade': '五年级'}
+\`\`\`
+
+## 常用操作
+
+\`\`\`python
+student = {"name": "小明", "age": 10}
+
+# 获取所有键
+print(student.keys())    # dict_keys(['name', 'age'])
+
+# 获取所有值
+print(student.values())  # dict_values(['小明', 10])
+
+# 删除键值对
+del student["age"]
+\`\`\`
+
+## 字典 vs 列表
+
+| 特点 | 字典 dict | 列表 list |
+|------|----------|----------|
+| 访问方式 | 通过键 | 通过索引 |
+| 有序 | 有序（Python 3.7+） | 有序 |
+| 适用场景 | 有对应关系的数据 | 按顺序排列的数据 |
+`,
+      practice: [
+        { q: '字典用什么存储数据？', a: '键值对（key: value）' },
+        { q: '如何访问字典中的值？', a: '字典["键"] 或 字典.get("键")' }
       ]
     }
   },
@@ -802,7 +1566,7 @@ random.shuffle(cards)
     'theory-6-1': {
       id: 'theory-6-1',
       knowledgePointId: 'kp-6-1',
-      title: '函数的定义和使用',
+      title: '函数的创建和调用',
       emoji: '📦',
       summary: '函数是一段可以重复使用的代码块',
       content: `
@@ -822,7 +1586,7 @@ def 函数名(参数):
 
 ## 示例
 
-\`\`\'python
+\`\`\`python
 # 定义一个打招呼的函数
 def greet(name):
     print('你好，' + name)
@@ -871,7 +1635,7 @@ PygameZero是一个专为初学者设计的游戏开发库，让我们可以轻�
 
 ## 基本设置
 
-\`\`\'python
+\`\`\`python
 import pgzrun
 
 # 设置窗口大小
@@ -887,7 +1651,7 @@ def draw():
     player.draw()   # 绘制角色
 
 pgzrun.go()  # 运行游戏
-\`\`\'
+\`\`\`
 
 ## 角色属性
 
@@ -923,7 +1687,7 @@ pgzrun.go()  # 运行游戏
 
 ## 键盘事件
 
-\`\`\'python
+\`\`\`python
 # 键盘按下时调用
 def on_key_down(key):
     if key == keys.LEFT:
@@ -941,7 +1705,7 @@ def on_key_up(key):
 
 ## 鼠标事件
 
-\`\`\'python
+\`\`\`python
 # 鼠标按下时调用
 def on_mouse_down(pos):
     print('点击位置:', pos)
@@ -1026,13 +1790,13 @@ print(result)  # 输出：120
       ]
     },
 
-    // 模拟表达式
+    // 顺序模拟
     'theory-6-5': {
       id: 'theory-6-5',
       knowledgePointId: 'kp-6-5',
-      title: '模拟表达式',
+      title: '顺序模拟',
       emoji: '🔢',
-      summary: `模拟表达式的计算过程，理解运算符优先级`,
+      summary: `按顺序模拟表达式的计算过程，理解运算符优先级`,
       content: `
 ## 什么是表达式？
 
@@ -1155,7 +1919,7 @@ print(count)  # 输出：33
 
 ## 示例：列表遍历
 
-\`\`\'python
+\`\`\`python
 fruits = ['苹果', '香蕉', '橙子']
 for fruit in fruits:
     print(fruit)
