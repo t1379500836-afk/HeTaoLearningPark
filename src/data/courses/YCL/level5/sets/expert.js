@@ -260,17 +260,18 @@ print(parts[1][0])`,
       knowledgePoint: 'kp-5-14',
       score: 2,
       difficulty: 'hard',
-      question: '下列代码运行后，变量x的类型是？',
-      code: `x = {5, 3, 1, 3, 5}
-print(type(x))`,
+      question: '运行下列代码，输出结果是？',
+      code: `a = {3, 2, 1, 2, 3}
+b = {1, 2, 3}
+print(a == b)`,
       options: [
-        "<class 'list'>",
-        "<class 'set'>",
-        "<class 'dict'>",
-        "<class 'tuple'>"
+        'True',
+        'False',
+        '程序报错',
+        '无输出'
       ],
-      answer: 1,
-      explanation: "用花括号{}创建且不含键值对的是集合，{5,3,1,3,5}是集合类型(set)，去重后为{1,3,5}。"
+      answer: 0,
+      explanation: "集合{3,2,1,2,3}去重后为{1,2,3}，与{1,2,3}相同，所以a==b为True。"
     },
     {
       id: 'q-5-exp-single-14',
@@ -398,11 +399,11 @@ print(result)`,
         "d['d'] = 4",
         "d['a'] = 10",
         "d['e'] = 5",
-        "del d['b']"
+        "d['b'] = 20"
       ],
       answer: [0, 2],
       partialAnswer: [0],
-      explanation: "A: 新增'd':4，数量+1；B: 修改已有键'a'的值，数量不变；C: 新增'e':5，数量+1；D: del删除键值对，数量减少。"
+      explanation: "A: 新增'd':4，数量+1；B: 修改已有键'a'的值，数量不变；C: 新增'e':5，数量+1；D: 修改已有键'b'的值，数量不变。"
     },
 
     // ==================== 编程题（4题，共55分）====================

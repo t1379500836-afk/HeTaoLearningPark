@@ -148,17 +148,17 @@ print(total)`,
       score: 2,
       difficulty: 'hard',
       question: "运行下列代码，输出结果是？",
-      code: `a = [1, 2, 3]
+      code: `a = 123
 b = str(a)
-print(b[0])`,
+print(b + '456')`,
       options: [
-        '1',
-        '[',
-        "'1'",
+        '579',
+        '123456',
+        "'123456'",
         '程序报错'
       ],
       answer: 1,
-      explanation: "str([1,2,3])转为字符串'[1, 2, 3]'，第一个字符b[0]是'['。"
+      explanation: "str(123)将整数转为字符串'123'，'123'+'456'进行字符串拼接，结果为'123456'。"
     },
     {
       id: 'q-5-adv-single-8',
@@ -258,17 +258,17 @@ print(result)`,
       score: 2,
       difficulty: 'medium',
       question: "运行下列代码，输出结果是？",
-      code: `s = 'a-b-c-d-e'
-parts = s.split('-', 2)
-print(parts)`,
+      code: `s = '猫-狗-兔-鸟'
+parts = s.split('-')
+print(len(parts))`,
       options: [
-        "['a', 'b', 'c-d-e']",
-        "['a-b', 'c-d', 'e']",
-        "['a', 'b', 'c', 'd', 'e']",
-        "['a', 'b']"
+        '2',
+        '3',
+        '4',
+        '5'
       ],
-      answer: 0,
-      explanation: "split('-', 2)最多分割2次，得到['a', 'b', 'c-d-e']。"
+      answer: 2,
+      explanation: "split('-')按横线分割，得到列表['猫', '狗', '兔', '鸟']，共4个元素。"
     },
     {
       id: 'q-5-adv-single-14',

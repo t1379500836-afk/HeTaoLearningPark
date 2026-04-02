@@ -422,22 +422,22 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-5',
       score: 15,
       difficulty: 'medium',
-      question: '小明有一些零花钱x元，他先坐地铁花了a元，然后骑共享单车30分钟（每10分钟b元）。输入x、a、b，输出小明剩余的钱。',
+      question: '班级采购文具，预算为P元。先买了20本笔记本，每本8元；又买了Q支笔，每支3元。请编写程序，输入P和Q，输出剩余的钱。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '100\n10\n2', expectedOutput: '84' },
-        { input: '50\n5\n1', expectedOutput: '42' }
+        { input: '200\n5', expectedOutput: '25' },
+        { input: '300\n10', expectedOutput: '110' }
       ],
       scoringRules: {
         fullScore: 15,
         partialScores: [
-          { condition: '能正确获取三个输入', score: 5 },
-          { condition: '能正确计算花费', score: 5 },
+          { condition: '能正确获取两个输入', score: 5 },
+          { condition: '能正确模拟花费过程', score: 10 },
           { condition: '完全正确', score: 15 }
         ]
       },
-      referenceAnswer: 'x = int(input())\na = int(input())\nb = int(input())\nx = x - a\nx = x - b * 3\nprint(x)',
-      explanation: '坐地铁花费a元，共享单车30分钟花费b*3元，从x中减去这些费用。'
+      referenceAnswer: 'p = int(input())\nq = int(input())\np = p - 8 * 20\np = p - 3 * q\nprint(p)',
+      explanation: '先算笔记本花费8*20=160元，再算笔的花费3*q元，从预算P中逐步减去。这是顺序模拟。'
     },
     {
       id: 'q-6-1-coding-4',

@@ -117,12 +117,12 @@ export const practiceSet = {
       code: 'def on_key_down(key):\n    if ______:\n        player.x = player.x + 10',
       options: [
         'key == keys.RIGHT',
-        "key == 'right'",
         "key == 'RIGHT'",
-        'key == keys.RIGHT'
+        "key == keys.LEFT",
+        "key == 'right'"
       ],
       answer: 0,
-      explanation: '在PygameZero中，keys.RIGHT表示向右箭头键。'
+      explanation: '在PygameZero中，keys.RIGHT表示向右箭头键，必须使用keys.前缀。'
     },
     {
       id: 'q-6-3-single-7',

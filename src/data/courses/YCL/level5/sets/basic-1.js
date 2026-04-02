@@ -484,28 +484,29 @@ for book in books:
       knowledgePoint: 'kp-5-3',
       score: 20,
       difficulty: 'medium',
-      question: '小明有一些零花钱x元，他先坐地铁花了a元，然后骑共享单车30分钟（每10分钟b元）。输入x、a、b，输出小明剩余的钱。',
+      question: '小明在收集卡片，每次输入一个正整数代表卡片上的数字，当输入0时停止收集。请编写程序，输出收集到的卡片数字之和。',
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '100\n10\n2', expectedOutput: '84' },
-        { input: '50\n5\n1', expectedOutput: '42' }
+        { input: '5\n3\n2\n0', expectedOutput: '10' },
+        { input: '10\n20\n0', expectedOutput: '30' }
       ],
       scoringRules: {
         fullScore: 20,
         partialScores: [
           { condition: '能正确获取输入', score: 5 },
-          { condition: '能正确计算地铁花费', score: 10 },
+          { condition: '能使用while和break控制循环', score: 10 },
           { condition: '完全正确', score: 20 }
         ]
       },
-      referenceAnswer: `x = int(input())
-a = int(input())
-b = int(input())
-x = x - a
-x = x - b * 3
-print(x)`,
-      explanation: '坐地铁花费a元，共享单车30分钟花费b*3元，从x中减去这些费用。'
+      referenceAnswer: `total = 0
+while True:
+    n = int(input())
+    if n == 0:
+        break
+    total = total + n
+print(total)`,
+      explanation: '使用while True循环不断获取输入，当输入为0时用break跳出循环，累加所有非零数字。'
     }
   ],
 

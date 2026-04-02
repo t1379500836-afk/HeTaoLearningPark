@@ -133,13 +133,13 @@ export const practiceSet = {
       question: '想要在按下空格键时让角色跳跃，横线处应填写？',
       code: "def on_key_down(key):\n    if ______:\n        jump()",
       options: [
-        "key == 'space'",
-        "key = 'space'",
-        'key == space',
-        "key == 'SPACE'"
+        "key == keys.SPACE",
+        "key = keys.SPACE",
+        "key == 'SPACE'",
+        "key == space"
       ],
       answer: 0,
-      explanation: "在PygameZero中，判断是否按下空格键使用key == 'space'。"
+      explanation: "在PygameZero中，判断是否按下空格键使用key == keys.SPACE，keys是PygameZero提供的按键常量模块。"
     },
     {
       id: 'q-6-2-single-8',
