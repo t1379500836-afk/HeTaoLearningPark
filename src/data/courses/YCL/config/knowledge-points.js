@@ -16,6 +16,11 @@ export const yclKnowledgePoints = {
 }
 
 // 等级信息
+// 访问权限说明：
+// - p1 前缀：只能访问 PY1 阶段 → 可访问 YCL四级
+// - py2 前缀：可访问 PY1、PY2 阶段 → 可访问 YCL四级、五级
+// - python3 前缀：可访问 PY1、PY2、PY3 阶段 → 可访问 YCL四级、五级、六级
+// - 无前缀（管理员）：可访问所有等级
 export const levelInfo = {
   level4: {
     id: 'level4',
@@ -23,7 +28,7 @@ export const levelInfo = {
     fullName: 'YCL四级',
     targetStage: 'PY1',
     description: 'Python基础语法、变量、条件判断、循环',
-    permission: ['p1', 'py1', 'py2', 'python3']  // 可访问的路由前缀
+    permission: ['p1', 'py2', 'python3']  // p1/py2/python3 均可访问
   },
   level5: {
     id: 'level5',
@@ -31,7 +36,7 @@ export const levelInfo = {
     fullName: 'YCL五级',
     targetStage: 'PY2',
     description: '列表、字典、函数、字符串处理、随机数模块',
-    permission: ['py2', 'python3']
+    permission: ['py2', 'python3']  // 仅 py2/python3 可访问
   },
   level6: {
     id: 'level6',
@@ -39,7 +44,7 @@ export const levelInfo = {
     fullName: 'YCL六级',
     targetStage: 'PY3',
     description: '算法、数据结构、Pygame游戏开发、综合应用',
-    permission: ['python3']
+    permission: ['python3']  // 仅 python3 可访问
   }
 }
 
