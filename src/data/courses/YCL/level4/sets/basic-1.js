@@ -432,52 +432,55 @@ print(10 + n)`,
     {
       id: 'q-4-1-coding-2',
       type: 'coding',
-      knowledgePoint: 'kp-4-4',
+      knowledgePoint: 'kp-4-5',
       score: 10,
       difficulty: 'easy',
-      question: '仓库里存放着50个篮球，体育老师领走了n个用于体育课教学。输入n，请你编程输出仓库里剩余的篮球个数。',
+      question: '小明在学校参加了兴趣班，请你编写程序，输入兴趣班的名称，输出"小明参加了___兴趣班"（用字符串拼接完成）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '10', expectedOutput: '40' },
-        { input: '15', expectedOutput: '35' }
+        { input: '美术', expectedOutput: '小明参加了美术兴趣班' },
+        { input: '足球', expectedOutput: '小明参加了足球兴趣班' }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
           { condition: '能获取输入', score: 3 },
-          { condition: '能正确计算', score: 5 },
+          { condition: '能正确拼接输出', score: 7 },
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: `n = input()
-n = int(n)
-print(50 - n)`,
-      explanation: '获取输入后转为整数，然后用50减去n输出结果。'
+      referenceAnswer: `name = input()
+print('小明参加了' + name + '兴趣班')`,
+      explanation: '使用字符串拼接，将前缀、输入内容和后缀拼接输出。'
     },
     {
       id: 'q-4-1-coding-3',
       type: 'coding',
-      knowledgePoint: 'kp-4-5',
+      knowledgePoint: 'kp-4-6',
       score: 15,
       difficulty: 'medium',
-      question: '明明酷爱水果，他每天都会吃一种水果。请你编写程序，输入水果名称，输出明明吃的是什么。',
+      question: '游乐园的过山车项目要求身高达到120厘米（包含120）才能乘坐。请编写程序，输入身高h（整数），判断是否能乘坐。如果可以乘坐输出"可以乘坐"，否则输出"身高不足"。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '苹果', expectedOutput: '明明吃的是苹果' },
-        { input: '香蕉', expectedOutput: '明明吃的是香蕉' }
+        { input: '130', expectedOutput: '可以乘坐' },
+        { input: '110', expectedOutput: '身高不足' },
+        { input: '120', expectedOutput: '可以乘坐' }
       ],
       scoringRules: {
         fullScore: 15,
         partialScores: [
-          { condition: '能获取输入', score: 5 },
-          { condition: '能正确拼接输出', score: 10 },
+          { condition: '能获取输入并转整数', score: 4 },
+          { condition: '能使用if-else判断', score: 6 },
           { condition: '完全正确', score: 15 }
         ]
       },
-      referenceAnswer: `s = input()
-ans = '明明吃的是' + s
-print(ans)`,
-      explanation: '使用字符串拼接，将"明明吃的是"和输入的水果名称拼接后输出。'
+      referenceAnswer: `h = input()
+h = int(h)
+if h >= 120:
+    print('可以乘坐')
+else:
+    print('身高不足')`,
+      explanation: '获取身高后转为整数，使用if-else判断是否达到120厘米，输出对应结果。'
     },
     {
       id: 'q-4-1-coding-4',
@@ -513,9 +516,9 @@ print(ans)`,
       'kp-4-1': { count: 2, totalScore: 5 },
       'kp-4-2': { count: 2, totalScore: 5 },
       'kp-4-3': { count: 2, totalScore: 4 },
-      'kp-4-4': { count: 5, totalScore: 27 },
-      'kp-4-5': { count: 4, totalScore: 21 },
-      'kp-4-6': { count: 1, totalScore: 2 },
+      'kp-4-4': { count: 4, totalScore: 17 },
+      'kp-4-5': { count: 4, totalScore: 16 },
+      'kp-4-6': { count: 2, totalScore: 17 },
       'kp-4-7': { count: 4, totalScore: 27 },
       'kp-4-8': { count: 2, totalScore: 4 },
       'kp-4-9': { count: 1, totalScore: 3 },
@@ -523,8 +526,8 @@ print(ans)`,
     },
     byDifficulty: {
       'easy': 9,
-      'medium': 9,
-      'hard': 6
+      'medium': 10,
+      'hard': 5
     }
   }
 }

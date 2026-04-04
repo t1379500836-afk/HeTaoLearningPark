@@ -443,29 +443,26 @@ print(200 - n)`,
     {
       id: 'q-4-3-coding-2',
       type: 'coding',
-      knowledgePoint: 'kp-4-3',
+      knowledgePoint: 'kp-4-5',
       score: 10,
       difficulty: 'easy',
-      question: '小刚的数学成绩是a分，语文成绩是b分。请编写程序，输入a和b（分两行输入），输出两科的总分。',
+      question: '小刚去书店买书，请你编写程序，输入书名，输出"小刚买了___这本书"（用字符串拼接完成）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '85\n92', expectedOutput: '177' },
-        { input: '70\n80', expectedOutput: '150' }
+        { input: '西游记', expectedOutput: '小刚买了西游记这本书' },
+        { input: '三国演义', expectedOutput: '小刚买了三国演义这本书' }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
-          { condition: '能获取两次输入', score: 3 },
-          { condition: '能正确计算', score: 5 },
+          { condition: '能获取输入', score: 3 },
+          { condition: '能正确拼接输出', score: 7 },
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: `a = input()
-a = int(a)
-b = input()
-b = int(b)
-print(a + b)`,
-      explanation: '分别获取两个输入，转为整数后相加输出。'
+      referenceAnswer: `book = input()
+print('小刚买了' + book + '这本书')`,
+      explanation: '使用字符串拼接，将前缀、输入的书名和后缀拼接输出。'
     },
     {
       id: 'q-4-3-coding-3',
@@ -528,11 +525,11 @@ else:
     byKnowledgePoint: {
       'kp-4-1': { count: 1, totalScore: 2 },
       'kp-4-2': { count: 1, totalScore: 2 },
-      'kp-4-3': { count: 2, totalScore: 13 },
-      'kp-4-4': { count: 3, totalScore: 17 },
-      'kp-4-5': { count: 2, totalScore: 4 },
-      'kp-4-6': { count: 2, totalScore: 17 },
-      'kp-4-7': { count: 3, totalScore: 24 },
+      'kp-4-3': { count: 2, totalScore: 5 },
+      'kp-4-4': { count: 4, totalScore: 17 },
+      'kp-4-5': { count: 4, totalScore: 17 },
+      'kp-4-6': { count: 3, totalScore: 20 },
+      'kp-4-7': { count: 4, totalScore: 27 },
       'kp-4-8': { count: 1, totalScore: 2 },
       'kp-4-9': { count: 1, totalScore: 2 },
       'kp-4-10': { count: 1, totalScore: 2 },
@@ -540,9 +537,9 @@ else:
       'kp-4-12': { count: 1, totalScore: 2 }
     },
     byDifficulty: {
-      'easy': 8,
-      'medium': 9,
-      'hard': 7
+      'easy': 9,
+      'medium': 10,
+      'hard': 5
     }
   }
 }

@@ -5,6 +5,12 @@
  *             多选题5题（每题3分，共15分）
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
+ *
+ * 编程题必考知识点覆盖：
+ * - kp-6-4: 简单递推问题 (Q1)
+ * - kp-6-5: 顺序模拟 (Q2)
+ * - kp-6-6: 循环模拟 (Q3)
+ * - kp-6-7: 带列表的模拟 (Q4)
  */
 
 export const practiceSet = {
@@ -17,7 +23,7 @@ export const practiceSet = {
     duration: 90,
     totalScore: 100,
     createdAt: '2026-03-28',
-    version: '1.0'
+    version: '2.0'
   },
 
   questions: [
@@ -110,7 +116,7 @@ export const practiceSet = {
     {
       id: 'q-6-1-single-6',
       type: 'single-choice',
-      knowledgePoint: 'kp-6-2',
+      knowledgePoint: 'kp-6-3',
       score: 2,
       difficulty: 'medium',
       question: "角色 animal 的初始造型是 '熊猫'，想要换成 '老鹰'，应该在横线处填写的代码是？",
@@ -127,41 +133,7 @@ export const practiceSet = {
     {
       id: 'q-6-1-single-7',
       type: 'single-choice',
-      knowledgePoint: 'kp-6-2',
-      score: 2,
-      difficulty: 'medium',
-      question: '想要将角色 worker 的x坐标设为35，y坐标设为108，下列代码可以实现这一效果的是？',
-      code: null,
-      options: [
-        'worker.x = 108\nworker.y = 35',
-        'worker.x = 35\nworker.y = 108',
-        'worker = (108, 35)',
-        'worker = (35, 108)'
-      ],
-      answer: 1,
-      explanation: '要将worker的x坐标设为35、y坐标设为108，需分别给worker的x、y属性赋值。'
-    },
-    {
-      id: 'q-6-1-single-8',
-      type: 'single-choice',
-      knowledgePoint: 'kp-6-2',
-      score: 2,
-      difficulty: 'medium',
-      question: '一个游戏程序的部分代码如下，想要实现：每次按下鼠标，角色 computer 就会变成 "开机" 造型，横线处应该填写的代码是？',
-      code: "def ________________:\n    computer.image = '开机'",
-      options: [
-        'on_mouse_down()',
-        'on_key_down()',
-        'on_key_up()',
-        'on_mouse_up()'
-      ],
-      answer: 0,
-      explanation: '在PygameZero中，on_mouse_down()函数会在鼠标按下时被调用，因此需要在on_mouse_down()函数中编写鼠标按下时要执行的代码。'
-    },
-    {
-      id: 'q-6-1-single-9',
-      type: 'single-choice',
-      knowledgePoint: 'kp-6-3',
+      knowledgePoint: 'kp-6-4',
       score: 2,
       difficulty: 'medium',
       question: '斐波那契数列：1, 1, 2, 3, 5, 8, 13, 21...，请问第7个数是多少？',
@@ -176,11 +148,11 @@ export const practiceSet = {
       explanation: '斐波那契数列的规律是：每个数等于前两个数之和。1, 1, 2, 3, 5, 8, 13，第7个数是13。'
     },
     {
-      id: 'q-6-1-single-10',
+      id: 'q-6-1-single-8',
       type: 'single-choice',
-      knowledgePoint: 'kp-6-3',
+      knowledgePoint: 'kp-6-4',
       score: 2,
-      difficulty: 'hard',
+      difficulty: 'medium',
       question: '已知递推公式：f(n) = f(n-1) + f(n-2)，且 f(1) = 1，f(2) = 1，则 f(6) 的值是？',
       code: null,
       options: [
@@ -193,58 +165,58 @@ export const practiceSet = {
       explanation: 'f(1)=1, f(2)=1, f(3)=2, f(4)=3, f(5)=5, f(6)=8。'
     },
     {
-      id: 'q-6-1-single-11',
-      type: 'single-choice',
-      knowledgePoint: 'kp-6-4',
-      score: 2,
-      difficulty: 'hard',
-      question: '下列关于递推算法的描述，正确的是？',
-      code: null,
-      options: [
-        '递推必须有初始条件',
-        '递推只能用递归函数实现',
-        '递推不需要循环',
-        '递推无法计算斐波那契数列'
-      ],
-      answer: 0,
-      explanation: '递推算法必须有初始条件（如斐波那契的前两项为1,1），然后通过循环依次计算出后续的值。'
-    },
-    {
-      id: 'q-6-1-single-12',
-      type: 'single-choice',
-      knowledgePoint: 'kp-6-4',
-      score: 2,
-      difficulty: 'hard',
-      question: '使用递推计算阶乘5!的结果是？',
-      code: 'n = 5\nresult = 1\nfor i in range(1, n + 1):\n    result = result * i\nprint(result)',
-      options: [
-        '5',
-        '24',
-        '120',
-        '720'
-      ],
-      answer: 2,
-      explanation: '使用循环递推：1*2*3*4*5=120。这是递推方法计算阶乘。'
-    },
-    {
-      id: 'q-6-1-single-13',
+      id: 'q-6-1-single-9',
       type: 'single-choice',
       knowledgePoint: 'kp-6-5',
       score: 2,
-      difficulty: 'hard',
-      question: '模拟算法的主要特点是？',
+      difficulty: 'medium',
+      question: '模拟表达式 3 + 5 * 2 的计算过程，正确的结果是？',
       code: null,
       options: [
-        '使用数学公式直接计算结果',
-        '按照问题的描述逐步模拟过程',
-        '使用二分法查找结果',
-        '使用动态规划优化计算'
+        '16',
+        '13',
+        '10',
+        '11'
       ],
       answer: 1,
-      explanation: '模拟算法的主要特点是按照问题的描述，逐步模拟整个过程，最终得到结果。'
+      explanation: '根据运算优先级，先算5*2=10，再算3+10=13。'
     },
     {
-      id: 'q-6-1-single-14',
+      id: 'q-6-1-single-10',
+      type: 'single-choice',
+      knowledgePoint: 'kp-6-6',
+      score: 2,
+      difficulty: 'hard',
+      question: '运行下列代码，输出结果是？',
+      code: 'n = 5\nresult = 1\nfor i in range(1, n + 1):\n    result = result * i\nprint(result)',
+      options: [
+        '15',
+        '120',
+        '60',
+        '24'
+      ],
+      answer: 1,
+      explanation: '这是计算5的阶乘：1*2*3*4*5=120。使用循环模拟阶乘计算。'
+    },
+    {
+      id: 'q-6-1-single-11',
+      type: 'single-choice',
+      knowledgePoint: 'kp-6-6',
+      score: 2,
+      difficulty: 'hard',
+      question: '运行下列代码，输出结果是？',
+      code: 'count = 0\nfor i in range(10):\n    if i % 3 == 0:\n        count = count + 1\nprint(count)',
+      options: [
+        '3',
+        '4',
+        '5',
+        '6'
+      ],
+      answer: 1,
+      explanation: '在0-9中，能被3整除的数是0,3,6,9，共4个。'
+    },
+    {
+      id: 'q-6-1-single-12',
       type: 'single-choice',
       knowledgePoint: 'kp-6-7',
       score: 2,
@@ -261,7 +233,7 @@ export const practiceSet = {
       explanation: '遍历nums，大于3的数是5,8,9，乘2后是10,16,18，sum=44。这是带列表的模拟。'
     },
     {
-      id: 'q-6-1-single-15',
+      id: 'q-6-1-single-13',
       type: 'single-choice',
       knowledgePoint: 'kp-6-7',
       score: 2,
@@ -276,6 +248,40 @@ export const practiceSet = {
       ],
       answer: 1,
       explanation: '遍历列表，大于2的数是3,4,5，共3个。这是列表模拟统计。'
+    },
+    {
+      id: 'q-6-1-single-14',
+      type: 'single-choice',
+      knowledgePoint: 'kp-6-8',
+      score: 2,
+      difficulty: 'hard',
+      question: '斐波那契数列的前两项都是1，从第3项开始每项等于前两项之和。求第10项的值？',
+      code: null,
+      options: [
+        '34',
+        '55',
+        '89',
+        '144'
+      ],
+      answer: 1,
+      explanation: '斐波那契数列：1,1,2,3,5,8,13,21,34,55，第10项是55。'
+    },
+    {
+      id: 'q-6-1-single-15',
+      type: 'single-choice',
+      knowledgePoint: 'kp-6-3',
+      score: 2,
+      difficulty: 'medium',
+      question: '想要将角色 worker 的x坐标设为35，y坐标设为108，下列代码可以实现这一效果的是？',
+      code: null,
+      options: [
+        'worker.x = 108\nworker.y = 35',
+        'worker.x = 35\nworker.y = 108',
+        'worker = (108, 35)',
+        'worker = (35, 108)'
+      ],
+      answer: 1,
+      explanation: '要将worker的x坐标设为35、y坐标设为108，需分别给worker的x、y属性赋值。'
     },
 
     // ==================== 多选题（5题，每题3分，共15分）====================
@@ -371,31 +377,11 @@ export const practiceSet = {
     },
 
     // ==================== 编程题（4题，共55分）====================
+    // Q1: 简单递推问题 (kp-6-4)
     {
       id: 'q-6-1-coding-1',
       type: 'coding',
-      knowledgePoint: 'kp-6-1',
-      score: 10,
-      difficulty: 'easy',
-      question: '编写一个函数 add(a, b)，接收两个整数参数，返回它们的和。然后调用该函数计算 3 + 5 的结果并输出。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '', expectedOutput: '8' }
-      ],
-      scoringRules: {
-        fullScore: 10,
-        partialScores: [
-          { condition: '能正确定义函数', score: 5 },
-          { condition: '能正确调用并输出', score: 5 }
-        ]
-      },
-      referenceAnswer: 'def add(a, b):\n    return a + b\n\nprint(add(3, 5))',
-      explanation: '定义一个函数add，接收两个参数a和b，返回它们的和。'
-    },
-    {
-      id: 'q-6-1-coding-2',
-      type: 'coding',
-      knowledgePoint: 'kp-6-3',
+      knowledgePoint: 'kp-6-4',
       score: 10,
       difficulty: 'easy',
       question: '使用递推计算斐波那契数列的第n项。输入一个正整数n（1<=n<=20），输出斐波那契数列的第n项。斐波那契数列：1, 1, 2, 3, 5, 8, 13...',
@@ -413,11 +399,12 @@ export const practiceSet = {
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: 'n = int(input())\nif n <= 2:\n    print(1)\nelse:\n    a, b = 1, 1\n    for i in range(3, n + 1):\n        a, b = b, a + b\n    print(b)',
-      explanation: '使用递推方式计算斐波那契数列，从第3项开始，每项等于前两项之和。'
+      referenceAnswer: 'n = int(input())\nif n <= 2:\n    print(1)\nelse:\n    a = 1\n    b = 1\n    for i in range(3, n + 1):\n        c = a + b\n        a = b\n        b = c\n    print(b)',
+      explanation: '使用递推方式计算斐波那契数列，从第3项开始，每项等于前两项之和。这是简单递推问题。'
     },
+    // Q2: 顺序模拟 (kp-6-5)
     {
-      id: 'q-6-1-coding-3',
+      id: 'q-6-1-coding-2',
       type: 'coding',
       knowledgePoint: 'kp-6-5',
       score: 15,
@@ -437,13 +424,38 @@ export const practiceSet = {
         ]
       },
       referenceAnswer: 'p = int(input())\nq = int(input())\np = p - 8 * 20\np = p - 3 * q\nprint(p)',
-      explanation: '先算笔记本花费8*20=160元，再算笔的花费3*q元，从预算P中逐步减去。这是顺序模拟。'
+      explanation: '先算笔记本花费8*20=160元，再算笔的花费3*q元，从预算P中逐步减去。这是顺序模拟，按步骤模拟计算过程。'
     },
+    // Q3: 循环模拟 (kp-6-6)
+    {
+      id: 'q-6-1-coding-3',
+      type: 'coding',
+      knowledgePoint: 'kp-6-6',
+      score: 15,
+      difficulty: 'medium',
+      question: '模拟倒计时。输入一个正整数n（表示秒数），从n开始倒计时到1，每秒输出一个数字（不包含0）。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '5', expectedOutput: '5\n4\n3\n2\n1' },
+        { input: '3', expectedOutput: '3\n2\n1' }
+      ],
+      scoringRules: {
+        fullScore: 15,
+        partialScores: [
+          { condition: '能正确获取输入', score: 4 },
+          { condition: '能正确使用循环倒计时', score: 8 },
+          { condition: '完全正确', score: 15 }
+        ]
+      },
+      referenceAnswer: 'n = int(input())\nwhile n >= 1:\n    print(n)\n    n = n - 1',
+      explanation: '使用while循环从n倒数到1，每次输出后减1。这是循环模拟问题。'
+    },
+    // Q4: 带列表的模拟 (kp-6-7)
     {
       id: 'q-6-1-coding-4',
       type: 'coding',
       knowledgePoint: 'kp-6-7',
-      score: 20,
+      score: 15,
       difficulty: 'medium',
       question: '模拟列表筛选。输入一个正整数n和n个整数存入列表，统计列表中有多少个偶数。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -452,11 +464,11 @@ export const practiceSet = {
         { input: '4\n3 1 4 6', expectedOutput: '2' }
       ],
       scoringRules: {
-        fullScore: 20,
+        fullScore: 15,
         partialScores: [
           { condition: '能正确获取输入', score: 5 },
-          { condition: '能正确遍历列表', score: 10 },
-          { condition: '完全正确', score: 20 }
+          { condition: '能正确遍历列表', score: 5 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: 'n = int(input())\nnums = list(map(int, input().split()))\ncount = 0\nfor num in nums:\n    if num % 2 == 0:\n        count = count + 1\nprint(count)',
@@ -471,12 +483,14 @@ export const practiceSet = {
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-6-1': { count: 4, totalScore: 13 },
-      'kp-6-2': { count: 6, totalScore: 16 },
-      'kp-6-3': { count: 3, totalScore: 14 },
-      'kp-6-4': { count: 3, totalScore: 7 },
-      'kp-6-5': { count: 2, totalScore: 18 },
-      'kp-6-6': { count: 3, totalScore: 24 }
+      'kp-6-1': { count: 4, totalScore: 10 },
+      'kp-6-2': { count: 4, totalScore: 10 },
+      'kp-6-3': { count: 2, totalScore: 4 },
+      'kp-6-4': { count: 4, totalScore: 18 },
+      'kp-6-5': { count: 3, totalScore: 20 },
+      'kp-6-6': { count: 3, totalScore: 19 },
+      'kp-6-7': { count: 3, totalScore: 19 },
+      'kp-6-8': { count: 1, totalScore: 2 }
     },
     byDifficulty: {
       'easy': 6,

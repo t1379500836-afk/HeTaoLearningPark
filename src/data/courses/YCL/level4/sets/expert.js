@@ -138,15 +138,15 @@ print(count)`,
       question: '运行下列代码，输出结果是？',
       code: `a = 'Python'
 b = '编程'
-print(a[0] + b[0])`,
+print(a + b + a)`,
       options: [
         'Python编程',
-        'P编',
-        'Pb',
-        '程序报错'
+        'Python编程Python',
+        'Python编程Python编程',
+        'a + b + a'
       ],
       answer: 1,
-      explanation: "a[0]是'P'（字符串第0个字符），b[0]是'编'，拼接得'P编'。"
+      explanation: "'Python'+'编程'='Python编程'，再+'Python'='Python编程Python'。"
     },
     {
       id: 'q-4-exp-single-7',
@@ -260,15 +260,15 @@ print(result)`,
       question: '运行下列代码，输出结果是？',
       code: `a = '123'
 b = '456'
-print(a[1] + b[2])`,
+print(a + b + '789')`,
       options: [
         '123456',
-        '26',
-        '16',
+        '123456789',
+        '123 + 456 + 789',
         '程序报错'
       ],
       answer: 1,
-      explanation: "a[1]是'2'（索引1的字符），b[2]是'6'，拼接得'26'。"
+      explanation: "'123'+'456'='123456'，'123456'+'789'='123456789'。"
     },
     {
       id: 'q-4-exp-single-13',
@@ -467,39 +467,62 @@ else:
     {
       id: 'q-4-exp-coding-1',
       type: 'coding',
-      knowledgePoint: 'kp-4-7',
+      knowledgePoint: 'kp-4-4',
       score: 10,
       difficulty: 'hard',
-      question: '请编写程序，使用for循环计算1到n的所有奇数的和。输入正整数n，输出1到n（包含n）的所有奇数的和。',
+      question: '小明去书店买书，一本书15元，如果他买n本，总价可以打9折。请编写程序，输入购买数量n，输出实际需要支付的金额（整数）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '10', expectedOutput: '25' },
-        { input: '7', expectedOutput: '16' },
-        { input: '1', expectedOutput: '1' }
+        { input: '2', expectedOutput: '27' },
+        { input: '5', expectedOutput: '67' },
+        { input: '10', expectedOutput: '135' }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
-          { condition: '能获取输入', score: 2 },
-          { condition: '能使用for循环', score: 4 },
-          { condition: '能判断奇数', score: 3 },
+          { condition: '能获取输入并转换', score: 2 },
+          { condition: '能正确计算总价', score: 4 },
+          { condition: '能正确应用折扣', score: 4 },
           { condition: '完全正确', score: 10 }
         ]
       },
       referenceAnswer: `n = input()
 n = int(n)
-total = 0
-for i in range(1, n + 1):
-    if i % 2 == 1:
-        total = total + i
-print(total)`,
-      explanation: '循环1到n，用i%2==1判断奇数，累加求和。1+3+5+7+9=25。'
+total = n * 15 * 0.9
+print(int(total))`,
+      explanation: '每本15元，买n本总价为n*15，打9折后为n*15*0.9。2本书：2*15*0.9=27元。'
     },
     {
       id: 'q-4-exp-coding-2',
       type: 'coding',
-      knowledgePoint: 'kp-4-6',
+      knowledgePoint: 'kp-4-5',
       score: 10,
+      difficulty: 'hard',
+      question: '请编写程序，输入学生的姓名和成绩，输出"___同学的成绩是___分"（用字符串拼接完成）。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '小明\n95', expectedOutput: '小明同学的成绩是95分' },
+        { input: '小红\n88', expectedOutput: '小红同学的成绩是88分' }
+      ],
+      scoringRules: {
+        fullScore: 10,
+        partialScores: [
+          { condition: '能获取输入', score: 3 },
+          { condition: '能将数字转为字符串', score: 3 },
+          { condition: '能正确拼接输出', score: 4 },
+          { condition: '完全正确', score: 10 }
+        ]
+      },
+      referenceAnswer: `name = input()
+score = input()
+print(name + '同学的成绩是' + score + '分')`,
+      explanation: '使用字符串拼接，将姓名、"同学的成绩是"、成绩、"分"拼接成完整句子。'
+    },
+    {
+      id: 'q-4-exp-coding-3',
+      type: 'coding',
+      knowledgePoint: 'kp-4-6',
+      score: 15,
       difficulty: 'hard',
       question: '出租车计费规则：3公里以内（包含3公里）收费13元，超过3公里的部分每公里收费2.5元。请编写程序，输入行驶公里数n（整数），输出需要支付的金额（整数，四舍五入）。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -509,12 +532,12 @@ print(total)`,
         { input: '10', expectedOutput: '31' }
       ],
       scoringRules: {
-        fullScore: 10,
+        fullScore: 15,
         partialScores: [
-          { condition: '能获取输入并转换', score: 2 },
-          { condition: '能判断公里数范围', score: 4 },
-          { condition: '能正确计算', score: 4 },
-          { condition: '完全正确', score: 10 }
+          { condition: '能获取输入并转换', score: 3 },
+          { condition: '能判断公里数范围', score: 5 },
+          { condition: '能正确计算', score: 7 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: `n = input()
@@ -527,66 +550,35 @@ else:
       explanation: '3公里内13元，超过3公里部分2.5元/公里。5公里：13+(5-3)*2.5=18元；10公里：13+(10-3)*2.5=30.5≈31元。'
     },
     {
-      id: 'q-4-exp-coding-3',
-      type: 'coding',
-      knowledgePoint: 'kp-4-7',
-      score: 15,
-      difficulty: 'hard',
-      question: '请编写程序，输入一个正整数n，使用for循环输出n行"*"组成的直角三角形。第一行1个星号，第二行2个星号，以此类推。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '3', expectedOutput: '*\n**\n***' },
-        { input: '5', expectedOutput: '*\n**\n***\n****\n*****' }
-      ],
-      scoringRules: {
-        fullScore: 15,
-        partialScores: [
-          { condition: '能获取输入', score: 3 },
-          { condition: '能使用for循环', score: 5 },
-          { condition: '能正确输出星号数量', score: 7 },
-          { condition: '完全正确', score: 15 }
-        ]
-      },
-      referenceAnswer: `n = input()
-n = int(n)
-for i in range(1, n + 1):
-    print('*' * i)`,
-      explanation: '外层循环控制行数，每行输出i个星号。使用字符串乘法'*' * i。'
-    },
-    {
       id: 'q-4-exp-coding-4',
       type: 'coding',
-      knowledgePoint: 'kp-4-6',
+      knowledgePoint: 'kp-4-7',
       score: 20,
       difficulty: 'hard',
-      question: '闰年判断：能被4整除但不能被100整除，或者能被400整除的年份是闰年。请编写程序，输入年份year，如果是闰年输出"是闰年"，否则输出"不是闰年"。',
+      question: '请编写程序，使用for循环计算1到n的所有奇数的和。输入正整数n，输出1到n（包含n）的所有奇数的和。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '2024', expectedOutput: '是闰年' },
-        { input: '2023', expectedOutput: '不是闰年' },
-        { input: '2000', expectedOutput: '是闰年' },
-        { input: '1900', expectedOutput: '不是闰年' }
+        { input: '10', expectedOutput: '25' },
+        { input: '7', expectedOutput: '16' },
+        { input: '1', expectedOutput: '1' }
       ],
       scoringRules: {
         fullScore: 20,
         partialScores: [
-          { condition: '能获取输入并转换', score: 3 },
-          { condition: '能使用条件判断', score: 5 },
-          { condition: '能正确判断普通闰年', score: 7 },
-          { condition: '完全正确（包括世纪年）', score: 20 }
+          { condition: '能获取输入', score: 3 },
+          { condition: '能使用for循环', score: 7 },
+          { condition: '能判断奇数', score: 5 },
+          { condition: '完全正确', score: 20 }
         ]
       },
-      referenceAnswer: `year = input()
-year = int(year)
-if year % 400 == 0:
-    print('是闰年')
-elif year % 100 == 0:
-    print('不是闰年')
-elif year % 4 == 0:
-    print('是闰年')
-else:
-    print('不是闰年')`,
-      explanation: '闰年规则：能被400整除一定是闰年；能被100整除但不是400的倍数不是闰年；能被4整除是闰年。'
+      referenceAnswer: `n = input()
+n = int(n)
+total = 0
+for i in range(1, n + 1):
+    if i % 2 == 1:
+        total = total + i
+print(total)`,
+      explanation: '循环1到n，用i%2==1判断奇数，累加求和。1+3+5+7+9=25。'
     }
   ],
 
@@ -600,15 +592,15 @@ else:
       'kp-4-1': { count: 0, totalScore: 0 },
       'kp-4-2': { count: 0, totalScore: 0 },
       'kp-4-3': { count: 1, totalScore: 2 },
-      'kp-4-4': { count: 3, totalScore: 7 },
-      'kp-4-5': { count: 2, totalScore: 4 },
-      'kp-4-6': { count: 4, totalScore: 37 },
-      'kp-4-7': { count: 5, totalScore: 27 },
+      'kp-4-4': { count: 4, totalScore: 17 },
+      'kp-4-5': { count: 3, totalScore: 14 },
+      'kp-4-6': { count: 4, totalScore: 22 },
+      'kp-4-7': { count: 6, totalScore: 31 },
       'kp-4-8': { count: 2, totalScore: 4 },
       'kp-4-9': { count: 0, totalScore: 0 },
       'kp-4-10': { count: 0, totalScore: 0 },
       'kp-4-11': { count: 2, totalScore: 5 },
-      'kp-4-12': { count: 2, totalScore: 7 }
+      'kp-4-12': { count: 2, totalScore: 5 }
     },
     byDifficulty: {
       'easy': 0,

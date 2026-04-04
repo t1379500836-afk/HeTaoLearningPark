@@ -6,6 +6,12 @@
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
  * 难度：进阶（略微提升难度，增加综合题）
+ *
+ * 编程题必考知识点覆盖：
+ * - kp-6-4: 简单递推问题 (Q1)
+ * - kp-6-5: 顺序模拟 (Q2)
+ * - kp-6-6: 循环模拟 (Q3)
+ * - kp-6-7: 带列表的模拟 (Q4)
  */
 
 export const practiceSet = {
@@ -18,7 +24,7 @@ export const practiceSet = {
     duration: 90,
     totalScore: 100,
     createdAt: '2026-03-31',
-    version: '1.0'
+    version: '2.0'
   },
 
   questions: [
@@ -115,7 +121,7 @@ export const practiceSet = {
       score: 2,
       difficulty: 'hard',
       question: '运行下列代码，输出结果是？',
-      code: 'def fib(n):\n    if n <= 2:\n        return 1\n    a, b = 1, 1\n    for i in range(n - 2):\n        a, b = b, a + b\n    return b\n\nprint(fib(6))',
+      code: 'def fib(n):\n    if n <= 2:\n        return 1\n    a = 1\n    b = 1\n    for i in range(n - 2):\n        c = a + b\n        a = b\n        b = c\n    return b\n\nprint(fib(6))',
       options: [
         '5',
         '8',
@@ -268,7 +274,7 @@ export const practiceSet = {
       score: 2,
       difficulty: 'hard',
       question: '运行下列代码，输出结果是？',
-      code: 'def fib_sum(n):\n    a, b = 1, 1\n    total = 0\n    for i in range(n):\n        total = total + a\n        a, b = b, a + b\n    return total\n\nprint(fib_sum(5))',
+      code: 'def fib_sum(n):\n    a = 1\n    b = 1\n    total = 0\n    for i in range(n):\n        total = total + a\n        c = a + b\n        a = b\n        b = c\n    return total\n\nprint(fib_sum(5))',
       options: [
         '8',
         '12',
@@ -372,34 +378,14 @@ export const practiceSet = {
     },
 
     // ==================== 编程题（4题，共55分）====================
+    // Q1: 简单递推问题 (kp-6-4)
     {
       id: 'q-6-adv-coding-1',
-      type: 'coding',
-      knowledgePoint: 'kp-6-1',
-      score: 10,
-      difficulty: 'medium',
-      question: '编写一个函数is_prime(n)，判断n是否为质数（只能被1和自身整除的大于1的整数）。如果是质数返回True，否则返回False。然后调用该函数判断17是否为质数并输出结果。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '', expectedOutput: 'True' }
-      ],
-      scoringRules: {
-        fullScore: 10,
-        partialScores: [
-          { condition: '能正确定义函数', score: 5 },
-          { condition: '能正确调用并输出', score: 5 }
-        ]
-      },
-      referenceAnswer: 'def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True\n\nprint(is_prime(17))',
-      explanation: '判断质数：检查2到n-1是否有能整除n的数。'
-    },
-    {
-      id: 'q-6-adv-coding-2',
       type: 'coding',
       knowledgePoint: 'kp-6-4',
       score: 10,
       difficulty: 'medium',
-      question: '使用递推计算泰波那契数列。泰波那契数列：每项等于前三项之和，前三项都是1。输入正整数n（3<=n<=15），输出第n项。',
+      question: '使用递推计算泰波那契数列的第n项。泰波那契数列定义：每项等于前三项之和，前三项都是1。输入正整数n（3<=n<=15），输出第n项的值。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '4', expectedOutput: '3' },
@@ -414,9 +400,34 @@ export const practiceSet = {
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: 'n = int(input())\nif n <= 3:\n    print(1)\nelse:\n    a, b, c = 1, 1, 1\n    for i in range(4, n + 1):\n        a, b, c = b, c, a + b + c\n    print(c)',
-      explanation: '泰波那契数列：每项等于前三项之和，前三项为1,1,1。'
+      referenceAnswer: 'n = int(input())\nif n <= 3:\n    print(1)\nelse:\n    a = 1\n    b = 1\n    c = 1\n    for i in range(4, n + 1):\n        d = a + b + c\n        a = b\n        b = c\n        c = d\n    print(c)',
+      explanation: '泰波那契数列递推：每项等于前三项之和，前三项为1,1,1。这是简单递推问题。'
     },
+    // Q2: 顺序模拟 (kp-6-5)
+    {
+      id: 'q-6-adv-coding-2',
+      type: 'coding',
+      knowledgePoint: 'kp-6-5',
+      score: 15,
+      difficulty: 'medium',
+      question: '模拟商店收银系统。顾客购买了3种商品：第一种买了a件，每件x元；第二种买了b件，每件y元；第三种买了c件，每件z元。商店会员可享受9折优惠。输入a, x, b, y, c, z和是否会员（1表示是，0表示否），输出应付金额（取整）。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '2 10\n3 5\n1 20\n1', expectedOutput: '55' },
+        { input: '1 100\n2 50\n1 30\n0', expectedOutput: '230' }
+      ],
+      scoringRules: {
+        fullScore: 15,
+        partialScores: [
+          { condition: '能正确获取输入', score: 5 },
+          { condition: '能正确计算商品总价', score: 5 },
+          { condition: '完全正确', score: 15 }
+        ]
+      },
+      referenceAnswer: 'a, x = map(int, input().split())\nb, y = map(int, input().split())\nc, z = map(int, input().split())\nis_member = int(input())\n\ntotal = a * x + b * y + c * z\nif is_member == 1:\n    total = int(total * 0.9)\nprint(total)',
+      explanation: '按顺序计算每种商品花费，再判断是否打折。这是顺序模拟问题。'
+    },
+    // Q3: 循环模拟 (kp-6-6)
     {
       id: 'q-6-adv-coding-3',
       type: 'coding',
@@ -438,13 +449,14 @@ export const practiceSet = {
         ]
       },
       referenceAnswer: 'target = 42\nwhile True:\n    guess = int(input())\n    if guess > target:\n        print("大了")\n    elif guess < target:\n        print("小了")\n    else:\n        print("恭喜猜对！")\n        break',
-      explanation: '循环获取猜测，与目标比较给出提示，猜对后退出。'
+      explanation: '循环获取猜测，与目标比较给出提示，猜对后退出。这是循环模拟问题。'
     },
+    // Q4: 带列表的模拟 (kp-6-7)
     {
       id: 'q-6-adv-coding-4',
       type: 'coding',
       knowledgePoint: 'kp-6-7',
-      score: 20,
+      score: 15,
       difficulty: 'hard',
       question: '模拟简单的成绩管理系统。输入一个正整数n和n个学生的成绩（0-100的整数），然后输入一个操作：1表示计算平均分，2表示找出最高分，3表示统计及格人数（>=60分）。根据操作输出对应结果。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -454,15 +466,15 @@ export const practiceSet = {
         { input: '5\n85 90 72 58 95\n3', expectedOutput: '4' }
       ],
       scoringRules: {
-        fullScore: 20,
+        fullScore: 15,
         partialScores: [
           { condition: '能正确获取输入', score: 5 },
-          { condition: '能正确实现一种操作', score: 10 },
-          { condition: '完全正确', score: 20 }
+          { condition: '能正确实现一种操作', score: 5 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: 'n = int(input())\nscores = list(map(int, input().split()))\nop = int(input())\n\nif op == 1:\n    print(sum(scores) // n)\nelif op == 2:\n    print(max(scores))\nelif op == 3:\n    count = 0\n    for s in scores:\n        if s >= 60:\n            count = count + 1\n    print(count)',
-      explanation: '根据操作类型执行不同的统计功能。'
+      explanation: '根据操作类型执行不同的统计功能。这是带列表的模拟问题。'
     }
   ],
 
@@ -473,13 +485,13 @@ export const practiceSet = {
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-6-1': { count: 4, totalScore: 15 },
+      'kp-6-1': { count: 3, totalScore: 8 },
       'kp-6-2': { count: 3, totalScore: 8 },
       'kp-6-3': { count: 2, totalScore: 4 },
       'kp-6-4': { count: 4, totalScore: 17 },
-      'kp-6-5': { count: 3, totalScore: 8 },
-      'kp-6-6': { count: 3, totalScore: 19 },
-      'kp-6-7': { count: 4, totalScore: 27 },
+      'kp-6-5': { count: 4, totalScore: 21 },
+      'kp-6-6': { count: 4, totalScore: 20 },
+      'kp-6-7': { count: 4, totalScore: 20 },
       'kp-6-8': { count: 2, totalScore: 5 }
     },
     byDifficulty: {

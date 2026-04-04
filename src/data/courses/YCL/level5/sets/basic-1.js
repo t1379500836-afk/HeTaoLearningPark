@@ -5,6 +5,9 @@
  *             多选题5题（每题3分，共15分）
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
+ *
+ * 编程题覆盖：kp-5-1(索引), kp-5-2(统计), kp-5-3(while), kp-5-4(split),
+ *             kp-5-5(列表修改), kp-5-7(break), kp-5-9(枚举法)
  */
 
 export const practiceSet = {
@@ -13,15 +16,16 @@ export const practiceSet = {
     level: 'level5',
     difficulty: 'basic',
     name: '五级基础练习（一）',
-    description: '涵盖五级必考知识点的基础练习',
+    description: '字符串和列表的综合应用',
     duration: 90,
     totalScore: 100,
-    createdAt: '2026-03-28',
-    version: '1.0'
+    createdAt: '2026-04-05',
+    version: '2.0'
   },
 
   questions: [
     // ==================== 单选题（15题，每题2分，共30分）====================
+    // 模块1：字符串和列表的综合应用（8题）
     {
       id: 'q-5-1-single-1',
       type: 'single-choice',
@@ -64,18 +68,16 @@ print(str1)`,
       knowledgePoint: 'kp-5-1',
       score: 2,
       difficulty: 'easy',
-      question: "运行下列代码，输出结果是什么？",
-      code: `s = 'dog'
-for j in range(3):
-    print(j, s[j])`,
+      question: "已知 s = 'Python'，s[-1]的值是什么？",
+      code: null,
       options: [
-        '1 d\n2 o\n3 g',
-        'd 1\no 2\ng 3',
-        '0 d\n1 o\n2 g',
-        'd 0\no 1\ng 2'
+        "'P'",
+        "'n'",
+        "'o'",
+        "程序报错"
       ],
-      answer: 2,
-      explanation: "range(3)生成0、1、2，循环中j依次取这三个值，s[j]分别是'd'、'o'、'g'，所以输出0 d、1 o、2 g。"
+      answer: 1,
+      explanation: "负索引从末尾开始，-1表示最后一个字符，'Python'的最后一个字符是'n'。"
     },
     {
       id: 'q-5-1-single-4',
@@ -92,7 +94,7 @@ for j in range(3):
         "葡萄 = fruits[2]"
       ],
       answer: 0,
-      explanation: "在列表中，元素的索引从0开始。fruits列表中，'苹果'索引为0，'香蕉'索引为1，所以修改'香蕉'为'葡萄'需用fruits[1] = '葡萄'。"
+      explanation: "在列表中，元素的索引从0开始。'香蕉'的索引是1，所以修改用fruits[1] = '葡萄'。"
     },
     {
       id: 'q-5-1-single-5',
@@ -109,62 +111,65 @@ for j in range(3):
         'sum(s)'
       ],
       answer: 3,
-      explanation: 'sum(s)用于计算列表中所有元素的总和，题目要求的总跑步距离即五天跑步距离的总和。'
+      explanation: 'sum(s)用于计算列表中所有元素的总和，即五天跑步距离的总和。'
     },
     {
       id: 'q-5-1-single-6',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-8',
+      knowledgePoint: 'kp-5-2',
       score: 2,
-      difficulty: 'medium',
-      question: "变量 t 的值是 '105'，以下哪个操作能将 t 转换为整数 105？",
+      difficulty: 'easy',
+      question: '已知 nums = [10, 20, 30, 40, 50]，下列哪个选项的值是30？',
       code: null,
       options: [
-        't = str(t)',
-        't = int(t)',
-        'str(t)',
-        'int(t)'
+        'nums[1]',
+        'nums[2]',
+        'nums[3]',
+        'nums[30]'
       ],
       answer: 1,
-      explanation: "int()函数的作用是将其他类型的数据转换为整数类型，t = int(t)可以将字符串'105'转换为整数105并赋值给t。"
+      explanation: '列表索引从0开始，nums[0]=10, nums[1]=20, nums[2]=30。'
     },
     {
       id: 'q-5-1-single-7',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-15',
+      knowledgePoint: 'kp-5-10',
       score: 2,
       difficulty: 'medium',
-      question: '厨师制作蛋糕，把所需材料及用量记录在字典d中。以下代码运行结果是？',
-      code: `d = {'糖': 100, '鸡蛋': 3}
-d['糖'] = 80
-print(d)`,
+      question: "运行下列代码，输出结果是？",
+      code: `colors = ['红', '绿', '蓝']
+for c in colors:
+    print(c)`,
       options: [
-        "{'糖': 100, '鸡蛋': 3}",
-        "{'糖': 80, '鸡蛋': 3}",
-        "{80, '鸡蛋': 3}",
-        "{80, 3}"
+        '0 1 2',
+        '红 绿 蓝',
+        "['红', '绿', '蓝']",
+        '红\n绿\n蓝'
       ],
-      answer: 1,
-      explanation: "字典d初始为{'糖': 100, '鸡蛋': 3}，然后通过d['糖'] = 80修改了键'糖'对应的值为80。"
+      answer: 3,
+      explanation: 'for循环遍历列表，每次print输出一个元素并换行，分3行输出。'
     },
     {
       id: 'q-5-1-single-8',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-14',
+      knowledgePoint: 'kp-5-1',
       score: 2,
       difficulty: 'medium',
-      question: '下列代码的运行结果是？',
-      code: `fruits = {'草莓', '橙子', '草莓', '西瓜'}
-print(len(fruits))`,
+      question: "运行下列代码，输出结果是什么？",
+      code: `s = 'dog'
+for j in range(3):
+    print(j, s[j])`,
       options: [
-        '3',
-        '4',
-        '6',
-        '8'
+        '1 d\n2 o\n3 g',
+        'd 1\no 2\ng 3',
+        '0 d\n1 o\n2 g',
+        'd 0\no 1\ng 2'
       ],
-      answer: 0,
-      explanation: "Python中集合（set）的元素具有唯一性，会自动去除重复值。去重后为{'草莓', '橙子', '西瓜'}，共3个元素。"
+      answer: 2,
+      explanation: "range(3)生成0、1、2，循环中j依次取这三个值，s[j]分别是'd'、'o'、'g'，所以输出0 d、1 o、2 g。"
     },
+
+    // 模块2：字典、集合与循环控制（4题）
     {
       id: 'q-5-1-single-9',
       type: 'single-choice',
@@ -210,83 +215,48 @@ while i < 6:
     {
       id: 'q-5-1-single-11',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-13',
+      knowledgePoint: 'kp-5-15',
       score: 2,
-      difficulty: 'hard',
-      question: "已知 fruits = ['5', '9', '12']，下列哪个选项的值是 [5, 9, 12]？",
-      code: null,
+      difficulty: 'medium',
+      question: '厨师制作蛋糕，把所需材料及用量记录在字典d中。以下代码运行结果是？',
+      code: `d = {'糖': 100, '鸡蛋': 3}
+d['糖'] = 80
+print(d)`,
       options: [
-        'int(x) for x in fruits',
-        '[int(x) for x in fruits]',
-        '[x for x in fruits]',
-        '[for int(x) in fruits]'
+        "{'糖': 100, '鸡蛋': 3}",
+        "{'糖': 80, '鸡蛋': 3}",
+        "{80, '鸡蛋': 3}",
+        "{80, 3}"
       ],
       answer: 1,
-      explanation: '要将列表中的字符串元素转为整数并组成新列表，需要使用列表推导式[int(x) for x in fruits]。'
+      explanation: "字典d初始为{'糖': 100, '鸡蛋': 3}，然后通过d['糖'] = 80修改了键'糖'对应的值为80。"
     },
     {
       id: 'q-5-1-single-12',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-7',
+      knowledgePoint: 'kp-5-14',
       score: 2,
-      difficulty: 'hard',
-      question: '运行下列代码，输出结果是什么？',
-      code: `h = ['苹果', '香蕉', '橙子', '葡萄', '西瓜']
-for j in h:
-    if j == '橙子':
-        print('找到水果')
-        break`,
+      difficulty: 'medium',
+      question: '下列代码的运行结果是？',
+      code: `fruits = {'草莓', '橙子', '草莓', '西瓜'}
+print(len(fruits))`,
       options: [
-        '橙子',
-        '找到水果',
-        'break',
-        '没有输出'
+        '3',
+        '4',
+        '6',
+        '8'
       ],
-      answer: 1,
-      explanation: "代码遍历列表h，当j等于'橙子'时，执行print('找到水果')并break。"
+      answer: 0,
+      explanation: "Python中集合（set）的元素具有唯一性，会自动去除重复值。去重后为{'草莓', '橙子', '西瓜'}，共3个元素。"
     },
+
+    // 模块3：列表操作与循环嵌套（3题）
     {
       id: 'q-5-1-single-13',
       type: 'single-choice',
-      knowledgePoint: 'kp-5-11',
-      score: 2,
-      difficulty: 'hard',
-      question: '已知 nums = [12, 8, 15, 4]，想要对 nums 中的元素从小到大排序，得到 [4, 8, 12, 15]，正确的选项是？',
-      code: null,
-      options: [
-        'nums = sorted(nums)',
-        'sorted(nums)',
-        'nums = sorted',
-        'sorted(nums) = nums'
-      ],
-      answer: 0,
-      explanation: 'sorted()函数可对列表元素排序，默认从小到大。nums = sorted(nums)能实现将nums从小到大排序并赋值给nums。'
-    },
-    {
-      id: 'q-5-1-single-14',
-      type: 'single-choice',
-      knowledgePoint: 'kp-5-2',
-      score: 2,
-      difficulty: 'hard',
-      question: '运行下列代码，输出结果是？',
-      code: `s = '动作片,喜剧片,科幻片,纪录片'
-f = s.split(',')
-print(*f, sep='-')`,
-      options: [
-        '动作片,喜剧片,科幻片,纪录片',
-        '动作片-喜剧片-科幻片-纪录片',
-        '动作片-喜剧片-科幻片',
-        '动作片喜剧片科幻片纪录片'
-      ],
-      answer: 1,
-      explanation: "split(',')将字符串按逗号分割成列表f，print(*f, sep='-')中*f将列表元素解包，sep='-'指定分隔符为横线。"
-    },
-    {
-      id: 'q-5-1-single-15',
-      type: 'single-choice',
       knowledgePoint: 'kp-5-6',
       score: 2,
-      difficulty: 'hard',
+      difficulty: 'medium',
       question: "运行下列代码，输出是什么？",
       code: `for a in range(2):
     for b in range(3):
@@ -300,6 +270,40 @@ print(*f, sep='-')`,
       ],
       answer: 2,
       explanation: '外层循环2次，每次内层循环3次输出3个r，然后换行。所以输出两行，每行3个r。'
+    },
+    {
+      id: 'q-5-1-single-14',
+      type: 'single-choice',
+      knowledgePoint: 'kp-5-8',
+      score: 2,
+      difficulty: 'medium',
+      question: "变量 t 的值是 '105'，以下哪个操作能将 t 转换为整数 105？",
+      code: null,
+      options: [
+        't = str(t)',
+        't = int(t)',
+        'str(t)',
+        'int(t)'
+      ],
+      answer: 1,
+      explanation: "int()函数的作用是将其他类型的数据转换为整数类型，t = int(t)可以将字符串'105'转换为整数105并赋值给t。"
+    },
+    {
+      id: 'q-5-1-single-15',
+      type: 'single-choice',
+      knowledgePoint: 'kp-5-9',
+      score: 2,
+      difficulty: 'hard',
+      question: '使用枚举法找出满足 a + b = 5 的正整数组合（a和b都从1到4），共有多少组？',
+      code: null,
+      options: [
+        '3组',
+        '4组',
+        '5组',
+        '6组'
+      ],
+      answer: 1,
+      explanation: '满足条件的组合有：(1,4), (2,3), (3,2), (4,1)，共4组。'
     },
 
     // ==================== 多选题（5题，每题3分，共15分）====================
@@ -324,25 +328,25 @@ print(*f, sep='-')`,
     {
       id: 'q-5-1-multi-2',
       type: 'multiple-choice',
-      knowledgePoint: 'kp-5-1',
+      knowledgePoint: 'kp-5-2',
       score: 3,
       difficulty: 'easy',
-      question: "【多选题】列表 foods 的值是 ['薯条', '汉堡', '披萨', '炸鸡', '可乐']，其中最后一个元素 '可乐' 对应的索引可以表示为？",
+      question: '【多选】已知 nums = [3, 5, 2, 8, 1]，下列哪些表达式的值是正确的？',
       code: null,
       options: [
-        '4',
-        '5',
-        '-1',
-        '-2'
+        'len(nums) 的值是 5',
+        'sum(nums) 的值是 19',
+        'max(nums) 的值是 8',
+        'min(nums) 的值是 3'
       ],
-      answer: [0, 2],
+      answer: [0, 1, 2],
       partialAnswer: [0],
-      explanation: "列表索引从0开始，'可乐'是第5个元素，索引为4。负数索引从末尾开始，-1表示最后一个元素。"
+      explanation: 'len(nums)=5正确；sum(nums)=3+5+2+8+1=19正确；max(nums)=8正确；min(nums)=1，不是3。'
     },
     {
       id: 'q-5-1-multi-3',
       type: 'multiple-choice',
-      knowledgePoint: 'kp-5-6',
+      knowledgePoint: 'kp-5-3',
       score: 3,
       difficulty: 'medium',
       question: '【多选题】下列哪段代码会一直输出"YCL必胜"？',
@@ -378,113 +382,88 @@ print(*f, sep='-')`,
     {
       id: 'q-5-1-multi-5',
       type: 'multiple-choice',
-      knowledgePoint: 'kp-5-6',
+      knowledgePoint: 'kp-5-5',
       score: 3,
       difficulty: 'medium',
-      question: '【多选题】哪些选项对应的代码能打印出两行各4个d？',
+      question: "【多选】已知 a = [1, 2, 3]，下列哪些操作执行后 a 的值为 [1, 2, 3, 4]？",
       code: null,
       options: [
-        'print("dddd")\nprint("dddd")',
-        'for m in range(2):\n    for n in range(4):\n        print("d")',
-        'for m in range(2):\n    for n in range(4):\n        print("d", end="")\n    print()',
-        'print("ddd")\nprint("ddd")'
+        'a.append(4)',
+        'a.insert(3, 4)',
+        'a = a + [4]',
+        'a + 4'
       ],
-      answer: [0, 2],
+      answer: [0, 1, 2],
       partialAnswer: [0],
-      explanation: '选项A：两个print直接输出两行各4个d。选项C：内层循环用end=""取消自动换行，输出4个d后换行，最终输出两行各4个d。'
+      explanation: 'append末尾添加4；insert(3,4)在索引3处插入4；a+[4]创建新列表[1,2,3,4]。a+4会报错。'
     },
 
     // ==================== 编程题（4题，共55分）====================
+    // Q1: kp-5-4(字符串分割) + kp-5-1(索引)
     {
       id: 'q-5-1-coding-1',
       type: 'coding',
-      knowledgePoint: 'kp-5-2',
+      knowledgePoint: 'kp-5-4',
       score: 10,
       difficulty: 'easy',
-      question: '机器人收到一串指令，指令按执行顺序排列，相邻的指令之间用"-"隔开。现在给出机器人收到的指令，请输出第一个指令。',
+      question: '输入一个包含5个数字的列表（格式如"10,20,30,40,50"），请使用split方法分割字符串，然后输出列表中第3个数字（索引为2的元素）。',
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '左转-前进3步-右转-停止', expectedOutput: '左转' },
-        { input: '开始-运行-结束', expectedOutput: '开始' }
+        { input: '10,20,30,40,50', expectedOutput: '30' },
+        { input: '5,15,25,35,45', expectedOutput: '25' }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
-          { condition: '能获取输入', score: 3 },
-          { condition: '能正确分割', score: 5 },
+          { condition: '能使用split分割字符串', score: 4 },
+          { condition: '能使用索引访问元素', score: 4 },
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: `a = input()
-b = a.split('-')
-print(b[0])`,
-      explanation: '使用split("-")分割字符串，然后输出列表的第一个元素。'
+      referenceAnswer: `s = input()
+nums = s.split(',')
+print(nums[2])`,
+      explanation: '使用split分割字符串得到列表，通过索引[2]访问第3个元素。本题融合了字符串分割和索引两个知识点。'
     },
+    // Q2: kp-5-5(列表修改) + kp-5-2(统计命令)
     {
       id: 'q-5-1-coding-2',
       type: 'coding',
-      knowledgePoint: 'kp-5-2',
+      knowledgePoint: 'kp-5-5',
       score: 10,
       difficulty: 'easy',
-      question: '三个传感器同时检测环境温度，每个传感器记录一个温度值（单位：摄氏度）。现在输入三个传感器记录的温度值，请输出三个温度值中最高的一个。',
+      question: '输入5个成绩（格式如"85,92,78,90,88"），请找出最高分并将其位置改为-1标记。输出修改后的列表。',
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
-        { input: '22\n25\n20', expectedOutput: '25' },
-        { input: '18\n15\n20', expectedOutput: '20' }
+        { input: '85,92,78,90,88', expectedOutput: "['85', '-1', '78', '90', '88']" },
+        { input: '60,70,80,90,100', expectedOutput: "['60', '70', '80', '90', '-1']" }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
-          { condition: '能获取三个输入', score: 3 },
-          { condition: '能正确比较', score: 5 },
-          { condition: '完全正确', score: 10 }
+          { condition: '能获取输入并分割', score: 3 },
+          { condition: '能使用统计函数找出最值位置', score: 3 },
+          { condition: '能通过索引修改列表元素', score: 4 }
         ]
       },
-      referenceAnswer: `a1 = int(input())
-a2 = int(input())
-a3 = int(input())
-a = [a1, a2, a3]
-print(max(a))`,
-      explanation: '将三个温度值存入列表，使用max()函数找出最大值。'
+      referenceAnswer: `s = input()
+scores = s.split(',')
+max_score = max(scores)
+idx = scores.index(max_score)
+scores[idx] = '-1'
+print(scores)`,
+      explanation: '使用max()找出最高分，index()找到其位置，然后通过索引修改该位置为-1。本题融合了统计命令和列表修改两个知识点。'
     },
+    // Q3: kp-5-3(while循环) + kp-5-7(break) + kp-5-8(类型转换)
     {
       id: 'q-5-1-coding-3',
       type: 'coding',
-      knowledgePoint: 'kp-5-4',
+      knowledgePoint: 'kp-5-3',
       score: 15,
       difficulty: 'medium',
-      question: '小明的书包里有若干本书，请编写程序，输入书本数量和每本书的名称，输出所有书本名称。',
-      codeTemplate: `# 请在下方编写代码
-`,
-      testCases: [
-        { input: '3\n语文\n数学\n英语', expectedOutput: '语文\n数学\n英语' }
-      ],
-      scoringRules: {
-        fullScore: 15,
-        partialScores: [
-          { condition: '能使用字典或列表', score: 5 },
-          { condition: '能正确存储', score: 10 },
-          { condition: '完全正确', score: 15 }
-        ]
-      },
-      referenceAnswer: `n = int(input())
-books = []
-for i in range(n):
-    book = input()
-    books.append(book)
-for book in books:
-    print(book)`,
-      explanation: '使用列表存储输入的书本名称，然后遍历输出。'
-    },
-    {
-      id: 'q-5-1-coding-4',
-      type: 'coding',
-      knowledgePoint: 'kp-5-3',
-      score: 20,
-      difficulty: 'medium',
-      question: '小明在收集卡片，每次输入一个正整数代表卡片上的数字，当输入0时停止收集。请编写程序，输出收集到的卡片数字之和。',
+      question: '小明在收集卡片，每次输入一个正整数代表卡片上的数字（字符串类型需转换为整数），当输入0时停止收集。请编写程序，输出收集到的卡片数字之和。',
       codeTemplate: `# 请在下方编写代码
 `,
       testCases: [
@@ -492,11 +471,12 @@ for book in books:
         { input: '10\n20\n0', expectedOutput: '30' }
       ],
       scoringRules: {
-        fullScore: 20,
+        fullScore: 15,
         partialScores: [
-          { condition: '能正确获取输入', score: 5 },
-          { condition: '能使用while和break控制循环', score: 10 },
-          { condition: '完全正确', score: 20 }
+          { condition: '能使用int()转换类型', score: 4 },
+          { condition: '能使用while循环', score: 5 },
+          { condition: '能使用break跳出循环', score: 3 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: `total = 0
@@ -506,7 +486,39 @@ while True:
         break
     total = total + n
 print(total)`,
-      explanation: '使用while True循环不断获取输入，当输入为0时用break跳出循环，累加所有非零数字。'
+      explanation: '使用int()将字符串转为整数，while True循环获取输入，当输入为0时用break跳出循环。本题融合了while循环、break和类型转换三个知识点。'
+    },
+    // Q4: kp-5-9(枚举法) + kp-5-6(for循环嵌套)
+    {
+      id: 'q-5-1-coding-4',
+      type: 'coding',
+      knowledgePoint: 'kp-5-9',
+      score: 20,
+      difficulty: 'medium',
+      question: '请编写程序，输入一个整数n，使用枚举法（双重循环）找出所有满足 a + b = n（a从1到n-1，b从1到n-1）的组合数。',
+      codeTemplate: `# 请在下方编写代码
+`,
+      testCases: [
+        { input: '5', expectedOutput: '4' },
+        { input: '3', expectedOutput: '2' },
+        { input: '10', expectedOutput: '9' }
+      ],
+      scoringRules: {
+        fullScore: 20,
+        partialScores: [
+          { condition: '能获取输入', score: 3 },
+          { condition: '能使用双重循环枚举', score: 7 },
+          { condition: '完全正确', score: 20 }
+        ]
+      },
+      referenceAnswer: `n = int(input())
+count = 0
+for a in range(1, n):
+    for b in range(1, n):
+        if a + b == n:
+            count = count + 1
+print(count)`,
+      explanation: '用双重循环枚举a和b的所有组合，判断a+b是否等于n，统计满足条件的数量。本题融合了枚举法和for循环嵌套两个知识点。'
     }
   ],
 
@@ -517,23 +529,24 @@ print(total)`,
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-5-1': { count: 4, totalScore: 10 },
-      'kp-5-2': { count: 3, totalScore: 12 },
-      'kp-5-3': { count: 2, totalScore: 22 },
-      'kp-5-4': { count: 2, totalScore: 17 },
-      'kp-5-5': { count: 1, totalScore: 2 },
-      'kp-5-6': { count: 2, totalScore: 5 },
-      'kp-5-7': { count: 2, totalScore: 5 },
-      'kp-5-8': { count: 1, totalScore: 2 },
-      'kp-5-11': { count: 1, totalScore: 2 },
-      'kp-5-13': { count: 1, totalScore: 2 },
-      'kp-5-14': { count: 1, totalScore: 2 },
-      'kp-5-15': { count: 1, totalScore: 2 }
+      // 编程题：Q1(kp-5-4,10分), Q2(kp-5-5,10分), Q3(kp-5-3,15分), Q4(kp-5-9,20分)
+      'kp-5-1': { count: 4, totalScore: 10 },   // single-1,3,6,8, multi-1
+      'kp-5-2': { count: 2, totalScore: 5 },    // single-5, multi-2
+      'kp-5-3': { count: 2, totalScore: 18 },   // single-9, multi-3, coding-Q3
+      'kp-5-4': { count: 2, totalScore: 12 },   // single-2, coding-Q1
+      'kp-5-5': { count: 2, totalScore: 13 },   // single-4, multi-5, coding-Q2
+      'kp-5-6': { count: 1, totalScore: 2 },    // single-13
+      'kp-5-7': { count: 2, totalScore: 5 },    // single-10, multi-4
+      'kp-5-8': { count: 1, totalScore: 2 },    // single-14
+      'kp-5-9': { count: 2, totalScore: 22 },   // single-15, coding-Q4
+      'kp-5-10': { count: 1, totalScore: 2 },   // single-7
+      'kp-5-14': { count: 1, totalScore: 2 },   // single-12
+      'kp-5-15': { count: 1, totalScore: 2 }    // single-11
     },
     byDifficulty: {
-      'easy': 7,
-      'medium': 9,
-      'hard': 8
+      'easy': 9,
+      'medium': 11,
+      'hard': 4
     }
   }
 }

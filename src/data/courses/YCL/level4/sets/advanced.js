@@ -436,34 +436,58 @@ x = x // 2`
       knowledgePoint: 'kp-4-4',
       score: 10,
       difficulty: 'medium',
-      question: '小明的零花钱是n元，他想买一个玩具需要60元。请编写程序，输入n，输出他还需要多少钱才能买这个玩具（如果够了输出0）。',
+      question: '小明去超市买了苹果和香蕉，苹果每斤5元，香蕉每斤3元。请编写程序，输入苹果的斤数a和香蕉的斤数b，输出总金额。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '30', expectedOutput: '30' },
-        { input: '70', expectedOutput: '0' },
-        { input: '60', expectedOutput: '0' }
+        { input: '2\n3', expectedOutput: '19' },
+        { input: '1\n2', expectedOutput: '11' },
+        { input: '3\n1', expectedOutput: '18' }
+      ],
+      scoringRules: {
+        fullScore: 10,
+        partialScores: [
+          { condition: '能获取输入并转换', score: 3 },
+          { condition: '能正确计算', score: 5 },
+          { condition: '完全正确', score: 10 }
+        ]
+      },
+      referenceAnswer: `a = input()
+a = int(a)
+b = input()
+b = int(b)
+total = a * 5 + b * 3
+print(total)`,
+      explanation: '苹果5元/斤，香蕉3元/斤，总价 = a*5 + b*3。2斤苹果+3斤香蕉 = 2*5+3*3 = 19元。'
+    },
+    {
+      id: 'q-4-adv-coding-2',
+      type: 'coding',
+      knowledgePoint: 'kp-4-5',
+      score: 10,
+      difficulty: 'medium',
+      question: '小红在学校参加了社团活动，请你编写程序，输入社团名称，输出"小红参加了___社团"（用字符串拼接完成）。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '合唱', expectedOutput: '小红参加了合唱社团' },
+        { input: '舞蹈', expectedOutput: '小红参加了舞蹈社团' }
       ],
       scoringRules: {
         fullScore: 10,
         partialScores: [
           { condition: '能获取输入', score: 3 },
-          { condition: '能正确计算', score: 5 },
+          { condition: '能正确拼接输出', score: 7 },
           { condition: '完全正确', score: 10 }
         ]
       },
-      referenceAnswer: `n = input()
-n = int(n)
-if n >= 60:
-    print(0)
-else:
-    print(60 - n)`,
-      explanation: '判断n是否够60元，够则输出0，不够则输出差额。'
+      referenceAnswer: `name = input()
+print('小红参加了' + name + '社团')`,
+      explanation: '使用字符串拼接，将前缀、输入内容和后缀拼接输出。'
     },
     {
-      id: 'q-4-adv-coding-2',
+      id: 'q-4-adv-coding-3',
       type: 'coding',
       knowledgePoint: 'kp-4-6',
-      score: 10,
+      score: 15,
       difficulty: 'medium',
       question: '电梯的载重量限制是800公斤，超过限制会报警。请编写程序，输入电梯当前的载重量n（公斤），如果超过800公斤输出"超载"，否则输出"正常"。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -473,11 +497,11 @@ else:
         { input: '850', expectedOutput: '超载' }
       ],
       scoringRules: {
-        fullScore: 10,
+        fullScore: 15,
         partialScores: [
-          { condition: '能获取输入并转换', score: 3 },
-          { condition: '能使用if-else判断', score: 5 },
-          { condition: '完全正确', score: 10 }
+          { condition: '能获取输入并转换', score: 4 },
+          { condition: '能使用if-else判断', score: 6 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: `n = input()
@@ -489,22 +513,22 @@ else:
       explanation: '判断载重量是否超过800，超过输出"超载"，否则输出"正常"。'
     },
     {
-      id: 'q-4-adv-coding-3',
+      id: 'q-4-adv-coding-4',
       type: 'coding',
       knowledgePoint: 'kp-4-7',
-      score: 15,
-      difficulty: 'medium',
+      score: 20,
+      difficulty: 'hard',
       question: '请编写程序，使用for循环计算1到10的所有整数的和，并输出结果。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '', expectedOutput: '55' }
       ],
       scoringRules: {
-        fullScore: 15,
+        fullScore: 20,
         partialScores: [
-          { condition: '能使用for循环', score: 5 },
+          { condition: '能使用for循环', score: 6 },
           { condition: '能正确累加', score: 10 },
-          { condition: '完全正确', score: 15 }
+          { condition: '完全正确', score: 20 }
         ]
       },
       referenceAnswer: `total = 0
@@ -512,40 +536,6 @@ for i in range(1, 11):
     total = total + i
 print(total)`,
       explanation: '使用循环累加1到10，1+2+3+...+10=55。'
-    },
-    {
-      id: 'q-4-adv-coding-4',
-      type: 'coding',
-      knowledgePoint: 'kp-4-6',
-      score: 20,
-      difficulty: 'hard',
-      question: '成绩等级判断：90分及以上是"优秀"，80-89分是"良好"，60-79分是"及格"，60分以下是"不及格"。请编写程序，输入成绩n，输出对应的等级。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '95', expectedOutput: '优秀' },
-        { input: '85', expectedOutput: '良好' },
-        { input: '70', expectedOutput: '及格' },
-        { input: '50', expectedOutput: '不及格' }
-      ],
-      scoringRules: {
-        fullScore: 20,
-        partialScores: [
-          { condition: '能获取输入并转换', score: 4 },
-          { condition: '能使用多分支判断', score: 10 },
-          { condition: '完全正确', score: 20 }
-        ]
-      },
-      referenceAnswer: `n = input()
-n = int(n)
-if n >= 90:
-    print('优秀')
-elif n >= 80:
-    print('良好')
-elif n >= 60:
-    print('及格')
-else:
-    print('不及格')`,
-      explanation: '使用if-elif-else多分支结构，按分数区间判断等级。'
     }
   ],
 
@@ -559,10 +549,10 @@ else:
       'kp-4-1': { count: 0, totalScore: 0 },
       'kp-4-2': { count: 1, totalScore: 2 },
       'kp-4-3': { count: 1, totalScore: 2 },
-      'kp-4-4': { count: 4, totalScore: 19 },
-      'kp-4-5': { count: 2, totalScore: 5 },
-      'kp-4-6': { count: 3, totalScore: 30 },
-      'kp-4-7': { count: 4, totalScore: 23 },
+      'kp-4-4': { count: 6, totalScore: 19 },
+      'kp-4-5': { count: 4, totalScore: 17 },
+      'kp-4-6': { count: 3, totalScore: 20 },
+      'kp-4-7': { count: 5, totalScore: 27 },
       'kp-4-8': { count: 2, totalScore: 5 },
       'kp-4-9': { count: 1, totalScore: 2 },
       'kp-4-10': { count: 0, totalScore: 0 },

@@ -431,51 +431,55 @@ print(25 + n)`,
     {
       id: 'q-4-2-coding-2',
       type: 'coding',
-      knowledgePoint: 'kp-4-4',
+      knowledgePoint: 'kp-4-5',
       score: 10,
       difficulty: 'easy',
-      question: '一本书有120页，小红已经读了n页。请编写程序，输入n，输出小红还有多少页没有读完。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '35', expectedOutput: '85' },
-        { input: '80', expectedOutput: '40' }
-      ],
-      scoringRules: {
-        fullScore: 10,
-        partialScores: [
-          { condition: '能获取输入', score: 3 },
-          { condition: '能正确计算', score: 5 },
-          { condition: '完全正确', score: 10 }
-        ]
-      },
-      referenceAnswer: `n = input()
-n = int(n)
-print(120 - n)`,
-      explanation: '获取输入转为整数，用120减去已读页数输出结果。'
-    },
-    {
-      id: 'q-4-2-coding-3',
-      type: 'coding',
-      knowledgePoint: 'kp-4-5',
-      score: 15,
-      difficulty: 'medium',
-      question: '小芳在学校参加了兴趣班，请你编写程序，输入小芳的兴趣班名称，输出"小芳参加了___兴趣班"（用字符串拼接完成）。',
+      question: '小芳在学校参加了兴趣班，请你编写程序，输入兴趣班的名称，输出"小芳参加了___兴趣班"（用字符串拼接完成）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '美术', expectedOutput: '小芳参加了美术兴趣班' },
         { input: '舞蹈', expectedOutput: '小芳参加了舞蹈兴趣班' }
       ],
       scoringRules: {
-        fullScore: 15,
+        fullScore: 10,
         partialScores: [
-          { condition: '能获取输入', score: 5 },
-          { condition: '能正确拼接输出', score: 10 },
-          { condition: '完全正确', score: 15 }
+          { condition: '能获取输入', score: 3 },
+          { condition: '能正确拼接输出', score: 7 },
+          { condition: '完全正确', score: 10 }
         ]
       },
       referenceAnswer: `name = input()
 print('小芳参加了' + name + '兴趣班')`,
       explanation: '使用字符串拼接，将前缀、输入内容和后缀拼接输出。'
+    },
+    {
+      id: 'q-4-2-coding-3',
+      type: 'coding',
+      knowledgePoint: 'kp-4-6',
+      score: 15,
+      difficulty: 'medium',
+      question: '学校考试满分100分，60分（包含60）及以上为及格。请编写程序，输入成绩score（整数），判断是否及格。如果及格输出"及格"，否则输出"不及格"。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '85', expectedOutput: '及格' },
+        { input: '55', expectedOutput: '不及格' },
+        { input: '60', expectedOutput: '及格' }
+      ],
+      scoringRules: {
+        fullScore: 15,
+        partialScores: [
+          { condition: '能获取输入并转整数', score: 4 },
+          { condition: '能使用if-else判断', score: 6 },
+          { condition: '完全正确', score: 15 }
+        ]
+      },
+      referenceAnswer: `score = input()
+score = int(score)
+if score >= 60:
+    print('及格')
+else:
+    print('不及格')`,
+      explanation: '获取成绩后转为整数，使用if-else判断是否达到60分，输出对应结果。'
     },
     {
       id: 'q-4-2-coding-4',
@@ -511,10 +515,10 @@ print('小芳参加了' + name + '兴趣班')`,
       'kp-4-1': { count: 1, totalScore: 2 },
       'kp-4-2': { count: 2, totalScore: 5 },
       'kp-4-3': { count: 1, totalScore: 2 },
-      'kp-4-4': { count: 4, totalScore: 19 },
-      'kp-4-5': { count: 2, totalScore: 17 },
-      'kp-4-6': { count: 2, totalScore: 5 },
-      'kp-4-7': { count: 3, totalScore: 24 },
+      'kp-4-4': { count: 6, totalScore: 21 },
+      'kp-4-5': { count: 3, totalScore: 15 },
+      'kp-4-6': { count: 3, totalScore: 20 },
+      'kp-4-7': { count: 4, totalScore: 27 },
       'kp-4-8': { count: 1, totalScore: 2 },
       'kp-4-9': { count: 1, totalScore: 2 },
       'kp-4-10': { count: 0, totalScore: 0 },
@@ -522,9 +526,9 @@ print('小芳参加了' + name + '兴趣班')`,
       'kp-4-12': { count: 1, totalScore: 2 }
     },
     byDifficulty: {
-      'easy': 8,
-      'medium': 9,
-      'hard': 7
+      'easy': 9,
+      'medium': 10,
+      'hard': 5
     }
   }
 }

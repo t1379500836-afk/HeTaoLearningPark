@@ -5,6 +5,12 @@
  *             多选题5题（每题3分，共15分）
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
+ *
+ * 编程题必考知识点覆盖：
+ * - kp-6-4: 简单递推问题 (Q1)
+ * - kp-6-5: 顺序模拟 (Q2)
+ * - kp-6-6: 循环模拟 (Q3)
+ * - kp-6-7: 带列表的模拟 (Q4)
  */
 
 export const practiceSet = {
@@ -17,7 +23,7 @@ export const practiceSet = {
     duration: 90,
     totalScore: 100,
     createdAt: '2026-03-31',
-    version: '1.0'
+    version: '2.0'
   },
 
   questions: [
@@ -147,23 +153,6 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-4',
       score: 2,
       difficulty: 'medium',
-      question: '斐波那契数列：1, 1, 2, 3, 5, 8, 13...，请问第8个数是多少？',
-      code: null,
-      options: [
-        '13',
-        '21',
-        '34',
-        '55'
-      ],
-      answer: 1,
-      explanation: '斐波那契数列规律是每个数等于前两个数之和。1,1,2,3,5,8,13,21，第8个数是21。'
-    },
-    {
-      id: 'q-6-2-single-9',
-      type: 'single-choice',
-      knowledgePoint: 'kp-6-4',
-      score: 2,
-      difficulty: 'medium',
       question: '已知递推公式：f(n) = f(n-1) + 2，且f(1) = 1，则f(5)的值是？',
       code: null,
       options: [
@@ -174,6 +163,23 @@ export const practiceSet = {
       ],
       answer: 1,
       explanation: 'f(1)=1, f(2)=1+2=3, f(3)=3+2=5, f(4)=5+2=7, f(5)=7+2=9。'
+    },
+    {
+      id: 'q-6-2-single-9',
+      type: 'single-choice',
+      knowledgePoint: 'kp-6-4',
+      score: 2,
+      difficulty: 'medium',
+      question: '已知递推公式：f(n) = 2 * f(n-1)，且f(1) = 3，则f(4)的值是？',
+      code: null,
+      options: [
+        '12',
+        '24',
+        '48',
+        '9'
+      ],
+      answer: 1,
+      explanation: 'f(1)=3, f(2)=2*3=6, f(3)=2*6=12, f(4)=2*12=24。'
     },
     {
       id: 'q-6-2-single-10',
@@ -249,16 +255,16 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-8',
       score: 2,
       difficulty: 'hard',
-      question: '斐波那契数列的前两项都是1，从第3项开始每项等于前两项之和。求第10项的值？',
+      question: '斐波那契数列的前两项都是1，从第3项开始每项等于前两项之和。求第9项的值？',
       code: null,
       options: [
+        '21',
         '34',
         '55',
-        '89',
-        '144'
+        '89'
       ],
       answer: 1,
-      explanation: '斐波那契数列：1,1,2,3,5,8,13,21,34,55，第10项是55。'
+      explanation: '斐波那契数列：1,1,2,3,5,8,13,21,34，第9项是34。'
     },
     {
       id: 'q-6-2-single-15',
@@ -371,29 +377,9 @@ export const practiceSet = {
     },
 
     // ==================== 编程题（4题，共55分）====================
+    // Q1: 简单递推问题 (kp-6-4)
     {
       id: 'q-6-2-coding-1',
-      type: 'coding',
-      knowledgePoint: 'kp-6-1',
-      score: 10,
-      difficulty: 'easy',
-      question: '编写一个函数multiply(x, y)，接收两个整数参数，返回它们的乘积。然后调用该函数计算4×7的结果并输出。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '', expectedOutput: '28' }
-      ],
-      scoringRules: {
-        fullScore: 10,
-        partialScores: [
-          { condition: '能正确定义函数', score: 5 },
-          { condition: '能正确调用并输出', score: 5 }
-        ]
-      },
-      referenceAnswer: 'def multiply(x, y):\n    return x * y\n\nprint(multiply(4, 7))',
-      explanation: '定义一个函数multiply，接收两个参数x和y，返回它们的乘积。'
-    },
-    {
-      id: 'q-6-2-coding-2',
       type: 'coding',
       knowledgePoint: 'kp-6-4',
       score: 10,
@@ -402,7 +388,8 @@ export const practiceSet = {
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '5', expectedOutput: '120' },
-        { input: '4', expectedOutput: '24' }
+        { input: '4', expectedOutput: '24' },
+        { input: '1', expectedOutput: '1' }
       ],
       scoringRules: {
         fullScore: 10,
@@ -413,10 +400,11 @@ export const practiceSet = {
         ]
       },
       referenceAnswer: 'n = int(input())\nresult = 1\nfor i in range(1, n + 1):\n    result = result * i\nprint(result)',
-      explanation: '使用循环递推计算阶乘，从1乘到n。'
+      explanation: '使用循环递推计算阶乘，从1乘到n。这是简单递推问题。'
     },
+    // Q2: 顺序模拟 (kp-6-5)
     {
-      id: 'q-6-2-coding-3',
+      id: 'q-6-2-coding-2',
       type: 'coding',
       knowledgePoint: 'kp-6-5',
       score: 15,
@@ -438,13 +426,38 @@ export const practiceSet = {
         ]
       },
       referenceAnswer: 'a = int(input())\nop = input()\nb = int(input())\n\nif op == "+":\n    print(a + b)\nelif op == "-":\n    print(a - b)\nelif op == "*":\n    print(a * b)\nelif op == "/":\n    print(a // b)',
-      explanation: '根据输入的运算符执行相应的运算，除法使用整除。'
+      explanation: '根据输入的运算符执行相应的运算，除法使用整除。这是顺序模拟，按步骤处理不同运算。'
     },
+    // Q3: 循环模拟 (kp-6-6)
+    {
+      id: 'q-6-2-coding-3',
+      type: 'coding',
+      knowledgePoint: 'kp-6-6',
+      score: 15,
+      difficulty: 'medium',
+      question: '模拟数字递减过程。输入一个正整数n，每次减半（取整），直到变为0。输出每次减半后的结果，每行一个数。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '10', expectedOutput: '5\n2\n1\n0' },
+        { input: '8', expectedOutput: '4\n2\n1\n0' }
+      ],
+      scoringRules: {
+        fullScore: 15,
+        partialScores: [
+          { condition: '能正确获取输入', score: 4 },
+          { condition: '能正确使用循环模拟', score: 8 },
+          { condition: '完全正确', score: 15 }
+        ]
+      },
+      referenceAnswer: 'n = int(input())\nwhile n > 0:\n    n = n // 2\n    print(n)',
+      explanation: '使用while循环模拟每次减半的过程，直到变为0。这是循环模拟问题。'
+    },
+    // Q4: 带列表的模拟 (kp-6-7)
     {
       id: 'q-6-2-coding-4',
       type: 'coding',
       knowledgePoint: 'kp-6-7',
-      score: 20,
+      score: 15,
       difficulty: 'medium',
       question: '模拟列表操作。输入一个正整数n和n个整数存入列表，然后输入一个整数k，统计列表中有多少个元素大于k。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -453,15 +466,15 @@ export const practiceSet = {
         { input: '4\n10 20 5 15\n10', expectedOutput: '2' }
       ],
       scoringRules: {
-        fullScore: 20,
+        fullScore: 15,
         partialScores: [
-          { condition: '能正确获取输入和创建列表', score: 6 },
-          { condition: '能正确遍历和统计', score: 8 },
-          { condition: '完全正确', score: 20 }
+          { condition: '能正确获取输入和创建列表', score: 5 },
+          { condition: '能正确遍历和统计', score: 5 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: 'n = int(input())\nnums = list(map(int, input().split()))\nk = int(input())\n\ncount = 0\nfor num in nums:\n    if num > k:\n        count = count + 1\nprint(count)',
-      explanation: '创建列表存储输入的数字，然后遍历列表统计大于k的元素个数。'
+      explanation: '创建列表存储输入的数字，然后遍历列表统计大于k的元素个数。这是带列表的模拟。'
     }
   ],
 
@@ -472,13 +485,13 @@ export const practiceSet = {
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-6-1': { count: 4, totalScore: 15 },
+      'kp-6-1': { count: 4, totalScore: 10 },
       'kp-6-2': { count: 3, totalScore: 8 },
       'kp-6-3': { count: 3, totalScore: 8 },
-      'kp-6-4': { count: 3, totalScore: 16 },
-      'kp-6-5': { count: 3, totalScore: 19 },
-      'kp-6-6': { count: 3, totalScore: 8 },
-      'kp-6-7': { count: 2, totalScore: 23 },
+      'kp-6-4': { count: 4, totalScore: 18 },
+      'kp-6-5': { count: 3, totalScore: 20 },
+      'kp-6-6': { count: 4, totalScore: 20 },
+      'kp-6-7': { count: 3, totalScore: 18 },
       'kp-6-8': { count: 1, totalScore: 2 }
     },
     byDifficulty: {

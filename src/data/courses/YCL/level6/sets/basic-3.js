@@ -5,6 +5,12 @@
  *             多选题5题（每题3分，共15分）
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
+ *
+ * 编程题必考知识点覆盖：
+ * - kp-6-4: 简单递推问题 (Q1)
+ * - kp-6-5: 顺序模拟 (Q2)
+ * - kp-6-6: 循环模拟 (Q3)
+ * - kp-6-7: 带列表的模拟 (Q4)
  */
 
 export const practiceSet = {
@@ -17,7 +23,7 @@ export const practiceSet = {
     duration: 90,
     totalScore: 100,
     createdAt: '2026-03-31',
-    version: '1.0'
+    version: '2.0'
   },
 
   questions: [
@@ -148,7 +154,7 @@ export const practiceSet = {
       score: 2,
       difficulty: 'medium',
       question: '运行下列代码，输出结果是？',
-      code: 'a, b = 1, 1\nfor i in range(3):\n    a, b = b, a + b\nprint(b)',
+      code: 'a = 1\nb = 1\nfor i in range(3):\n    c = a + b\n    a = b\n    b = c\nprint(b)',
       options: [
         '3',
         '5',
@@ -371,34 +377,14 @@ export const practiceSet = {
     },
 
     // ==================== 编程题（4题，共55分）====================
+    // Q1: 简单递推问题 (kp-6-4)
     {
       id: 'q-6-3-coding-1',
-      type: 'coding',
-      knowledgePoint: 'kp-6-1',
-      score: 10,
-      difficulty: 'easy',
-      question: '编写一个函数multiply(a, b)，返回两个数的乘积。然后调用该函数计算4乘以7的结果并输出。',
-      codeTemplate: '# 请在下方编写代码\n',
-      testCases: [
-        { input: '', expectedOutput: '28' }
-      ],
-      scoringRules: {
-        fullScore: 10,
-        partialScores: [
-          { condition: '能正确定义函数', score: 5 },
-          { condition: '能正确调用并输出', score: 5 }
-        ]
-      },
-      referenceAnswer: 'def multiply(a, b):\n    return a * b\n\nprint(multiply(4, 7))',
-      explanation: '定义一个函数multiply，接收两个参数a和b，返回它们的乘积。'
-    },
-    {
-      id: 'q-6-3-coding-2',
       type: 'coding',
       knowledgePoint: 'kp-6-4',
       score: 10,
       difficulty: 'easy',
-      question: '使用递推计算等差数列。已知首项a1=2，公差d=3，输入正整数n，输出第n项的值。',
+      question: '使用递推计算等差数列。已知首项a1=2，公差d=3，输入正整数n（1<=n<=20），输出第n项的值。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '1', expectedOutput: '2' },
@@ -413,36 +399,62 @@ export const practiceSet = {
         ]
       },
       referenceAnswer: 'n = int(input())\na = 2\nfor i in range(1, n):\n    a = a + 3\nprint(a)',
-      explanation: '等差数列公式：a_n = a_1 + (n-1)*d。使用循环递推计算。'
+      explanation: '等差数列递推公式：a_n = a_{n-1} + d，从首项开始递推n-1次得到第n项。这是简单递推问题。'
     },
+    // Q2: 顺序模拟 (kp-6-5)
+    {
+      id: 'q-6-3-coding-2',
+      type: 'coding',
+      knowledgePoint: 'kp-6-5',
+      score: 15,
+      difficulty: 'medium',
+      question: '模拟超市购物结算。小明有预算P元，先买了3瓶牛奶，每瓶6元；又买了2盒饼干，每盒15元；最后买了1袋水果，花费F元。输入P和F，输出剩余的钱。',
+      codeTemplate: '# 请在下方编写代码\n',
+      testCases: [
+        { input: '100\n25', expectedOutput: '27' },
+        { input: '200\n40', expectedOutput: '112' }
+      ],
+      scoringRules: {
+        fullScore: 15,
+        partialScores: [
+          { condition: '能正确获取输入', score: 5 },
+          { condition: '能正确模拟花费过程', score: 10 },
+          { condition: '完全正确', score: 15 }
+        ]
+      },
+      referenceAnswer: 'p = int(input())\nf = int(input())\np = p - 6 * 3\np = p - 15 * 2\np = p - f\nprint(p)',
+      explanation: '先算牛奶花费6*3=18元，再算饼干花费15*2=30元，最后算水果花费F元，从预算P中逐步减去。这是顺序模拟。'
+    },
+    // Q3: 循环模拟 (kp-6-6)
     {
       id: 'q-6-3-coding-3',
       type: 'coding',
       knowledgePoint: 'kp-6-6',
       score: 15,
       difficulty: 'medium',
-      question: '模拟倒计时。输入一个正整数n（表示秒数），从n开始倒计时到0，每秒输出一个数字。',
+      question: '模拟数字递增过程。输入一个正整数n，输出从1加到n的和。例如：输入5，输出15（因为1+2+3+4+5=15）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '5', expectedOutput: '5\n4\n3\n2\n1\n0' },
-        { input: '3', expectedOutput: '3\n2\n1\n0' }
+        { input: '5', expectedOutput: '15' },
+        { input: '10', expectedOutput: '55' }
       ],
       scoringRules: {
         fullScore: 15,
         partialScores: [
           { condition: '能正确获取输入', score: 4 },
-          { condition: '能正确使用循环倒计时', score: 8 },
+          { condition: '能正确使用循环模拟累加', score: 8 },
           { condition: '完全正确', score: 15 }
         ]
       },
-      referenceAnswer: 'n = int(input())\nwhile n >= 0:\n    print(n)\n    n = n - 1',
-      explanation: '使用while循环从n倒数到0，每次输出后减1。'
+      referenceAnswer: 'n = int(input())\ntotal = 0\nfor i in range(1, n + 1):\n    total = total + i\nprint(total)',
+      explanation: '使用for循环从1累加到n。这是循环模拟问题。'
     },
+    // Q4: 带列表的模拟 (kp-6-7)
     {
       id: 'q-6-3-coding-4',
       type: 'coding',
       knowledgePoint: 'kp-6-7',
-      score: 20,
+      score: 15,
       difficulty: 'medium',
       question: '模拟列表数据筛选。输入一个正整数n和n个整数存入列表，然后输出列表中所有偶数（按原顺序输出，每行一个）。',
       codeTemplate: '# 请在下方编写代码\n',
@@ -451,15 +463,15 @@ export const practiceSet = {
         { input: '6\n10 7 8 3 6 1', expectedOutput: '10\n8\n6' }
       ],
       scoringRules: {
-        fullScore: 20,
+        fullScore: 15,
         partialScores: [
-          { condition: '能正确获取输入和创建列表', score: 6 },
-          { condition: '能正确遍历并判断偶数', score: 8 },
-          { condition: '完全正确', score: 20 }
+          { condition: '能正确获取输入和创建列表', score: 5 },
+          { condition: '能正确遍历并判断偶数', score: 5 },
+          { condition: '完全正确', score: 15 }
         ]
       },
       referenceAnswer: 'n = int(input())\nnums = list(map(int, input().split()))\n\nfor num in nums:\n    if num % 2 == 0:\n        print(num)',
-      explanation: '遍历列表，判断每个元素是否为偶数，是则输出。'
+      explanation: '遍历列表，判断每个元素是否为偶数，是则输出。这是带列表的模拟。'
     }
   ],
 
@@ -470,13 +482,13 @@ export const practiceSet = {
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-6-1': { count: 4, totalScore: 15 },
+      'kp-6-1': { count: 3, totalScore: 8 },
       'kp-6-2': { count: 3, totalScore: 8 },
       'kp-6-3': { count: 2, totalScore: 4 },
-      'kp-6-4': { count: 3, totalScore: 15 },
-      'kp-6-5': { count: 3, totalScore: 8 },
-      'kp-6-6': { count: 3, totalScore: 19 },
-      'kp-6-7': { count: 3, totalScore: 24 },
+      'kp-6-4': { count: 4, totalScore: 18 },
+      'kp-6-5': { count: 4, totalScore: 23 },
+      'kp-6-6': { count: 4, totalScore: 20 },
+      'kp-6-7': { count: 4, totalScore: 23 },
       'kp-6-8': { count: 2, totalScore: 5 }
     },
     byDifficulty: {

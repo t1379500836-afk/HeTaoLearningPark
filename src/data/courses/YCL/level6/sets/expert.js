@@ -1,11 +1,17 @@
 /**
- * YCL六级提升练习
+ * YCL六级专家练习
  *
  * 本套卷包含：单选题15题（每题2分，共30分）
  *             多选题5题（每题3分，共15分）
  *             编程题4题（共55分）
  * 总分：100分  时长：90分钟
- * 难度：提升（较高难度，多知识点综合，接近考试上限）
+ * 难度：专家（较高难度，多知识点综合，接近考试上限）
+ *
+ * 编程题必考知识点覆盖：
+ * - kp-6-4: 简单递推问题 (Q1)
+ * - kp-6-6: 循环模拟 (Q2)
+ * - kp-6-5: 顺序模拟 (Q3)
+ * - kp-6-7: 带列表的模拟 (Q4)
  */
 
 export const practiceSet = {
@@ -13,12 +19,12 @@ export const practiceSet = {
     id: 'level6-expert',
     level: 'level6',
     difficulty: 'expert',
-    name: '六级提升练习',
-    description: '六级提升练习，多知识点综合，接近考试上限',
+    name: '六级专家练习',
+    description: '六级专家练习，多知识点综合，接近考试上限',
     duration: 90,
     totalScore: 100,
     createdAt: '2026-03-31',
-    version: '1.0'
+    version: '2.0'
   },
 
   questions: [
@@ -30,7 +36,7 @@ export const practiceSet = {
       score: 2,
       difficulty: 'hard',
       question: '运行下列代码，输出结果是？',
-      code: 'def process(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a\n\nprint(process(48, 18))',
+      code: 'def process(a, b):\n    while b != 0:\n        r = a % b\n        a = b\n        b = r\n    return a\n\nprint(process(48, 18))',
       options: [
         '0',
         '6',
@@ -234,7 +240,7 @@ export const practiceSet = {
       score: 2,
       difficulty: 'hard',
       question: '运行下列代码，输出结果是？',
-      code: 'def fib(n):\n    if n <= 2:\n        return 1\n    a, b = 1, 1\n    for _ in range(n - 2):\n        a, b = b, a + b\n    return b\n\nprint(fib(10))',
+      code: 'def fib(n):\n    if n <= 2:\n        return 1\n    a = 1\n    b = 1\n    for i in range(n - 2):\n        c = a + b\n        a = b\n        b = c\n    return b\n\nprint(fib(10))',
       options: [
         '34',
         '55',
@@ -448,11 +454,12 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-7',
       score: 20,
       difficulty: 'hard',
-      question: '模拟简单的文本处理器。输入一个正整数n和n行文本，每行是一个操作："ADD 文本"表示添加文本到末尾，"INSERT 位置 文本"表示在指定位置插入文本，"DELETE 位置 长度"表示从指定位置删除指定长度的文本。输出最终处理后的文本。初始文本为空字符串。',
+      question: '模拟简单的队列操作。初始队列为空，输入一个正整数n和n个操作，每个操作是以下之一："PUSH X"表示将数字X加入队尾，"POP"表示移除队首元素。输出最终队列中的所有元素（从队首到队尾，用空格分隔）。如果队列为空，输出"空"。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
-        { input: '2\nADD Hello\nADD World', expectedOutput: 'HelloWorld' },
-        { input: '3\nADD Hello\nINSERT 5 World\nDELETE 5 5', expectedOutput: 'Hello' }
+        { input: '3\nPUSH 1\nPUSH 2\nPUSH 3', expectedOutput: '1 2 3' },
+        { input: '4\nPUSH 5\nPOP\nPUSH 10\nPUSH 20', expectedOutput: '10 20' },
+        { input: '2\nPUSH 1\nPOP', expectedOutput: '空' }
       ],
       scoringRules: {
         fullScore: 20,
@@ -462,8 +469,8 @@ export const practiceSet = {
           { condition: '完全正确', score: 20 }
         ]
       },
-      referenceAnswer: 'n = int(input())\ntext = ""\nfor i in range(n):\n    cmd = input()\n    parts = cmd.split()\n    if parts[0] == "ADD":\n        text = text + parts[1]\n    elif parts[0] == "INSERT":\n        pos = int(parts[1])\n        content = parts[2]\n        text = text[:pos] + content + text[pos:]\n    elif parts[0] == "DELETE":\n        pos = int(parts[1])\n        length = int(parts[2])\n        text = text[:pos] + text[pos + length:]\nprint(text)',
-      explanation: '根据操作类型对文本进行添加、插入、删除操作。'
+      referenceAnswer: 'n = int(input())\nqueue = []\nfor i in range(n):\n    cmd = input()\n    parts = cmd.split()\n    if parts[0] == "PUSH":\n        queue.append(int(parts[1]))\n    elif parts[0] == "POP":\n        if len(queue) > 0:\n            queue.pop(0)\n\nif len(queue) == 0:\n    print("空")\nelse:\n    for i in range(len(queue)):\n        if i > 0:\n            print(" ", end="")\n        print(queue[i], end="")\n    print()',
+      explanation: '使用列表模拟队列，append()在队尾添加，pop(0)移除队首元素。这是带列表的模拟问题。'
     }
   ],
 
@@ -474,14 +481,14 @@ export const practiceSet = {
       'coding': { count: 4, totalScore: 55 }
     },
     byKnowledgePoint: {
-      'kp-6-1': { count: 3, totalScore: 11 },
+      'kp-6-1': { count: 3, totalScore: 8 },
       'kp-6-2': { count: 1, totalScore: 2 },
       'kp-6-3': { count: 1, totalScore: 2 },
       'kp-6-4': { count: 4, totalScore: 17 },
       'kp-6-5': { count: 4, totalScore: 21 },
-      'kp-6-6': { count: 5, totalScore: 19 },
-      'kp-6-7': { count: 5, totalScore: 26 },
-      'kp-6-8': { count: 2, totalScore: 4 }
+      'kp-6-6': { count: 4, totalScore: 20 },
+      'kp-6-7': { count: 4, totalScore: 22 },
+      'kp-6-8': { count: 2, totalScore: 5 }
     },
     byDifficulty: {
       'hard': 24
