@@ -284,18 +284,17 @@ print(total)`,
       knowledgePoint: 'kp-5-6',
       score: 3,
       difficulty: 'hard',
-      question: '【多选】下列哪些代码的输出行数为3行? (可能多个答案)
+      question: '【多选】下列哪些代码的输出行数为3行？(可能多个答案)',
       code: null,
       options: [
         'for i in range(3):\\n    print(i)',
         'for i in range(1, 4):\\n    print(i)',
-        'i = 1, j = range(3):\\n    print(i,1, j, end=\'')',
-        'i = 1, j = range(2):\\n    print(i,1, j)'
+        'for i in range(3):\\n    for j in range(2):\\n        print(i)',
+        'for i in range(2):\\n    for j in range(2):\\n        print(i, j)'
       ],
       answer: [0, 1],
       partialAnswer: [0],
-      explanation: 'A输出3行; B输出3行, C输出6行(3×2); D输出4行(2×2). 所以选A和B'
-}
+      explanation: 'A输出3行；B输出3行；C输出6行(3×2)；D输出4行(2×2)。所以选A和B'
     },
     {
       id: 'q-5-adv-multi-4',
@@ -303,13 +302,13 @@ print(total)`,
       knowledgePoint: 'kp-5-7',
       score: 3,
       difficulty: 'hard',
-      question: '【多选】关于break和continue的说法,正确的有哪些? (可能多个答案)
+      question: '【多选】关于break和continue的说法，正确的有哪些？(可能多个答案)',
       code: null,
       options: [
         'break可以结束整个循环',
         'continue可以跳过本次循环',
         'break和continue可以在循环外使用',
-        'break只能用于for循环,不能用于while循环'
+        'break只能用于for循环，不能用于while循环'
       ],
       answer: [0, 1, 3],
       partialAnswer: [0],
@@ -321,7 +320,7 @@ print(total)`,
       knowledgePoint: 'kp-5-9',
       score: 3,
       difficulty: 'hard',
-      question: '【多选】使用枚举法解决下列问题,正确的有哪些? (可能多个答案)
+      question: '【多选】使用枚举法解决下列问题，正确的有哪些？(可能多个答案)',
       code: null,
       options: [
         '枚举法需要遍历所有可能的情况',
