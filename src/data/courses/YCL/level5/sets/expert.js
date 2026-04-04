@@ -1,5 +1,5 @@
 /**
- * YCL五级冲刺练习
+ * YCL五级提升练习
  *
  * 本套卷包含： 单选题15题(每题2分,共30分)
  *             多选题5题(每题3分,共15分)
@@ -18,8 +18,8 @@ export const practiceSet = {
     id: 'level5-expert',
     level: 'level5',
     difficulty: 'expert',
-    name: '五级冲刺练习',
-    description: '五级冲刺练习套卷,难度最高',
+    name: '五级提升练习',
+    description: '五级提升练习套卷，难度最高',
     duration: 90,
     totalScore: 100,
     createdAt: '2026-04-05',
